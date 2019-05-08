@@ -117,8 +117,15 @@ for i in range(1, 5000):
     """
     
     data_ = {}
+    
     data_['X_mb'] = X_mb
     data_['a1'] = a1
+    data_['a2'] = a2
+    data_['h1'] = h1
+    data_['h2'] = h2
+    data_['z'] = z
+    
+    
     kfac_update(data_, m)
     
 
