@@ -74,7 +74,6 @@ inverse_update_freq = 20
 
 params = {}
 params['m'] = m
-params['i'] = i
 params['inverse_update_freq'] = inverse_update_freq
 params['eps'] = eps
 
@@ -138,7 +137,7 @@ for i in range(1, 5000):
     data_['h2'] = h2
     data_['z'] = z
     
-    
+    params['i'] = i
     
     
     
