@@ -140,5 +140,6 @@ y = z.argmax(dim=1)
 acc = np.mean(y.numpy() == t_test)
 
 print(f'Accuracy: {acc:.3f}')
-np.save('temp/ekfac_losses.npy', losses)
+# np.save('temp/ekfac_losses.npy', losses)
+np.save('/content/logs/temp/ekfac_losses.npy', losses)
 
