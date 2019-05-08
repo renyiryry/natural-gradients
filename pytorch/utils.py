@@ -5,6 +5,8 @@ def kfac_update(data_, params):
     h1 = data_['h1']
     h2 = data_['h2']
     z = data_['z']
+    A = data_['A']
+    G = data_['G']
     
     m = params['m']
     i = params['i']
@@ -36,3 +38,5 @@ def kfac_update(data_, params):
 
         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
         model.W[k].data -= alpha * delta
+        
+    return A, G
