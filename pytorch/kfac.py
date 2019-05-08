@@ -130,6 +130,7 @@ for i in range(1, 5000):
     params = {}
     params['m'] = m
     params['i'] = i
+    params['inverse_update_freq'] = inverse_update_freq
     
     
     A, G = kfac_update(data_, params)
