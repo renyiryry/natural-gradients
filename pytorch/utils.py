@@ -31,18 +31,18 @@ def SMW_Fisher_update(data_, params):
     A_ = [A1_, A2_, A3_]
 
     # Update running estimates of KFAC
-    rho = min(1-1/i, 0.95)
+#     rho = min(1-1/i, 0.95)
 
-    for k in range(3):
-        A[k] = rho*A[k] + (1-rho)*A_[k]
-        G[k] = rho*G[k] + (1-rho)*G_[k]
+#     for k in range(3):
+#         A[k] = rho*A[k] + (1-rho)*A_[k]
+#         G[k] = rho*G[k] + (1-rho)*G_[k]
 
     # Step
-    for k in range(3):
+#     for k in range(3):
         # Amortize the inverse. Only update inverses every now and then
-        if (i-1) % inverse_update_freq == 0:
-            A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
-            G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
+#         if (i-1) % inverse_update_freq == 0:
+#             A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
+#             G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
 
         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
         model.W[k].data -= alpha * delta
