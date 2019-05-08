@@ -50,30 +50,7 @@ class Model(nn.Module):
 
         return z, cache
 
-
-
-
-
-data_ = {}
-
-# Model
-model = Model()
-
-A = []  # KFAC A
-G = []  # KFAC G
-
-for Wi in model.W:
-    A.append(torch.zeros(Wi.size(1)))
-    G.append(torch.zeros(Wi.size(0)))
     
-A_inv, G_inv = 3*[0], 3*[0]
-    
-data_['model'] = model
-data_['A'] = A
-data_['G'] = G
-data_['A_inv'] = A_inv
-data_['G_inv'] = G_inv
-
 params = {}
 
 m = 128  # mb size
@@ -92,6 +69,38 @@ parser.add_argument('algorithm', type=str, )
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 params['algorithm'] = args.algorithm
+
+
+
+
+data_ = {}
+
+# Model
+model = Model()
+
+data_['model'] = model
+
+
+
+if params['algorithm'] == 'kfac':
+
+    A = []  # KFAC A
+    G = []  # KFAC G
+
+    for Wi in model.W:
+        A.append(torch.zeros(Wi.size(1)))
+        G.append(torch.zeros(Wi.size(0)))
+    
+    A_inv, G_inv = 3*[0], 3*[0]
+    
+    
+    data_['A'] = A
+    data_['G'] = G
+    data_['A_inv'] = A_inv
+    data_['G_inv'] = G_inv
+    
+
+
 
 # Visualization stuffs
 losses = []
