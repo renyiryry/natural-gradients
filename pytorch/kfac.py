@@ -53,14 +53,19 @@ model = Model()
 m = 128  # mb size
 alpha = 0.001
 
+data_ = {}
+
 A = []  # KFAC A
 G = []  # KFAC G
-
-A_inv, G_inv = 3*[0], 3*[0]
 
 for Wi in model.W:
     A.append(torch.zeros(Wi.size(1)))
     G.append(torch.zeros(Wi.size(0)))
+    
+A_inv, G_inv = 3*[0], 3*[0]
+    
+data_['A'] = A
+data_['G'] = G
 
 eps = 1e-2
 inverse_update_freq = 20
@@ -116,7 +121,7 @@ for i in range(1, 5000):
         model.W[k].data -= alpha * delta
     """
     
-    data_ = {}
+    
     
     data_['X_mb'] = X_mb
     data_['a1'] = a1
@@ -124,8 +129,7 @@ for i in range(1, 5000):
     data_['h1'] = h1
     data_['h2'] = h2
     data_['z'] = z
-    data_['A'] = A
-    data_['G'] = G
+    
     
     params = {}
     params['m'] = m
@@ -133,7 +137,7 @@ for i in range(1, 5000):
     params['inverse_update_freq'] = inverse_update_freq
     
     
-    A, G = kfac_update(data_, params)
+    data_ = kfac_update(data_, params)
     
 
     # PyTorch stuffs
