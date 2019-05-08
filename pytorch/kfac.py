@@ -124,13 +124,15 @@ for i in range(1, 5000):
     data_['h1'] = h1
     data_['h2'] = h2
     data_['z'] = z
+    data_['A'] = A
+    data_['G'] = G
     
     params = {}
     params['m'] = m
     params['i'] = i
     
     
-    kfac_update(data_, params)
+    A, G = kfac_update(data_, params)
     
 
     # PyTorch stuffs
