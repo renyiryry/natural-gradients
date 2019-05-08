@@ -14,8 +14,8 @@ def SMW_Fisher_update(data_, params):
     model = data_['model']
     
     m = params['m']
-    i = params['i']
-    inverse_update_freq = params['inverse_update_freq']
+#     i = params['i']
+#     inverse_update_freq = params['inverse_update_freq']
     eps = params['eps']
     alpha = params['alpha']
     
