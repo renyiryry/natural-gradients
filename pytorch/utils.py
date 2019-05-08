@@ -1,22 +1,22 @@
 def SMW_Fisher_update(data_, params):
-#     import torch
+    import torch
     
-#     X_mb = data_['X_mb']
-#     a1 = data_['a1']
-#     a2 = data_['a2']
-#     h1 = data_['h1']
-#     h2 = data_['h2']
-#     z = data_['z']
+    X_mb = data_['X_mb']
+    a1 = data_['a1']
+    a2 = data_['a2']
+    h1 = data_['h1']
+    h2 = data_['h2']
+    z = data_['z']
 #     A = data_['A']
 #     G = data_['G']
 #     A_inv = data_['A_inv']
 #     G_inv = data_['G_inv']
-#     model = data_['model']
+    model = data_['model']
     
-#     m = params['m']
-#     i = params['i']
-#     inverse_update_freq = params['inverse_update_freq']
-#     eps = params['eps']
+    m = params['m']
+    i = params['i']
+    inverse_update_freq = params['inverse_update_freq']
+    eps = params['eps']
     alpha = params['alpha']
     
     # KFAC matrices
@@ -47,10 +47,10 @@ def SMW_Fisher_update(data_, params):
         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
         model.W[k].data -= alpha * delta
         
-    data_['A'] = A
-    data_['G'] = G
-    data_['A_inv'] = A_inv
-    data_['G_inv'] = G_inv
+#     data_['A'] = A
+#     data_['G'] = G
+#     data_['A_inv'] = A_inv
+#     data_['G_inv'] = G_inv
     data_['model'] = model
         
     return data_
