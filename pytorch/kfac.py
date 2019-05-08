@@ -47,11 +47,13 @@ class Model(nn.Module):
         return z, cache
 
 
-# Model
-model = Model()
+
 
 
 data_ = {}
+
+# Model
+model = Model()
 
 A = []  # KFAC A
 G = []  # KFAC G
@@ -62,6 +64,7 @@ for Wi in model.W:
     
 A_inv, G_inv = 3*[0], 3*[0]
     
+data_['model'] = model
 data_['A'] = A
 data_['G'] = G
 data_['A_inv'] = A_inv
@@ -142,6 +145,8 @@ for i in range(1, 5000):
     
     
     data_ = kfac_update(data_, params)
+    
+    model = data_['model']
     
 
     # PyTorch stuffs
