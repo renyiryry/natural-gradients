@@ -144,7 +144,7 @@ for i in range(1, 5000):
         model.W[k].data -= alpha * delta
     """
     
-    if params['algorhthm'] == 'kfac':
+    if params['algorithm'] == 'kfac':
     
         data_['X_mb'] = X_mb
         data_['a1'] = a1
