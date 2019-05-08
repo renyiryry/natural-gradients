@@ -17,6 +17,7 @@ def kfac_update(data_, params):
     i = params['i']
     inverse_update_freq = params['inverse_update_freq']
     eps = params['eps']
+    alpha = params['alpha']
     
     # KFAC matrices
     G1_ = 1/m * a1.grad.t() @ a1.grad
