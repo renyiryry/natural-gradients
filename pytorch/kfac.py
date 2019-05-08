@@ -8,6 +8,8 @@ from sklearn.utils import shuffle
 import warnings
 warnings.filterwarnings('error')
 
+from utils import *
+
 
 np.random.seed(9999)
 torch.manual_seed(9999)
@@ -84,6 +86,7 @@ for i in range(1, 5000):
 
     losses.append(loss if i == 1 else 0.99*losses[-1] + 0.01*loss)
 
+    """
     # KFAC matrices
     G1_ = 1/m * a1.grad.t() @ a1.grad
     A1_ = 1/m * X_mb.t() @ X_mb
@@ -111,6 +114,10 @@ for i in range(1, 5000):
 
         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
         model.W[k].data -= alpha * delta
+    """
+    
+    kfac_update()
+    
 
     # PyTorch stuffs
     model.zero_grad()
