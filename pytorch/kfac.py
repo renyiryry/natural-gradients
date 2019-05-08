@@ -130,7 +130,7 @@ for i in range(1, 5000):
     params['i'] = i
     
     
-    kfac_update(data_, m, i)
+    kfac_update(data_, params)
     
 
     # PyTorch stuffs
