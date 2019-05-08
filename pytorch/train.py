@@ -169,7 +169,7 @@ for i in range(1, 5000):
         data_ = kfac_update(data_, params)
     
         model = data_['model']
-    elseif params['algorithm'] == 'SMW-Fisher':
+    elif params['algorithm'] == 'SMW-Fisher':
         data_ = SMW_Fisher_update(data_, params)
     else:
         print('Error!')
