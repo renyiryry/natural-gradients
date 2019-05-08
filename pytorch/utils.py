@@ -1,4 +1,7 @@
-def kfac_update(X_mb, a1, m):
+def kfac_update(data_, m):
+    X_mb = data_['X_mb']
+    a1 = data_['a1']
+    
     # KFAC matrices
     G1_ = 1/m * a1.grad.t() @ a1.grad
     A1_ = 1/m * X_mb.t() @ X_mb
