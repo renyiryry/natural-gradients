@@ -66,6 +66,8 @@ A_inv, G_inv = 3*[0], 3*[0]
     
 data_['A'] = A
 data_['G'] = G
+data_['A_inv'] = A_inv
+data_['G_inv'] = G_inv
 
 eps = 1e-2
 inverse_update_freq = 20
