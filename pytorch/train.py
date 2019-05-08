@@ -9,6 +9,10 @@ import warnings
 warnings.filterwarnings('error')
 
 from utils import *
+import argparse
+import sys
+
+
 
 
 np.random.seed(9999)
@@ -70,16 +74,24 @@ data_['G'] = G
 data_['A_inv'] = A_inv
 data_['G_inv'] = G_inv
 
+params = {}
+
 m = 128  # mb size
 alpha = 0.001
 eps = 1e-2
 inverse_update_freq = 20
 
-params = {}
+
 params['m'] = m
 params['inverse_update_freq'] = inverse_update_freq
 params['eps'] = eps
 params['alpha'] = alpha
+
+parser = argparse.ArgumentParser()
+parser.add_argument('algorithm', type=str, )
+args = parser.parse_args()
+# print args.accumulate(args.algorithm)
+params['algorithm'] = args.algorithm
 
 # Visualization stuffs
 losses = []
@@ -132,22 +144,26 @@ for i in range(1, 5000):
         model.W[k].data -= alpha * delta
     """
     
+    if params['algorhthm'] == 'kfac':
+    
+        data_['X_mb'] = X_mb
+        data_['a1'] = a1
+        data_['a2'] = a2
+        data_['h1'] = h1
+        data_['h2'] = h2
+        data_['z'] = z
+    
+        params['i'] = i
     
     
-    data_['X_mb'] = X_mb
-    data_['a1'] = a1
-    data_['a2'] = a2
-    data_['h1'] = h1
-    data_['h2'] = h2
-    data_['z'] = z
     
-    params['i'] = i
+        data_ = kfac_update(data_, params)
     
-    
-    
-    data_ = kfac_update(data_, params)
-    
-    model = data_['model']
+        model = data_['model']
+    else:
+        print('Error!')
+        sys.exit()
+        
     
 
     # PyTorch stuffs
