@@ -116,7 +116,10 @@ for i in range(1, 5000):
         model.W[k].data -= alpha * delta
     """
     
-    kfac_update(a1, m)
+    data_ = {}
+    data_['X_mb'] = X_mb
+    data_['a1'] = a1
+    kfac_update(data_, m)
     
 
     # PyTorch stuffs
