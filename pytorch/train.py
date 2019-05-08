@@ -110,7 +110,7 @@ for i in range(1, 5000):
     loss.backward()
 
     if (i-1) % 100 == 0:
-        print(f'Iter-{i}; Loss: {loss:.3f}')
+        print(f'Iter-{i-1}; Loss: {loss:.3f}')
 
     losses.append(loss if i == 1 else 0.99*losses[-1] + 0.01*loss)
 
@@ -160,6 +160,8 @@ for i in range(1, 5000):
         data_ = kfac_update(data_, params)
     
         model = data_['model']
+    elseif params['algorithm'] == 'SMW-Fisher':
+        data_ = SMW_Fisher_update(data_, params)
     else:
         print('Error!')
         sys.exit()
