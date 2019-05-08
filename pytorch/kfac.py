@@ -50,8 +50,6 @@ class Model(nn.Module):
 # Model
 model = Model()
 
-m = 128  # mb size
-alpha = 0.001
 
 data_ = {}
 
@@ -69,8 +67,16 @@ data_['G'] = G
 data_['A_inv'] = A_inv
 data_['G_inv'] = G_inv
 
+m = 128  # mb size
+alpha = 0.001
 eps = 1e-2
 inverse_update_freq = 20
+
+params = {}
+params['m'] = m
+params['i'] = i
+params['inverse_update_freq'] = inverse_update_freq
+params['eps'] = eps
 
 # Visualization stuffs
 losses = []
@@ -133,10 +139,7 @@ for i in range(1, 5000):
     data_['z'] = z
     
     
-    params = {}
-    params['m'] = m
-    params['i'] = i
-    params['inverse_update_freq'] = inverse_update_freq
+    
     
     
     data_ = kfac_update(data_, params)
