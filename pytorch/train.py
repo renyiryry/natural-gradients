@@ -155,13 +155,13 @@ for i in range(1, 5000):
     
     data_['X_mb'] = X_mb
     
-    if params['algorithm'] == 'kfac':     
-        data_['a1'] = a1
-        data_['a2'] = a2
-        data_['h1'] = h1
-        data_['h2'] = h2
-        data_['z'] = z
+    data_['a1'] = a1
+    data_['a2'] = a2
+    data_['h1'] = h1
+    data_['h2'] = h2
+    data_['z'] = z
     
+    if params['algorithm'] == 'kfac':    
         params['i'] = i
     
     
