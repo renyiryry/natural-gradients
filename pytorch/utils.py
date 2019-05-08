@@ -1,4 +1,6 @@
 def kfac_update(data_, params):
+    import torch
+    
     X_mb = data_['X_mb']
     a1 = data_['a1']
     a2 = data_['a2']
