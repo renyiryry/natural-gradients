@@ -9,6 +9,8 @@ def kfac_update(data_, params):
     z = data_['z']
     A = data_['A']
     G = data_['G']
+    A_inv = data_['A_inv']
+    G_inv = data_['G_inv']
     
     m = params['m']
     i = params['i']
