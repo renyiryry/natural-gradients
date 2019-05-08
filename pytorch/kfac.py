@@ -79,6 +79,7 @@ params = {}
 params['m'] = m
 params['inverse_update_freq'] = inverse_update_freq
 params['eps'] = eps
+params['alpha'] = alpha
 
 # Visualization stuffs
 losses = []
