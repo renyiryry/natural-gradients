@@ -25,19 +25,32 @@ def SMW_Fisher_update(data_, params):
     eps = params['eps']
     alpha = params['alpha']
     lambda_ = params['lambda_']
+    numlayers = params['numlayers']
     
     a = []
-    h = []
+    h = [X_mb]
     for ii in range(len(cache)):
         if ii % 2 == 0:
             a.append(cache[ii])
         else:
-            h.append(cache[ii])
+            h.append(cache[ii])        
+    a.append(z)
+    
+    print('a[0].size(): ', a[0].size())
+    print('a[1].size(): ', a[1].size())
+    print('a[2].size(): ', a[2].size())
+    
+    print('h[0].size(): ', h[0].size())
+    print('h[1].size(): ', h[1].size())
+    print('h[2].size(): ', h[2].size())
+    
     
     N2_index = np.random.permutation(N1)[:N2]
     
     # compute D_t
     D_t = lambda_ * torch.eye(N2)
+#     for l in range(numlayers):
+#         D_t += 1 / N2 * () * ()
     
     
     # compute hat_v
