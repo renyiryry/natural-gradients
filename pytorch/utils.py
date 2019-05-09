@@ -96,11 +96,11 @@ def kfac_update(data_, params):
     
     a = []
     h = []
-    for i in range(0, len(cache)):
-        if i % 2 == 0:
-            a.append(cache[i])
+    for ii in range(0, len(cache)):
+        if ii % 2 == 0:
+            a.append(cache[ii])
         else:
-            h.append(cache[i])
+            h.append(cache[ii])
     
     
     
