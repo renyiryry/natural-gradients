@@ -120,7 +120,7 @@ for i in range(1, max_iter):
         A[k] = rho*A[k] + (1-rho)*A_[k]
         G[k] = rho*G[k] + (1-rho)*G_[k]
         
-        print('G[l]: ', G[k])
+#         print('G[l]: ', G[k])
 
     # Step
     for k in range(3):
@@ -128,17 +128,17 @@ for i in range(1, max_iter):
         if (i-1) % inverse_update_freq == 0:
             A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
             
-            print('G[k] + eps*torch.eye(G[k].shape[0]): ', G[k] + eps*torch.eye(G[k].shape[0]))
+#             print('G[k] + eps*torch.eye(G[k].shape[0]): ', G[k] + eps*torch.eye(G[k].shape[0]))
             
             G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
             
-        print('G_inv[l]: ', G_inv[k])
-        print('model.W[l].grad.data: ', model.W[k].grad.data)
-        print('A_inv[l]: ', A_inv[k])
+#         print('G_inv[l]: ', G_inv[k])
+#         print('model.W[l].grad.data: ', model.W[k].grad.data)
+#         print('A_inv[l]: ', A_inv[k])
 
         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
         
-        print('delta: ', delta)
+#         print('delta: ', delta)
         
         model.W[k].data -= alpha * delta
 
