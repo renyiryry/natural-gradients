@@ -184,6 +184,9 @@ for i in range(1, max_iter):
     
     print('z.grad: ', z.grad)
     
+    print('h1.grad: ', cache[1].grad)
+    print('h2.grad: ', cache[3].grad)
+    
     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
     if (i-1) % 100 == 0:
