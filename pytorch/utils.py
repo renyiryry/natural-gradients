@@ -142,7 +142,7 @@ def kfac_update(data_, params):
         A[l] = rho*A[l] + (1-rho)*A_[l]
         G[l] = rho*G[l] + (1-rho)*G_[l]
         
-        print('G[l]: ', G[l])
+#         print('G[l]: ', G[l])
 
     # Step
     for l in range(numlayers):
@@ -158,7 +158,7 @@ def kfac_update(data_, params):
             
             A_inv[l] = (A[l] + eps*torch.eye(A[l].shape[0])).inverse()
             
-            print('G[l] + eps*torch.eye(G[l].shape[0]): ', G[l] + eps*torch.eye(G[l].shape[0]))
+#             print('G[l] + eps*torch.eye(G[l].shape[0]): ', G[l] + eps*torch.eye(G[l].shape[0]))
             
             G_inv[l] = (G[l] + eps*torch.eye(G[l].shape[0])).inverse()
 
@@ -166,14 +166,14 @@ def kfac_update(data_, params):
 #         print(type(model.W[l].grad.data))
 #         print(type(A_inv[l]))
 
-        print('G_inv[l]: ', G_inv[l])
-        print('model.W[l].grad.data: ', model.W[l].grad.data)
-        print('A_inv[l]: ', A_inv[l])
+#         print('G_inv[l]: ', G_inv[l])
+#         print('model.W[l].grad.data: ', model.W[l].grad.data)
+#         print('A_inv[l]: ', A_inv[l])
         
             
         delta = G_inv[l] @ model.W[l].grad.data @ A_inv[l]
         
-        print('delta: ', delta)
+#         print('delta: ', delta)
         
         model.W[l].data -= alpha * delta
         
