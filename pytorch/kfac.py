@@ -76,6 +76,9 @@ for i in range(1, 5000):
     a1, h1, a2, h2 = cache
 
     # Loss
+    
+    print('z: ', z)
+    
     loss = F.cross_entropy(z, t_mb)
     loss.backward()
 
