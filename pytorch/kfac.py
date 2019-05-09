@@ -118,13 +118,17 @@ for i in range(1, max_iter):
     
     print('z.grad: ', z.grad)
     
-    print('h1.grad: ', h1.grad)
-    print('h2.grad: ', h2.grad)
+#     print('h1.grad: ', h1.grad)
+#     print('h2.grad: ', h2.grad)
+    
+    print('h1: ', h1)
+    print('h2: ', h2)
     
     print('a1.grad: ', a1.grad)
     print('a2.grad: ', a2.grad)
     
-    print('X_mb.grad: ', X_mb.grad)
+#     print('X_mb.grad: ', X_mb.grad)
+    print('X_mb: ', X_mb)
     
     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
