@@ -184,8 +184,8 @@ for i in range(1, max_iter):
     
     print('z.grad: ', z.grad)
     
-    print('h1.grad: ', cache[1].grad)
-    print('h2.grad: ', cache[3].grad)
+#     print('h1.grad: ', cache[1].grad)
+#     print('h2.grad: ', cache[3].grad)
     
     print('h1: ', cache[1])
     print('h2: ', cache[3])
