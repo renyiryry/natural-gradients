@@ -245,6 +245,8 @@ for i in range(1, max_iter):
     
     print('1/m * cache[1].t() @ cache[2].grad: ', 1/m * cache[1].t() @ cache[2].grad)
     
+    print('cache[1].t() @ cache[2].grad: ', cache[1].t() @ cache[2].grad)
+    
     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
     if (i-1) % 100 == 0:
