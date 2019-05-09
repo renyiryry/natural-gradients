@@ -250,6 +250,8 @@ for i in range(1, max_iter):
     print('model.W[1].grad.data: ', model.W[1].grad.data)
     
     print('model.W[1].grad: ', model.W[1].grad)
+    
+    print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
 
     if (i-1) % 100 == 0:
         
