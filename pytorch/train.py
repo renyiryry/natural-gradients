@@ -97,10 +97,12 @@ params['alpha'] = alpha
 params['numlayers'] = model.numlayers
 
 parser = argparse.ArgumentParser()
-parser.add_argument('algorithm', type=str, )
+parser.add_argument('algorithm', type=str)
+parser.add_argument('max_iter', type=int)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 params['algorithm'] = args.algorithm
+max_iter = args.max_iter
 
 
 
@@ -136,7 +138,7 @@ if params['algorithm'] == 'kfac':
 losses = []
 
 # max_iter = 5000
-max_iter = 5
+# max_iter = 5
 
 # Training
 for i in range(1, max_iter):
