@@ -8,6 +8,14 @@ from sklearn.utils import shuffle
 import warnings
 warnings.filterwarnings('error')
 
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('max_iter', type=int)
+args = parser.parse_args()
+
+max_iter = args.max_iter
+
 
 np.random.seed(9999)
 torch.manual_seed(9999)
@@ -67,7 +75,7 @@ inverse_update_freq = 20
 losses = []
 
 # max_iter = 5000
-max_iter = 5
+# max_iter = 5
 
 # Training
 for i in range(1, max_iter):
@@ -80,8 +88,10 @@ for i in range(1, max_iter):
 
     # Loss
     
-    print('a1: ', a1)
-    print('a2: ', a2)
+#     print('a1: ', a1)
+#     print('a2: ', a2)
+
+    print('i: ', i)
     print('z: ', z)
     
     loss = F.cross_entropy(z, t_mb)
