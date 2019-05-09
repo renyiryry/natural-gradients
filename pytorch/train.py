@@ -135,8 +135,11 @@ if params['algorithm'] == 'kfac':
 # Visualization stuffs
 losses = []
 
+# max_iter = 5000
+maxx_iter = 5
+
 # Training
-for i in range(1, 5000):
+for i in range(1, max_iter):
     X_mb, t_mb = mnist.train.next_batch(m)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
