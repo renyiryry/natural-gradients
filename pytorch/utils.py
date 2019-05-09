@@ -118,7 +118,7 @@ def kfac_update(data_, params):
     for l in range(0, numlayers):
         if l < numlayers - 1:
             G_.append(1/m * a[l].grad.t() @ a[l].grad)
-        elif l == numlayers:
+        elif l == numlayers - 1:
             G_.append(1/m * z.grad.t() @ z.grad)
         else:
             print('Error!')
