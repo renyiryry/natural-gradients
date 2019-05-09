@@ -85,14 +85,14 @@ class Model(nn.Module):
             
         
         
-        a = []
-        h = []
-        for l in range(self.numlayers - 1):
-            if l == 0:
-                a.append(self.fc[l](x))
-            else:
-                a.append(self.fc[l](h[l-1]))
-            h.append(F.relu(a[l]))
+#         a = []
+#         h = []
+#         for l in range(self.numlayers - 1):
+#             if l == 0:
+#                 a.append(self.fc[l](x))
+#             else:
+#                 a.append(self.fc[l](h[l-1]))
+#             h.append(F.relu(a[l]))
             
         a = list(range(2))
         h = list(range(2))
@@ -248,6 +248,8 @@ for i in range(1, max_iter):
     print('cache[2].grad.t() @ cache[1]: ', cache[2].grad.t() @ cache[1])
     
     print('model.W[1].grad.data: ', model.W[1].grad.data)
+    
+    print('model.W[1].grad: ', model.W[1].grad)
 
     if (i-1) % 100 == 0:
         
