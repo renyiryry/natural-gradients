@@ -141,6 +141,8 @@ def kfac_update(data_, params):
     for l in range(numlayers):
         A[l] = rho*A[l] + (1-rho)*A_[l]
         G[l] = rho*G[l] + (1-rho)*G_[l]
+        
+        print('G[l]: ', G[l])
 
     # Step
     for l in range(numlayers):
