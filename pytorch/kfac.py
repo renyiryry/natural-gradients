@@ -108,8 +108,15 @@ for i in range(1, 5000):
         if (i-1) % inverse_update_freq == 0:
             A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
             G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
+            
+        print('G_inv[l]: ', G_inv[l])
+        print('model.W[l].grad.data: ', model.W[l].grad.data)
+        print('A_inv[l]: ', A_inv[l])
 
         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
+        
+        print('delta: ', delta)
+        
         model.W[k].data -= alpha * delta
 
     # PyTorch stuffs
