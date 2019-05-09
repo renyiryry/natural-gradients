@@ -71,7 +71,7 @@ class Model(nn.Module):
 #             cache.append([a[l],h[l]])
         cache = tuple(cache) 
     
-        print('len(cache): ', len(cache))
+#         print('len(cache): ', len(cache))
 
         z.retain_grad()
         for c in cache:
