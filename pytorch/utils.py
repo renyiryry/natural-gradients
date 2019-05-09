@@ -36,21 +36,33 @@ def SMW_Fisher_update(data_, params):
             h.append(cache[ii])        
     a.append(z)
     
-    print('a[0].size(): ', a[0].size())
-    print('a[1].size(): ', a[1].size())
-    print('a[2].size(): ', a[2].size())
+    # a[l], h[l]: size N1 * something
     
-    print('h[0].size(): ', h[0].size())
-    print('h[1].size(): ', h[1].size())
-    print('h[2].size(): ', h[2].size())
+#     print('a[0].size(): ', a[0].size())
+#     print('a[1].size(): ', a[1].size())
+#     print('a[2].size(): ', a[2].size())
+    
+#     print('h[0].size(): ', h[0].size())
+#     print('h[1].size(): ', h[1].size())
+#     print('h[2].size(): ', h[2].size())
     
     
     N2_index = np.random.permutation(N1)[:N2]
     
     # compute D_t
     D_t = lambda_ * torch.eye(N2)
+    for l in range(numlayers):
+        D_t += 1 / N2 * (a[l][N2_index] @ a[l][N2_index].t()) * (h[l][N2_index] @ h[l][N2_index].t())
+        
+    # compute the vector after D_t
+    v = torch.zeros(N2)
+    
+    print('model.W[0].size(): ', model.W[0].size())
+    print('model.W[1].size(): ', model.W[1].size())
+    print('model.W[2].size(): ', model.W[2].size())
+    
 #     for l in range(numlayers):
-#         D_t += 1 / N2 * () * ()
+        
     
     
     # compute hat_v
