@@ -94,9 +94,15 @@ def SMW_Fisher_update(data_, params):
         
         a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :] # [N2, m[l+1], m[l]]
         
-        print('a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :].size(): ', 
-              (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]).size())
+#         print('a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :].size(): ', 
+#               (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]).size())
+
+        (1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]) # [N2, m[l+1], m[l]]
+    
+        torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]). dim=0) $ [m[l+1], m[l]]
         
+        print('(torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]). dim=0)).size(): ', 
+              (torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]). dim=0)).size())
 #         delta = 
 #         model.W[k].data -= alpha * delta
         
