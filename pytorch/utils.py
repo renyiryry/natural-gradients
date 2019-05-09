@@ -146,6 +146,9 @@ def kfac_update(data_, params):
     for l in range(numlayers):
         # Amortize the inverse. Only update inverses every now and then
         if (i-1) % inverse_update_freq == 0:
+            
+            print(type(G[l]))
+            
             A_inv[l] = (A[l] + eps*torch.eye(A[l].shape[0])).inverse()
             G_inv[l] = (G[l] + eps*torch.eye(G[l].shape[0])).inverse()
 
