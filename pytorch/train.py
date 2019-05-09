@@ -144,14 +144,17 @@ for i in range(1, 5000):
 #     a1, h1, a2, h2 = cache
 
     # Loss
+    
+    print('z: ', z)
+    
     loss = F.cross_entropy(z, t_mb)
     loss.backward()
 
     if (i-1) % 100 == 0:
         
-        print(z)
+#         print(z)
         
-        print(t_mb)
+#         print(t_mb)
         
         print(f'Iter-{i-1}; Loss: {loss:.3f}')
 
