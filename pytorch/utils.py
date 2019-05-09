@@ -1,6 +1,7 @@
 def SMW_Fisher_update(data_, params):
     import torch
     import numpy as np
+    import scipy
     
     X_mb = data_['X_mb']
     
@@ -36,16 +37,17 @@ def SMW_Fisher_update(data_, params):
             h.append(cache[ii])        
     a.append(z)
     
-    # a[l], h[l]: size N1 * something
-    # model.W[l]: size m[l+1] * m[l]
     
-    print('a[0].size(): ', a[0].size())
-    print('a[1].size(): ', a[1].size())
-    print('a[2].size(): ', a[2].size())
     
-    print('h[0].size(): ', h[0].size())
-    print('h[1].size(): ', h[1].size())
-    print('h[2].size(): ', h[2].size())
+#     print('a[0].size(): ', a[0].size())
+#     print('a[1].size(): ', a[1].size())
+#     print('a[2].size(): ', a[2].size())
+    
+#     print('h[0].size(): ', h[0].size())
+#     print('h[1].size(): ', h[1].size())
+#     print('h[2].size(): ', h[2].size())
+
+    
     
     
     N2_index = np.random.permutation(N1)[:N2]
@@ -64,23 +66,50 @@ def SMW_Fisher_update(data_, params):
     
     
     
-#     for l in range(numlayers):
-#         v += 
+    for l in range(numlayers):
+        
+#         model.W[l] @ h[l] # m[l+1] * N2
+
+#         a[l][N2_index] @ model.W[l] # N2 * m[l]
+#         (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
+#         torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+        
+        v += torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
         
     
     
     # compute hat_v
+#     hat_v, _ = torch.solve(v, D_t)
+    hat_v = scipy.linalg.cho_solve(scipy.linalg.cho_factor(D_t), v)
+    
+    # a[l]: size N1 * m[l+1]
+    # h[l]: size N1 * m[l]
+    # model.W[l]: size m[l+1] * m[l]
+    
+    # update parameters
+    for l in range(numlayers):
+        
+#         For two 2D tensors a and b (of size [b,n] and [b,m] respectively),
+# a[:, :, None] @ b[:, None, :] (of size [b,n,m]) gives the outer product operated on each item in the batch.
+        
+        a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :] # [N2, m[l+1], m[l]]
+        
+        print('a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :].size(): ', a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :].size())
+        
+#         delta = 
+#         model.W[k].data -= alpha * delta
+        
     
     # KFAC matrices
-    G1_ = 1/N1 * a1.grad.t() @ a1.grad
-    A1_ = 1/N1 * X_mb.t() @ X_mb
-    G2_ = 1/N1 * a2.grad.t() @ a2.grad
-    A2_ = 1/N1 * h1.t() @ h1
-    G3_ = 1/N1 * z.grad.t() @ z.grad
-    A3_ = 1/N1 * h2.t() @ h2
+#     G1_ = 1/N1 * a1.grad.t() @ a1.grad
+#     A1_ = 1/N1 * X_mb.t() @ X_mb
+#     G2_ = 1/N1 * a2.grad.t() @ a2.grad
+#     A2_ = 1/N1 * h1.t() @ h1
+#     G3_ = 1/N1 * z.grad.t() @ z.grad
+#     A3_ = 1/N1 * h2.t() @ h2
 
-    G_ = [G1_, G2_, G3_]
-    A_ = [A1_, A2_, A3_]
+#     G_ = [G1_, G2_, G3_]
+#     A_ = [A1_, A2_, A3_]
 
     # Update running estimates of KFAC
 #     rho = min(1-1/i, 0.95)
