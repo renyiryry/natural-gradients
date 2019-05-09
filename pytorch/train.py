@@ -63,11 +63,11 @@ class Model(nn.Module):
         z = self.fc[-1](h[-1])
             
 
-        cache = (a1, h1, a2, h2)
+#         cache = (a1, h1, a2, h2)
             
         cache = []
         for l in range(0, self.numlayers - 1):
-            cache.append((a[l],h[l]))
+            cache.append([a[l],h[l]])
         cache = tuple(cache) 
 
         z.retain_grad()
@@ -139,7 +139,7 @@ for i in range(1, 5000):
     # Forward
     z, cache = model.forward(X_mb)
     
-    a1, h1, a2, h2 = cache
+#     a1, h1, a2, h2 = cache
 
     # Loss
     loss = F.cross_entropy(z, t_mb)
