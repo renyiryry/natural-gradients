@@ -85,6 +85,8 @@ class Model(nn.Module):
 
 # Model
 model = Model()
+
+print('model: ', model)
     
 params = {}
 
