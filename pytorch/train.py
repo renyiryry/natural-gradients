@@ -146,6 +146,10 @@ for i in range(1, max_iter):
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
+    
+    print('i: ', i)
+    print('X_mb: ', X_mb)
+    
     z, cache = model.forward(X_mb)
     
 #     a1, h1, a2, h2 = cache
@@ -154,7 +158,7 @@ for i in range(1, max_iter):
     
     
     
-    print('i: ', i)
+    
     print('a1: ', cache[0])
     print('a2: ', cache[2])
     print('z: ', z)
