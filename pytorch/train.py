@@ -63,6 +63,8 @@ class Model(nn.Module):
         self.W[0] = self.fc[0].weight
         self.W[1] = self.fc[1].weight
         self.W[2] = self.fc[2].weight
+        
+        self.W = tuple(self.W)
     
         print('size(self.W[0]): ', self.W[0].numel())
         print('size(self.W[1]): ', self.W[1].numel())
@@ -102,6 +104,9 @@ class Model(nn.Module):
         h[0] = F.relu(a[0])
         a[1] = self.fc[1](h[0])
         h[1] = F.relu(a[1])
+        
+        a = tuple(a)
+        h = tuple(h)
             
         z = self.fc[2](h[1])
             
