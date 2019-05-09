@@ -136,7 +136,24 @@ model = Model()
     
 params = {}
 
+parser = argparse.ArgumentParser()
+parser.add_argument('algorithm', type=str)
+parser.add_argument('max_iter', type=int)
+args = parser.parse_args()
+# print args.accumulate(args.algorithm)
+params['algorithm'] = args.algorithm
+max_iter = args.max_iter
+
 N1 = 128  # mini-batch size (for gradient)
+
+if params['algorithm'] == 'kfac':
+    N2 = 128
+elif params['algorithm'] == 'SMW-Fisher':
+    N2 = 64
+else:
+    print('Error!')
+    sys.exit()
+
 alpha = 0.001
 eps = 1e-2
 inverse_update_freq = 20
@@ -148,13 +165,7 @@ params['eps'] = eps
 params['alpha'] = alpha
 params['numlayers'] = model.numlayers
 
-parser = argparse.ArgumentParser()
-parser.add_argument('algorithm', type=str)
-parser.add_argument('max_iter', type=int)
-args = parser.parse_args()
-# print args.accumulate(args.algorithm)
-params['algorithm'] = args.algorithm
-max_iter = args.max_iter
+
 
 
 
