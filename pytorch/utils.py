@@ -17,7 +17,7 @@ def SMW_Fisher_update(data_, params):
 #     G_inv = data_['G_inv']
     model = data_['model']
     
-    m = params['m']
+    N1 = params['N1']
 #     i = params['i']
 #     inverse_update_freq = params['inverse_update_freq']
     eps = params['eps']
@@ -37,12 +37,12 @@ def SMW_Fisher_update(data_, params):
     # compute hat_v
     
     # KFAC matrices
-    G1_ = 1/m * a1.grad.t() @ a1.grad
-    A1_ = 1/m * X_mb.t() @ X_mb
-    G2_ = 1/m * a2.grad.t() @ a2.grad
-    A2_ = 1/m * h1.t() @ h1
-    G3_ = 1/m * z.grad.t() @ z.grad
-    A3_ = 1/m * h2.t() @ h2
+    G1_ = 1/N1 * a1.grad.t() @ a1.grad
+    A1_ = 1/N1 * X_mb.t() @ X_mb
+    G2_ = 1/N1 * a2.grad.t() @ a2.grad
+    A2_ = 1/N1 * h1.t() @ h1
+    G3_ = 1/N1 * z.grad.t() @ z.grad
+    A3_ = 1/N1 * h2.t() @ h2
 
     G_ = [G1_, G2_, G3_]
     A_ = [A1_, A2_, A3_]
@@ -92,7 +92,7 @@ def kfac_update(data_, params):
     G_inv = data_['G_inv']
     model = data_['model']
     
-    m = params['m']
+    N1 = params['N1']
     i = params['i']
     inverse_update_freq = params['inverse_update_freq']
     eps = params['eps']
@@ -122,9 +122,9 @@ def kfac_update(data_, params):
     G_ = []
     for l in range(0, numlayers):
         if l < numlayers - 1:
-            G_.append(1/m * a[l].grad.t() @ a[l].grad)
+            G_.append(1/N1 * a[l].grad.t() @ a[l].grad)
         elif l == numlayers - 1:
-            G_.append(1/m * z.grad.t() @ z.grad)
+            G_.append(1/N1 * z.grad.t() @ z.grad)
         else:
             print('Error!')
             sys.exit()
@@ -132,9 +132,9 @@ def kfac_update(data_, params):
     A_ = []
     for l in range(0, numlayers):
         if l == 0:
-            A_.append(1/m * X_mb.t() @ X_mb)
+            A_.append(1/N1 * X_mb.t() @ X_mb)
         else:
-            A_.append(1/m * h[l-1].t() @ h[l-1])
+            A_.append(1/N1 * h[l-1].t() @ h[l-1])
         
 
 #     G_ = [G1_, G2_, G3_]
