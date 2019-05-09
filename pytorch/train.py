@@ -187,6 +187,11 @@ for i in range(1, max_iter):
     print('h1.grad: ', cache[1].grad)
     print('h2.grad: ', cache[3].grad)
     
+    print('a1.grad: ', cache[0].grad)
+    print('a2.grad: ', cache[2].grad)
+    
+    print('X_mb.grad: ', X_mb.grad)
+    
     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
     if (i-1) % 100 == 0:
