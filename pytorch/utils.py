@@ -2,10 +2,14 @@ def SMW_Fisher_update(data_, params):
     import torch
     
     X_mb = data_['X_mb']
+    
     a1 = data_['a1']
     a2 = data_['a2']
     h1 = data_['h1']
     h2 = data_['h2']
+    
+    cache = data_['cache']
+    
     z = data_['z']
 #     A = data_['A']
 #     G = data_['G']
@@ -18,6 +22,14 @@ def SMW_Fisher_update(data_, params):
 #     inverse_update_freq = params['inverse_update_freq']
     eps = params['eps']
     alpha = params['alpha']
+    
+    a = []
+    h = []
+    for i in range(0, len(cache)):
+        if i % 2 == 0:
+            a.append(cache[i])
+        else:
+            h.append(cache[i])
     
     # KFAC matrices
     G1_ = 1/m * a1.grad.t() @ a1.grad
@@ -81,6 +93,14 @@ def kfac_update(data_, params):
     eps = params['eps']
     alpha = params['alpha']
     numlayers = params['numlayers']
+    
+    a = []
+    h = []
+    for i in range(0, len(cache)):
+        if i % 2 == 0:
+            a.append(cache[i])
+        else:
+            h.append(cache[i])
     
     
     
