@@ -68,7 +68,7 @@ class Model(nn.Module):
         cache = []
         for l in range(0, self.numlayers - 1):
             cache.append((a[l],h[l]))
-        cache = tuple(acche) 
+        cache = tuple(cache) 
 
         z.retain_grad()
         for c in cache:
