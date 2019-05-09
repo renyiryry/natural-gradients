@@ -243,9 +243,9 @@ for i in range(1, max_iter):
     print('a2.grad.size: ', cache[2].grad.size())
     print('h1.size: ',cache[1].size())
     
-    print('1/m * cache[1].t() @ cache[2].grad: ', 1/m * cache[1].t() @ cache[2].grad)
+#     print('1/m * cache[1].t() @ cache[2].grad: ', 1/m * cache[1].t() @ cache[2].grad)
     
-    print('cache[1].t() @ cache[2].grad: ', cache[1].t() @ cache[2].grad)
+    print('cache[2].grad @ cache[1].t(): ', cache[2].grad @ cache[1].t())
     
     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
