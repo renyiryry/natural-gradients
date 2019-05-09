@@ -28,12 +28,22 @@ class Model(nn.Module):
 
     def __init__(self):
         super(Model, self).__init__()
+        
+        layersizes = [784, 200, 100, 10]
+        self.numlayers = len(layersizes) - 1
+        
+        self.fc = []
+        for l in range(0, self.numlayers):
+            self.fc.append(nn.linear(layersizes[l], layersizes[l+1], bias=False))
+        
+        
 
         self.fc1 = nn.Linear(784, 200, bias=False)
         self.fc2 = nn.Linear(200, 100, bias=False)
         self.fc3 = nn.Linear(100, 10, bias=False)
 
-        self.W = [self.fc1.weight, self.fc2.weight, self.fc3.weight]
+#         self.W = [self.fc1.weight, self.fc2.weight, self.fc3.weight]       
+        self.W = [fci.weight for fci in self.fc]
 
     def forward(self, x):
         a1 = self.fc1(x)
@@ -41,8 +51,24 @@ class Model(nn.Module):
         a2 = self.fc2(h1)
         h2 = F.relu(a2)
         z = self.fc3(h2)
+        
+        a = []
+        h = []
+        for l in range(0, self.numlayers - 1):
+            if l == 0:
+                a.append(self.fc[l](x))
+            else:
+                a.append(self.fc[l](a[-1]))
+            h.append(F.relu(a[-1]))
+        z = self.fc[-1](h[-1])
+            
 
         cache = (a1, h1, a2, h2)
+            
+        cache = []
+        for l in range(0, self.numlayers - 1):
+            cache.append((a[l],h[l]))
+        cache = tuple(acche) 
 
         z.retain_grad()
         for c in cache:
@@ -112,6 +138,7 @@ for i in range(1, 5000):
 
     # Forward
     z, cache = model.forward(X_mb)
+    
     a1, h1, a2, h2 = cache
 
     # Loss
@@ -155,10 +182,12 @@ for i in range(1, 5000):
     
     data_['X_mb'] = X_mb
     
-    data_['a1'] = a1
-    data_['a2'] = a2
-    data_['h1'] = h1
-    data_['h2'] = h2
+#     data_['a1'] = a1
+#     data_['a2'] = a2
+#     data_['h1'] = h1
+#     data_['h2'] = h2
+    data_['cache'] = cache
+    
     data_['z'] = z
     
     if params['algorithm'] == 'kfac':    
