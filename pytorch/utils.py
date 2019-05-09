@@ -39,13 +39,13 @@ def SMW_Fisher_update(data_, params):
 
     # Step
 #     for k in range(3):
-        # Amortize the inverse. Only update inverses every now and then
+#         Amortize the inverse. Only update inverses every now and then
 #         if (i-1) % inverse_update_freq == 0:
 #             A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
 #             G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
 
-        delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
-        model.W[k].data -= alpha * delta
+#         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
+#         model.W[k].data -= alpha * delta
         
 #     data_['A'] = A
 #     data_['G'] = G
