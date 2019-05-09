@@ -115,6 +115,9 @@ for i in range(1, max_iter):
     loss.backward()
     
     print('model.W[1]: ', model.W[1])
+    
+    print('z.grad: ', z.grad)
+    
     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
     if (i-1) % 100 == 0:
