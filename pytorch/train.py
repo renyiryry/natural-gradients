@@ -152,10 +152,11 @@ for i in range(1, max_iter):
 
     # Loss
     
-#     print('a1: ', cache[0])
-#     print('a2: ', cache[2])
+    
     
     print('i: ', i)
+    print('a1: ', cache[0])
+    print('a2: ', cache[2])
     print('z: ', z)
     
     loss = F.cross_entropy(z, t_mb)
