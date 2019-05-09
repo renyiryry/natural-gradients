@@ -94,7 +94,8 @@ def SMW_Fisher_update(data_, params):
         
         a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :] # [N2, m[l+1], m[l]]
         
-        print('a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :].size(): ', a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :].size())
+        print('a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :].size(): ', 
+              (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]).size())
         
 #         delta = 
 #         model.W[k].data -= alpha * delta
