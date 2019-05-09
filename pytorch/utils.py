@@ -143,14 +143,19 @@ def kfac_update(data_, params):
         G[l] = rho*G[l] + (1-rho)*G_[l]
 
     # Step
-    for k in range(3):
+    for l in range(numlayers):
         # Amortize the inverse. Only update inverses every now and then
         if (i-1) % inverse_update_freq == 0:
-            A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
-            G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
+            A_inv[l] = (A[l] + eps*torch.eye(A[l].shape[0])).inverse()
+            G_inv[l] = (G[l] + eps*torch.eye(G[l].shape[0])).inverse()
 
-        delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
-        model.W[k].data -= alpha * delta
+        print(type(G_inv[l]))
+        print(type(model.W[l].grad.data))
+        print(type(A_inv[l]))
+        
+            
+        delta = G_inv[l] @ model.W[l].grad.data @ A_inv[l]
+        model.W[l].data -= alpha * delta
         
     data_['A'] = A
     data_['G'] = G
