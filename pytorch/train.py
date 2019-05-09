@@ -92,7 +92,7 @@ params['m'] = m
 params['inverse_update_freq'] = inverse_update_freq
 params['eps'] = eps
 params['alpha'] = alpha
-params['nunlayers'] = model.numlayers
+params['numlayers'] = model.numlayers
 
 parser = argparse.ArgumentParser()
 parser.add_argument('algorithm', type=str, )
