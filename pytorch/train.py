@@ -46,11 +46,11 @@ class Model(nn.Module):
         self.W = [fci.weight for fci in self.fc]
 
     def forward(self, x):
-        a1 = self.fc1(x)
-        h1 = F.relu(a1)
-        a2 = self.fc2(h1)
-        h2 = F.relu(a2)
-        z = self.fc3(h2)
+#         a1 = self.fc1(x)
+#         h1 = F.relu(a1)
+#         a2 = self.fc2(h1)
+#         h2 = F.relu(a2)
+#         z = self.fc3(h2)
         
         a = []
         h = []
@@ -148,6 +148,11 @@ for i in range(1, 5000):
     loss.backward()
 
     if (i-1) % 100 == 0:
+        
+        print(z)
+        
+        print(t_mb)
+        
         print(f'Iter-{i-1}; Loss: {loss:.3f}')
 
     losses.append(loss if i == 1 else 0.99*losses[-1] + 0.01*loss)
