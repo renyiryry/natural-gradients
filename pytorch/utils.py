@@ -3,10 +3,10 @@ def SMW_Fisher_update(data_, params):
     
     X_mb = data_['X_mb']
     
-    a1 = data_['a1']
-    a2 = data_['a2']
-    h1 = data_['h1']
-    h2 = data_['h2']
+#     a1 = data_['a1']
+#     a2 = data_['a2']
+#     h1 = data_['h1']
+#     h2 = data_['h2']
     
     cache = data_['cache']
     
