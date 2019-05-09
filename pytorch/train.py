@@ -34,7 +34,7 @@ class Model(nn.Module):
         
         self.fc = []
         for l in range(0, self.numlayers):
-            self.fc.append(nn.linear(layersizes[l], layersizes[l+1], bias=False))
+            self.fc.append(nn.Linear(layersizes[l], layersizes[l+1], bias=False))
         
         
 
