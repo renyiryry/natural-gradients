@@ -43,10 +43,14 @@ class Model(nn.Module):
 #         self.fc3 = nn.Linear(100, 10, bias=False)
 
 #         self.W = [self.fc1.weight, self.fc2.weight, self.fc3.weight]  
-        self.W = self.numlayers * [0]
-        for l in range(self.numlayers):
-            self.W[l] = self.fc[l].weight
+#         self.W = self.numlayers * [0]
+#         for l in range(self.numlayers):
+#             self.W[l] = self.fc[l].weight
 #         self.W = [fci.weight for fci in self.fc]
+
+        self.W = []
+        for l in range(self.numlayers):
+            self.W.append(self.fc[l].weight)
     
         print('size(self.W[0]): ', self.W[0].numel())
         print('size(self.W[1]): ', self.W[1].numel())
