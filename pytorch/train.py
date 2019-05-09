@@ -66,9 +66,9 @@ class Model(nn.Module):
         
         self.W = tuple(self.W)
     
-        print('size(self.W[0]): ', self.W[0].numel())
-        print('size(self.W[1]): ', self.W[1].numel())
-        print('size(self.W[2]): ', self.W[2].numel())
+#         print('size(self.W[0]): ', self.W[0].numel())
+#         print('size(self.W[1]): ', self.W[1].numel())
+#         print('size(self.W[2]): ', self.W[2].numel())
 
     def forward(self, x):
 #         a1 = self.fc1(x)
@@ -132,7 +132,7 @@ class Model(nn.Module):
 # Model
 model = Model()
 
-print('model: ', model)
+# print('model: ', model)
     
 params = {}
 
@@ -199,12 +199,12 @@ for i in range(1, max_iter):
 
     # Forward
     
-    print('i: ', i)
-    print('X_mb: ', X_mb)
+#     print('i: ', i)
+#     print('X_mb: ', X_mb)
     
-    print('model.W[0]: ', model.W[0])
+#     print('model.W[0]: ', model.W[0])
     
-    print('model.W: ', model.W)
+#     print('model.W: ', model.W)
     
     z, cache = model.forward(X_mb)
     
@@ -215,50 +215,50 @@ for i in range(1, max_iter):
     
     
     
-    print('a1: ', cache[0])
-    print('a2: ', cache[2])
-    print('z: ', z)
+#     print('a1: ', cache[0])
+#     print('a2: ', cache[2])
+#     print('z: ', z)
     
     loss = F.cross_entropy(z, t_mb)
     
-    print('loss: ', loss)
+#     print('loss: ', loss)
     
 #     model.zero_grad()
 
-    print('model.W[1]: ', model.W[1])
+#     print('model.W[1]: ', model.W[1])
 #     print('model.W[1].grad.data: ', model.W[1].grad.data)
     
     loss.backward()
     
-    print('model.W[1]: ', model.W[1])
+#     print('model.W[1]: ', model.W[1])
     
-    print('z.grad: ', z.grad)
+#     print('z.grad: ', z.grad)
     
 #     print('h1.grad: ', cache[1].grad)
 #     print('h2.grad: ', cache[3].grad)
     
-    print('h1: ', cache[1])
-    print('h2: ', cache[3])
+#     print('h1: ', cache[1])
+#     print('h2: ', cache[3])
     
-    print('a1.grad: ', cache[0].grad)
-    print('a2.grad: ', cache[2].grad)
+#     print('a1.grad: ', cache[0].grad)
+#     print('a2.grad: ', cache[2].grad)
     
 #     print('X_mb.grad: ', X_mb.grad)
     
-    print('X_mb: ', X_mb)
+#     print('X_mb: ', X_mb)
     
-    print('a2.grad.size: ', cache[2].grad.size())
-    print('h1.size: ',cache[1].size())
+#     print('a2.grad.size: ', cache[2].grad.size())
+#     print('h1.size: ',cache[1].size())
     
 #     print('1/m * cache[1].t() @ cache[2].grad: ', 1/m * cache[1].t() @ cache[2].grad)
     
-    print('cache[2].grad.t() @ cache[1]: ', cache[2].grad.t() @ cache[1])
+#     print('cache[2].grad.t() @ cache[1]: ', cache[2].grad.t() @ cache[1])
     
-    print('model.W[1].grad.data: ', model.W[1].grad.data)
+#     print('model.W[1].grad.data: ', model.W[1].grad.data)
     
-    print('model.W[1].grad: ', model.W[1].grad)
+#     print('model.W[1].grad: ', model.W[1].grad)
     
-    print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
+#     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
 
     if (i-1) % 100 == 0:
         
@@ -328,14 +328,14 @@ for i in range(1, max_iter):
 
     # PyTorch stuffs
     model.zero_grad()
-    print('gradeint zerod')
+#     print('gradeint zerod')
     
-    print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
+#     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
     
     for fci in model.fc:
         fci.zero_grad()
         
-    print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
+#     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
 
 
 z, _ = model.forward(torch.from_numpy(X_test))
