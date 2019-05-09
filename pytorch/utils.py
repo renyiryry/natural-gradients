@@ -57,12 +57,17 @@ def SMW_Fisher_update(data_, params):
 
 def kfac_update(data_, params):
     import torch
+    import sys
     
     X_mb = data_['X_mb']
+    
     a1 = data_['a1']
     a2 = data_['a2']
     h1 = data_['h1']
     h2 = data_['h2']
+    
+    cache = data_['cache']
+    
     z = data_['z']
     A = data_['A']
     G = data_['G']
@@ -75,24 +80,45 @@ def kfac_update(data_, params):
     inverse_update_freq = params['inverse_update_freq']
     eps = params['eps']
     alpha = params['alpha']
+    numlayers = params['numlayers']
     
     # KFAC matrices
-    G1_ = 1/m * a1.grad.t() @ a1.grad
-    A1_ = 1/m * X_mb.t() @ X_mb
-    G2_ = 1/m * a2.grad.t() @ a2.grad
-    A2_ = 1/m * h1.t() @ h1
-    G3_ = 1/m * z.grad.t() @ z.grad
-    A3_ = 1/m * h2.t() @ h2
+#     G1_ = 1/m * a1.grad.t() @ a1.grad
+#     G2_ = 1/m * a2.grad.t() @ a2.grad
+#     G3_ = 1/m * z.grad.t() @ z.grad
+    
+    
+#     A1_ = 1/m * X_mb.t() @ X_mb
+#     A2_ = 1/m * h1.t() @ h1
+#     A3_ = 1/m * h2.t() @ h2
+    
+    G_ = []
+    for l in range(0, numlayers):
+        if l < numlayers - 1:
+            G_.append(1/m * a[l].grad.t() @ a[l].grad)
+        elif l == numlayers:
+            G_.append(1/m * z.grad.t() @ z.grad)
+        else:
+            print('Error!')
+            sys.exit()
+            
+    A_ = []
+    for l in range(0, numlayers):
+        if l == 0:
+            A_.append(1/m * X_mb.t() @ X_mb)
+        else:
+            A_.append(1/m * h[l-1].t() @ h[l-1])
+        
 
-    G_ = [G1_, G2_, G3_]
-    A_ = [A1_, A2_, A3_]
+#     G_ = [G1_, G2_, G3_]
+#     A_ = [A1_, A2_, A3_]
 
     # Update running estimates of KFAC
     rho = min(1-1/i, 0.95)
 
-    for k in range(3):
-        A[k] = rho*A[k] + (1-rho)*A_[k]
-        G[k] = rho*G[k] + (1-rho)*G_[k]
+    for l in range(numlayers):
+        A[l] = rho*A[l] + (1-rho)*A_[l]
+        G[l] = rho*G[l] + (1-rho)*G_[l]
 
     # Step
     for k in range(3):
