@@ -89,6 +89,8 @@ for i in range(1, max_iter):
     
     print('model.W[0]: ', model.W[0])
     
+    print('model.W: ', model.W)
+    
     z, cache = model.forward(X_mb)
     a1, h1, a2, h2 = cache
 
