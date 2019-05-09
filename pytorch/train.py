@@ -46,6 +46,8 @@ class Model(nn.Module):
         self.W = [fci.weight for fci in self.fc]
     
         print('size(self.W[0]): ', self.W[0].numel())
+        print('size(self.W[1]): ', self.W[1].numel())
+        print('size(self.W[2]): ', self.W[2].numel())
 
     def forward(self, x):
 #         a1 = self.fc1(x)
