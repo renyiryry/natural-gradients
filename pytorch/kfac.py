@@ -106,6 +106,8 @@ for i in range(1, 5000):
     for k in range(3):
         A[k] = rho*A[k] + (1-rho)*A_[k]
         G[k] = rho*G[k] + (1-rho)*G_[k]
+        
+        print('G[l]: ', G[k])
 
     # Step
     for k in range(3):
