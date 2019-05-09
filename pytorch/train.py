@@ -77,6 +77,8 @@ class Model(nn.Module):
 
         return z, cache
 
+# Model
+model = Model()
     
 params = {}
 
@@ -90,6 +92,7 @@ params['m'] = m
 params['inverse_update_freq'] = inverse_update_freq
 params['eps'] = eps
 params['alpha'] = alpha
+params['nunlayers'] = model.numlayers
 
 parser = argparse.ArgumentParser()
 parser.add_argument('algorithm', type=str, )
@@ -101,9 +104,6 @@ params['algorithm'] = args.algorithm
 
 
 data_ = {}
-
-# Model
-model = Model()
 
 data_['model'] = model
 
@@ -125,6 +125,7 @@ if params['algorithm'] == 'kfac':
     data_['G'] = G
     data_['A_inv'] = A_inv
     data_['G_inv'] = G_inv
+
     
 
 
