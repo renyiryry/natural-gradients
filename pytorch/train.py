@@ -332,7 +332,7 @@ for i in range(1, max_iter):
     
     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
     
-    for fci in self.fc:
+    for fci in model.fc:
         fci.zero_grad()
         
     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
