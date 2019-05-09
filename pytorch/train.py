@@ -136,13 +136,13 @@ model = Model()
     
 params = {}
 
-m = 128  # mb size
+N1 = 128  # mini-batch size (for gradient)
 alpha = 0.001
 eps = 1e-2
 inverse_update_freq = 20
 
 
-params['m'] = m
+params['N1'] = N1
 params['inverse_update_freq'] = inverse_update_freq
 params['eps'] = eps
 params['alpha'] = alpha
