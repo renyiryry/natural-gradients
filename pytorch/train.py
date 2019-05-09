@@ -59,14 +59,27 @@ class Model(nn.Module):
 #         h2 = F.relu(a2)
 #         z = self.fc3(h2)
         
-        a = (self.numlayers - 1) * [0]
-        h = (self.numlayers - 1) * [0]
+#         a = (self.numlayers - 1) * [0]
+#         h = (self.numlayers - 1) * [0]
+#         for l in range(self.numlayers - 1):
+#             if l == 0:
+#                 a[l] = self.fc[l](x)
+#             else:
+#                 a[l] = self.fc[l](h[l-1])
+#             h[l] = F.relu(a[l])
+            
+            
+        
+        
+        a = []
+        h = []
         for l in range(self.numlayers - 1):
             if l == 0:
-                a[l] = self.fc[l](x)
+                a.append(self.fc[l](x))
             else:
-                a[l] = self.fc[l](h[l-1])
-            h[l] = F.relu(a[l])
+                a.append(self.fc[l](h[l-1]))
+            h.append(F.relu(a[l]))
+            
         z = self.fc[-1](h[-1])
             
 
