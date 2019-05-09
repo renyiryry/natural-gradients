@@ -32,9 +32,7 @@ class Model(nn.Module):
         layersizes = [784, 200, 100, 10]
         self.numlayers = len(layersizes) - 1
         
-        self.fc = []
-        for l in range(0, self.numlayers):
-            self.fc.append(nn.Linear(layersizes[l], layersizes[l+1], bias=False))
+        self.fc = [nn.Linear(layersizes[l], layersizes[l+1], bias=False) for l in range(self.numlayers)]
         
         
 
@@ -56,23 +54,25 @@ class Model(nn.Module):
 #         h2 = F.relu(a2)
 #         z = self.fc3(h2)
         
-        a = []
-        h = []
+        a = (self.numlayers - 1) * [0]
+        h = (self.numlayers - 1) * [0]
         for l in range(self.numlayers - 1):
             if l == 0:
-                a.append(self.fc[l](x))
+                a[l] = self.fc[l](x)
             else:
-                a.append(self.fc[l](h[-1]))
-            h.append(F.relu(a[-1]))
+                a[l] = self.fc[l](h[l-1])
+            h[l] = F.relu(a[l])
         z = self.fc[-1](h[-1])
             
 
 #         cache = (a1, h1, a2, h2)
             
-        cache = []
+        cache = ((self.numlayers - 1)) * 2 * [0]
         for l in range(0, self.numlayers - 1):
-            cache = cache + [a[l],h[l]]
+#             cache = cache + [a[l],h[l]]
 #             cache.append([a[l],h[l]])
+            cache[2*l] = a[l]
+            cache[2*l+1] = h[l]
         cache = tuple(cache) 
     
 #         print('len(cache): ', len(cache))
