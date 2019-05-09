@@ -32,9 +32,14 @@ class Model(nn.Module):
         layersizes = [784, 200, 100, 10]
         self.numlayers = len(layersizes) - 1
         
-        self.fc = self.numlayers * [0]
-        for l in range(self.numlayers):
-            self.fc[l] = nn.Linear(layersizes[l], layersizes[l+1], bias=False)
+#         self.fc = self.numlayers * [0]
+        self.fc = list(range(self.numlayers))
+#         for l in range(self.numlayers):
+#             self.fc[l] = nn.Linear(layersizes[l], layersizes[l+1], bias=False)
+            
+        self.fc[0] = nn.Linear(layersizes[0], layersizes[0+1], bias=False)
+        self.fc[1] = nn.Linear(layersizes[1], layersizes[1+1], bias=False)
+        self.fc[2] = nn.Linear(layersizes[2], layersizes[2+1], bias=False)
         
         
 
