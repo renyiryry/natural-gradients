@@ -41,6 +41,8 @@ class Model(nn.Module):
         self.fc[1] = nn.Linear(layersizes[1], layersizes[1+1], bias=False)
         self.fc[2] = nn.Linear(layersizes[2], layersizes[2+1], bias=False)
         
+        self.fc = tuple(self.fc)
+        
         
 
 #         self.fc1 = nn.Linear(784, 200, bias=False)
