@@ -136,7 +136,7 @@ if params['algorithm'] == 'kfac':
 losses = []
 
 # max_iter = 5000
-maxx_iter = 5
+max_iter = 5
 
 # Training
 for i in range(1, max_iter):
