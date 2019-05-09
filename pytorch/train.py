@@ -176,7 +176,7 @@ for i in range(1, max_iter):
 #     model.zero_grad()
 
     print('model.W[1]: ', model.W[1])
-    print('model.W[1].grad.data: ', model.W[1].grad.data)
+#     print('model.W[1].grad.data: ', model.W[1].grad.data)
     
     loss.backward()
     
