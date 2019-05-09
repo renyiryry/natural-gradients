@@ -145,9 +145,9 @@ def kfac_update(data_, params):
     # Step
     for l in range(numlayers):
         
-        print(type(G[l]))
+#         print(type(G[l]))
         
-        print('i = ', i)
+#         print('i = ', i)
         
         # Amortize the inverse. Only update inverses every now and then
         if (i-1) % inverse_update_freq == 0:
@@ -157,9 +157,9 @@ def kfac_update(data_, params):
             A_inv[l] = (A[l] + eps*torch.eye(A[l].shape[0])).inverse()
             G_inv[l] = (G[l] + eps*torch.eye(G[l].shape[0])).inverse()
 
-        print(type(G_inv[l]))
-        print(type(model.W[l].grad.data))
-        print(type(A_inv[l]))
+#         print(type(G_inv[l]))
+#         print(type(model.W[l].grad.data))
+#         print(type(A_inv[l]))
         
             
         delta = G_inv[l] @ model.W[l].grad.data @ A_inv[l]
