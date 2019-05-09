@@ -109,9 +109,9 @@ for i in range(1, 5000):
             A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
             G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
             
-        print('G_inv[l]: ', G_inv[l])
-        print('model.W[l].grad.data: ', model.W[l].grad.data)
-        print('A_inv[l]: ', A_inv[l])
+        print('G_inv[l]: ', G_inv[k])
+        print('model.W[l].grad.data: ', model.W[k].grad.data)
+        print('A_inv[l]: ', A_inv[k])
 
         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
         
