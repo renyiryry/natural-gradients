@@ -121,6 +121,11 @@ for i in range(1, max_iter):
     print('h1.grad: ', h1.grad)
     print('h2.grad: ', h2.grad)
     
+    print('a1.grad: ', a1.grad)
+    print('a2.grad: ', a2.grad)
+    
+    print('X_mb.grad: ', X_mb.grad)
+    
     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
     if (i-1) % 100 == 0:
