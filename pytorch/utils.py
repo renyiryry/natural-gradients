@@ -166,9 +166,9 @@ def kfac_update(data_, params):
 #         print(type(model.W[l].grad.data))
 #         print(type(A_inv[l]))
 
-#         print('G_inv[l]: ', G_inv[l])
-#         print('model.W[l].grad.data: ', model.W[l].grad.data)
-#         print('A_inv[l]: ', A_inv[l])
+        print('G_inv[l]: ', G_inv[l])
+        print('model.W[l].grad.data: ', model.W[l].grad.data)
+        print('A_inv[l]: ', A_inv[l])
         
             
         delta = G_inv[l] @ model.W[l].grad.data @ A_inv[l]
