@@ -240,6 +240,9 @@ for i in range(1, max_iter):
     
     print('X_mb: ', X_mb)
     
+    print('a2.grad.size: ', cache[2].grad.size)
+    print('h1,size: ',cache[1].size)
+    
     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
     if (i-1) % 100 == 0:
