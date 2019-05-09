@@ -38,9 +38,9 @@ class Model(nn.Module):
         
         
 
-        self.fc1 = nn.Linear(784, 200, bias=False)
-        self.fc2 = nn.Linear(200, 100, bias=False)
-        self.fc3 = nn.Linear(100, 10, bias=False)
+#         self.fc1 = nn.Linear(784, 200, bias=False)
+#         self.fc2 = nn.Linear(200, 100, bias=False)
+#         self.fc3 = nn.Linear(100, 10, bias=False)
 
 #         self.W = [self.fc1.weight, self.fc2.weight, self.fc3.weight]       
         self.W = [fci.weight for fci in self.fc]
