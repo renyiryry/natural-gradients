@@ -37,7 +37,7 @@ class Model(nn.Module):
 
         self.W = [self.fc1.weight, self.fc2.weight, self.fc3.weight]
         
-        print('size(self.W[0]): ', self.W[0].numel())
+#         print('size(self.W[0]): ', self.W[0].numel())
 
     def forward(self, x):
         a1 = self.fc1(x)
@@ -86,12 +86,12 @@ for i in range(1, max_iter):
 
     # Forward
     
-    print('i: ', i)
-    print('X_mb: ', X_mb)
+#     print('i: ', i)
+#     print('X_mb: ', X_mb)
     
-    print('model.W[0]: ', model.W[0])
+#     print('model.W[0]: ', model.W[0])
     
-    print('model.W: ', model.W)
+#     print('model.W: ', model.W)
     
     z, cache = model.forward(X_mb)
     a1, h1, a2, h2 = cache
@@ -101,36 +101,36 @@ for i in range(1, max_iter):
 
 
     
-    print('a1: ', a1)
-    print('a2: ', a2)
-    print('z: ', z)
+#     print('a1: ', a1)
+#     print('a2: ', a2)
+#     print('z: ', z)
     
     loss = F.cross_entropy(z, t_mb)
     
-    print('loss: ', loss)
+#     print('loss: ', loss)
     
-    print('model.W[1]: ', model.W[1])
+#     print('model.W[1]: ', model.W[1])
 #     print('model.W[1].grad.data: ', model.W[1].grad.data)
     
     loss.backward()
     
-    print('model.W[1]: ', model.W[1])
+#     print('model.W[1]: ', model.W[1])
     
-    print('z.grad: ', z.grad)
+#     print('z.grad: ', z.grad)
     
 #     print('h1.grad: ', h1.grad)
 #     print('h2.grad: ', h2.grad)
     
-    print('h1: ', h1)
-    print('h2: ', h2)
+#     print('h1: ', h1)
+#     print('h2: ', h2)
     
-    print('a1.grad: ', a1.grad)
-    print('a2.grad: ', a2.grad)
+#     print('a1.grad: ', a1.grad)
+#     print('a2.grad: ', a2.grad)
     
 #     print('X_mb.grad: ', X_mb.grad)
-    print('X_mb: ', X_mb)
+#     print('X_mb: ', X_mb)
     
-    print('model.W[1].grad.data: ', model.W[1].grad.data)
+#     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
     if (i-1) % 100 == 0:
         print(f'Iter-{i}; Loss: {loss:.3f}')
@@ -167,14 +167,14 @@ for i in range(1, max_iter):
             
             G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
             
-        print('G_inv[l]: ', G_inv[k])
-        print('model.W[l]: ', model.W[k])
-        print('model.W[l].grad.data: ', model.W[k].grad.data)
-        print('A_inv[l]: ', A_inv[k])
+#         print('G_inv[l]: ', G_inv[k])
+#         print('model.W[l]: ', model.W[k])
+#         print('model.W[l].grad.data: ', model.W[k].grad.data)
+#         print('A_inv[l]: ', A_inv[k])
 
         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
         
-        print('delta: ', delta)
+#         print('delta: ', delta)
         
         model.W[k].data -= alpha * delta
 
