@@ -209,7 +209,7 @@ losses = []
 
 # Training
 for i in range(1, max_iter):
-    X_mb, t_mb = mnist.train.next_batch(m)
+    X_mb, t_mb = mnist.train.next_batch(N1)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
