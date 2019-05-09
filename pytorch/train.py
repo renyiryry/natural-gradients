@@ -168,6 +168,9 @@ for i in range(1, max_iter):
     print('z: ', z)
     
     loss = F.cross_entropy(z, t_mb)
+    
+    print('loss: ', loss)
+    
     loss.backward()
 
     if (i-1) % 100 == 0:
