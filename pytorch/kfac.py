@@ -114,6 +114,9 @@ for i in range(1, 5000):
         # Amortize the inverse. Only update inverses every now and then
         if (i-1) % inverse_update_freq == 0:
             A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
+            
+            print('G[k] + eps*torch.eye(G[k].shape[0]): ', G[k] + eps*torch.eye(G[k].shape[0]))
+            
             G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
             
         print('G_inv[l]: ', G_inv[k])
