@@ -160,6 +160,7 @@ inverse_update_freq = 20
 
 
 params['N1'] = N1
+params['N2'] = N2
 params['inverse_update_freq'] = inverse_update_freq
 params['eps'] = eps
 params['alpha'] = alpha
