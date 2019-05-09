@@ -54,11 +54,11 @@ class Model(nn.Module):
         
         a = []
         h = []
-        for l in range(0, self.numlayers - 1):
+        for l in range(self.numlayers - 1):
             if l == 0:
                 a.append(self.fc[l](x))
             else:
-                a.append(self.fc[l](a[-1]))
+                a.append(self.fc[l](h[-1]))
             h.append(F.relu(a[-1]))
         z = self.fc[-1](h[-1])
             
