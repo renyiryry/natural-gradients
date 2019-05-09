@@ -77,6 +77,8 @@ for i in range(1, 5000):
 
     # Loss
     
+    print('a1: ', a1)
+    print('a2: ', a2)
     print('z: ', z)
     
     loss = F.cross_entropy(z, t_mb)
