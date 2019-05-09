@@ -1,5 +1,6 @@
 def SMW_Fisher_update(data_, params):
     import torch
+    import numpy as np
     
     X_mb = data_['X_mb']
     
@@ -18,10 +19,12 @@ def SMW_Fisher_update(data_, params):
     model = data_['model']
     
     N1 = params['N1']
+    N2 = params['N2']
 #     i = params['i']
 #     inverse_update_freq = params['inverse_update_freq']
     eps = params['eps']
     alpha = params['alpha']
+    lambda_ = params['lambda_']
     
     a = []
     h = []
@@ -31,7 +34,10 @@ def SMW_Fisher_update(data_, params):
         else:
             h.append(cache[ii])
     
+    N2_index = np.random.permutation(N1)[:N2]
+    
     # compute D_t
+    D_t = lambda_ * torch.eye(N2)
     
     
     # compute hat_v
