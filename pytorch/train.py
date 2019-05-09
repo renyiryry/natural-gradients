@@ -150,6 +150,9 @@ if params['algorithm'] == 'kfac':
     N2 = 128
 elif params['algorithm'] == 'SMW-Fisher':
     N2 = 64
+    
+    lambda_ = 1
+    params['lambda_'] = lambda_
 else:
     print('Error!')
     sys.exit()
