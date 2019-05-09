@@ -328,6 +328,9 @@ for i in range(1, max_iter):
 
     # PyTorch stuffs
     model.zero_grad()
+    print('gradeint zerod')
+    
+    print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
 
 
 z, _ = model.forward(torch.from_numpy(X_test))
