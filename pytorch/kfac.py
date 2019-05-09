@@ -36,6 +36,8 @@ class Model(nn.Module):
         self.fc3 = nn.Linear(100, 10, bias=False)
 
         self.W = [self.fc1.weight, self.fc2.weight, self.fc3.weight]
+        
+        print('size(self.W[0]): ', size(self.W[0]))
 
     def forward(self, x):
         a1 = self.fc1(x)
