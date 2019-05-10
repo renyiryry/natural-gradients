@@ -1,4 +1,5 @@
 def get_new_loss(model, delta, x, t):
+    import torch.nn.functional as F
     
     for l in range(model.numlayers):
         model.W[l].data -= delta[l]
