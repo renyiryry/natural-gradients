@@ -172,6 +172,7 @@ def SMW_Fisher_update(data_, params):
     data_['model'] = model
     
     print('model.W[1] in utils: ', model.W[1])
+    print('model.W[1].data in utils: ', model.W[1].data)
         
     return data_
 
