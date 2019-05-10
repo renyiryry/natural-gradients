@@ -257,11 +257,11 @@ for i in range(1, max_iter):
 #     print('h1.grad: ', cache[1].grad)
 #     print('h2.grad: ', cache[3].grad)
     
-    print('h1 in train: ', cache[1])
+#     print('h1 in train: ', cache[1])
 #     print('h2: ', cache[3])
     
 #     print('a1.grad: ', cache[0].grad)
-    print('a2.grad in train: ', cache[2].grad)
+#     print('a2.grad in train: ', cache[2].grad)
     
 #     print('X_mb.grad: ', X_mb.grad)
     
@@ -272,11 +272,11 @@ for i in range(1, max_iter):
     
 #     print('1/m * cache[1].t() @ cache[2].grad: ', 1/m * cache[1].t() @ cache[2].grad)
     
-    print('cache[2].grad.t() @ cache[1] in train: ', cache[2].grad.t() @ cache[1])
+#     print('cache[2].grad.t() @ cache[1] in train: ', cache[2].grad.t() @ cache[1])
     
 #     print('model.W[1].grad.data: ', model.W[1].grad.data)
     
-    print('model.W[1].grad in train: ', model.W[1].grad)
+#     print('model.W[1].grad in train: ', model.W[1].grad)
     
 #     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
 
