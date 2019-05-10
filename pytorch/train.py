@@ -225,6 +225,8 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
         
     data_['a_grad_momentum'] = a_grad_momentum
     data_['h_momentum'] = h_momentum
+elif params['algorithm'] == 'SMW-Fisher':
+    1;
 else:
     print('Error!')
     sys.exit()
