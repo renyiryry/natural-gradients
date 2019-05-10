@@ -151,7 +151,7 @@ max_iter = args.max_iter
 
 if algorithm == 'kfac':
     eps = args.eps_or_lambda
-elif algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum'
+elif algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
     lambda_ = args.eps_or_lambda
 else:
     print('Error!')
