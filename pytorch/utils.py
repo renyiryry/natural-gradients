@@ -220,7 +220,7 @@ def SMW_Fisher_update(data_, params):
         rho = -Inf
     else:
         autodamp = 0
-        denom = -0.5*double(test_p'*computeBV(test_p)) - double(grad_use_0'*test_p) 
+#         denom = -0.5*double(test_p'*computeBV(test_p)) - double(grad_use_0'*test_p) 
         autodamp = 1
    
         rho = (oldll_chunk - ll_chunk) / denom
