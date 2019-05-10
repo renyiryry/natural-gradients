@@ -174,7 +174,7 @@ for i in range(1, max_iter):
 
         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
         
-#         print('delta: ', delta)
+        print('delta: ', delta)
         
         model.W[k].data -= alpha * delta
 
