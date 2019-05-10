@@ -139,17 +139,22 @@ params = {}
 parser = argparse.ArgumentParser()
 parser.add_argument('algorithm', type=str)
 parser.add_argument('max_iter', type=int)
+parser.add_argument('N1', type=int)
+parser.add_argument('N2', type=int)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 params['algorithm'] = args.algorithm
 max_iter = args.max_iter
 
-N1 = 128  # mini-batch size (for gradient)
+# N1 = 128  # mini-batch size (for gradient)
+N1 = args.N1
+N2 = args.N2
 
 if params['algorithm'] == 'kfac':
-    N2 = 128
+#     N2 = 128
+    1
 elif params['algorithm'] == 'SMW-Fisher':
-    N2 = 64
+#     N2 = 64
     
     lambda_ = 1
     params['lambda_'] = lambda_
