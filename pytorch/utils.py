@@ -218,7 +218,7 @@ def SMW_Fisher_update(data_, params):
     oldll_chunk = loss
         
     if oldll_chunk - ll_chunk > 0:
-        rho = -Inf
+        rho = float("-inf")
     else:
         autodamp = 0
 #         denom = -0.5*double(test_p'*computeBV(test_p)) - double(grad_use_0'*test_p) 
