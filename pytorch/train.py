@@ -158,7 +158,7 @@ if N2 > N1:
 if params['algorithm'] == 'kfac':
 #     N2 = 128
     1
-elif params['algorithm'] == 'SMW-Fisher':
+elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum':
 #     N2 = 64
     
 #     lambda_ = 1e-2
@@ -347,7 +347,7 @@ for i in range(1, max_iter):
         data_ = kfac_update(data_, params)
     
         
-    elif params['algorithm'] == 'SMW-Fisher':
+    elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum':
         data_ = SMW_Fisher_update(data_, params)
     else:
         print('Error!')
