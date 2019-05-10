@@ -274,14 +274,14 @@ def kfac_update(data_, params):
 
     for l in range(numlayers):
         
-        print('in utils')
-        print('A[l].size(): ', A[l].size())
-        print('A_[l].size(): ', A_[l].size())
+#         print('in utils')
+#         print('A[l].size(): ', A[l].size())
+#         print('A_[l].size(): ', A_[l].size())
         
         A[l] = rho*A[l] + (1-rho)*A_[l]
         G[l] = rho*G[l] + (1-rho)*G_[l]
         
-        print('A[l].size(): ', A[l].size())
+#         print('A[l].size(): ', A[l].size())
         
 #         print('G[l]: ', G[l])
 
