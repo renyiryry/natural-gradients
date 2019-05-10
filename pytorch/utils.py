@@ -248,6 +248,11 @@ def kfac_update(data_, params):
     rho = min(1-1/i, 0.95)
 
     for l in range(numlayers):
+        
+        print('in utils')
+        print('A[l].size(): ', A[l].size())
+        print('A_[l].size(): ', A_[l].size())
+        
         A[l] = rho*A[l] + (1-rho)*A_[l]
         G[l] = rho*G[l] + (1-rho)*G_[l]
         
