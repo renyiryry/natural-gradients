@@ -315,7 +315,7 @@ def kfac_update(data_, params):
             
         delta = G_inv[l] @ model.W[l].grad.data @ A_inv[l]
         
-        print('delta: ', delta)
+#         print('delta: ', delta)
         
         model.W[l].data -= alpha * delta
         
