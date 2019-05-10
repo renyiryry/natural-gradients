@@ -1,5 +1,5 @@
 def SMW_Fisher_update(data_, params):
-    # a[l]: size N1 * m[l+1]
+    # a[l].grad: size N1 * m[l+1], it has a coefficient 1 / N1, which should be first compensate
     # h[l]: size N1 * m[l]
     # model.W[l]: size m[l+1] * m[l]
     
@@ -64,14 +64,14 @@ def SMW_Fisher_update(data_, params):
         rho = min(1-1/i, 0.95)
         
         for l in range(numlayers):
-            a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * (a[l].grad)[N2_index]
+            a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * N1 * (a[l].grad)[N2_index]
             h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
         
     elif algorithm == 'SMW-Fisher':
         a_grad_momentum = []
         h_momentum = []
         for l in range(numlayers):
-            a_grad_momentum.append((a[l].grad)[N2_index])
+            a_grad_momentum.append(N1 * (a[l].grad)[N2_index])
             h_momentum.append(h[l][N2_index])
         
         
@@ -155,8 +155,8 @@ def SMW_Fisher_update(data_, params):
     
         delta = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
         delta = (1 - hat_v)[:, None, None] * delta # [N2, m[l+1], m[l]]
-#         delta = torch.mean(delta, dim = 0) # [m[l+1], m[l]]
-        delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+        delta = torch.mean(delta, dim = 0) # [m[l+1], m[l]]
+#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
         delta = 1 / lambda_ * delta
         
 #         print('delta.size():', delta.size())
