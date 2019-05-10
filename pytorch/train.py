@@ -272,7 +272,7 @@ for i in range(1, max_iter):
     
     loss = F.cross_entropy(z, t_mb)
     
-#     print('loss: ', loss)
+    print('loss: ', loss)
     
 #     model.zero_grad()
 
