@@ -256,6 +256,8 @@ def kfac_update(data_, params):
         A[l] = rho*A[l] + (1-rho)*A_[l]
         G[l] = rho*G[l] + (1-rho)*G_[l]
         
+        print('A[l].size(): ', A[l].size())
+        
 #         print('G[l]: ', G[l])
 
     # Step
