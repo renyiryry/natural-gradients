@@ -170,6 +170,8 @@ def SMW_Fisher_update(data_, params):
 #     data_['A_inv'] = A_inv
 #     data_['G_inv'] = G_inv
     data_['model'] = model
+    
+    print('model.W[1] in utils: ', model.W[1])
         
     return data_
 
