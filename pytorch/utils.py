@@ -4,20 +4,15 @@ def SMW_Fisher_update(data_, params):
     import scipy
     
     X_mb = data_['X_mb']
-    
-#     a1 = data_['a1']
-#     a2 = data_['a2']
-#     h1 = data_['h1']
-#     h2 = data_['h2']
-    
     cache = data_['cache']
-    
     z = data_['z']
 #     A = data_['A']
 #     G = data_['G']
 #     A_inv = data_['A_inv']
 #     G_inv = data_['G_inv']
     model = data_['model']
+    
+    
     
     N1 = params['N1']
     N2 = params['N2']
