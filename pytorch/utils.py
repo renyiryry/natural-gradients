@@ -106,7 +106,7 @@ def SMW_Fisher_update(data_, params):
 #         print('(torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]). dim=0)).size(): ', 
 #               (torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]), dim=0)).size())
         delta = 1 / lambda_ * torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]), dim=0) 
-        model.W[k].data -= alpha * delta
+        model.W[l].data -= alpha * delta
         
     
     # KFAC matrices
