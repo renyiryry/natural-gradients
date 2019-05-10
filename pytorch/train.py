@@ -161,7 +161,8 @@ if params['algorithm'] == 'kfac':
 elif params['algorithm'] == 'SMW-Fisher':
 #     N2 = 64
     
-    lambda_ = 1e-2
+#     lambda_ = 1e-2
+    lambda_ = 0.1
 #     lambda_ = 0.2
 #     lambda_ = 0.5
 #     lambda_ = 1
