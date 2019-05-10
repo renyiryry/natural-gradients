@@ -85,6 +85,7 @@ def SMW_Fisher_update(data_, params):
     hat_v = torch.from_numpy(hat_v)
     
     print('hat_v: ', hat_v)
+    print('1 - hav_v: ', 1 - hav_v)
     print('torch.max(hat_v): ', torch.max(hat_v))
     print('torch.min(hat_v): ', torch.min(hat_v))
     
@@ -109,7 +110,12 @@ def SMW_Fisher_update(data_, params):
         
 #         print('(torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]). dim=0)).size(): ', 
 #               (torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]), dim=0)).size())
-        delta = 1 / lambda_ * torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]), dim=0) 
+        
+        delta = a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]
+        delta = (1 - hat_v)[:, None, None] * delta
+        delta = totch.mean(delta, dim = 0)       
+        delta = 1 / lambda_ * delta
+    
         model.W[l].data -= alpha * delta
         
     
