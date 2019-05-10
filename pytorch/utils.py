@@ -115,6 +115,9 @@ def SMW_Fisher_update(data_, params):
         delta = (1 - hat_v)[:, None, None] * delta
         delta = torch.mean(delta, dim = 0)       
         delta = 1 / lambda_ * delta
+        
+        print('delta: ', delta)
+        print('model.W[l].grad: ', model.W[l].grad)
     
         model.W[l].data -= alpha * delta
         
