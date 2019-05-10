@@ -388,7 +388,7 @@ for i in range(1, max_iter):
         
     elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum':
         
-        
+        data_['loss'] = loss
         
         data_, params = SMW_Fisher_update(data_, params)
     else:
