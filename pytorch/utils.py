@@ -18,7 +18,7 @@ def SMW_Fisher_update(data_, params):
     model = data_['model']
     
     a_grad_momentum = data_['a_grad_momentum']
-    h_momnetum = data_['h_momentum']
+    h_momentum = data_['h_momentum']
     
     
     
