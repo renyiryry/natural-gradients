@@ -224,7 +224,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
         h_momentum.append(torch.zeros(N2, layersizes[l]))
         
     data_['a_grad_momentum'] = a_grad_momentum
-    data_['h_momentum'] = h_momnetum
+    data_['h_momentum'] = h_momentum
 else:
     print('Error!')
     sys.exit()
