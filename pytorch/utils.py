@@ -116,6 +116,9 @@ def SMW_Fisher_update(data_, params):
 #         print('(torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]). dim=0)).size(): ', 
 #               (torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]), dim=0)).size())
         
+        print('a[l][N2_index][:, :, None]: ', a[l][N2_index][:, :, None])
+        print('h[l][N2_index][:, None, :]: ', h[l][N2_index][:, None, :])
+    
         delta = a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]
         delta = (1 - hat_v)[:, None, None] * delta
         delta = torch.mean(delta, dim = 0)       
