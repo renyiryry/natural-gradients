@@ -97,7 +97,7 @@ def SMW_Fisher_update(data_, params):
     hat_v = torch.zeros(N2)
     
 #     print('hat_v: ', hat_v)
-#     print('1 - hat_v: ', 1 - hat_v)
+    print('1 - hat_v: ', 1 - hat_v)
     
     # a[l]: size N1 * m[l+1]
     # h[l]: size N1 * m[l]
@@ -130,9 +130,9 @@ def SMW_Fisher_update(data_, params):
         delta = 1 / lambda_ * delta
         
 #         print('delta.size():', delta.size())
-#         print('delta: ', delta)
+        print('delta: ', delta)
 #         print('model.W[l].grad.size(): ', model.W[l].grad.size())
-#         print('model.W[l].grad: ', model.W[l].grad)
+        print('model.W[l].grad: ', model.W[l].grad)
     
         model.W[l].data -= alpha * delta
         
