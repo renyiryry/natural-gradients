@@ -55,7 +55,7 @@ def SMW_Fisher_update(data_, params):
     # compute D_t
     D_t = lambda_ * torch.eye(N2)
     for l in range(numlayers):
-        D_t += 1 / N2 * (a[l][N2_index] @ a[l][N2_index].t()) * (h[l][N2_index] @ h[l][N2_index].t())
+        D_t += 1 / N2 * ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()) * (h[l][N2_index] @ h[l][N2_index].t())
         
     # compute the vector after D_t
     v = torch.zeros(N2)
@@ -74,7 +74,7 @@ def SMW_Fisher_update(data_, params):
 #         (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
 #         torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
         
-        v += torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+        v += torch.sum(((a[l].grad)[N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
         
     
     
@@ -119,7 +119,7 @@ def SMW_Fisher_update(data_, params):
         print('a[l][N2_index][:, :, None]: ', a[l][N2_index][:, :, None])
         print('h[l][N2_index][:, None, :]: ', h[l][N2_index][:, None, :])
     
-        delta = a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]
+        delta = (a[l].grad)[N2_index][:, :, None] @ h[l][N2_index][:, None, :]
         delta = (1 - hat_v)[:, None, None] * delta
         delta = torch.mean(delta, dim = 0)       
         delta = 1 / lambda_ * delta
