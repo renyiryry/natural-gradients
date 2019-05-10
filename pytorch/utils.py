@@ -56,7 +56,7 @@ def SMW_Fisher_update(data_, params):
     
     N2_index = np.random.permutation(N1)[:N2]
     
-    # Update running estimates of KFAC
+    # Update running estimates
     if algorithm == 'SMW-Fisher-momentum':
         rho = min(1-1/i, 0.95)
     elif algorithm == 'SMW-Fisher':
@@ -65,7 +65,7 @@ def SMW_Fisher_update(data_, params):
         print('Error!')
         sys.exit()
 
-    for l in range(3):
+    for l in range(numlayers):
         a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * (a[l].grad)[N2_index]
         h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
     
@@ -100,7 +100,7 @@ def SMW_Fisher_update(data_, params):
 
 
         
-        v += torch.sum((a_grad_momentum[l] @ model.W[l]) * h_momentum[l], dim = 1)
+        v += torch.sum((a_grad_momentum[l] @ model.W[l].grad) * h_momentum[l], dim = 1)
         
     
     
