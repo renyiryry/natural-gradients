@@ -385,7 +385,7 @@ for i in range(1, max_iter):
         
         
         
-        data_ = SMW_Fisher_update(data_, params)
+        data_, params = SMW_Fisher_update(data_, params)
     else:
         print('Error!')
         sys.exit()
