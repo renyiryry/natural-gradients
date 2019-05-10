@@ -17,8 +17,9 @@ def SMW_Fisher_update(data_, params):
 #     G_inv = data_['G_inv']
     model = data_['model']
     
-    a_grad_momentum = data_['a_grad_momentum']
-    h_momentum = data_['h_momentum']
+    if if algorithm == 'SMW-Fisher-momentum':
+        a_grad_momentum = data_['a_grad_momentum']
+        h_momentum = data_['h_momentum']
     
     
     
@@ -59,15 +60,24 @@ def SMW_Fisher_update(data_, params):
     # Update running estimates
     if algorithm == 'SMW-Fisher-momentum':
         rho = min(1-1/i, 0.95)
+        
+        for l in range(numlayers):
+            a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * (a[l].grad)[N2_index]
+            h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
+        
     elif algorithm == 'SMW-Fisher':
-        rho = 0
+        a_grad_momentum = []
+        h_momentum = []
+        for l in range(numlayers):
+            a_grad_momentum[l].append((a[l].grad)[N2_index])
+            h_momentum[l].append(h[l][N2_index])
+        
+        
     else:
         print('Error!')
         sys.exit()
 
-    for l in range(numlayers):
-        a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * (a[l].grad)[N2_index]
-        h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
+    
     
     
     
@@ -181,8 +191,9 @@ def SMW_Fisher_update(data_, params):
 #     data_['G_inv'] = G_inv
     data_['model'] = model
     
-    data_['a_grad_momentum'] = a_grad_momentum
-    data_['h_momentum'] = h_momentum
+    if algorithm == 'SMW-Fisher-momentum':
+        data_['a_grad_momentum'] = a_grad_momentum
+        data_['h_momentum'] = h_momentum
     
 #     print('model.W[1] in utils: ', model.W[1])
 #     print('model.W[1].data in utils: ', model.W[1].data)
