@@ -213,7 +213,7 @@ if params['algorithm'] == 'kfac':
     data_['A_inv'] = A_inv
     data_['G_inv'] = G_inv
 
-elif params['algorithm'] == 'SMW-Fihser-momentum':
+elif params['algorithm'] == 'SMW-Fisher-momentum':
     a_grad_momentum = []
     h_momentum = []
     
@@ -225,6 +225,9 @@ elif params['algorithm'] == 'SMW-Fihser-momentum':
         
     data_['a_grad_momentum'] = a_grad_momentum
     data_['h_momentum'] = h_momnetum
+else:
+    print('Error!')
+    sys.exit()
 
     
 
