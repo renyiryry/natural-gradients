@@ -203,6 +203,8 @@ if params['algorithm'] == 'kfac':
         A.append(torch.zeros(Wi.size(1)))
         G.append(torch.zeros(Wi.size(0)))
     
+    print('A[0].size(): ', A[0].size())
+    
     A_inv, G_inv = 3*[0], 3*[0]
     
     
@@ -210,6 +212,12 @@ if params['algorithm'] == 'kfac':
     data_['G'] = G
     data_['A_inv'] = A_inv
     data_['G_inv'] = G_inv
+
+elif params['algorithm'] == 'SMW-Fihser-momentum':
+    a_grad_momentum = []
+    h_momentum = []
+    
+#     for 
 
     
 
