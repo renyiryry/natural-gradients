@@ -1,6 +1,6 @@
 def get_new_loss(model, delta, x, t):
     
-    for l in model.numlayers:
+    for l in range(model.numlayers):
         model.W[l] -= delta[l]
         
     z, _ = model.forward(x)
