@@ -94,10 +94,10 @@ def SMW_Fisher_update(data_, params):
 #     print('torch.max(hat_v): ', torch.max(hat_v))
 #     print('torch.min(hat_v): ', torch.min(hat_v))
 
-#     hat_v = torch.zeros(N2)
+    hat_v = torch.zeros(N2)
     
 #     print('hat_v: ', hat_v)
-#     print('1 - hat_v: ', 1 - hat_v)
+    print('1 - hat_v: ', 1 - hat_v)
     
     # a[l]: size N1 * m[l+1]
     # h[l]: size N1 * m[l]
