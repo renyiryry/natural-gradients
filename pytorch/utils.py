@@ -188,10 +188,7 @@ def SMW_Fisher_update(data_, params):
 #         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
 #         model.W[k].data -= alpha * delta
         
-#     data_['A'] = A
-#     data_['G'] = G
-#     data_['A_inv'] = A_inv
-#     data_['G_inv'] = G_inv
+
     data_['model'] = model
     
     if algorithm == 'SMW-Fisher-momentum':
