@@ -217,11 +217,11 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
     a_grad_momentum = []
     h_momentum = []
     
-    numlayers = model.numlayers
+    layersizes = model.layersizes
     
     for l in range(model.numlayers):
-        a_grad_momentum.append(torch.zeros(N2, numlayers[l+1]))
-        h_momentum.append(torch.zeros(N2, numlayers[l]))
+        a_grad_momentum.append(torch.zeros(N2, layersizes[l+1]))
+        h_momentum.append(torch.zeros(N2, layersizes[l]))
         
     data_['a_grad_momentum'] = a_grad_momentum
     data_['h_momentum'] = h_momnetum
