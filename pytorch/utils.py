@@ -130,11 +130,15 @@ def SMW_Fisher_update(data_, params):
         delta = 1 / lambda_ * delta
         
 #         print('delta.size():', delta.size())
-#         print('delta: ', delta)
+        print('delta: ', delta)
 #         print('model.W[l].grad.size(): ', model.W[l].grad.size())
 #         print('model.W[l].grad: ', model.W[l].grad)
+
+        print('model.W[1].data in utils: ', model.W[1].data)
     
         model.W[l].data -= alpha * delta
+        
+        print('model.W[1].data in utils: ', model.W[1].data)
         
     
     # KFAC matrices
