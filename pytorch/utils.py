@@ -231,10 +231,9 @@ def SMW_Fisher_update(data_, params):
     
     # update lambda   
     if rho < 0.25:
-        lambda_ = lambda_ * boost;
+        lambda_ = lambda_ * boost
     elif rho > 0.75:
-        lambda_ = lambda_ * drop;
-    end
+        lambda_ = lambda_ * drop
             
 
             
