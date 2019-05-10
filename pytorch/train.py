@@ -226,7 +226,7 @@ for i in range(1, max_iter):
 #     print('i: ', i)
 #     print('X_mb: ', X_mb)
     
-#     print('model.W[0]: ', model.W[0])
+    print('model.W[1]: ', model.W[1])
     
 #     print('model.W: ', model.W)
     
