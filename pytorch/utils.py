@@ -1,3 +1,15 @@
+def get_new_loss(model, delta, x, t):
+    
+    for l in model.numlayers:
+        model.W[l] -= delta[l]
+        
+    z, _ = model.forward(x)
+    
+    loss = F.cross_entropy(z, t)
+    
+    return loss
+    
+
 def SMW_Fisher_update(data_, params):
     # a[l].grad: size N1 * m[l+1], it has a coefficient 1 / N1, which should be first compensate
     # h[l]: size N1 * m[l]
@@ -11,6 +23,9 @@ def SMW_Fisher_update(data_, params):
     algorithm = params['algorithm']
     
     X_mb = data_['X_mb']
+    
+    t_mb = data_['t_mb']
+    
     cache = data_['cache']
     z = data_['z']
 #     A = data_['A']
@@ -22,6 +37,8 @@ def SMW_Fisher_update(data_, params):
     if algorithm == 'SMW-Fisher-momentum':
         a_grad_momentum = data_['a_grad_momentum']
         h_momentum = data_['h_momentum']
+        
+    loss = data_['loss']
     
     
     
@@ -33,6 +50,8 @@ def SMW_Fisher_update(data_, params):
     alpha = params['alpha']
     lambda_ = params['lambda_']
     numlayers = params['numlayers']
+    boost = params['boost']
+    drop = params['drop']
     
     
     a = []
@@ -136,6 +155,15 @@ def SMW_Fisher_update(data_, params):
     
 #     print('hat_v: ', hat_v)
 #     print('1 - hat_v: ', 1 - hat_v)
+
+    # compute natural gradient
+    delta = list(range(numlayers))
+    for l in range(numlayers):
+        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
+        delta[l] = (1 - hat_v)[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
+        delta[l] = torch.mean(delta[l], dim = 0) # [m[l+1], m[l]]
+#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+        delta[l] = 1 / lambda_ * delta[l]
     
 
     
@@ -154,11 +182,7 @@ def SMW_Fisher_update(data_, params):
 #         print('a[l][N2_index][:, :, None]: ', a[l][N2_index][:, :, None])
 #         print('h[l][N2_index][:, None, :]: ', h[l][N2_index][:, None, :])
     
-        delta = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
-        delta = (1 - hat_v)[:, None, None] * delta # [N2, m[l+1], m[l]]
-        delta = torch.mean(delta, dim = 0) # [m[l+1], m[l]]
-#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
-        delta = 1 / lambda_ * delta
+        
         
 #         print('delta.size():', delta.size())
 #         print('delta: ', delta)
@@ -170,7 +194,7 @@ def SMW_Fisher_update(data_, params):
 
 #         print('model.W[1].data in utils: ', model.W[1].data)
     
-        model.W[l].data -= alpha * delta
+        model.W[l].data -= alpha * delta[l]
         
 #         print('model.W[1].data in utils: ', model.W[1].data)
         
@@ -179,15 +203,42 @@ def SMW_Fisher_update(data_, params):
 
     
 
-    # Step
-#     for k in range(3):
-#         Amortize the inverse. Only update inverses every now and then
-#         if (i-1) % inverse_update_freq == 0:
-#             A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
-#             G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
+    # compute rho
+#     test_rate = 1;
+#     test_p = test_rate * p;
+      
 
-#         delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
-#         model.W[k].data -= alpha * delta
+#     [ll_chunk, ~] =...
+#             computeLL(paramsp + test_p, indata, outdata, numchunks, targetchunk)
+    ll_chunk = get_new_loss(model, delta, X_mb, t_mb)
+        
+#     [oldll_chunk, ~] =...
+#             computeLL(paramsp, indata, outdata, numchunks, targetchunk)
+    oldll_chunk = loss
+        
+    if oldll_chunk - ll_chunk > 0:
+        rho = -Inf
+    else:
+        autodamp = 0
+        denom = -0.5*double(test_p'*computeBV(test_p)) - double(grad_use_0'*test_p) 
+        autodamp = 1
+   
+        rho = (oldll_chunk - ll_chunk) / denom
+        
+    
+    
+    
+    # update lambda   
+    if rho < 0.25:
+        lambda_ = lambda_ * boost;
+    elif rho > 0.75:
+        lambda_ = lambda_ * drop;
+    end
+            
+
+            
+            
+
         
 
     data_['model'] = model
@@ -198,8 +249,10 @@ def SMW_Fisher_update(data_, params):
     
 #     print('model.W[1] in utils: ', model.W[1])
 #     print('model.W[1].data in utils: ', model.W[1].data)
+
+    params['lambda_'] = lambda_
         
-    return data_
+    return data_, params
 
 def kfac_update(data_, params):
     import torch
