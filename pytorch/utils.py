@@ -60,7 +60,7 @@ def SMW_Fisher_update(data_, params):
         rho = min(1-1/i, 0.95)
     elif algorithm == 'SMW-Fisher':
         rho = 0
-    else
+    else:
         print('Error!')
         sys.exit()
 
