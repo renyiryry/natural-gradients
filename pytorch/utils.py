@@ -113,7 +113,7 @@ def SMW_Fisher_update(data_, params):
         
         delta = a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]
         delta = (1 - hat_v)[:, None, None] * delta
-        delta = totch.mean(delta, dim = 0)       
+        delta = torch.mean(delta, dim = 0)       
         delta = 1 / lambda_ * delta
     
         model.W[l].data -= alpha * delta
