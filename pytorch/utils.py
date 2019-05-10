@@ -1,4 +1,8 @@
 def SMW_Fisher_update(data_, params):
+    # a[l][N2_index] @ model.W[l] # N2 * m[l]
+    # (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
+    #  torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+    
     import torch
     import numpy as np
     import scipy
@@ -70,9 +74,7 @@ def SMW_Fisher_update(data_, params):
         
 #         model.W[l] @ h[l] # m[l+1] * N2
 
-#         a[l][N2_index] @ model.W[l] # N2 * m[l]
-#         (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
-#         torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+
         
         v += torch.sum(((a[l].grad)[N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
         
