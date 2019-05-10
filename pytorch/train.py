@@ -138,7 +138,7 @@ params = {}
 
 parser = argparse.ArgumentParser()
 parser.add_argument('algorithm', type=str)
-parser.add_argument('max_iter', type=int)
+parser.add_argument('--max_iter', type=int)
 parser.add_argument('N1', type=int)
 parser.add_argument('N2', type=int)
 parser.add_argument('alpha', type=float)
