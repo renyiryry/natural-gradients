@@ -151,6 +151,7 @@ max_iter = args.max_iter
 
 if algorithm == 'kfac':
     eps = args.eps_or_lambda
+    params['eps'] = eps
 elif algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
     lambda_ = args.eps_or_lambda
 else:
@@ -190,7 +191,7 @@ inverse_update_freq = 20
 params['N1'] = N1
 params['N2'] = N2
 params['inverse_update_freq'] = inverse_update_freq
-params['eps'] = eps
+
 params['alpha'] = alpha
 params['numlayers'] = model.numlayers
 
