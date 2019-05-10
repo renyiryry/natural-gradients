@@ -217,7 +217,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
     a_grad_momentum = []
     h_momentum = []
     
-    numlayers = self.numlayers
+    numlayers = model.numlayers
     
     for l in range(model.numlayers):
         a_grad_momentum.append(torch.zeros(N2, numlayers[l+1]))
