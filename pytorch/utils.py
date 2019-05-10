@@ -119,7 +119,8 @@ def SMW_Fisher_update(data_, params):
     # compute hat_v
 #     hat_v, _ = torch.solve(v, D_t)
 
-    print('D_t:', D_t)
+    if i % 100 == 0:
+        print('D_t:', D_t)
     
     D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
     hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
