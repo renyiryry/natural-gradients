@@ -141,6 +141,7 @@ parser.add_argument('algorithm', type=str)
 parser.add_argument('max_iter', type=int)
 parser.add_argument('N1', type=int)
 parser.add_argument('N2', type=int)
+parser.add_argument('alpha', type=float)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 algorithm = args.algorithm
@@ -171,7 +172,8 @@ else:
     print('Error!')
     sys.exit()
 
-alpha = 0.001
+# alpha = 0.001
+alpha = args.alpha
 eps = 1e-2
 inverse_update_freq = 20
 
