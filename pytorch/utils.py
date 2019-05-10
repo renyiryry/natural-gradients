@@ -17,6 +17,9 @@ def SMW_Fisher_update(data_, params):
 #     G_inv = data_['G_inv']
     model = data_['model']
     
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momnetum = data_['h_momentum']
+    
     
     
     N1 = params['N1']
@@ -52,6 +55,22 @@ def SMW_Fisher_update(data_, params):
     
     N2_index = np.random.permutation(N1)[:N2]
     
+    # Update running estimates of KFAC
+    if algorithm == 'SMW-Fisher-momentum':
+        rho = min(1-1/i, 0.95)
+    elif algorithm == 'SMW-Fisher':
+        rho = 0
+    else
+        print('Error!')
+        sys.exit()
+
+    for l in range(3):
+        a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * (a[l].grad)[N2_index]
+        h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
+    
+    
+    
+    
     # compute D_t
     D_t = lambda_ * torch.eye(N2)
     for l in range(numlayers):
@@ -60,7 +79,7 @@ def SMW_Fisher_update(data_, params):
 #         print('(a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t().size(): ',
 #               ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()).size())
         
-        D_t += 1 / N2 * ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()) * (h[l][N2_index] @ h[l][N2_index].t())
+        D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
         
     # compute the vector after D_t
     v = torch.zeros(N2)
@@ -80,7 +99,7 @@ def SMW_Fisher_update(data_, params):
 
 
         
-        v += torch.sum(((a[l].grad)[N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+        v += torch.sum((a_grad_momentum[l] @ model.W[l]) * h_momentum[l], dim = 1)
         
     
     
@@ -120,7 +139,7 @@ def SMW_Fisher_update(data_, params):
 #         print('a[l][N2_index][:, :, None]: ', a[l][N2_index][:, :, None])
 #         print('h[l][N2_index][:, None, :]: ', h[l][N2_index][:, None, :])
     
-        delta = (a[l].grad)[N2_index][:, :, None] @ h[l][N2_index][:, None, :] # [N2, m[l+1], m[l]]
+        delta = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
         delta = (1 - hat_v)[:, None, None] * delta # [N2, m[l+1], m[l]]
 #         delta = torch.mean(delta, dim = 0) # [m[l+1], m[l]]
         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
@@ -141,23 +160,9 @@ def SMW_Fisher_update(data_, params):
 #         print('model.W[1].data in utils: ', model.W[1].data)
         
     
-    # KFAC matrices
-#     G1_ = 1/N1 * a1.grad.t() @ a1.grad
-#     A1_ = 1/N1 * X_mb.t() @ X_mb
-#     G2_ = 1/N1 * a2.grad.t() @ a2.grad
-#     A2_ = 1/N1 * h1.t() @ h1
-#     G3_ = 1/N1 * z.grad.t() @ z.grad
-#     A3_ = 1/N1 * h2.t() @ h2
+    
 
-#     G_ = [G1_, G2_, G3_]
-#     A_ = [A1_, A2_, A3_]
-
-    # Update running estimates of KFAC
-#     rho = min(1-1/i, 0.95)
-
-#     for k in range(3):
-#         A[k] = rho*A[k] + (1-rho)*A_[k]
-#         G[k] = rho*G[k] + (1-rho)*G_[k]
+    
 
     # Step
 #     for k in range(3):
@@ -174,6 +179,9 @@ def SMW_Fisher_update(data_, params):
 #     data_['A_inv'] = A_inv
 #     data_['G_inv'] = G_inv
     data_['model'] = model
+    
+    data_['a_grad_momentum'] = a_grad_momentum
+    data_['h_momentum'] = h_momnetum
     
 #     print('model.W[1] in utils: ', model.W[1])
 #     print('model.W[1].data in utils: ', model.W[1].data)
