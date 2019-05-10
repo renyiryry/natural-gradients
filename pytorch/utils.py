@@ -131,6 +131,9 @@ def SMW_Fisher_update(data_, params):
         
 #         print('delta.size():', delta.size())
         print('delta: ', delta)
+    
+        print('delta * N2: ', delta * N2)
+        
 #         print('model.W[l].grad.size(): ', model.W[l].grad.size())
         print('model.W[l].grad: ', model.W[l].grad)
 
