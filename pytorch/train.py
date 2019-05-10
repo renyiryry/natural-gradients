@@ -150,6 +150,10 @@ max_iter = args.max_iter
 N1 = args.N1
 N2 = args.N2
 
+if N2 > N1:
+    print('Error!')
+    sys.exit()
+
 if params['algorithm'] == 'kfac':
 #     N2 = 128
     1
