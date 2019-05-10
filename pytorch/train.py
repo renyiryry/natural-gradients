@@ -357,8 +357,10 @@ for i in range(1, max_iter):
     
     data_['z'] = z
     
+    params['i'] = i
+    
     if params['algorithm'] == 'kfac':    
-        params['i'] = i
+        
     
     
     
