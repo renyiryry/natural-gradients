@@ -29,17 +29,17 @@ class Model(nn.Module):
     def __init__(self):
         super(Model, self).__init__()
         
-        layersizes = [784, 200, 100, 10]
-        self.numlayers = len(layersizes) - 1
+        self.layersizes = [784, 200, 100, 10]
+        self.numlayers = len(self.layersizes) - 1
         
 #         self.fc = self.numlayers * [0]
         self.fc = list(range(self.numlayers))
 #         for l in range(self.numlayers):
 #             self.fc[l] = nn.Linear(layersizes[l], layersizes[l+1], bias=False)
             
-        self.fc[0] = nn.Linear(layersizes[0], layersizes[0+1], bias=False)
-        self.fc[1] = nn.Linear(layersizes[1], layersizes[1+1], bias=False)
-        self.fc[2] = nn.Linear(layersizes[2], layersizes[2+1], bias=False)
+        self.fc[0] = nn.Linear(self.layersizes[0], self.layersizes[0+1], bias=False)
+        self.fc[1] = nn.Linear(self.layersizes[1], self.layersizes[1+1], bias=False)
+        self.fc[2] = nn.Linear(self.layersizes[2], self.layersizes[2+1], bias=False)
         
         self.fc = tuple(self.fc)
         
@@ -217,7 +217,14 @@ elif params['algorithm'] == 'SMW-Fihser-momentum':
     a_grad_momentum = []
     h_momentum = []
     
-#     for 
+    numlayers = self.numlayers
+    
+    for l in range(model.numlayers):
+        a_grad_momentum.append(torch.zeros(N2, numlayers[l+1]))
+        h_momentum.append(torch.zeros(N2, numlayers[l]))
+        
+    data_['a_grad_momentum'] = a_grad_momentum
+    data_['h_momentum'] = h_momnetum
 
     
 
@@ -356,6 +363,9 @@ for i in range(1, max_iter):
     
         
     elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum':
+        
+        
+        
         data_ = SMW_Fisher_update(data_, params)
     else:
         print('Error!')
