@@ -178,6 +178,11 @@ elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-m
 #     lambda_ = 0.5
 #     lambda_ = 1
     params['lambda_'] = lambda_
+    
+    boost = 1.01
+    drop = 1 / 1.01
+    params['boost'] = boost
+    params['drop'] = drop
 else:
     print('Error!')
     sys.exit()
