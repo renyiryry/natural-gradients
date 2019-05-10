@@ -214,7 +214,7 @@ if params['algorithm'] == 'kfac':
         A.append(torch.zeros(Wi.size(1)))
         G.append(torch.zeros(Wi.size(0)))
     
-    print('A[0].size(): ', A[0].size())
+#     print('A[0].size(): ', A[0].size())
     
     A_inv, G_inv = 3*[0], 3*[0]
     
@@ -277,11 +277,11 @@ for i in range(1, max_iter):
     
 #     print('a1: ', cache[0])
 #     print('a2: ', cache[2])
-    print('z: ', z)
+#     print('z: ', z)
     
     loss = F.cross_entropy(z, t_mb)
     
-    print('loss: ', loss)
+#     print('loss: ', loss)
     
 #     model.zero_grad()
 
