@@ -182,7 +182,7 @@ def SMW_Fisher_update(data_, params):
     data_['model'] = model
     
     data_['a_grad_momentum'] = a_grad_momentum
-    data_['h_momentum'] = h_momnetum
+    data_['h_momentum'] = h_momentum
     
 #     print('model.W[1] in utils: ', model.W[1])
 #     print('model.W[1].data in utils: ', model.W[1].data)
