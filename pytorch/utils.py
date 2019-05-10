@@ -17,7 +17,7 @@ def SMW_Fisher_update(data_, params):
 #     G_inv = data_['G_inv']
     model = data_['model']
     
-    if if algorithm == 'SMW-Fisher-momentum':
+    if algorithm == 'SMW-Fisher-momentum':
         a_grad_momentum = data_['a_grad_momentum']
         h_momentum = data_['h_momentum']
     
