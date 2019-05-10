@@ -29,7 +29,7 @@ def SMW_Fisher_update(data_, params):
     N2 = params['N2']
     i = params['i']
 #     inverse_update_freq = params['inverse_update_freq']
-    eps = params['eps']
+#     eps = params['eps']
     alpha = params['alpha']
     lambda_ = params['lambda_']
     numlayers = params['numlayers']
