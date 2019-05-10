@@ -142,11 +142,20 @@ parser.add_argument('max_iter', type=int)
 parser.add_argument('N1', type=int)
 parser.add_argument('N2', type=int)
 parser.add_argument('alpha', type=float)
+parser.add_argument('eps_or_lambda', type=float)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 algorithm = args.algorithm
 params['algorithm'] = algorithm
 max_iter = args.max_iter
+
+if algorithm == 'kfac':
+    eps = args.eps_or_lambda
+elif algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum'
+    lambda_ = args.eps_or_lambda
+else:
+    print('Error!')
+    sys.exit()
 
 # N1 = 128  # mini-batch size (for gradient)
 N1 = args.N1
@@ -163,7 +172,7 @@ elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-m
 #     N2 = 64
     
 #     lambda_ = 1e-2
-    lambda_ = 0.1
+#     lambda_ = 0.1
 #     lambda_ = 0.2
 #     lambda_ = 0.5
 #     lambda_ = 1
@@ -174,7 +183,7 @@ else:
 
 # alpha = 0.001
 alpha = args.alpha
-eps = 1e-2
+# eps = 1e-2
 inverse_update_freq = 20
 
 
