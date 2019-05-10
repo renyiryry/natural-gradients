@@ -341,12 +341,14 @@ for i in range(1, max_iter):
     
         data_ = kfac_update(data_, params)
     
-        model = data_['model']
+        
     elif params['algorithm'] == 'SMW-Fisher':
         data_ = SMW_Fisher_update(data_, params)
     else:
         print('Error!')
         sys.exit()
+        
+    model = data_['model']
         
     
 
