@@ -370,5 +370,6 @@ acc = np.mean(y.numpy() == t_test)
 
 print(f'Accuracy: {acc:.3f}')
 # np.save('temp/kfac_losses.npy', losses)
-np.save('/content/logs/temp/kfac_losses.npy', losses)
+# np.save('/content/logs/temp/kfac_losses.npy', losses)
+np.save('/content/logs/temp/' + algorithm + '_losses.npy', losses)
 
