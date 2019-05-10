@@ -30,6 +30,7 @@ def SMW_Fisher_update(data_, params):
     alpha = params['alpha']
     lambda_ = params['lambda_']
     numlayers = params['numlayers']
+    algorithm = params['algorithm']
     
     a = []
     h = [X_mb]
