@@ -109,14 +109,8 @@ def SMW_Fisher_update(data_, params):
 #         For two 2D tensors a and b (of size [b,n] and [b,m] respectively),
 # a[:, :, None] @ b[:, None, :] (of size [b,n,m]) gives the outer product operated on each item in the batch.
         
-#         a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :] # [N2, m[l+1], m[l]]
-        
 #         print('a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :].size(): ', 
-#               (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]).size())
-
-#         (1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]) # [N2, m[l+1], m[l]]
-    
-#         torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]). dim=0) # [m[l+1], m[l]]
+#               (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]).size()) 
         
 #         print('(torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]). dim=0)).size(): ', 
 #               (torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]), dim=0)).size())
@@ -124,9 +118,10 @@ def SMW_Fisher_update(data_, params):
 #         print('a[l][N2_index][:, :, None]: ', a[l][N2_index][:, :, None])
 #         print('h[l][N2_index][:, None, :]: ', h[l][N2_index][:, None, :])
     
-        delta = (a[l].grad)[N2_index][:, :, None] @ h[l][N2_index][:, None, :]
-        delta = (1 - hat_v)[:, None, None] * delta
-        delta = torch.mean(delta, dim = 0)       
+        delta = (a[l].grad)[N2_index][:, :, None] @ h[l][N2_index][:, None, :] # [N2, m[l+1], m[l]]
+        delta = (1 - hat_v)[:, None, None] * delta # [N2, m[l+1], m[l]]
+#         delta = torch.mean(delta, dim = 0) # [m[l+1], m[l]]
+        delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
         delta = 1 / lambda_ * delta
         
 #         print('delta.size():', delta.size())
