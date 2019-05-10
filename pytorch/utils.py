@@ -134,11 +134,11 @@ def SMW_Fisher_update(data_, params):
 #         print('model.W[l].grad.size(): ', model.W[l].grad.size())
         print('model.W[l].grad: ', model.W[l].grad)
 
-        print('model.W[1].data in utils: ', model.W[1].data)
+#         print('model.W[1].data in utils: ', model.W[1].data)
     
         model.W[l].data -= alpha * delta
         
-        print('model.W[1].data in utils: ', model.W[1].data)
+#         print('model.W[1].data in utils: ', model.W[1].data)
         
     
     # KFAC matrices
@@ -175,8 +175,8 @@ def SMW_Fisher_update(data_, params):
 #     data_['G_inv'] = G_inv
     data_['model'] = model
     
-    print('model.W[1] in utils: ', model.W[1])
-    print('model.W[1].data in utils: ', model.W[1].data)
+#     print('model.W[1] in utils: ', model.W[1])
+#     print('model.W[1].data in utils: ', model.W[1].data)
         
     return data_
 
