@@ -143,7 +143,8 @@ parser.add_argument('N1', type=int)
 parser.add_argument('N2', type=int)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
-params['algorithm'] = args.algorithm
+algorithm = args.algorithm
+params['algorithm'] = algorithm
 max_iter = args.max_iter
 
 # N1 = 128  # mini-batch size (for gradient)
