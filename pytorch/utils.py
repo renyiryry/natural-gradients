@@ -48,11 +48,11 @@ def compute_J_transpose_V_backp(v, data_, params):
 #         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
         delta[l] = copy.deepcopy(model_1.W[l].grad)
     
-    cache.detach_()
+#     cache.detach_()
     
     get_model_zerod(model_1)
     
-    del model_1
+#     del model_1
     
     
     return delta
@@ -656,14 +656,20 @@ def kfac_update(data_, params):
         delta.append(G_inv[l] @ model.W[l].grad.data @ A_inv[l])
         
 #         print('delta: ', delta)
+
+    data_ = get_cache_momentum(data_, params)
+    
+    p = []
+    for l in range(numlayers):
+        p.append(-delta[l])
+        
+    lambda_ = update_lambda(p, data_, params)
     
     for l in range(numlayers):
         model.W[l].data -= alpha * delta[l]
         
         
-    p = []
-    for l in range(numlayers):
-        p.append(-delta[l])
+    
     
 #     data_update_lambda = {}
 #     data_update_lambda['model'] = model
@@ -671,9 +677,7 @@ def kfac_update(data_, params):
 #     data_update_lambda['t_mb'] = t_mb
 #     data_update_lambda['loss'] = loss
 
-    data_ = get_cache_momentum(data_, params)
-        
-    lambda_ = update_lambda(p, data_, params)
+    
         
     data_['A'] = A
     data_['G'] = G
