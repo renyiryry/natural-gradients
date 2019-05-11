@@ -52,6 +52,8 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     get_model_zerod(model_1)
     
+    del model_1
+    
     
     return delta
 
