@@ -333,9 +333,10 @@ for i in range(1, max_iter):
 #         print(t_mb)
         
         print(f'Iter-{i-1}; Loss: {loss:.3f}')
-        lambda_ = params['lambda_']
-        print('lambda = ', lambda_)
-        print('\n')
+        if algorithm == 'SMW-Fisher':
+            lambda_ = params['lambda_']
+            print('lambda = ', lambda_)
+            print('\n')
 
     losses.append(loss if i == 1 else 0.99*losses[-1] + 0.01*loss)
 
