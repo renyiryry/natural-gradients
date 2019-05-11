@@ -216,15 +216,15 @@ def SMW_Fisher_update(data_, params):
         
     # compute the vector after D_t    
     
-    data_compute_JV = {}
-    data_compute_JV['a_grad_momentum'] = a_grad_momentum
-    data_compute_JV['h_momentum'] = h_momentum
+#     data_compute_JV = {}
+#     data_compute_JV['a_grad_momentum'] = a_grad_momentum
+#     data_compute_JV['h_momentum'] = h_momentum
     
     
     
-    v = compute_JV([Wi.grad for Wi in model.W], data_compute_JV, params)
+    v = compute_JV([Wi.grad for Wi in model.W], data_, params)
     
-    data_compute_JV = {}
+#     data_compute_JV = {}
         
     
     
