@@ -31,7 +31,7 @@ def computeFV(delta, data_, params):
     
     delta = compute_J_transpose_V(v, data_, params)
     
-    print('delta.size(): ', delta.size())
+#     print('delta.size(): ', delta.size())
     
     delta = torch.mean(delta, dim=0)
     return delta
