@@ -142,18 +142,16 @@ parser.add_argument('--max_iter', type=int)
 parser.add_argument('N1', type=int)
 parser.add_argument('N2', type=int)
 parser.add_argument('--alpha', type=float)
-parser.add_argument('--eps_or_lambda', type=float)
+parser.add_argument('--lambda', type=float)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 algorithm = args.algorithm
 params['algorithm'] = algorithm
 max_iter = args.max_iter
 
-if algorithm == 'kfac':
-    eps = args.eps_or_lambda
-    params['eps'] = eps
-elif algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
-    lambda_ = args.eps_or_lambda
+if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+    lambda_ = args.lambda
+    params['lambda'] = lambda_
 else:
     print('Error!')
     sys.exit()
@@ -177,7 +175,7 @@ elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-m
 #     lambda_ = 0.2
 #     lambda_ = 0.5
 #     lambda_ = 1
-    params['lambda_'] = lambda_
+    
     
     boost = 1.01
     drop = 1 / 1.01
@@ -340,35 +338,7 @@ for i in range(1, max_iter):
 
     losses.append(loss if i == 1 else 0.99*losses[-1] + 0.01*loss)
 
-    """
-    # KFAC matrices
-    G1_ = 1/m * a1.grad.t() @ a1.grad
-    A1_ = 1/m * X_mb.t() @ X_mb
-    G2_ = 1/m * a2.grad.t() @ a2.grad
-    A2_ = 1/m * h1.t() @ h1
-    G3_ = 1/m * z.grad.t() @ z.grad
-    A3_ = 1/m * h2.t() @ h2
-
-    G_ = [G1_, G2_, G3_]
-    A_ = [A1_, A2_, A3_]
-
-    # Update running estimates of KFAC
-    rho = min(1-1/i, 0.95)
-
-    for k in range(3):
-        A[k] = rho*A[k] + (1-rho)*A_[k]
-        G[k] = rho*G[k] + (1-rho)*G_[k]
-
-    # Step
-    for k in range(3):
-        # Amortize the inverse. Only update inverses every now and then
-        if (i-1) % inverse_update_freq == 0:
-            A_inv[k] = (A[k] + eps*torch.eye(A[k].shape[0])).inverse()
-            G_inv[k] = (G[k] + eps*torch.eye(G[k].shape[0])).inverse()
-
-        delta = G_inv[k] @ model.W[k].grad.data @ A_inv[k]
-        model.W[k].data -= alpha * delta
-    """
+    
     
     data_['X_mb'] = X_mb
     
