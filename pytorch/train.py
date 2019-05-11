@@ -152,6 +152,10 @@ max_iter = args.max_iter
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
     lambda_ = args.lambda_
     params['lambda_'] = lambda_
+    boost = 1.01
+    drop = 1 / 1.01
+    params['boost'] = boost
+    params['drop'] = drop
 else:
     print('Error!')
     sys.exit()
@@ -164,26 +168,7 @@ if N2 > N1:
     print('Error!')
     sys.exit()
 
-if params['algorithm'] == 'kfac':
-#     N2 = 128
-    1
-elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum':
-#     N2 = 64
-    
-#     lambda_ = 1e-2
-#     lambda_ = 0.1
-#     lambda_ = 0.2
-#     lambda_ = 0.5
-#     lambda_ = 1
-    
-    
-    boost = 1.01
-    drop = 1 / 1.01
-    params['boost'] = boost
-    params['drop'] = drop
-else:
-    print('Error!')
-    sys.exit()
+
 
 # alpha = 0.001
 alpha = args.alpha
