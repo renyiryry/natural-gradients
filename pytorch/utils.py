@@ -1,4 +1,4 @@
-def update_lambda(params):
+def update_lambda(p, params):
     numlayers = params['numlayers']
     
     
@@ -10,9 +10,7 @@ def update_lambda(params):
 #     [ll_chunk, ~] =...
 #             computeLL(paramsp + test_p, indata, outdata, numchunks, targetchunk)
 
-    p = []
-    for l in range(numlayers):
-        p.append(-delta[l])
+    
         
     ll_chunk = get_new_loss(model, p, X_mb, t_mb)
         
@@ -257,11 +255,13 @@ def SMW_Fisher_update(data_, params):
     
 
     
-
+    p = []
+    for l in range(numlayers):
+        p.append(-delta[l])
     
         
         
-    lambda_ = update_lambda(params)
+    lambda_ = update_lambda(p, params)
             
 
             
