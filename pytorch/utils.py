@@ -188,7 +188,14 @@ def SMW_Fisher_update(data_, params):
     
     
     # compute D_t
+    
+    
+    
     D_t = lambda_ * torch.eye(N2)
+    
+    print('D_t aftre lambda: ', D_t)
+    print('lambda: ', lambda_)
+    
     for l in range(numlayers):
         
 #         print('h[l][N2_index] @ h[l][N2_index].t().size(): ', (h[l][N2_index] @ h[l][N2_index].t()).size())
