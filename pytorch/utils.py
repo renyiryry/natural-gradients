@@ -251,13 +251,13 @@ def SMW_Fisher_update(data_, params):
 
     # compute natural gradient
     
-    data_compute_J_transpose_V = {}
-    data_compute_J_transpose_V['a_grad_momentum'] = a_grad_momentum
-    data_compute_J_transpose_V['h_momentum'] = h_momentum
+#     data_compute_J_transpose_V = {}
+#     data_compute_J_transpose_V['a_grad_momentum'] = a_grad_momentum
+#     data_compute_J_transpose_V['h_momentum'] = h_momentum
     
     delta = compute_J_transpose_V(hat_v, data_compute_J_transpose_V, params)
     
-    data_compute_J_transpose_V = {}
+#     data_compute_J_transpose_V = {}
     
     for l in range(numlayers):
         delta[l] = torch.mean(delta[l], dim = 0) # [m[l+1], m[l]]
