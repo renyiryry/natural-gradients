@@ -1,4 +1,4 @@
-def get_D_t(data_, params)
+def get_D_t(data_, params):
     from torch import eye
     
     a_grad_momentum = data_['a_grad_momentum']
