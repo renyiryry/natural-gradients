@@ -461,6 +461,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     # use backpropagation
     import copy
     import torch.nn.functional as F
+    import torch
     
     model_1 = copy.deepcopy(data_['model'])
     X_mb = data_['X_mb']
@@ -469,6 +470,8 @@ def compute_J_transpose_V_backp(v, data_, params):
     z, _ = model_1.forward(X_mb)
     
     loss = F.cross_entropy(z, t_mb, reduction = 'none')
+    
+    weighted_loss = torch.dot(loss, v)
     
     loss.backward()
     
