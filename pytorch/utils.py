@@ -17,13 +17,14 @@ def compute_J_transpose_V_backp(v, data_, params):
     import torch.nn.functional as F
     import torch
     
-    model_1 = copy.deepcopy(data_['model'])
+#     model_1 = copy.deepcopy(data_['model'])
+    model = data_['model']
     X_mb = data_['X_mb']
     t_mb = data_['t_mb']
     
     N2_index = params['N2_index']
     
-    z, cache = model_1.forward(X_mb[N2_index])
+    z, cache = model.forward(X_mb[N2_index])
     
     
     
@@ -46,11 +47,11 @@ def compute_J_transpose_V_backp(v, data_, params):
 #         delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
         
 #         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
-        delta[l] = copy.deepcopy(model_1.W[l].grad)
+        delta[l] = copy.deepcopy(model.W[l].grad)
     
 #     cache.detach_()
     
-    get_model_zerod(model_1)
+    get_model_zerod(model)
     
 #     del model_1
     
@@ -291,6 +292,10 @@ def SMW_Fisher_update(data_, params):
     data_ = get_cache_momentum(data_, params)
 
 #     print('time for get cache momentum: ', start_time - time.time())
+
+    model_grad = []
+    for l in range(numlayers):
+        model_grad.append(copy.deepcopy(model.W[l].grad))
     
     
     
@@ -305,7 +310,7 @@ def SMW_Fisher_update(data_, params):
     
 #     start_time = time.time()
     
-    v = compute_JV([Wi.grad for Wi in model.W], data_, params)
+    v = compute_JV(model_grad, data_, params)
     
 #     print('time for compute JV: ', start_time - time.time())
     
@@ -372,7 +377,7 @@ def SMW_Fisher_update(data_, params):
 #     print('model.W[1].grad: ', model.W[1].grad)
 
     for l in range(numlayers):
-        delta[l] = model.W[l].grad - delta[l]
+        delta[l] = model_grad[l] - delta[l]
         
 #     print('make delta[1] to be grad: ', delta[1])
         
