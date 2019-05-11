@@ -197,7 +197,7 @@ def SMW_Fisher_update(data_, params):
     # compute natural gradient
     delta = compute_J_transpose_V(hat_v)
     
-    for l in range(numlayers)
+    for l in range(numlayers):
         delta[l] = torch.mean(delta[l], dim = 0) # [m[l+1], m[l]]
 
     for l in range(numlayers):
