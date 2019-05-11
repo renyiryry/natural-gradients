@@ -1,4 +1,7 @@
-def update_lambda():
+def update_lambda(params):
+    numlayers = params['numlayers']
+    
+    
     # compute rho
 #     test_rate = 1;
 #     test_p = test_rate * p;
@@ -258,7 +261,7 @@ def SMW_Fisher_update(data_, params):
     
         
         
-    lambda_ = update_lambda()
+    lambda_ = update_lambda(params)
             
 
             
