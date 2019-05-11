@@ -32,6 +32,7 @@ def computeFV(delta):
 
 
 def compute_JV(V, a_grad_momentum, h_momentum):
+    import torch
     
     v = torch.zeros(N2)
     
