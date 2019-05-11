@@ -284,6 +284,16 @@ for i in range(1, max_iter):
     
     loss.backward()
     
+    ###########
+    # test
+    
+    loss = nn.MSELoss(z, t_mb)
+    loss.backward()
+    
+    print('test')
+    
+    ###########
+    
 #     print('model.W[1]: ', model.W[1])
     
 #     print('z.grad: ', z.grad)
