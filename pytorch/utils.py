@@ -94,6 +94,8 @@ def get_cache_momentum(data_, params):
     algorithm = params['algorithm']
     numlayers = params['numlayers']
     
+    N2_index = params['N2_index']
+    
     if algorithm == 'SMW-Fisher-momentum':
         a_grad_momentum = data_['a_grad_momentum']
         h_momentum = data_['h_momentum']
