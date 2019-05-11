@@ -255,7 +255,7 @@ def SMW_Fisher_update(data_, params):
 #     data_compute_J_transpose_V['a_grad_momentum'] = a_grad_momentum
 #     data_compute_J_transpose_V['h_momentum'] = h_momentum
     
-    delta = compute_J_transpose_V(hat_v, data_compute_J_transpose_V, params)
+    delta = compute_J_transpose_V(hat_v, data_, params)
     
 #     data_compute_J_transpose_V = {}
     
