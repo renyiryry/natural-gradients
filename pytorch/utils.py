@@ -23,7 +23,9 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     N2_index = params['N2_index']
     
-    z, _ = model_1.forward(X_mb[N2_index])
+    z, cache = model_1.forward(X_mb[N2_index])
+    
+    
     
     loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
     
@@ -45,6 +47,8 @@ def compute_J_transpose_V_backp(v, data_, params):
         
 #         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
         delta[l] = copy.deepcopy(model_1.W[l].grad)
+    
+    cache.detach_()
     
     get_model_zerod(model_1)
     
