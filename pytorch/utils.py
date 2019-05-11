@@ -156,6 +156,14 @@ def SMW_Fisher_update(data_, params):
 #     print('h[0].size(): ', h[0].size())
 #     print('h[1].size(): ', h[1].size())
 #     print('h[2].size(): ', h[2].size())
+    
+    print('a[0].grad: ', a[0].grad)
+    print('a[1].grad: ', a[1].grad)
+    print('a[2].grad: ', a[2].grad)
+    
+    print('h[0]: ', h[0])
+    print('h[1]: ', h[1])
+    print('h[2]: ', h[2])
 
     
     
