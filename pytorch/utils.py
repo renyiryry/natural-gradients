@@ -20,6 +20,7 @@ def get_dot_product(delta_1, delta_2, numlayers):
     return dot_product
 
 def get_mean(delta, params):
+    import torch
     numlayers = params['numlayers']
     for l in range(numlayers):
         delta[l] = torch.mean(delta[l], dim=0)
