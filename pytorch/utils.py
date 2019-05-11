@@ -19,10 +19,16 @@ def get_dot_product(delta_1, delta_2, numlayers):
     
     return dot_product
 
-def computeFV(delta):
+def computeFV(delta, data_, params):
     import torch
     
-    v = compute_JV(delta)
+#     a_grad_momentum = data_['a_grad_momentum']
+#     h_momentum = data_['h_momentum']
+    
+    v = compute_JV(delta, data_, params)
+    
+    
+    
     delta = compute_J_transpose_V(v)
     
     print('delta.size(): ', delta.size())
@@ -31,8 +37,14 @@ def computeFV(delta):
     return delta
 
 
-def compute_JV(V, a_grad_momentum, h_momentum):
+def compute_JV(V, data_, params):
     import torch
+    
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momentum = data_['h_momentum']
+    
+    N2 = params['N2']
+    numlayers = params['numlayers']
     
     v = torch.zeros(N2)
     
@@ -170,7 +182,16 @@ def SMW_Fisher_update(data_, params):
         D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
         
     # compute the vector after D_t    
-    v = compute_JV([Wi.grad for Wi in model.W], a_grad_momentum, h_momentum)
+    
+    data_compute_JV = {}
+    data_compute_JV['a_grad_momentum'] = a_grad_momentum
+    data_compute_JV['h_momentum'] = h_momentum
+    
+    
+    
+    v = compute_JV([Wi.grad for Wi in model.W], data_compute_JV, params)
+    
+    data_compute_JV = {}
         
     
     
@@ -263,8 +284,14 @@ def SMW_Fisher_update(data_, params):
         rho = float("-inf")
     else:
 #         autodamp = 0
-        denom = -0.5 * get_dot_product(-delta, computeFV(-delta)) - get_dot_product(model.W, -delta) 
+        data_computeFV = {}
+        data_computeFV['a_grad_momentum'] = a_grad_momentum
+        data_computeFV['h_momentum'] = h_momentum
+
+        denom = -0.5 * get_dot_product(-delta, computeFV(-delta, data_computeFV, params)) - get_dot_product(model.W, -delta) 
 #         autodamp = 1
+
+        data_computeFV = {}
    
         rho = (oldll_chunk - ll_chunk) / denom
         
