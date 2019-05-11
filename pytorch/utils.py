@@ -168,10 +168,10 @@ def SMW_Fisher_update(data_, params):
     print('delta[1]: ', delta[1])
     print('model.W[1].grad: ', model.W[1].grad)
 
-    for l in range(numlayers):
-        delta[l] = model.W[l].grad - delta[l]
+#     for l in range(numlayers):
+#         delta[l] = model.W[l].grad - delta[l]
         
-    print('delta[1]: ', delta[1])
+    print('make delta[1] to be grad: ', delta[1])
         
     
     for l in range(numlayers):
@@ -222,7 +222,12 @@ def SMW_Fisher_update(data_, params):
 
 #     [ll_chunk, ~] =...
 #             computeLL(paramsp + test_p, indata, outdata, numchunks, targetchunk)
-    ll_chunk = get_new_loss(model, delta, X_mb, t_mb)
+
+    p = []
+    for l in range(numlayers):
+        p.append(-delta[l])
+        
+    ll_chunk = get_new_loss(model, p, X_mb, t_mb)
         
 #     [oldll_chunk, ~] =...
 #             computeLL(paramsp, indata, outdata, numchunks, targetchunk)
@@ -236,9 +241,7 @@ def SMW_Fisher_update(data_, params):
         data_computeFV['a_grad_momentum'] = a_grad_momentum
         data_computeFV['h_momentum'] = h_momentum
         
-        p = []
-        for l in range(numlayers):
-            p.append(-delta[l])
+        
 
         denom = -0.5 * get_dot_product(p, computeFV(p, data_computeFV, params), params)\
         - get_dot_product([Wi.grad for Wi in model.W], p, params) 
@@ -280,7 +283,7 @@ def get_new_loss(model, delta, x, t):
     import torch.nn.functional as F
     
     for l in range(model.numlayers):
-        model.W[l].data -= delta[l]
+        model.W[l].data += delta[l]
         
     z, _ = model.forward(x)
     
