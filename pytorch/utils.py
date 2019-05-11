@@ -10,8 +10,9 @@ def get_new_loss(model, delta, x, t):
     
     return loss
 
-def get_dot_product(delta_1, delta_2, numlayers):
+def get_dot_product(delta_1, delta_2, params):
     import torch
+    numlayers = params['numlayers']
     
     dot_product = 0
     for l in range(numlayers):
@@ -314,7 +315,8 @@ def SMW_Fisher_update(data_, params):
         for l in range(numlayers):
             p.append(-delta[l])
 
-        denom = -0.5 * get_dot_product(p, computeFV(p, data_computeFV, params)) - get_dot_product(model.W, p) 
+        denom = -0.5 * get_dot_product(p, computeFV(p, data_computeFV, params), params)\
+        - get_dot_product([Wi.grad for Wi in model.W], p, params) 
 #         autodamp = 1
 
         data_computeFV = {}
