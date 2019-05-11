@@ -550,11 +550,15 @@ def kfac_update(data_, params):
     model = data_['model']
     
     N1 = params['N1']
+    N2 = params['N2']
     i = params['i']
     inverse_update_freq = params['inverse_update_freq']
     lambda_ = params['lambda_']
     alpha = params['alpha']
     numlayers = params['numlayers']
+    
+    N2_index = np.random.permutation(N1)[:N2]
+    params['N2_index'] = N2_index
     
     a = []
     h = []
