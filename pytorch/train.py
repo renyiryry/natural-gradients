@@ -333,7 +333,7 @@ for i in range(1, max_iter):
 #         print(t_mb)
         
         print(f'Iter-{i-1}; Loss: {loss:.3f}')
-        if algorithm == 'SMW-Fisher':
+        if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
             lambda_ = params['lambda_']
             print('lambda = ', lambda_)
             print('\n')
