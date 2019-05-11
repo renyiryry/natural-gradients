@@ -1,3 +1,28 @@
+def get_D_t(data_, params)
+    from torch import eye
+    
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momentum = data_['h_momentum']
+    
+    lambda_ = params['lambda_']
+    numlayers = params['numlayers']
+
+    # compute D_t 
+    D_t = lambda_ * eye(N2)
+    
+#     print('D_t aftre lambda: ', D_t)
+#     print('lambda: ', lambda_)
+    
+    for l in range(numlayers):
+        
+#         print('h[l][N2_index] @ h[l][N2_index].t().size(): ', (h[l][N2_index] @ h[l][N2_index].t()).size())
+#         print('(a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t().size(): ',
+#               ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()).size())
+        
+        D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
+        
+    return D_t
+
 def get_cache_momentum(data_, params):
     import numpy as np
     
@@ -197,6 +222,8 @@ def SMW_Fisher_update(data_, params):
 #               ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()).size())
         
         D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
+        
+    D_t = get_D_t(data_, params)
         
     # compute the vector after D_t    
     
