@@ -619,4 +619,4 @@ def SGD_update(data_, params):
     
     
         
-    return data_, params
+    return data_
