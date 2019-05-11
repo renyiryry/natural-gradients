@@ -592,7 +592,11 @@ def kfac_update(data_, params):
 
 def SGD_update(data_, params):
     
+    print(data_['model'])
+    
     model = data_['model']
+    
+    print(data_['model'])
     
 
     alpha = params['alpha']
@@ -606,8 +610,12 @@ def SGD_update(data_, params):
     for l in range(numlayers):
         model.W[l].data -= alpha * delta[l]
         
+    print(data_['model'])
+        
     
     data_['model'] = model
+    
+    print(data_['model'])
     
     
         
