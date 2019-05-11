@@ -209,19 +209,7 @@ def SMW_Fisher_update(data_, params):
     
     
     
-    # compute D_t 
-    D_t = lambda_ * torch.eye(N2)
     
-#     print('D_t aftre lambda: ', D_t)
-#     print('lambda: ', lambda_)
-    
-    for l in range(numlayers):
-        
-#         print('h[l][N2_index] @ h[l][N2_index].t().size(): ', (h[l][N2_index] @ h[l][N2_index].t()).size())
-#         print('(a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t().size(): ',
-#               ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()).size())
-        
-        D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
         
     D_t = get_D_t(data_, params)
         
