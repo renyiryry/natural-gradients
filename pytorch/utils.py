@@ -16,7 +16,7 @@ def get_dot_product(delta_1, delta_2, params):
     
     dot_product = 0
     for l in range(numlayers):
-        dot_product += torch.mm(delta_1[l], delta_2[l])
+        dot_product += torch.sum(delta_1[l] * delta_2[l])
     
     return dot_product
 
