@@ -61,13 +61,13 @@ def SMW_Fisher_update(data_, params):
 #     print('h[1].size(): ', h[1].size())
 #     print('h[2].size(): ', h[2].size())
     
-    print('a[0].grad: ', a[0].grad)
-    print('a[1].grad: ', a[1].grad)
-    print('a[2].grad: ', a[2].grad)
+#     print('a[0].grad: ', a[0].grad)
+#     print('a[1].grad: ', a[1].grad)
+#     print('a[2].grad: ', a[2].grad)
     
-    print('h[0]: ', h[0])
-    print('h[1]: ', h[1])
-    print('h[2]: ', h[2])
+#     print('h[0]: ', h[0])
+#     print('h[1]: ', h[1])
+#     print('h[2]: ', h[2])
 
     
     
@@ -105,8 +105,8 @@ def SMW_Fisher_update(data_, params):
     
     D_t = lambda_ * torch.eye(N2)
     
-    print('D_t aftre lambda: ', D_t)
-    print('lambda: ', lambda_)
+#     print('D_t aftre lambda: ', D_t)
+#     print('lambda: ', lambda_)
     
     for l in range(numlayers):
         
@@ -134,21 +134,21 @@ def SMW_Fisher_update(data_, params):
 #     hat_v, _ = torch.solve(v, D_t)
 
 #     if i % 100 == 0:
-    print('D_t:', D_t)
+#     print('D_t:', D_t)
     
     D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
     hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
     hat_v = torch.from_numpy(hat_v)
     
-    print('hat_v: ', hat_v)
+#     print('hat_v: ', hat_v)
 #     print('1 - hat_v: ', 1 - hat_v)
 #     print('torch.max(hat_v): ', torch.max(hat_v))
 #     print('torch.min(hat_v): ', torch.min(hat_v))
 
-    hat_v = torch.ones(N2)
+#     hat_v = torch.ones(N2)
     
-    print('hat_v: ', hat_v)
+#     print('hat_v: ', hat_v)
 #     print('1 - hat_v: ', 1 - hat_v)
 
     # compute natural gradient
@@ -165,13 +165,13 @@ def SMW_Fisher_update(data_, params):
         delta[l] = torch.mean(delta[l], dim = 0) # [m[l+1], m[l]]
         
         
-    print('delta[1]: ', delta[1])
-    print('model.W[1].grad: ', model.W[1].grad)
+#     print('delta[1]: ', delta[1])
+#     print('model.W[1].grad: ', model.W[1].grad)
 
-#     for l in range(numlayers):
-#         delta[l] = model.W[l].grad - delta[l]
+    for l in range(numlayers):
+        delta[l] = model.W[l].grad - delta[l]
         
-    print('make delta[1] to be grad: ', delta[1])
+#     print('make delta[1] to be grad: ', delta[1])
         
     
     for l in range(numlayers):
