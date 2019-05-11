@@ -11,6 +11,7 @@ warnings.filterwarnings('error')
 from utils import *
 import argparse
 import sys
+import time
 
 
 
@@ -239,6 +240,7 @@ else:
 
 # Visualization stuffs
 losses = []
+times = []
 
 # max_iter = 5000
 # max_iter = 5
@@ -324,6 +326,7 @@ for i in range(1, max_iter):
             print('\n')
 
     losses.append(loss if i == 1 else 0.99*losses[-1] + 0.01*loss)
+    
 
     
     
@@ -342,6 +345,9 @@ for i in range(1, max_iter):
     params['i'] = i
     
 #     print(data_['model'])
+
+    start_time = time.time()
+
     
     if params['algorithm'] == 'kfac':    
         
@@ -361,6 +367,9 @@ for i in range(1, max_iter):
     else:
         print('Error!')
         sys.exit()
+        
+
+    times.append(time.time() - start_time)
         
     model = data_['model']
         
@@ -386,4 +395,5 @@ print(f'Accuracy: {acc:.3f}')
 # np.save('temp/kfac_losses.npy', losses)
 # np.save('/content/logs/temp/kfac_losses.npy', losses)
 np.save('/content/logs/temp/' + algorithm + '_losses.npy', losses)
+np.save('/content/logs/temp/' + algorithm + '_times.npy', times)
 
