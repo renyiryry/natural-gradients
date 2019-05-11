@@ -255,9 +255,9 @@ def SMW_Fisher_update(data_, params):
     if oldll_chunk - ll_chunk > 0:
         rho = float("-inf")
     else:
-        autodamp = 0
+#         autodamp = 0
         denom = -0.5 * get_dot_product(-delta, computeFV(-delta)) - get_dot_product(model.W, -delta) 
-        autodamp = 1
+#         autodamp = 1
    
         rho = (oldll_chunk - ll_chunk) / denom
         
