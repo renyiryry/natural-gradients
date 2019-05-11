@@ -156,6 +156,8 @@ if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-
     drop = 1 / 1.01
     params['boost'] = boost
     params['drop'] = drop
+elif algorithm == 'SGD':
+    1
 else:
     print('Error!')
     sys.exit()
@@ -225,7 +227,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
         
     data_['a_grad_momentum'] = a_grad_momentum
     data_['h_momentum'] = h_momentum
-elif params['algorithm'] == 'SMW-Fisher':
+elif params['algorithm'] == 'SMW-Fisher' or algorithm == 'SGD':
     1;
 else:
     print('Error!')
@@ -352,6 +354,8 @@ for i in range(1, max_iter):
         
         
         data_, params = SMW_Fisher_update(data_, params)
+    elif algorithm == 'SGD':
+        data_ = SGD_update(data_, params)
     else:
         print('Error!')
         sys.exit()
