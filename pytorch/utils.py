@@ -352,7 +352,7 @@ def SMW_Fisher_update(data_, params):
     
 #     print('time for compute J transpose V: ', start_time - time.time())
     
-    print('\n')
+#     print('\n')
     
 #     data_compute_J_transpose_V = {}
     
