@@ -460,6 +460,7 @@ def compute_J_transpose_V(v, data_, params):
 def compute_J_transpose_V_backp(v, data_, params):
     # use backpropagation
     import copy
+    import torch.nn.functional as F
     
     model_1 = copy.deepcopy(data_['model'])
     X_mb = data_['X_mb']
