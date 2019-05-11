@@ -5,6 +5,14 @@ def get_cache_momentum(data_):
     cache = data_['cache']
     z = data_['z']
     
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momentum = data_['h_momentum']
+    
+    N1 = params['N1']
+    N2 = params['N2']
+    i = params['i']
+    algorithm = params['algorithm']
+    
     
     a = []
     h = [X_mb]
