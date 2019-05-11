@@ -20,15 +20,15 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     print('model_1.W[1].size():', model_1.W[1].size())
     
-    a_grad_momentum = data_['a_grad_momentum']
-    h_momentum = data_['h_momentum']
+#     a_grad_momentum = data_['a_grad_momentum']
+#     h_momentum = data_['h_momentum']
     
-    numlayers = params['numlayers']
+#     numlayers = params['numlayers']
     
-    delta = list(range(numlayers))
-    for l in range(numlayers):
-        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
-        delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
+#     delta = list(range(numlayers))
+#     for l in range(numlayers):
+#         delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
+#         delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
         
 #         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
     
@@ -48,6 +48,9 @@ def compute_J_transpose_V(v, data_, params):
         delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
         
 #         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+
+    for l in range(numlayers):
+        delta[l] = torch.sum(delta[l], dim = 0) # [m[l+1], m[l]]
     
     
     return delta
@@ -337,8 +340,10 @@ def SMW_Fisher_update(data_, params):
     
 #     data_compute_J_transpose_V = {}
     
+    
+        
     for l in range(numlayers):
-        delta[l] = torch.mean(delta[l], dim = 0) # [m[l+1], m[l]]
+        delta[l] = 1 / N2 * delta[l] # [m[l+1], m[l]]
         
         
 #     print('delta[1]: ', delta[1])
