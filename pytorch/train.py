@@ -287,10 +287,10 @@ for i in range(1, max_iter):
     ###########
     # test
     
-    loss = nn.MSELoss(z, t_mb)
-    loss.backward()
+#     loss = nn.MSELoss(z, t_mb)
+#     loss.backward()
     
-    print('test')
+#     print('test')
     
     ###########
     
