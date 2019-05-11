@@ -270,7 +270,7 @@ def SMW_Fisher_update(data_, params):
     
     start_time = time.time()
     
-    delta = compute_J_transpose_V)vackp(hat_v, data_, params)
+    delta = compute_J_transpose_V_backp(hat_v, data_, params)
     
     print('time for compute J transpose V: ', start_time - time.time())
     
