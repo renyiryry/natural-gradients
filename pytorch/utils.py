@@ -29,7 +29,7 @@ def computeFV(delta, data_, params):
     
     
     
-    delta = compute_J_transpose_V(v)
+    delta = compute_J_transpose_V(v, params)
     
     print('delta.size(): ', delta.size())
     
@@ -63,7 +63,12 @@ def compute_JV(V, data_, params):
     
     return v
 
-def compute_J_transpose_V(v):
+def compute_J_transpose_V(v, data_, params):
+    
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momentum = data_['h_momentum']
+    
+    numlayers = params['numlayers']
     
     delta = list(range(numlayers))
     for l in range(numlayers):
@@ -217,7 +222,14 @@ def SMW_Fisher_update(data_, params):
 #     print('1 - hat_v: ', 1 - hat_v)
 
     # compute natural gradient
-    delta = compute_J_transpose_V(hat_v)
+    
+    data_compute_J_transpose_V = {}
+    data_compute_J_transpose_V['a_grad_momentum'] = a_grad_momentum
+    data_compute_J_transpose_V['h_momentum'] = h_momentum
+    
+    delta = compute_J_transpose_V(hat_v, data_compute_J_transpose_V, params)
+    
+    data_compute_J_transpose_V = {}
     
     for l in range(numlayers):
         delta[l] = torch.mean(delta[l], dim = 0) # [m[l+1], m[l]]
