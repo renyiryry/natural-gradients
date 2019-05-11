@@ -299,8 +299,12 @@ def SMW_Fisher_update(data_, params):
         data_computeFV = {}
         data_computeFV['a_grad_momentum'] = a_grad_momentum
         data_computeFV['h_momentum'] = h_momentum
+        
+        p = []
+        for l in range(numlayers):
+            p.append(-delta[l])
 
-        denom = -0.5 * get_dot_product(-delta, computeFV(-delta, data_computeFV, params)) - get_dot_product(model.W, -delta) 
+        denom = -0.5 * get_dot_product(p, computeFV(p, data_computeFV, params)) - get_dot_product(model.W, p) 
 #         autodamp = 1
 
         data_computeFV = {}
