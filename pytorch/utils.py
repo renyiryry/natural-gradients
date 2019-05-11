@@ -590,7 +590,7 @@ def kfac_update(data_, params):
 
 
 
-def kfac_update(data_, params):
+def SGD_update(data_, params):
     
     model = data_['model']
     
