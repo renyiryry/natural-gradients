@@ -12,6 +12,7 @@ def get_cache_momentum(data_, params):
     N2 = params['N2']
     i = params['i']
     algorithm = params['algorithm']
+    numlayers = params['numlayers']
     
     if algorithm == 'SMW-Fisher-momentum':
         a_grad_momentum = data_['a_grad_momentum']
