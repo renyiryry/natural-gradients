@@ -1,4 +1,6 @@
-def update_lambda(p, params):
+def update_lambda(p, data_, params):
+    model = data_['model']
+    
     numlayers = params['numlayers']
     
     
@@ -259,9 +261,12 @@ def SMW_Fisher_update(data_, params):
     for l in range(numlayers):
         p.append(-delta[l])
     
+    data_update_lambda = {}
+    data_update_lambda['model'] = model
         
-        
-    lambda_ = update_lambda(p, params)
+    lambda_ = update_lambda(p, data_update_lambda, params)
+    
+    data_update_lambda = {}
             
 
             
