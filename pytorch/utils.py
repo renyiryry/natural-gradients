@@ -6,6 +6,7 @@ def get_D_t(data_, params):
     
     lambda_ = params['lambda_']
     numlayers = params['numlayers']
+    N2 = params['N2']
 
     # compute D_t 
     D_t = lambda_ * eye(N2)
