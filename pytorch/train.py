@@ -341,7 +341,7 @@ for i in range(1, max_iter):
     
     params['i'] = i
     
-    print(data_['model'])
+#     print(data_['model'])
     
     if params['algorithm'] == 'kfac':    
         
