@@ -5,7 +5,7 @@ def update_lambda(p, data_, params):
     loss = data_['loss']
     
     numlayers = params['numlayers']
-    lambda_ = params['lambda']
+    lambda_ = params['lambda_']
     boost = params['boost']
     drop = params['drop']
     
