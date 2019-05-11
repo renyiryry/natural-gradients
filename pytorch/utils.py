@@ -600,7 +600,7 @@ def kfac_update(data_, params):
     
 
     delta = []
-    fpr l in range(numlayers):
+    for l in range(numlayers):
         delta.append(model.W[l].grad)
     
     for l in range(numlayers):
