@@ -9,18 +9,14 @@ def SMW_Fisher_update(data_, params):
     import scipy
     
     algorithm = params['algorithm']
+    model = data_['model']
     
     X_mb = data_['X_mb']
-    
-    t_mb = data_['t_mb']
-    
+    t_mb = data_['t_mb']    
     cache = data_['cache']
     z = data_['z']
-#     A = data_['A']
-#     G = data_['G']
-#     A_inv = data_['A_inv']
-#     G_inv = data_['G_inv']
-    model = data_['model']
+
+    
     
     if algorithm == 'SMW-Fisher-momentum':
         a_grad_momentum = data_['a_grad_momentum']
@@ -34,7 +30,6 @@ def SMW_Fisher_update(data_, params):
     N2 = params['N2']
     i = params['i']
 #     inverse_update_freq = params['inverse_update_freq']
-#     eps = params['eps']
     alpha = params['alpha']
     lambda_ = params['lambda_']
     numlayers = params['numlayers']
@@ -99,10 +94,7 @@ def SMW_Fisher_update(data_, params):
     
     
     
-    # compute D_t
-    
-    
-    
+    # compute D_t 
     D_t = lambda_ * torch.eye(N2)
     
 #     print('D_t aftre lambda: ', D_t)
