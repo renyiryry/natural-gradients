@@ -1,4 +1,6 @@
 def get_cache_momentum(data_):
+    import numpy as np
+    
     X_mb = data_['X_mb']
     cache = data_['cache']
     z = data_['z']
