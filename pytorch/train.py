@@ -373,18 +373,9 @@ for i in range(1, max_iter):
         
     model = data_['model']
         
-    
+    get_model_zerod(model)
 
-    # PyTorch stuffs
-    model.zero_grad()
-#     print('gradeint zerod')
     
-#     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
-    
-    for fci in model.fc:
-        fci.zero_grad()
-        
-#     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
 
 
 z, _ = model.forward(torch.from_numpy(X_test))
