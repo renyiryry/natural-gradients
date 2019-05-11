@@ -357,7 +357,7 @@ for i in range(1, max_iter):
     
     
     
-        data_ = kfac_update(data_, params)
+        data_, params = kfac_update(data_, params)
     
         
     elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum':
