@@ -151,7 +151,7 @@ max_iter = args.max_iter
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
     lambda_ = args.lambda_
-    params['lambda'] = lambda_
+    params['lambda_'] = lambda_
 else:
     print('Error!')
     sys.exit()
