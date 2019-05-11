@@ -142,7 +142,7 @@ parser.add_argument('--max_iter', type=int)
 parser.add_argument('N1', type=int)
 parser.add_argument('N2', type=int)
 parser.add_argument('--alpha', type=float)
-parser.add_argument('eps_or_lambda', type=float)
+parser.add_argument('--eps_or_lambda', type=float)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 algorithm = args.algorithm
