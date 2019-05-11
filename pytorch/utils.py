@@ -27,17 +27,17 @@ def update_lambda(p, data_, params):
         rho = float("-inf")
     else:
 #         autodamp = 0
-        data_computeFV = {}
-        data_computeFV['a_grad_momentum'] = a_grad_momentum
-        data_computeFV['h_momentum'] = h_momentum
+#         data_computeFV = {}
+#         data_computeFV['a_grad_momentum'] = a_grad_momentum
+#         data_computeFV['h_momentum'] = h_momentum
         
         
 
-        denom = -0.5 * get_dot_product(p, computeFV(p, data_computeFV, params), params)\
+        denom = -0.5 * get_dot_product(p, computeFV(p, data_, params), params)\
         - get_dot_product([Wi.grad for Wi in model.W], p, params) 
 #         autodamp = 1
 
-        data_computeFV = {}
+#         data_computeFV = {}
    
         rho = (oldll_chunk - ll_chunk) / denom
         
