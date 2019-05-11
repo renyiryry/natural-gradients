@@ -171,6 +171,7 @@ def SMW_Fisher_update(data_, params):
     import torch
     import numpy as np
     import scipy
+    import time
     
     algorithm = params['algorithm']
     model = data_['model']
@@ -201,18 +202,16 @@ def SMW_Fisher_update(data_, params):
     drop = params['drop']
     
     
-    
+    start_time = time.time()
     
     data_ = get_cache_momentum(data_, params)
 
+    print('time for get cache momentum: ', start_time - time.time())
     
     
     
     
     
-    
-        
-    D_t = get_D_t(data_, params)
         
     # compute the vector after D_t    
     
@@ -220,9 +219,11 @@ def SMW_Fisher_update(data_, params):
 #     data_compute_JV['a_grad_momentum'] = a_grad_momentum
 #     data_compute_JV['h_momentum'] = h_momentum
     
-    
+    start_time = time.time()
     
     v = compute_JV([Wi.grad for Wi in model.W], data_, params)
+    
+    print('time for compute JV: ', start_time - time.time())
     
 #     data_compute_JV = {}
         
@@ -233,11 +234,21 @@ def SMW_Fisher_update(data_, params):
 
 #     if i % 100 == 0:
 #     print('D_t:', D_t)
+
+    start_time = time.time()
+        
+    D_t = get_D_t(data_, params)
+    
+    print('time for get D_t: ', start_time - time.time())
+    
+    start_time = time.time()
     
     D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
     hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
     hat_v = torch.from_numpy(hat_v)
+    
+    print('time for solve linear system: ', start_time - time.time())
     
 #     print('hat_v: ', hat_v)
 #     print('1 - hat_v: ', 1 - hat_v)
@@ -255,7 +266,11 @@ def SMW_Fisher_update(data_, params):
 #     data_compute_J_transpose_V['a_grad_momentum'] = a_grad_momentum
 #     data_compute_J_transpose_V['h_momentum'] = h_momentum
     
+    start_time = time.time()
+    
     delta = compute_J_transpose_V(hat_v, data_, params)
+    
+    print('time for compute J transpose V: ', start_time - time.time())
     
 #     data_compute_J_transpose_V = {}
     
