@@ -1,4 +1,56 @@
+def compute_J_transpose_V_backp(v, data_, params):
+    # use backpropagation
+    import copy
+    import torch.nn.functional as F
+    import torch
+    
+    model_1 = copy.deepcopy(data_['model'])
+    X_mb = data_['X_mb']
+    t_mb = data_['t_mb']
+    
+    N2_index = params['N2_index']
+    
+    z, _ = model_1.forward(X_mb[N2_index])
+    
+    loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
+    
+    weighted_loss = torch.dot(loss, v)
+    
+    loss.backward()
+    
+    print('model_1.W[1].size():', model_1.W[1].size())
+    
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momentum = data_['h_momentum']
+    
+    numlayers = params['numlayers']
+    
+    delta = list(range(numlayers))
+    for l in range(numlayers):
+        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
+        delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
+        
+#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+    
+    
+    return delta
 
+def compute_J_transpose_V(v, data_, params):
+    
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momentum = data_['h_momentum']
+    
+    numlayers = params['numlayers']
+    
+    delta = list(range(numlayers))
+    for l in range(numlayers):
+        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
+        delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
+        
+#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+    
+    
+    return delta
 
 def get_D_t(data_, params):
     from torch import eye
@@ -77,7 +129,7 @@ def get_cache_momentum(data_, params):
     
     
     
-    N2_index = np.random.permutation(N1)[:N2]
+    
     
     # Update running estimates
     if algorithm == 'SMW-Fisher-momentum':
@@ -203,6 +255,9 @@ def SMW_Fisher_update(data_, params):
     boost = params['boost']
     drop = params['drop']
     
+    N2_index = np.random.permutation(N1)[:N2]
+    params['N2_index'] = N2_index
+    
     
     start_time = time.time()
     
@@ -269,6 +324,8 @@ def SMW_Fisher_update(data_, params):
 #     data_compute_J_transpose_V['h_momentum'] = h_momentum
     
     start_time = time.time()
+    
+    
     
     delta = compute_J_transpose_V_backp(hat_v, data_, params)
     
@@ -440,57 +497,9 @@ def compute_JV(V, data_, params):
     
     return v
 
-def compute_J_transpose_V(v, data_, params):
-    
-    a_grad_momentum = data_['a_grad_momentum']
-    h_momentum = data_['h_momentum']
-    
-    numlayers = params['numlayers']
-    
-    delta = list(range(numlayers))
-    for l in range(numlayers):
-        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
-        delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
-        
-#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
-    
-    
-    return delta
 
-def compute_J_transpose_V_backp(v, data_, params):
-    # use backpropagation
-    import copy
-    import torch.nn.functional as F
-    import torch
-    
-    model_1 = copy.deepcopy(data_['model'])
-    X_mb = data_['X_mb']
-    t_mb = data_['t_mb']
-    
-    z, _ = model_1.forward(X_mb)
-    
-    loss = F.cross_entropy(z, t_mb, reduction = 'none')
-    
-    weighted_loss = torch.dot(loss, v)
-    
-    loss.backward()
-    
-    print('model_1.W[1].size():', model_1.W[1].size())
-    
-    a_grad_momentum = data_['a_grad_momentum']
-    h_momentum = data_['h_momentum']
-    
-    numlayers = params['numlayers']
-    
-    delta = list(range(numlayers))
-    for l in range(numlayers):
-        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
-        delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
-        
-#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
-    
-    
-    return delta
+
+
     
     
     
