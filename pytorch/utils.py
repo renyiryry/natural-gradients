@@ -1,4 +1,4 @@
-def get_cache_momentum(data_)
+def get_cache_momentum(data_):
     a = []
     h = [X_mb]
     for ii in range(len(cache)):
