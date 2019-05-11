@@ -9,6 +9,57 @@ def get_new_loss(model, delta, x, t):
     loss = F.cross_entropy(z, t)
     
     return loss
+
+def get_dot_product(delta_1, delta_2, numlayers):
+    import torch
+    
+    dot_product = 0
+    for l in range(numlayers):
+        dot_product += torch.mm(delta_1[l], delta_2[l])
+    
+    return dot_product
+
+def computeFV(delta):
+    import torch
+    
+    v = compute_JV(delta)
+    delta = compute_J_transpose_V(v)
+    delta = torch.mean(delta, dim=)
+    return delta
+
+
+def compute_JV(V, a_grad_momentum, h_momentum):
+    
+    v = torch.zeros(N2)
+    
+#     print('model.W[0].size(): ', model.W[0].size())
+#     print('model.W[1].size(): ', model.W[1].size())
+#     print('model.W[2].size(): ', model.W[2].size())        
+    
+    for l in range(numlayers):
+        
+#         model.W[l] @ h[l] # m[l+1] * N2
+    # a[l][N2_index] @ model.W[l] # N2 * m[l]
+    # (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
+    #  torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+        
+        v += torch.sum((a_grad_momentum[l] @ V[l]) * h_momentum[l], dim = 1)
+    
+    return v
+
+def compute_J_transpose_V(v):
+    
+    delta = list(range(numlayers))
+    for l in range(numlayers):
+        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
+        delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
+        delta[l] = torch.mean(delta[l], dim = 0) # [m[l+1], m[l]]
+#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+    
+    
+    return delta
+    
+    
     
 
 def SMW_Fisher_update(data_, params):
@@ -114,25 +165,8 @@ def SMW_Fisher_update(data_, params):
         
         D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
         
-    # compute the vector after D_t
-    v = torch.zeros(N2)
-    
-#     print('model.W[0].size(): ', model.W[0].size())
-#     print('model.W[1].size(): ', model.W[1].size())
-#     print('model.W[2].size(): ', model.W[2].size())
-    
-    
-    
-    for l in range(numlayers):
-        
-#         model.W[l] @ h[l] # m[l+1] * N2
-    # a[l][N2_index] @ model.W[l] # N2 * m[l]
-    # (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
-    #  torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
-
-
-        
-        v += torch.sum((a_grad_momentum[l] @ model.W[l].grad) * h_momentum[l], dim = 1)
+    # compute the vector after D_t    
+    v = compute_JV([Wi.grad for Wi in model.W], a_grad_momentum, h_momentum)
         
     
     
@@ -158,12 +192,13 @@ def SMW_Fisher_update(data_, params):
 #     print('1 - hat_v: ', 1 - hat_v)
 
     # compute natural gradient
-    delta = list(range(numlayers))
+    delta = compute_J_transpose_V(hat_v)
+
     for l in range(numlayers):
-        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
-        delta[l] = (1 - hat_v)[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
-        delta[l] = torch.mean(delta[l], dim = 0) # [m[l+1], m[l]]
-#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+        delta[l] = model.W[l].grad - delta[l]
+        
+    
+    for l in range(numlayers):
         delta[l] = 1 / lambda_ * delta[l]
     
 
@@ -221,7 +256,7 @@ def SMW_Fisher_update(data_, params):
         rho = float("-inf")
     else:
         autodamp = 0
-#         denom = -0.5*double(test_p'*computeBV(test_p)) - double(grad_use_0'*test_p) 
+        denom = -0.5 * get_dot_product(-delta, computeFV(-delta)) - get_dot_product(model.W, -delta) 
         autodamp = 1
    
         rho = (oldll_chunk - ll_chunk) / denom
