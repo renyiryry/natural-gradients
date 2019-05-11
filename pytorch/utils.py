@@ -1,4 +1,9 @@
 def get_cache_momentum(data_):
+    X_mb = data_['X_mb']
+    cache = data_['cache']
+    z = data_['z']
+    
+    
     a = []
     h = [X_mb]
     for ii in range(len(cache)):
