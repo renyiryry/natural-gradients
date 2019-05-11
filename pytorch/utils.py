@@ -1,4 +1,4 @@
-def get_cache_momentum(data_):
+def get_cache_momentum(data_, params):
     import numpy as np
     
     X_mb = data_['X_mb']
@@ -176,7 +176,7 @@ def SMW_Fisher_update(data_, params):
     
     
     
-    data_ = get_cache_momentum(data_)
+    data_ = get_cache_momentum(data_, params)
 
     
     
