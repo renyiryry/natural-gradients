@@ -1,99 +1,3 @@
-def get_new_loss(model, delta, x, t):
-    import torch.nn.functional as F
-    
-    for l in range(model.numlayers):
-        model.W[l].data -= delta[l]
-        
-    z, _ = model.forward(x)
-    
-    loss = F.cross_entropy(z, t)
-    
-    return loss
-
-def get_dot_product(delta_1, delta_2, params):
-    import torch
-    numlayers = params['numlayers']
-    
-    dot_product = 0
-    for l in range(numlayers):
-        dot_product += torch.sum(delta_1[l] * delta_2[l])
-    
-    return dot_product
-
-def get_mean(delta, params):
-    import torch
-    numlayers = params['numlayers']
-    for l in range(numlayers):
-        delta[l] = torch.mean(delta[l], dim=0)
-    return delta
-
-def computeFV(delta, data_, params):
-    import torch
-    
-#     a_grad_momentum = data_['a_grad_momentum']
-#     h_momentum = data_['h_momentum']
-    
-    v = compute_JV(delta, data_, params)
-    
-    
-    
-    delta = compute_J_transpose_V(v, data_, params)
-    
-#     print('delta.size(): ', delta.size())
-    
-    
-    
-    delta = get_mean(delta, params)
-    
-    return delta
-
-
-def compute_JV(V, data_, params):
-    import torch
-    
-    a_grad_momentum = data_['a_grad_momentum']
-    h_momentum = data_['h_momentum']
-    
-    N2 = params['N2']
-    numlayers = params['numlayers']
-    
-    v = torch.zeros(N2)
-    
-#     print('model.W[0].size(): ', model.W[0].size())
-#     print('model.W[1].size(): ', model.W[1].size())
-#     print('model.W[2].size(): ', model.W[2].size())        
-    
-    for l in range(numlayers):
-        
-#         model.W[l] @ h[l] # m[l+1] * N2
-    # a[l][N2_index] @ model.W[l] # N2 * m[l]
-    # (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
-    #  torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
-        
-        v += torch.sum((a_grad_momentum[l] @ V[l]) * h_momentum[l], dim = 1)
-    
-    return v
-
-def compute_J_transpose_V(v, data_, params):
-    
-    a_grad_momentum = data_['a_grad_momentum']
-    h_momentum = data_['h_momentum']
-    
-    numlayers = params['numlayers']
-    
-    delta = list(range(numlayers))
-    for l in range(numlayers):
-        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
-        delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
-        
-#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
-    
-    
-    return delta
-    
-    
-    
-
 def SMW_Fisher_update(data_, params):
     # a[l].grad: size N1 * m[l+1], it has a coefficient 1 / N1, which should be first compensate
     # h[l]: size N1 * m[l]
@@ -267,6 +171,8 @@ def SMW_Fisher_update(data_, params):
     for l in range(numlayers):
         delta[l] = model.W[l].grad - delta[l]
         
+    print('delta[1]: ', delta[1])
+        
     
     for l in range(numlayers):
         delta[l] = 1 / lambda_ * delta[l]
@@ -369,6 +275,104 @@ def SMW_Fisher_update(data_, params):
     params['lambda_'] = lambda_
         
     return data_, params
+
+def get_new_loss(model, delta, x, t):
+    import torch.nn.functional as F
+    
+    for l in range(model.numlayers):
+        model.W[l].data -= delta[l]
+        
+    z, _ = model.forward(x)
+    
+    loss = F.cross_entropy(z, t)
+    
+    return loss
+
+def get_dot_product(delta_1, delta_2, params):
+    import torch
+    numlayers = params['numlayers']
+    
+    dot_product = 0
+    for l in range(numlayers):
+        dot_product += torch.sum(delta_1[l] * delta_2[l])
+    
+    return dot_product
+
+def get_mean(delta, params):
+    import torch
+    numlayers = params['numlayers']
+    for l in range(numlayers):
+        delta[l] = torch.mean(delta[l], dim=0)
+    return delta
+
+def computeFV(delta, data_, params):
+    import torch
+    
+#     a_grad_momentum = data_['a_grad_momentum']
+#     h_momentum = data_['h_momentum']
+    
+    v = compute_JV(delta, data_, params)
+    
+    
+    
+    delta = compute_J_transpose_V(v, data_, params)
+    
+#     print('delta.size(): ', delta.size())
+    
+    
+    
+    delta = get_mean(delta, params)
+    
+    return delta
+
+
+def compute_JV(V, data_, params):
+    import torch
+    
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momentum = data_['h_momentum']
+    
+    N2 = params['N2']
+    numlayers = params['numlayers']
+    
+    v = torch.zeros(N2)
+    
+#     print('model.W[0].size(): ', model.W[0].size())
+#     print('model.W[1].size(): ', model.W[1].size())
+#     print('model.W[2].size(): ', model.W[2].size())        
+    
+    for l in range(numlayers):
+        
+#         model.W[l] @ h[l] # m[l+1] * N2
+    # a[l][N2_index] @ model.W[l] # N2 * m[l]
+    # (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
+    #  torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+        
+        v += torch.sum((a_grad_momentum[l] @ V[l]) * h_momentum[l], dim = 1)
+    
+    return v
+
+def compute_J_transpose_V(v, data_, params):
+    
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momentum = data_['h_momentum']
+    
+    numlayers = params['numlayers']
+    
+    delta = list(range(numlayers))
+    for l in range(numlayers):
+        delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
+        delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
+        
+#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+    
+    
+    return delta
+    
+    
+    
+
+
 
 def kfac_update(data_, params):
     import torch
