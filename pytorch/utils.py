@@ -5,6 +5,9 @@ def update_lambda(p, data_, params):
     loss = data_['loss']
     
     numlayers = params['numlayers']
+    lambda_ = params['lambda']
+    boost = params['boost']
+    drop = params['drop']
     
     
     # compute rho
