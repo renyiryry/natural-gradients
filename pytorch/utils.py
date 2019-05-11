@@ -422,7 +422,7 @@ def kfac_update(data_, params):
     N1 = params['N1']
     i = params['i']
     inverse_update_freq = params['inverse_update_freq']
-    eps = params['eps']
+    lambda_ = params['lambda_']
     alpha = params['alpha']
     numlayers = params['numlayers']
     
@@ -484,6 +484,7 @@ def kfac_update(data_, params):
 #         print('G[l]: ', G[l])
 
     # Step
+    delta = []
     for l in range(numlayers):
         
 #         print(type(G[l]))
@@ -495,11 +496,11 @@ def kfac_update(data_, params):
             
             
             
-            A_inv[l] = (A[l] + eps*torch.eye(A[l].shape[0])).inverse()
+            A_inv[l] = (A[l] + lamba_ * torch.eye(A[l].shape[0])).inverse()
             
 #             print('G[l] + eps*torch.eye(G[l].shape[0]): ', G[l] + eps*torch.eye(G[l].shape[0]))
             
-            G_inv[l] = (G[l] + eps*torch.eye(G[l].shape[0])).inverse()
+            G_inv[l] = (G[l] + lambda_ * torch.eye(G[l].shape[0])).inverse()
 
 #         print(type(G_inv[l]))
 #         print(type(model.W[l].grad.data))
@@ -511,16 +512,32 @@ def kfac_update(data_, params):
 #         print('A_inv[l]: ', A_inv[l])
         
             
-        delta = G_inv[l] @ model.W[l].grad.data @ A_inv[l]
+        delta.append(G_inv[l] @ model.W[l].grad.data @ A_inv[l])
         
 #         print('delta: ', delta)
+    
+    for l in range(numlayers):
+        model.W[l].data -= alpha * delta[l]
         
-        model.W[l].data -= alpha * delta
+        
+    p = []
+    for l in range(numlayers):
+        p.append(-delta[l])
+    
+#     data_update_lambda = {}
+#     data_update_lambda['model'] = model
+#     data_update_lambda['X_mb'] = X_mb
+#     data_update_lambda['t_mb'] = t_mb
+#     data_update_lambda['loss'] = loss
+        
+    lambda_ = update_lambda(p, data_, params)
         
     data_['A'] = A
     data_['G'] = G
     data_['A_inv'] = A_inv
     data_['G_inv'] = G_inv
     data_['model'] = model
+    
+    params['lambda_'] = lambda_
         
-    return data_
+    return data_, params
