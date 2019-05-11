@@ -1,3 +1,51 @@
+def update_lambda():
+    # compute rho
+#     test_rate = 1;
+#     test_p = test_rate * p;
+      
+
+#     [ll_chunk, ~] =...
+#             computeLL(paramsp + test_p, indata, outdata, numchunks, targetchunk)
+
+    p = []
+    for l in range(numlayers):
+        p.append(-delta[l])
+        
+    ll_chunk = get_new_loss(model, p, X_mb, t_mb)
+        
+#     [oldll_chunk, ~] =...
+#             computeLL(paramsp, indata, outdata, numchunks, targetchunk)
+    oldll_chunk = loss
+        
+    if oldll_chunk - ll_chunk < 0:
+        rho = float("-inf")
+    else:
+#         autodamp = 0
+        data_computeFV = {}
+        data_computeFV['a_grad_momentum'] = a_grad_momentum
+        data_computeFV['h_momentum'] = h_momentum
+        
+        
+
+        denom = -0.5 * get_dot_product(p, computeFV(p, data_computeFV, params), params)\
+        - get_dot_product([Wi.grad for Wi in model.W], p, params) 
+#         autodamp = 1
+
+        data_computeFV = {}
+   
+        rho = (oldll_chunk - ll_chunk) / denom
+        
+    
+    
+    
+    # update lambda   
+    if rho < 0.25:
+        lambda_ = lambda_ * boost
+    elif rho > 0.75:
+        lambda_ = lambda_ * drop
+        
+    return lambda_
+
 def SMW_Fisher_update(data_, params):
     # a[l].grad: size N1 * m[l+1], it has a coefficient 1 / N1, which should be first compensate
     # h[l]: size N1 * m[l]
@@ -207,50 +255,10 @@ def SMW_Fisher_update(data_, params):
 
     
 
-    # compute rho
-#     test_rate = 1;
-#     test_p = test_rate * p;
-      
-
-#     [ll_chunk, ~] =...
-#             computeLL(paramsp + test_p, indata, outdata, numchunks, targetchunk)
-
-    p = []
-    for l in range(numlayers):
-        p.append(-delta[l])
-        
-    ll_chunk = get_new_loss(model, p, X_mb, t_mb)
-        
-#     [oldll_chunk, ~] =...
-#             computeLL(paramsp, indata, outdata, numchunks, targetchunk)
-    oldll_chunk = loss
-        
-    if oldll_chunk - ll_chunk < 0:
-        rho = float("-inf")
-    else:
-#         autodamp = 0
-        data_computeFV = {}
-        data_computeFV['a_grad_momentum'] = a_grad_momentum
-        data_computeFV['h_momentum'] = h_momentum
-        
-        
-
-        denom = -0.5 * get_dot_product(p, computeFV(p, data_computeFV, params), params)\
-        - get_dot_product([Wi.grad for Wi in model.W], p, params) 
-#         autodamp = 1
-
-        data_computeFV = {}
-   
-        rho = (oldll_chunk - ll_chunk) / denom
-        
     
-    
-    
-    # update lambda   
-    if rho < 0.25:
-        lambda_ = lambda_ * boost
-    elif rho > 0.75:
-        lambda_ = lambda_ * drop
+        
+        
+    lambda_ = update_lambda()
             
 
             
