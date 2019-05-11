@@ -18,19 +18,20 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     weighted_loss.backward()
     
-    print('model_1.W[1].size():', model_1.W[1].size())
+#     print('model_1.W[1].size():', model_1.W[1].size())
     
 #     a_grad_momentum = data_['a_grad_momentum']
 #     h_momentum = data_['h_momentum']
     
-#     numlayers = params['numlayers']
+    numlayers = params['numlayers']
     
-#     delta = list(range(numlayers))
-#     for l in range(numlayers):
+    delta = list(range(numlayers))
+    for l in range(numlayers):
 #         delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
 #         delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
         
 #         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+        delta[l] = model_1.W[l].grad
     
     
     return delta
