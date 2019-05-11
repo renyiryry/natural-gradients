@@ -397,7 +397,7 @@ print(f'Accuracy: {acc:.3f}')
 np.save('/content/logs/temp/' + algorithm + '_losses.npy', losses)
 np.save('/content/logs/temp/' + algorithm + '_times.npy', times)
 
-np.save('/content/gdrive/my drive/Gauss_Newton/result/' + algorithm + '_losses.npy', losses)
-np.save('/content/gdrive/my drive/Gauss_Newton/result/' + algorithm + '_times.npy', times)
+np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + algorithm + '_losses.npy', losses)
+np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + algorithm + '_times.npy', times)
 
 
