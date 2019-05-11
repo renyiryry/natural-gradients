@@ -265,8 +265,8 @@ def SMW_Fisher_update(data_, params):
     
     data_update_lambda = {}
     data_update_lambda['model'] = model
-    data_['X_mb'] = X_mb
-    data_['t_mb'] = t_mb
+    data_update_lambda['X_mb'] = X_mb
+    data_update_lambda['t_mb'] = t_mb
         
     lambda_ = update_lambda(p, data_update_lambda, params)
     
