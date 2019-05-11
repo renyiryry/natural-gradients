@@ -532,6 +532,7 @@ def compute_JV(V, data_, params):
 def kfac_update(data_, params):
     import torch
     import sys
+    import np
     
     X_mb = data_['X_mb']
     
