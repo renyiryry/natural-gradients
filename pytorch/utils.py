@@ -1,3 +1,64 @@
+def get_cache_momentum(data_)
+    a = []
+    h = [X_mb]
+    for ii in range(len(cache)):
+        if ii % 2 == 0:
+            a.append(cache[ii])
+        else:
+            h.append(cache[ii])        
+    a.append(z)
+    
+    
+    
+#     print('a[0].size(): ', a[0].size())
+#     print('a[1].size(): ', a[1].size())
+#     print('a[2].size(): ', a[2].size())
+    
+#     print('h[0].size(): ', h[0].size())
+#     print('h[1].size(): ', h[1].size())
+#     print('h[2].size(): ', h[2].size())
+    
+#     print('a[0].grad: ', a[0].grad)
+#     print('a[1].grad: ', a[1].grad)
+#     print('a[2].grad: ', a[2].grad)
+    
+#     print('h[0]: ', h[0])
+#     print('h[1]: ', h[1])
+#     print('h[2]: ', h[2])
+
+    
+    
+    
+    N2_index = np.random.permutation(N1)[:N2]
+    
+    # Update running estimates
+    if algorithm == 'SMW-Fisher-momentum':
+        rho = min(1-1/i, 0.95)
+        
+        for l in range(numlayers):
+            a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * N1 * (a[l].grad)[N2_index]
+            h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
+        
+    elif algorithm == 'SMW-Fisher':
+        a_grad_momentum = []
+        h_momentum = []
+        for l in range(numlayers):
+            a_grad_momentum.append(N1 * (a[l].grad)[N2_index])
+            h_momentum.append(h[l][N2_index])
+            
+    
+        
+        
+    else:
+        print('Error!')
+        sys.exit()
+        
+    data_['a_grad_momentum'] = a_grad_momentum
+    data_['h_momentum'] = h_momentum
+
+
+    return data_
+
 def update_lambda(p, data_, params):
     model = data_['model']
     X_mb = data_['X_mb']
@@ -94,62 +155,9 @@ def SMW_Fisher_update(data_, params):
     drop = params['drop']
     
     
-    a = []
-    h = [X_mb]
-    for ii in range(len(cache)):
-        if ii % 2 == 0:
-            a.append(cache[ii])
-        else:
-            h.append(cache[ii])        
-    a.append(z)
     
     
-    
-#     print('a[0].size(): ', a[0].size())
-#     print('a[1].size(): ', a[1].size())
-#     print('a[2].size(): ', a[2].size())
-    
-#     print('h[0].size(): ', h[0].size())
-#     print('h[1].size(): ', h[1].size())
-#     print('h[2].size(): ', h[2].size())
-    
-#     print('a[0].grad: ', a[0].grad)
-#     print('a[1].grad: ', a[1].grad)
-#     print('a[2].grad: ', a[2].grad)
-    
-#     print('h[0]: ', h[0])
-#     print('h[1]: ', h[1])
-#     print('h[2]: ', h[2])
-
-    
-    
-    
-    N2_index = np.random.permutation(N1)[:N2]
-    
-    # Update running estimates
-    if algorithm == 'SMW-Fisher-momentum':
-        rho = min(1-1/i, 0.95)
-        
-        for l in range(numlayers):
-            a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * N1 * (a[l].grad)[N2_index]
-            h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
-        
-    elif algorithm == 'SMW-Fisher':
-        a_grad_momentum = []
-        h_momentum = []
-        for l in range(numlayers):
-            a_grad_momentum.append(N1 * (a[l].grad)[N2_index])
-            h_momentum.append(h[l][N2_index])
-            
-    
-        
-        
-    else:
-        print('Error!')
-        sys.exit()
-        
-    data_['a_grad_momentum'] = a_grad_momentum
-    data_['h_momentum'] = h_momentum
+    data_ = get_cache_momentum(data_)
 
     
     
