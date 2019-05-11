@@ -137,11 +137,16 @@ def SMW_Fisher_update(data_, params):
         for l in range(numlayers):
             a_grad_momentum.append(N1 * (a[l].grad)[N2_index])
             h_momentum.append(h[l][N2_index])
+            
+    
         
         
     else:
         print('Error!')
         sys.exit()
+        
+    data_['a_grad_momentum'] = a_grad_momentum
+    data_['h_momentum'] = h_momentum
 
     
     
