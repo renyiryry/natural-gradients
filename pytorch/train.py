@@ -142,7 +142,7 @@ parser.add_argument('--max_iter', type=int)
 parser.add_argument('N1', type=int)
 parser.add_argument('N2', type=int)
 parser.add_argument('--alpha', type=float)
-parser.add_argument('--lambda', type=float)
+parser.add_argument('--lambda_', type=float)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 algorithm = args.algorithm
@@ -150,7 +150,7 @@ params['algorithm'] = algorithm
 max_iter = args.max_iter
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
-    lambda_ = args.lambda
+    lambda_ = args.lambda_
     params['lambda'] = lambda_
 else:
     print('Error!')
