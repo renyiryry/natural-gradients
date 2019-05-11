@@ -29,7 +29,7 @@ def computeFV(delta, data_, params):
     
     
     
-    delta = compute_J_transpose_V(v, params)
+    delta = compute_J_transpose_V(v, data_, params)
     
     print('delta.size(): ', delta.size())
     
