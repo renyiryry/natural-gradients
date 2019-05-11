@@ -573,6 +573,8 @@ def kfac_update(data_, params):
 #     data_update_lambda['X_mb'] = X_mb
 #     data_update_lambda['t_mb'] = t_mb
 #     data_update_lambda['loss'] = loss
+
+    data_ = get_cache_momentum(data_, params)
         
     lambda_ = update_lambda(p, data_, params)
         
