@@ -1,3 +1,16 @@
+def get_model_zerod(model):
+    # PyTorch stuffs
+    model.zero_grad()
+#     print('gradeint zerod')
+    
+#     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
+    
+    for fci in model.fc:
+        fci.zero_grad()
+        
+#     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
+    return
+
 def compute_J_transpose_V_backp(v, data_, params):
     # use backpropagation
     import copy
@@ -31,7 +44,9 @@ def compute_J_transpose_V_backp(v, data_, params):
 #         delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
         
 #         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
-        delta[l] = model_1.W[l].grad
+        delta[l] = copy.deepcopy(model_1.W[l].grad)
+    
+    get_model_zerod(model_1)
     
     
     return delta
