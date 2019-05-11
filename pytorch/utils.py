@@ -587,3 +587,28 @@ def kfac_update(data_, params):
     params['lambda_'] = lambda_
         
     return data_, params
+
+
+
+def kfac_update(data_, params):
+    
+    model = data_['model']
+    
+
+    alpha = params['alpha']
+    numlayers = params['numlayers']
+    
+
+    delta = []
+    fpr l in range(numlayers):
+        delta.append(model.W[l].grad)
+    
+    for l in range(numlayers):
+        model.W[l].data -= alpha * delta[l]
+        
+    
+    data_['model'] = model
+    
+    
+        
+    return data_, params
