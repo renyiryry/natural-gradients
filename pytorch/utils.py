@@ -16,7 +16,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     weighted_loss = torch.dot(loss, v)
     
-    loss.backward()
+    weighted_loss.backward()
     
     print('model_1.W[1].size():', model_1.W[1].size())
     
