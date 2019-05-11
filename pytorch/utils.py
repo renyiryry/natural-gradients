@@ -233,7 +233,7 @@ def SMW_Fisher_update(data_, params):
 #             computeLL(paramsp, indata, outdata, numchunks, targetchunk)
     oldll_chunk = loss
         
-    if oldll_chunk - ll_chunk > 0:
+    if oldll_chunk - ll_chunk < 0:
         rho = float("-inf")
     else:
 #         autodamp = 0
