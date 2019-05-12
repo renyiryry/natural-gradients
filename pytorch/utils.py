@@ -10,18 +10,18 @@ def get_model_grad_zerod(model):
 #     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
     return
 
-def compute_J_transpose_V_backp(v, data_, params):
+def compute_J_transpose_V_backp(v, model, x, t, params):
     # use backpropagation
     import copy
     import torch.nn.functional as F
     import torch
     
 #     model_1 = copy.deepcopy(data_['model'])
-    model = data_['model']
-    X_mb = data_['X_mb']
-    t_mb = data_['t_mb']
+#     model = data_['model']
+#     X_mb = data_['X_mb']
+#     t_mb = data_['t_mb']
     
-    N2_index = params['N2_index']
+#     N2_index = params['N2_index']
     
 #     model_new = Model()
     
@@ -30,13 +30,13 @@ def compute_J_transpose_V_backp(v, data_, params):
 #     print(model_new.fc[1].weight)
 #     print(model.fc[1].weight)
 
-    print('X_mb[N2_index].size(): ', X_mb[N2_index].size())
+#     print('X_mb[N2_index].size(): ', X_mb[N2_index].size())
     
-    z, cache = model.forward(X_mb[N2_index])
+    z, cache = model.forward(x)
     
     
     
-    loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
+    loss = F.cross_entropy(z, t, reduction = 'none')
     
     weighted_loss = torch.dot(loss, v)
     
@@ -371,7 +371,7 @@ def SMW_Fisher_update(data_, params):
     
     
     
-    delta = compute_J_transpose_V_backp(hat_v, data_, params)
+    delta = compute_J_transpose_V_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index] params)
 
 #     print('test delta')
 #     delta = model_grad
@@ -495,6 +495,13 @@ def get_mean(delta, params):
 
 def computeFV(delta, data_, params):
     import torch
+    import numpy as np
+    
+    X_mb = data_[X_mb]
+    t_mb = data_[t_mb]
+    
+    N2 = params['N2']
+    N2_index = np.permutation(N1)[:N2]
     
 #     a_grad_momentum = data_['a_grad_momentum']
 #     h_momentum = data_['h_momentum']
@@ -503,7 +510,7 @@ def computeFV(delta, data_, params):
     
     
     
-    delta = compute_J_transpose_V_backp(v, data_, params)
+    delta = compute_J_transpose_V_backp(v, model, X_mb[N2_index], t_mb[N2_index], params)
     
 #     print('delta.size(): ', delta.size())
     
