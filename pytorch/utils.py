@@ -227,7 +227,8 @@ def update_lambda(p, data_, params):
 #     [ll_chunk, ~] =...
 #             computeLL(paramsp + test_p, indata, outdata, numchunks, targetchunk)
 
-    
+    denom = -0.5 * get_dot_product(p, computeFV(p, data_, params), params)\
+        - get_dot_product([Wi.grad for Wi in model.W], p, params) 
         
     ll_chunk = get_new_loss(model, p, X_mb, t_mb)
         
@@ -235,23 +236,17 @@ def update_lambda(p, data_, params):
 #             computeLL(paramsp, indata, outdata, numchunks, targetchunk)
     oldll_chunk = loss
         
-    if oldll_chunk - ll_chunk < 0:
-        rho = float("-inf")
-    else:
-#         autodamp = 0
-#         data_computeFV = {}
-#         data_computeFV['a_grad_momentum'] = a_grad_momentum
-#         data_computeFV['h_momentum'] = h_momentum
-        
-        
+    
+    
 
-        denom = -0.5 * get_dot_product(p, computeFV(p, data_, params), params)\
-        - get_dot_product([Wi.grad for Wi in model.W], p, params) 
-#         autodamp = 1
 
 #         data_computeFV = {}
    
-        rho = (oldll_chunk - ll_chunk) / denom
+    rho = (oldll_chunk - ll_chunk) / denom
+        
+        
+    if oldll_chunk - ll_chunk < 0:
+        rho = float("-inf")
         
     
     
