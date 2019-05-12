@@ -500,6 +500,7 @@ def computeFV(delta, data_, params):
     X_mb = data_['X_mb']
     t_mb = data_['t_mb']
     
+    N1 = params['N1']
     N2 = params['N2']
     N2_index = np.random.permutation(N1)[:N2]
     
