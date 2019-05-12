@@ -27,6 +27,10 @@ mnist = input_data.read_data_sets('../MNIST_data', one_hot=False)
 X_test = mnist.test.images
 t_test = mnist.test.labels
 
+X_test, t_test = mnist.train.images. mnist.train.labels
+#         X_whole, t_whole = torch.from_numpy(X_whole), torch.from_numpy(t_whole).long()
+
+
 
 class Model(nn.Module):
 
@@ -458,16 +462,14 @@ for i in range(max_epoch * iter_per_epoch):
             print('\n')
 
             
-        X_whole, t_whole = mnist.train.images. mnist.train.labels
-        X_whole, t_whole = torch.from_numpy(X_whole), torch.from_numpy(t_whole).long()
-
+        
     
     
-        z, cache = model.forward(X_whole)
+        z, cache = model.forward(X_test)
     
 
     
-        loss = F.cross_entropy(z, t_whole)    
+        loss = F.cross_entropy(z, t_test)    
             
         losses[epoch] = loss
         
