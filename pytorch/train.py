@@ -357,6 +357,8 @@ for i in range(1, max_iter):
     
 #     print(data_['model'])
 
+    model = data_['model']
+
     start_time = time.time()
 
     
@@ -392,7 +394,7 @@ for i in range(1, max_iter):
 
     times.append(time.time() - start_time)
         
-    model = data_['model']
+    
         
     get_model_zerod(model)
 
