@@ -379,10 +379,15 @@ for i in range(1, max_iter):
         print('Error!')
         sys.exit()
         
+    p = data_['p']
+    
+    
     if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
-        p = data_['p']
+        
         lambda_ = update_lambda(p, data_, params)
         params['lambda_'] = lambda_
+        
+    model = update_parameter(p, model, params)
         
 
     times.append(time.time() - start_time)
