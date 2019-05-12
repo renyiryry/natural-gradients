@@ -429,15 +429,7 @@ def SMW_Fisher_update(data_, params):
     for l in range(numlayers):
         p.append(-delta[l])
     
-#     data_update_lambda = {}
-#     data_update_lambda['model'] = model
-#     data_update_lambda['X_mb'] = X_mb
-#     data_update_lambda['t_mb'] = t_mb
-#     data_update_lambda['loss'] = loss
-        
-    lambda_ = update_lambda(p, data_, params)
-    
-#     data_update_lambda = {}
+
             
 
             
@@ -446,6 +438,7 @@ def SMW_Fisher_update(data_, params):
         
 
     data_['model'] = model
+    data_['p'] = p
     
     if algorithm == 'SMW-Fisher-momentum':
         data_['a_grad_momentum'] = a_grad_momentum
@@ -453,8 +446,6 @@ def SMW_Fisher_update(data_, params):
     
 #     print('model.W[1] in utils: ', model.W[1])
 #     print('model.W[1].data in utils: ', model.W[1].data)
-
-    params['lambda_'] = lambda_
         
     return data_, params
 
@@ -677,7 +668,7 @@ def kfac_update(data_, params):
     for l in range(numlayers):
         model.W[l].data -= alpha * delta[l]
         
-    lambda_ = update_lambda(p, data_, params)
+    
     
     
 
@@ -689,7 +680,9 @@ def kfac_update(data_, params):
     data_['G_inv'] = G_inv
     data_['model'] = model
     
-    params['lambda_'] = lambda_
+    data_['p'] = p
+    
+    
         
     return data_, params
 
