@@ -227,6 +227,8 @@ def update_lambda(p, data_, params):
 #     [ll_chunk, ~] =...
 #             computeLL(paramsp + test_p, indata, outdata, numchunks, targetchunk)
 
+    print('model.W[1].grad: ', model.W[1].grad)
+
     denom = -0.5 * get_dot_product(p, computeFV(p, data_, params), params)\
         - get_dot_product([Wi.grad for Wi in model.W], p, params) 
         
