@@ -240,7 +240,7 @@ else:
 
 
 # Visualization stuffs
-losses = []
+losses = np.zeros(max_iter)
 times = np.zeros(max_iter)
 
 # max_iter = 5000
@@ -435,7 +435,7 @@ for i in range(1, max_iter):
             print('lambda = ', lambda_)
             print('\n')
 
-    losses.append(loss if i == 1 else 0.99*losses[-1] + 0.01*loss)
+    losses[i-1] = (loss if i == 1 else 0.99*losses[i-2] + 0.01*loss)
         
     
         
