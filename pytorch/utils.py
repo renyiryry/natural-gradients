@@ -359,10 +359,10 @@ def SMW_Fisher_update(data_, params):
     
     
     
-#     delta = compute_J_transpose_V_backp(hat_v, data_, params)
+    delta = compute_J_transpose_V_backp(hat_v, data_, params)
 
-    print('test delta')
-    delta = model_grad
+#     print('test delta')
+#     delta = model_grad
     
 #     print('time for compute J transpose V: ', start_time - time.time())
     
