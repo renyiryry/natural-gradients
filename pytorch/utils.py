@@ -453,12 +453,12 @@ def get_new_loss(model, p, x, t):
     import torch.nn.functional as F
     import copy
     
-    model = copy.deepcopy(model)
+    model_new = copy.deepcopy(model)
     
-    for l in range(model.numlayers):
-        model.W[l].data += p[l]
+    for l in range(model_new.numlayers):
+        model_new.W[l].data += p[l]
         
-    z, _ = model.forward(x)
+    z, _ = model_new.forward(x)
     
     loss = F.cross_entropy(z, t)
     
