@@ -31,6 +31,8 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
 #     print(model.fc[1].weight)
 
 #     print('X_mb[N2_index].size(): ', X_mb[N2_index].size())
+
+    get_model_grad_zerod(model)
     
     z, cache = model.forward(x)
     
