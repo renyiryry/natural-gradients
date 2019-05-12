@@ -360,6 +360,9 @@ def SMW_Fisher_update(data_, params):
     print('hat_v: ', hat_v)
     
     print('torch.mean(hat_v): ', torch.mean(hat_v))
+    
+    
+    print('get_dot_product(model_grad, model_grad, params): ', get_dot_product(model_grad, model_grad, params))
 #     print('1 - hat_v: ', 1 - hat_v)
 #     print('torch.max(hat_v): ', torch.max(hat_v))
 #     print('torch.min(hat_v): ', torch.min(hat_v))
