@@ -231,8 +231,14 @@ def update_lambda(p, data_, params):
 
 #     print('model.W[1].grad: ', model.W[1].grad)
 
+
+    import time
+    start_time = time.time()
+
     denom = -0.5 * get_dot_product(p, computeFV(p, data_, params), params)\
         - get_dot_product(model_grad, p, params) 
+    
+    print('time for update lambda 1/2: ', time.time() - start_time)
         
     ll_chunk = get_new_loss(model, p, X_mb, t_mb)
         
