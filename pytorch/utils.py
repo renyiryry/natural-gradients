@@ -371,7 +371,7 @@ def SMW_Fisher_update(data_, params):
     
     
     
-    delta = compute_J_transpose_V_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index] params)
+    delta = compute_J_transpose_V_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
 
 #     print('test delta')
 #     delta = model_grad
