@@ -50,7 +50,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     
 #     cache.detach_()
     
-    get_model_zerod(model)
+    get_model_grad_zerod(model)
     
 #     del model_1
     
