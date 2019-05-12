@@ -499,6 +499,7 @@ def computeFV(delta, data_, params):
     
     X_mb = data_['X_mb']
     t_mb = data_['t_mb']
+    model = data_['model']
     
     N1 = params['N1']
     N2 = params['N2']
