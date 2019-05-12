@@ -305,11 +305,11 @@ def SMW_Fisher_update(data_, params):
     params['N2_index'] = N2_index
     
     
-    start_time = time.time()
+#     start_time = time.time()
     
     data_ = get_cache_momentum(data_, params)
 
-    print('time for get cache momentum: ', start_time - time.time())
+#     print('time for get cache momentum: ', start_time - time.time())
 
 #     model_grad = []
 #     for l in range(numlayers):
@@ -326,11 +326,11 @@ def SMW_Fisher_update(data_, params):
 #     data_compute_JV['a_grad_momentum'] = a_grad_momentum
 #     data_compute_JV['h_momentum'] = h_momentum
     
-    start_time = time.time()
+#     start_time = time.time()
     
     v = compute_JV(model_grad, data_, params)
     
-    print('time for compute JV: ', start_time - time.time())
+#     print('time for compute JV: ', start_time - time.time())
     
 #     data_compute_JV = {}
         
@@ -340,7 +340,7 @@ def SMW_Fisher_update(data_, params):
 #     hat_v, _ = torch.solve(v, D_t)
     
 
-    start_time = time.time()
+#     start_time = time.time()
         
     D_t = get_D_t(data_, params)
     
@@ -349,16 +349,16 @@ def SMW_Fisher_update(data_, params):
 #     print('v:', v)
 #     print('torch.mean(v): ', torch.mean(v))
     
-    print('time for get D_t: ', start_time - time.time())
+#     print('time for get D_t: ', start_time - time.time())
     
-    start_time = time.time()
+#     start_time = time.time()
     
     D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
     hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
     hat_v = torch.from_numpy(hat_v)
     
-    print('time for solve linear system: ', start_time - time.time())
+#     print('time for solve linear system: ', start_time - time.time())
     
 #     print('hat_v: ', hat_v)
     
@@ -381,7 +381,7 @@ def SMW_Fisher_update(data_, params):
 #     data_compute_J_transpose_V['a_grad_momentum'] = a_grad_momentum
 #     data_compute_J_transpose_V['h_momentum'] = h_momentum
     
-    start_time = time.time()
+#     start_time = time.time()
     
     
     
@@ -390,7 +390,7 @@ def SMW_Fisher_update(data_, params):
 #     print('test delta')
 #     delta = model_grad
     
-    print('time for compute J transpose V: ', start_time - time.time())
+#     print('time for compute J transpose V: ', start_time - time.time())
     
 #     print('\n')
     
