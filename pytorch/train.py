@@ -248,7 +248,7 @@ times = np.zeros(max_epoch-1)
 # max_iter = 5000
 # max_iter = 5
 
-iter_per_epoch = 
+iter_per_epoch = 1
 
 # Training
 for i in range(1, max_epoch):
