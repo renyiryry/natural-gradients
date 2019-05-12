@@ -365,7 +365,11 @@ for i in range(1, max_iter):
 
     start_time = time.time()
     
-    model = update_parameter(p, model, params)
+    
+    p = []
+    for l in range(numlayers):
+        p.append(copy.deepcopy(model.W[l].grad))   
+    lambda_ = update_lambda(p, data_, params)
     print('test')
 
     
