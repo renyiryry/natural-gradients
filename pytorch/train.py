@@ -252,7 +252,7 @@ times = np.zeros(max_epoch)
 # max_iter = 5000
 # max_iter = 5
 
-iter_per_epoch = np.round(mnist.train.labels / N1)
+iter_per_epoch = int(mnist.train.labels / N1)
 
 # Training
 epoch = -1
