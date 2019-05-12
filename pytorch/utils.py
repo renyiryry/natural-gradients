@@ -248,7 +248,9 @@ def update_lambda(p, data_, params):
     if oldll_chunk - ll_chunk < 0:
         rho = float("-inf")
         
-        
+    
+    print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
+    print('denom: ', denom)
     print('rho: ', rho)
         
     
