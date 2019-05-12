@@ -299,7 +299,7 @@ for i in range(1, max_iter):
     
     loss_2_mean.backward(retain_graph=True)
     
-    print('time of loss 1:', time.time() - start_time)
+    print('time of loss 2:', time.time() - start_time)
 
     
 
