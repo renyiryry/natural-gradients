@@ -379,6 +379,8 @@ for i in range(1, max_iter):
 
     test_start_time = time.time()
     
+    print('time first half: ', time.time() - start_time)
+    
     
     
     
