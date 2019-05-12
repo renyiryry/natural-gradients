@@ -22,6 +22,8 @@ torch.manual_seed(9999)
 
 mnist = input_data.read_data_sets('../MNIST_data', one_hot=False)
 
+print('len(mnist): ', len(mnist))
+
 X_test = mnist.test.images
 t_test = mnist.test.labels
 
@@ -140,7 +142,7 @@ params = {}
 
 parser = argparse.ArgumentParser()
 parser.add_argument('algorithm', type=str)
-parser.add_argument('--max_iter', type=int)
+parser.add_argument('--max_epoch', type=int)
 parser.add_argument('N1', type=int)
 parser.add_argument('N2', type=int)
 parser.add_argument('--alpha', type=float)
@@ -149,7 +151,7 @@ args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 algorithm = args.algorithm
 params['algorithm'] = algorithm
-max_iter = args.max_iter
+max_epoch = args.max_epoch
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
     lambda_ = args.lambda_
@@ -240,14 +242,16 @@ else:
 
 
 # Visualization stuffs
-losses = np.zeros(max_iter-1)
-times = np.zeros(max_iter-1)
+losses = np.zeros(max_epoch-1)
+times = np.zeros(max_epoch-1)
 
 # max_iter = 5000
 # max_iter = 5
 
+iter_per_epoch = 
+
 # Training
-for i in range(1, max_iter):
+for i in range(1, max_epoch):
     
     start_time = time.time()
     
