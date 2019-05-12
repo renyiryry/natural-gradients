@@ -420,6 +420,8 @@ for i in range(1, max_iter):
 #     print('no update lambda')
         
     model = update_parameter(p, model, params)
+    
+    print('time 7/8: ', time.time() - start_time)
         
 
     times[i-1] = time.time() - start_time
