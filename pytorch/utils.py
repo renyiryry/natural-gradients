@@ -497,8 +497,8 @@ def computeFV(delta, data_, params):
     import torch
     import numpy as np
     
-    X_mb = data_[X_mb]
-    t_mb = data_[t_mb]
+    X_mb = data_['X_mb']
+    t_mb = data_['t_mb']
     
     N2 = params['N2']
     N2_index = np.permutation(N1)[:N2]
