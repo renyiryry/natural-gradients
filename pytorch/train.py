@@ -367,7 +367,7 @@ for i in range(1, max_iter):
     
     
     p = []
-    for l in range(numlayers):
+    for l in range(model.numlayers):
         p.append(copy.deepcopy(model.W[l].grad))   
     lambda_ = update_lambda(p, data_, params)
     print('test')
