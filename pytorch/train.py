@@ -400,7 +400,7 @@ for i in range(1, max_iter):
         
     
         
-    get_model_zerod(model)
+    get_model_grad_zerod(model)
 
     
 
