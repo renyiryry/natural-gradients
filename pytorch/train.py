@@ -419,8 +419,12 @@ for i in range(1, max_iter):
         
 
     times[i-1] = time.time() - start_time
+    
+    print('time this iter: ', time[i-1])
+    
     if i > 1:
         times[i-1] = times[i-1] + times[i-2]
+        
         
     if (i-1) % 100 == 0:
         
