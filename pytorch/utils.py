@@ -347,6 +347,7 @@ def SMW_Fisher_update(data_, params):
     print('D_t:', D_t)
     
     print('v:', v)
+    print('torch.mean(v): ', torch.mean(v))
     
 #     print('time for get D_t: ', start_time - time.time())
     
@@ -361,7 +362,7 @@ def SMW_Fisher_update(data_, params):
     
     print('hat_v: ', hat_v)
     
-    print('torch.mean(hat_v): ', torch.mean(hat_v))
+#     print('torch.mean(hat_v): ', torch.mean(hat_v))
     
     
     print('get_dot_product(model_grad, model_grad, params): ', get_dot_product(model_grad, model_grad, params))
