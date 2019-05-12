@@ -393,7 +393,7 @@ def SMW_Fisher_update(data_, params):
         
         
     print('delta[1]: ', delta[1])
-    print('model.W[1].grad: ', model.W[1].grad)
+    print('model_grad[1]: ', model_grad[1])
 
     for l in range(numlayers):
         delta[l] = model_grad[l] - delta[l]
