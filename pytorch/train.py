@@ -253,7 +253,7 @@ for i in range(1, max_iter):
 
     # Forward
     
-    print('i: ', i)
+#     print('i: ', i)
 #     print('X_mb: ', X_mb)
     
 #     print('model.W[1]: ', model.W[1])
@@ -366,11 +366,11 @@ for i in range(1, max_iter):
     start_time = time.time()
     
     
-    p = []
-    for l in range(model.numlayers):
-        p.append(copy.deepcopy(model.W[l].grad))   
-    lambda_ = update_lambda(p, data_, params)
-    print('test')
+#     p = []
+#     for l in range(model.numlayers):
+#         p.append(copy.deepcopy(model.W[l].grad))   
+#     lambda_ = update_lambda(p, data_, params)
+#     print('test')
 
     
     if params['algorithm'] == 'kfac':    
