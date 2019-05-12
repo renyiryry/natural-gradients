@@ -282,7 +282,7 @@ for i in range(1, max_iter):
 #     print('model.W[1]: ', model.W[1])
 #     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
-    get_model_grad_zerod(model)
+    model = get_model_grad_zerod(model)
     
 #     loss.backward(retain_graph=True)
     loss.backward()
@@ -410,7 +410,7 @@ for i in range(1, max_iter):
         
     
         
-    get_model_grad_zerod(model)
+    model = get_model_grad_zerod(model)
 
     
 
