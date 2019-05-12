@@ -8,7 +8,7 @@ def get_model_grad_zerod(model):
         fci.zero_grad()
         
 #     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
-    return
+    return model
 
 def compute_J_transpose_V_backp(v, model, x, t, params):
     # use backpropagation
@@ -39,7 +39,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
 #     model.W[0].data = model.W[0].data - 0.1
     print('test ?')
 
-    get_model_grad_zerod(model)
+    model = get_model_grad_zerod(model)
     
     z, cache = model.forward(x)
     
@@ -49,7 +49,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
     
     weighted_loss = torch.dot(loss, v)
     
-    get_model_grad_zerod(model)
+    model = get_model_grad_zerod(model)
     
     weighted_loss.backward(retain_graph = True)
 #     weighted_loss.backward()
@@ -71,7 +71,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
     
 #     cache.detach_()
     
-    get_model_grad_zerod(model)
+    model = get_model_grad_zerod(model)
     
 #     del model_1
     
