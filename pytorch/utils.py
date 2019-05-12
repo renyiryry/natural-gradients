@@ -344,10 +344,10 @@ def SMW_Fisher_update(data_, params):
         
     D_t = get_D_t(data_, params)
     
-    print('D_t:', D_t)
+#     print('D_t:', D_t)
     
-    print('v:', v)
-    print('torch.mean(v): ', torch.mean(v))
+#     print('v:', v)
+#     print('torch.mean(v): ', torch.mean(v))
     
 #     print('time for get D_t: ', start_time - time.time())
     
@@ -360,19 +360,19 @@ def SMW_Fisher_update(data_, params):
     
 #     print('time for solve linear system: ', start_time - time.time())
     
-    print('hat_v: ', hat_v)
+#     print('hat_v: ', hat_v)
     
 #     print('torch.mean(hat_v): ', torch.mean(hat_v))
     
     
-    print('get_dot_product(model_grad, model_grad, params): ', get_dot_product(model_grad, model_grad, params))
+#     print('get_dot_product(model_grad, model_grad, params): ', get_dot_product(model_grad, model_grad, params))
 #     print('1 - hat_v: ', 1 - hat_v)
 #     print('torch.max(hat_v): ', torch.max(hat_v))
 #     print('torch.min(hat_v): ', torch.min(hat_v))
 
-    hat_v = torch.ones(N2)
+#     hat_v = torch.ones(N2)
     
-    print('hat_v: ', hat_v)
+#     print('hat_v: ', hat_v)
 #     print('1 - hat_v: ', 1 - hat_v)
 
     # compute natural gradient
