@@ -380,6 +380,7 @@ for i in range(1, max_iter):
         sys.exit()
         
     if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+        p = data_['p']
         lambda_ = update_lambda(p, data_, params)
         params['lambda_'] = lambda_
         
