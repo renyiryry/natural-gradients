@@ -248,6 +248,9 @@ times = []
 
 # Training
 for i in range(1, max_iter):
+    
+    start_time = time.time()
+    
     X_mb, t_mb = mnist.train.next_batch(N1)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
@@ -284,22 +287,22 @@ for i in range(1, max_iter):
 
     model = get_model_grad_zerod(model)
     
-    start_time = time.time()
+#     start_time = time.time()
     
     loss.backward(retain_graph=True)
     
-    print('time of loss 1:', time.time() - start_time)
+#     print('time of loss 1:', time.time() - start_time)
 #     loss.backward()
 
-    loss_2 = F.cross_entropy(z, t_mb, reduction = 'none')
+#     loss_2 = F.cross_entropy(z, t_mb, reduction = 'none')
     
-    loss_2_mean = torch.mean(loss_2)
+#     loss_2_mean = torch.mean(loss_2)
     
-    start_time = time.time()
+#     start_time = time.time()
     
-    loss_2_mean.backward(retain_graph=True)
+#     loss_2_mean.backward(retain_graph=True)
     
-    print('time of loss 2:', time.time() - start_time)
+#     print('time of loss 2:', time.time() - start_time)
 
     
 
@@ -387,7 +390,7 @@ for i in range(1, max_iter):
 
     model = data_['model']
 
-    start_time = time.time()
+    
     
     
 #     p = []
