@@ -28,7 +28,7 @@ X_test = mnist.test.images
 t_test = mnist.test.labels
 X_train = mnist.train.images
 t_train = mnist.train.labels
-#         X_whole, t_whole = torch.from_numpy(X_whole), torch.from_numpy(t_whole).long()
+X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
 
 
 
