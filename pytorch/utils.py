@@ -23,14 +23,14 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     N2_index = params['N2_index']
     
-    model_new = Model()
+#     model_new = Model()
     
-    model_new.W = model.W
+#     model_new.W = model.W
     
-    print(model_new.fc[1].weight)
-    print(model.fc[1].weight)
+#     print(model_new.fc[1].weight)
+#     print(model.fc[1].weight)
     
-    z, cache = model_new.forward(X_mb[N2_index])
+    z, cache = model.forward(X_mb[N2_index])
     
     
     
