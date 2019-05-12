@@ -33,7 +33,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     get_model_grad_zerod(model)
     
-    weighted_loss.backward()
+    weighted_loss.backward(retain_graph = True)
     
 #     print('model_1.W[1].size():', model_1.W[1].size())
     
