@@ -344,6 +344,8 @@ def SMW_Fisher_update(data_, params):
     
     print('D_t:', D_t)
     
+    print('v:', v)
+    
 #     print('time for get D_t: ', start_time - time.time())
     
 #     start_time = time.time()
