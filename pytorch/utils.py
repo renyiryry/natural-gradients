@@ -501,7 +501,7 @@ def computeFV(delta, data_, params):
     t_mb = data_['t_mb']
     
     N2 = params['N2']
-    N2_index = np.permutation(N1)[:N2]
+    N2_index = np.random.permutation(N1)[:N2]
     
 #     a_grad_momentum = data_['a_grad_momentum']
 #     h_momentum = data_['h_momentum']
