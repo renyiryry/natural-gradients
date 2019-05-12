@@ -287,22 +287,14 @@ for i in range(1, max_iter):
 
     model = get_model_grad_zerod(model)
     
-#     start_time = time.time()
+    test_start_time = time.time()
     
     loss.backward(retain_graph=True)
     
-#     print('time of loss 1:', time.time() - start_time)
+    print('time of loss:', time.time() - test_start_time)
 #     loss.backward()
 
-#     loss_2 = F.cross_entropy(z, t_mb, reduction = 'none')
-    
-#     loss_2_mean = torch.mean(loss_2)
-    
-#     start_time = time.time()
-    
-#     loss_2_mean.backward(retain_graph=True)
-    
-#     print('time of loss 2:', time.time() - start_time)
+
 
     
 
@@ -385,6 +377,12 @@ for i in range(1, max_iter):
 #     lambda_ = update_lambda(p, data_, params)
 #     print('test')
 
+    test_start_time = time.time()
+    
+    
+    
+    
+
     
     if params['algorithm'] == 'kfac':    
         
@@ -404,6 +402,9 @@ for i in range(1, max_iter):
     else:
         print('Error!')
         sys.exit()
+        
+        
+    print('time of second order:', time.time() - test_start_time)
         
     p = data_['p']
     
