@@ -234,9 +234,20 @@ def update_lambda(p, data_, params):
 
     import time
     start_time = time.time()
+    
+    
+    
+    denom = computeFV(p, data_, params)
+    
+    print('time for update lambda 1/4: ', time.time() - start_time)
 
-    denom = -0.5 * get_dot_product(p, computeFV(p, data_, params), params)\
-        - get_dot_product(model_grad, p, params) 
+    denom = get_dot_product(p, denom, params)
+    
+    denom = -0.5 * denom
+    
+    
+    
+    denom = denom - get_dot_product(model_grad, p, params) 
     
     print('time for update lambda 1/2: ', time.time() - start_time)
         
