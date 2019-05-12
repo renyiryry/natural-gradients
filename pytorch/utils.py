@@ -29,6 +29,8 @@ def compute_J_transpose_V_backp(v, data_, params):
     
 #     print(model_new.fc[1].weight)
 #     print(model.fc[1].weight)
+
+    print('X_mb[N2_index].size(): ', X_mb[N2_index].size())
     
     z, cache = model.forward(X_mb[N2_index])
     
