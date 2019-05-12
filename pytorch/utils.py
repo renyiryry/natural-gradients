@@ -358,6 +358,8 @@ def SMW_Fisher_update(data_, params):
 #     print('time for solve linear system: ', start_time - time.time())
     
     print('hat_v: ', hat_v)
+    
+    print('torch.mean(hat_v): ', torch.mean(hat_v))
 #     print('1 - hat_v: ', 1 - hat_v)
 #     print('torch.max(hat_v): ', torch.max(hat_v))
 #     print('torch.min(hat_v): ', torch.min(hat_v))
