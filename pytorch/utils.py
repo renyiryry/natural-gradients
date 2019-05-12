@@ -449,14 +449,14 @@ def SMW_Fisher_update(data_, params):
         
     return data_, params
 
-def get_new_loss(model, delta, x, t):
+def get_new_loss(model, p, x, t):
     import torch.nn.functional as F
     import copy
     
     model = copy.deepcopy(model)
     
     for l in range(model.numlayers):
-        model.W[l].data += delta[l]
+        model.W[l].data += p[l]
         
     z, _ = model.forward(x)
     
