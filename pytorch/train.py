@@ -364,6 +364,9 @@ for i in range(1, max_iter):
     model = data_['model']
 
     start_time = time.time()
+    
+    model = update_parameter(p, model, params)
+    print('test')
 
     
     if params['algorithm'] == 'kfac':    
