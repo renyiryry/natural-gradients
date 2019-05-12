@@ -390,7 +390,7 @@ for i in range(max_epoch * iter_per_epoch):
 
 #     test_start_time = time.time()
     
-    print('time first half: ', time.time() - start_time)
+#     print('time first half: ', time.time() - start_time)
     
     
     
