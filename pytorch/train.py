@@ -286,6 +286,11 @@ for i in range(1, max_iter):
     
     loss.backward(retain_graph=True)
 #     loss.backward()
+
+    model_grad = []
+    for l in range(model.numlayers):
+        model_grad.append(copy.deepcopy(model.W[l].grad))
+    data_['model_grad'] = model_grad
     
     
     
