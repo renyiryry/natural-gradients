@@ -432,6 +432,8 @@ for i in range(1, max_iter):
         
 
     times.append(time.time() - start_time)
+    if i > 1:
+        times[-1] = times[-1] + times[-2]
         
     
         
