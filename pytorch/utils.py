@@ -549,7 +549,13 @@ def computeFV(delta, data_, params):
 #     a_grad_momentum = data_['a_grad_momentum']
 #     h_momentum = data_['h_momentum']
     
+    
+    import time
+    start_time = time.time()
+    
     v = compute_JV(delta, data_, params)
+    
+    print('time for FV 1/2: ', time.time() - start_time)
     
     
     
