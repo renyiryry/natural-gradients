@@ -291,7 +291,7 @@ for i in range(1, max_iter):
     print('time of loss 1:', time.time() - start_time)
 #     loss.backward()
 
-    loss_2 = F.croos_entropy(z, t_mb, reduction = 'none')
+    loss_2 = F.cross_entropy(z, t_mb, reduction = 'none')
     
     loss_2_mean = torch.mean(loss_2)
     
