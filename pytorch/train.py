@@ -377,7 +377,7 @@ for i in range(1, max_iter):
 #     lambda_ = update_lambda(p, data_, params)
 #     print('test')
 
-    test_start_time = time.time()
+#     test_start_time = time.time()
     
     print('time first half: ', time.time() - start_time)
     
@@ -406,7 +406,9 @@ for i in range(1, max_iter):
         sys.exit()
         
         
-    print('time of second order:', time.time() - test_start_time)
+#     print('time of second order:', time.time() - test_start_time)
+    
+    print('time 3/4: ', time.time() - start_time)
         
     p = data_['p']
     
