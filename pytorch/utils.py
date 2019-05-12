@@ -254,6 +254,7 @@ def SMW_Fisher_update(data_, params):
     import numpy as np
     import scipy
     import time
+    import copy
     
     algorithm = params['algorithm']
     model = data_['model']
