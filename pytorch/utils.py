@@ -674,19 +674,12 @@ def kfac_update(data_, params):
     for l in range(numlayers):
         p.append(-delta[l])
         
-    lambda_ = update_lambda(p, data_, params)
-    
     for l in range(numlayers):
         model.W[l].data -= alpha * delta[l]
         
-        
+    lambda_ = update_lambda(p, data_, params)
     
     
-#     data_update_lambda = {}
-#     data_update_lambda['model'] = model
-#     data_update_lambda['X_mb'] = X_mb
-#     data_update_lambda['t_mb'] = t_mb
-#     data_update_lambda['loss'] = loss
 
     
         
