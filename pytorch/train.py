@@ -22,7 +22,7 @@ torch.manual_seed(9999)
 
 mnist = input_data.read_data_sets('../MNIST_data', one_hot=False)
 
-print('len(mnist): ', len(mnist))
+print('len(mnist): ', mnist.num_examples())
 
 X_test = mnist.test.images
 t_test = mnist.test.labels
