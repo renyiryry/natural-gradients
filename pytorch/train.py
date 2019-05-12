@@ -335,6 +335,8 @@ for i in range(1, max_iter):
 #         print(t_mb)
         
         print(f'Iter-{i-1}; Loss: {loss:.3f}')
+        if i > 1:
+            print('elapsed time: ', times[-1])
         if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
             lambda_ = params['lambda_']
             print('lambda = ', lambda_)
