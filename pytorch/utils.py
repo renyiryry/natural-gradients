@@ -16,7 +16,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
     import torch.nn.functional as F
     import torch
     
-    model.detach()
+#     model.detach()
     
     
 #     model_1 = copy.deepcopy(data_['model'])
@@ -34,6 +34,8 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
 #     print(model.fc[1].weight)
 
 #     print('X_mb[N2_index].size(): ', X_mb[N2_index].size())
+
+    model.W[0] = model.W[0] + 1
 
     get_model_grad_zerod(model)
     
