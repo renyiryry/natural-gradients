@@ -241,7 +241,7 @@ else:
 
 # Visualization stuffs
 losses = []
-times = []
+times = np.zeros(max_iter)
 
 # max_iter = 5000
 # max_iter = 5
@@ -353,21 +353,7 @@ for i in range(1, max_iter):
     
 #     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
 
-    if (i-1) % 100 == 0:
-        
-#         print(z)
-        
-#         print(t_mb)
-        
-        print(f'Iter-{i-1}; Loss: {loss:.3f}')
-        if i > 1:
-            print('elapsed time: ', times[-1] - times[-101])
-        if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
-            lambda_ = params['lambda_']
-            print('lambda = ', lambda_)
-            print('\n')
-
-    losses.append(loss if i == 1 else 0.99*losses[-1] + 0.01*loss)
+    
     
 
     
@@ -431,9 +417,25 @@ for i in range(1, max_iter):
     model = update_parameter(p, model, params)
         
 
-    times.append(time.time() - start_time)
+    times[i-1] = time.time() - start_time
     if i > 1:
-        times[-1] = times[-1] + times[-2]
+        times[i-1] = times[i-1] + times[i-2]
+        
+    if (i-1) % 100 == 0:
+        
+#         print(z)
+        
+#         print(t_mb)
+        
+        print(f'Iter-{i-1}; Loss: {loss:.3f}')
+        if i > 1:
+            print('elapsed time: ', times[i-1] - times[i-101])
+        if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
+            lambda_ = params['lambda_']
+            print('lambda = ', lambda_)
+            print('\n')
+
+    losses.append(loss if i == 1 else 0.99*losses[-1] + 0.01*loss)
         
     
         
