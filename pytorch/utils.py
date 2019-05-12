@@ -725,7 +725,7 @@ def update_parameter(p, model, params):
     alpha = params['alpha']
     
     for l in range(numlayers):
-        model.W[l].data -= alpha * delta[l]
+        model.W[l].data += alpha * p[l]
         
     return model
     
