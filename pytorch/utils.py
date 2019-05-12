@@ -213,6 +213,8 @@ def update_lambda(p, data_, params):
     t_mb = data_['t_mb']
     loss = data_['loss']
     
+    model_grad = data_['model_grad']
+    
     numlayers = params['numlayers']
     lambda_ = params['lambda_']
     boost = params['boost']
@@ -227,10 +229,10 @@ def update_lambda(p, data_, params):
 #     [ll_chunk, ~] =...
 #             computeLL(paramsp + test_p, indata, outdata, numchunks, targetchunk)
 
-    print('model.W[1].grad: ', model.W[1].grad)
+#     print('model.W[1].grad: ', model.W[1].grad)
 
     denom = -0.5 * get_dot_product(p, computeFV(p, data_, params), params)\
-        - get_dot_product([Wi.grad for Wi in model.W], p, params) 
+        - get_dot_product(model_grad, p, params) 
         
     ll_chunk = get_new_loss(model, p, X_mb, t_mb)
         
