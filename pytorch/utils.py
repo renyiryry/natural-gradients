@@ -274,6 +274,8 @@ def SMW_Fisher_update(data_, params):
     algorithm = params['algorithm']
     model = data_['model']
     
+    model_grad = data_['model_grad']
+    
     X_mb = data_['X_mb']
     t_mb = data_['t_mb']    
     cache = data_['cache']
@@ -309,9 +311,9 @@ def SMW_Fisher_update(data_, params):
 
 #     print('time for get cache momentum: ', start_time - time.time())
 
-    model_grad = []
-    for l in range(numlayers):
-        model_grad.append(copy.deepcopy(model.W[l].grad))
+#     model_grad = []
+#     for l in range(numlayers):
+#         model_grad.append(copy.deepcopy(model.W[l].grad))
     
     
     
