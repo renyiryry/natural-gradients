@@ -253,7 +253,7 @@ for i in range(1, max_iter):
 
     # Forward
     
-    print('i: ', i)
+#     print('i: ', i)
 #     print('X_mb: ', X_mb)
     
 #     print('model.W[1]: ', model.W[1])
