@@ -391,7 +391,7 @@ def SMW_Fisher_update(data_, params):
 
     
     # update parameters
-    for l in range(numlayers):
+#     for l in range(numlayers):
         
 #         For two 2D tensors a and b (of size [b,n] and [b,m] respectively),
 # a[:, :, None] @ b[:, None, :] (of size [b,n,m]) gives the outer product operated on each item in the batch.
@@ -417,7 +417,7 @@ def SMW_Fisher_update(data_, params):
 
 #         print('model.W[1].data in utils: ', model.W[1].data)
     
-        model.W[l].data -= alpha * delta[l]
+#         model.W[l].data -= alpha * delta[l]
         
 #         print('model.W[1].data in utils: ', model.W[1].data)
         
@@ -437,7 +437,7 @@ def SMW_Fisher_update(data_, params):
 
         
 
-    data_['model'] = model
+#     data_['model'] = model
     data_['p'] = p
     
     if algorithm == 'SMW-Fisher-momentum':
@@ -665,8 +665,8 @@ def kfac_update(data_, params):
     for l in range(numlayers):
         p.append(-delta[l])
         
-    for l in range(numlayers):
-        model.W[l].data -= alpha * delta[l]
+#     for l in range(numlayers):
+#         model.W[l].data -= alpha * delta[l]
         
     
     
@@ -678,7 +678,7 @@ def kfac_update(data_, params):
     data_['G'] = G
     data_['A_inv'] = A_inv
     data_['G_inv'] = G_inv
-    data_['model'] = model
+#     data_['model'] = model
     
     data_['p'] = p
     
@@ -697,24 +697,35 @@ def SGD_update(data_, params):
 #     print(data_['model'])
     
 
-    alpha = params['alpha']
+#     alpha = params['alpha']
     numlayers = params['numlayers']
     
 
-    delta = []
+    p = []
     for l in range(numlayers):
-        delta.append(model.W[l].grad)
+        p.append(-model.W[l].grad)
     
-    for l in range(numlayers):
-        model.W[l].data -= alpha * delta[l]
+    
         
 #     print(data_['model'])
         
     
-    data_['model'] = model
+#     data_['model'] = model
     
 #     print(data_['model'])
+
+    data_['p'] = p
     
     
         
     return data_
+
+def update_parameter(p, model, params):
+    numlayers = params['numlayers']
+    alpha = params['alpha']
+    
+    for l in range(numlayers):
+        model.W[l].data -= alpha * delta[l]
+        
+    return model
+    
