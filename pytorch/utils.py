@@ -253,9 +253,9 @@ def update_lambda(p, data_, params):
         rho = float("-inf")
         
     
-    print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
-    print('denom: ', denom)
-    print('rho: ', rho)
+#     print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
+#     print('denom: ', denom)
+#     print('rho: ', rho)
         
     
     
