@@ -37,7 +37,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
 
     model.W[0].data = model.W[0].data + 0.1
     model.W[0].data = model.W[0].data - 0.1
-    print('test')
+    print('test ?')
 
     get_model_grad_zerod(model)
     
