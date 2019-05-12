@@ -336,13 +336,13 @@ def SMW_Fisher_update(data_, params):
     
     # compute hat_v
 #     hat_v, _ = torch.solve(v, D_t)
-
-#     if i % 100 == 0:
-#     print('D_t:', D_t)
+    
 
 #     start_time = time.time()
         
     D_t = get_D_t(data_, params)
+    
+    print('D_t:', D_t)
     
 #     print('time for get D_t: ', start_time - time.time())
     
@@ -392,8 +392,8 @@ def SMW_Fisher_update(data_, params):
         delta[l] = 1 / N2 * delta[l] # [m[l+1], m[l]]
         
         
-    print('delta[1]: ', delta[1])
-    print('model_grad[1]: ', model_grad[1])
+#     print('delta[1]: ', delta[1])
+#     print('model_grad[1]: ', model_grad[1])
 
     for l in range(numlayers):
         delta[l] = model_grad[l] - delta[l]
