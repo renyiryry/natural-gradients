@@ -22,7 +22,7 @@ torch.manual_seed(9999)
 
 mnist = input_data.read_data_sets('../MNIST_data', one_hot=False)
 
-print('len(mnist): ', mnist.train.labels)
+
 
 X_test = mnist.test.images
 t_test = mnist.test.labels
@@ -242,18 +242,23 @@ else:
 
 
 # Visualization stuffs
-losses = np.zeros(max_epoch-1)
-times = np.zeros(max_epoch-1)
+losses = np.zeros(max_epoch)
+times = np.zeros(max_epoch)
 
 # max_iter = 5000
 # max_iter = 5
 
-iter_per_epoch = 1
+iter_per_epoch = np.round(mnist.train.labels / N1)
 
 # Training
-for i in range(1, max_epoch):
+epoch = -1
+for i in range(max_epoch * iter_per_epoch):
     
-    start_time = time.time()
+    if i % iter_per_epoch == 0:
+        start_time = time.time()
+        epoch += 1
+    
+#     for iter_ in range(iter_per_epoch):
     
     X_mb, t_mb = mnist.train.next_batch(N1)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
@@ -291,11 +296,11 @@ for i in range(1, max_epoch):
 
     model = get_model_grad_zerod(model)
     
-    test_start_time = time.time()
+#         test_start_time = time.time()
     
     loss.backward(retain_graph=True)
     
-    print('time of loss:', time.time() - test_start_time)
+#         print('time of loss:', time.time() - test_start_time)
 #     loss.backward()
 
 
@@ -358,14 +363,12 @@ for i in range(1, max_epoch):
     data_['loss'] = loss
     data_['t_mb'] = t_mb
     
-#     data_['a1'] = a1
-#     data_['a2'] = a2
-#     data_['h1'] = h1
-#     data_['h2'] = h2
+
     data_['cache'] = cache
     
     data_['z'] = z
     
+#         i = epoch * iter_per_epoch + iter_
     params['i'] = i
     
 #     print(data_['model'])
@@ -412,7 +415,7 @@ for i in range(1, max_epoch):
         
 #     print('time of second order:', time.time() - test_start_time)
     
-    print('time 3/4: ', time.time() - start_time)
+#     print('time 3/4: ', time.time() - start_time)
         
     p = data_['p']
     
@@ -425,32 +428,48 @@ for i in range(1, max_epoch):
         
     model = update_parameter(p, model, params)
     
-    print('time 7/8: ', time.time() - start_time)
+#     print('time 7/8: ', time.time() - start_time)
         
-
-    times[i-1] = time.time() - start_time
     
-    print('time this iter: ', times[i-1])
     
-    if i > 1:
-        times[i-1] = times[i-1] + times[i-2]
+    if (i+1) % iter_per_epoch == 0:
+        times[epoch] = time.time() - start_time
+    
+#         print('time this iter: ', times[i-1])
+    
+    if epoch > 0:
+        times[epoch] = times[epoch] + times[epoch-1]
         
         
-    if (i-1) % 100 == 0:
+    if (i+1) % iter_per_epoch == 0:
         
 #         print(z)
         
 #         print(t_mb)
-        
-        print(f'Iter-{i-1}; Loss: {loss:.3f}')
-        if i > 1:
-            print('elapsed time: ', times[i-1] - times[i-101])
+            
+        print(f'Iter-{epoch}; Loss: {loss:.3f}')
+        if epoch > 0:
+            print('elapsed time: ', times[epoch] - times[epoch-1])
+        else:
+            print('elapsed time: ', times[epoch])
         if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
             lambda_ = params['lambda_']
             print('lambda = ', lambda_)
             print('\n')
 
-    losses[i-1] = (loss if i == 1 else 0.99*losses[i-2] + 0.01*loss)
+            
+        X_whole, t_whole = mnist.train.images. mnist.train.labels
+        X_whole, t_whole = torch.from_numpy(X_whole), torch.from_numpy(t_whole).long()
+
+    
+    
+        z, cache = model.forward(X_whole)
+    
+
+    
+        loss = F.cross_entropy(z, t_whole)    
+            
+        losses[epoch] = loss
         
     
         
