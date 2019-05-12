@@ -361,7 +361,7 @@ for i in range(1, max_iter):
         
         print(f'Iter-{i-1}; Loss: {loss:.3f}')
         if i > 1:
-            print('elapsed time: ', np.sum(times[-100:]))
+            print('elapsed time: ', times[-1] - times[-101])
         if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
             lambda_ = params['lambda_']
             print('lambda = ', lambda_)
