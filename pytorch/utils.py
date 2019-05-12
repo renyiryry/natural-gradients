@@ -1,4 +1,4 @@
-def get_model_zerod(model):
+def get_model_grad_zerod(model):
     model.zero_grad()
 #     print('gradeint zerod')
     
