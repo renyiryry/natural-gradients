@@ -379,6 +379,10 @@ for i in range(1, max_iter):
         print('Error!')
         sys.exit()
         
+    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+        lambda_ = update_lambda(p, data_, params)
+        params['lambda_'] = lambda_
+        
 
     times.append(time.time() - start_time)
         
