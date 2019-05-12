@@ -16,6 +16,10 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
     import torch.nn.functional as F
     import torch
     
+    model.fc[0].detach()
+    model.fc[1].detach()
+    model.fc[2].detach()
+    
 #     model_1 = copy.deepcopy(data_['model'])
 #     model = data_['model']
 #     X_mb = data_['X_mb']
