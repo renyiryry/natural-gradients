@@ -284,8 +284,8 @@ for i in range(1, max_iter):
 
     model = get_model_grad_zerod(model)
     
-#     loss.backward(retain_graph=True)
-    loss.backward()
+    loss.backward(retain_graph=True)
+#     loss.backward()
     
     
     
