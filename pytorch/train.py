@@ -240,8 +240,8 @@ else:
 
 
 # Visualization stuffs
-losses = np.zeros(max_iter)
-times = np.zeros(max_iter)
+losses = np.zeros(max_iter-1)
+times = np.zeros(max_iter-1)
 
 # max_iter = 5000
 # max_iter = 5
