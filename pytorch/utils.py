@@ -1,3 +1,43 @@
+def compute_JV(V, data_, params):
+    import sys
+    algorithm = params['algorithm']
+    
+    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+        import torch
+    
+        a_grad_momentum = data_['a_grad_momentum']
+        h_momentum = data_['h_momentum']
+    
+        N2 = params['N2']
+        numlayers = params['numlayers']
+    
+        v = torch.zeros(N2)
+    
+#     print('model.W[0].size(): ', model.W[0].size())
+#     print('model.W[1].size(): ', model.W[1].size())
+#     print('model.W[2].size(): ', model.W[2].size())        
+    
+        for l in range(numlayers):
+        
+#         model.W[l] @ h[l] # m[l+1] * N2
+    # a[l][N2_index] @ model.W[l] # N2 * m[l]
+    # (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
+    #  torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+        
+            v += torch.sum((a_grad_momentum[l] @ V[l]) * h_momentum[l], dim = 1)
+        
+        
+#     print('V[1]: ', V[1])
+#     print('1/N2 * h_momentum[1].t() @ a_grad_momentum[1]:', 1/N2 * h_momentum[1].t() @ a_grad_momentum[1])
+    elif algorithm == 'SMW-GN':
+        print('Error!')
+        
+    else:
+        print('Error!')
+        sys.exit()
+    
+    return v
+
 def get_subtract(model_grad, delta, params):
     numlayers = params['numlayers']
     for l in range(numlayers):
@@ -52,8 +92,8 @@ def SMW_GN_update(data_, params):
     
     
     
-#     N1 = params['N1']
-#     N2 = params['N2']
+    N1 = params['N1']
+    N2 = params['N2']
 #     i = params['i']
 #     alpha = params['alpha']
 #     lambda_ = params['lambda_']
@@ -61,13 +101,13 @@ def SMW_GN_update(data_, params):
 #     boost = params['boost']
 #     drop = params['drop']
     
-#     N2_index = np.random.permutation(N1)[:N2]
-#     params['N2_index'] = N2_index
+    N2_index = np.random.permutation(N1)[:N2]
+    params['N2_index'] = N2_index
     
     
 #     start_time = time.time()
     
-#     data_ = get_cache_momentum(data_, params)
+    data_ = get_cache_momentum(data_, params)
 
 #     print('time for get cache momentum: ', start_time - time.time())
 
@@ -84,7 +124,7 @@ def SMW_GN_update(data_, params):
     
 #     start_time = time.time()
     
-    v = compute_JV_1(model_grad, data_, params)
+    v = compute_JV(model_grad, data_, params)
     
 #     print('time for compute JV: ', start_time - time.time())
     
@@ -318,7 +358,24 @@ def get_D_t(data_, params):
     return D_t
 
 def get_cache_momentum(data_, params):
-    import numpy as np
+    algorithm == params['algorithm']
+    
+    if algorithm == 'SMW-GN':
+        model = data_['model']
+        
+        N2_index = params['N2_index']
+        
+        z, _ = model.forward(X_mb[N2_index])
+        
+        z.backward()
+        
+        
+        
+        
+    else:
+    
+    
+#     import numpy as np
     
     X_mb = data_['X_mb']
     cache = data_['cache']
@@ -767,37 +824,6 @@ def computeFV(delta, data_, params):
     delta = get_mean(delta, params)
     
     return delta
-
-
-def compute_JV(V, data_, params):
-    import torch
-    
-    a_grad_momentum = data_['a_grad_momentum']
-    h_momentum = data_['h_momentum']
-    
-    N2 = params['N2']
-    numlayers = params['numlayers']
-    
-    v = torch.zeros(N2)
-    
-#     print('model.W[0].size(): ', model.W[0].size())
-#     print('model.W[1].size(): ', model.W[1].size())
-#     print('model.W[2].size(): ', model.W[2].size())        
-    
-    for l in range(numlayers):
-        
-#         model.W[l] @ h[l] # m[l+1] * N2
-    # a[l][N2_index] @ model.W[l] # N2 * m[l]
-    # (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
-    #  torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
-        
-        v += torch.sum((a_grad_momentum[l] @ V[l]) * h_momentum[l], dim = 1)
-        
-        
-#     print('V[1]: ', V[1])
-#     print('1/N2 * h_momentum[1].t() @ a_grad_momentum[1]:', 1/N2 * h_momentum[1].t() @ a_grad_momentum[1])
-    
-    return v
 
 
 
