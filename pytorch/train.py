@@ -42,12 +42,12 @@ class Model(nn.Module):
         
 #         self.fc = self.numlayers * [0]
         self.fc = list(range(self.numlayers))
-#         for l in range(self.numlayers):
-#             self.fc[l] = nn.Linear(layersizes[l], layersizes[l+1], bias=False)
+        for l in range(self.numlayers):
+            self.fc[l] = nn.Linear(layersizes[l], layersizes[l+1], bias=False)
             
-        self.fc[0] = nn.Linear(self.layersizes[0], self.layersizes[0+1], bias=False)
-        self.fc[1] = nn.Linear(self.layersizes[1], self.layersizes[1+1], bias=False)
-        self.fc[2] = nn.Linear(self.layersizes[2], self.layersizes[2+1], bias=False)
+#         self.fc[0] = nn.Linear(self.layersizes[0], self.layersizes[0+1], bias=False)
+#         self.fc[1] = nn.Linear(self.layersizes[1], self.layersizes[1+1], bias=False)
+#         self.fc[2] = nn.Linear(self.layersizes[2], self.layersizes[2+1], bias=False)
         
         self.fc = tuple(self.fc)
         
