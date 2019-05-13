@@ -55,7 +55,7 @@ def compute_JV(V, data_, params):
             for l in range(numlayers):
 #                 print('len(a_grad_momentum): ', len(a_grad_momentum))
                 
-                v[i] += torch.sum((a_i[l] @ V[l]) * h_i[l], dim = 1)
+                v[i] += torch.sum((a_grad_i[l] @ V[l]) * h_i[l], dim = 1)
         
         v = v.view(m_L * N2)
         
