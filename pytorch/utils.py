@@ -1,3 +1,196 @@
+def get_subtract(model_grad, delta, params):
+    numlayers = params['numlayers']
+    for l in range(numlayers):
+        delta[l] = model_grad[l] - delta[l]
+    return delta
+
+def get_multiply(alpha, delta, params):
+    numlayers = params['numlayers']
+    for l in range(numlayers):
+        delta[l] = alpha * delta[l]
+    return delta
+
+def get_minus(delta, params):
+    numlayers = params['numlayers']
+    
+    p = []
+    for l in range(numlayers):
+        p.append(-delta[l])
+        
+    return p
+
+
+def SMW_GN_update(data_, params):
+    # a[l].grad: size N1 * m[l+1], it has a coefficient 1 / N1, which should be first compensate
+    # h[l]: size N1 * m[l]
+    # model.W[l]: size m[l+1] * m[l]
+    
+    
+#     import torch
+#     import numpy as np
+#     import scipy
+#     import time
+#     import copy
+    
+#     algorithm = params['algorithm']
+#     model = data_['model']
+    
+#     model_grad = data_['model_grad']
+    
+#     X_mb = data_['X_mb']
+#     t_mb = data_['t_mb']    
+#     cache = data_['cache']
+#     z = data_['z']
+
+    
+    
+#     if algorithm == 'SMW-Fisher-momentum':
+#         a_grad_momentum = data_['a_grad_momentum']
+#         h_momentum = data_['h_momentum']
+        
+#     loss = data_['loss']
+    
+    
+    
+#     N1 = params['N1']
+#     N2 = params['N2']
+#     i = params['i']
+#     alpha = params['alpha']
+#     lambda_ = params['lambda_']
+#     numlayers = params['numlayers']
+#     boost = params['boost']
+#     drop = params['drop']
+    
+#     N2_index = np.random.permutation(N1)[:N2]
+#     params['N2_index'] = N2_index
+    
+    
+#     start_time = time.time()
+    
+#     data_ = get_cache_momentum(data_, params)
+
+#     print('time for get cache momentum: ', start_time - time.time())
+
+
+    
+    
+    
+    
+    
+        
+    # compute the vector after D_t    
+    
+
+    
+#     start_time = time.time()
+    
+    v = compute_JV_1(model_grad, data_, params)
+    
+#     print('time for compute JV: ', start_time - time.time())
+    
+
+        
+    
+    
+    # compute hat_v
+    
+
+#     start_time = time.time()
+        
+    D_t = get_D_t_1(data_, params)
+    
+#     print('D_t:', D_t)
+    
+#     print('v:', v)
+#     print('torch.mean(v): ', torch.mean(v))
+    
+#     print('time for get D_t: ', start_time - time.time())
+    
+#     start_time = time.time()
+    
+    D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
+    hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
+    
+    hat_v = torch.from_numpy(hat_v)
+    
+    hat_v = compute_HV(hat_v)
+    
+#     print('time for solve linear system: ', start_time - time.time())
+    
+#     print('hat_v: ', hat_v)
+    
+#     print('torch.mean(hat_v): ', torch.mean(hat_v))
+    
+    
+#     print('get_dot_product(model_grad, model_grad, params): ', get_dot_product(model_grad, model_grad, params))
+#     print('1 - hat_v: ', 1 - hat_v)
+#     print('torch.max(hat_v): ', torch.max(hat_v))
+#     print('torch.min(hat_v): ', torch.min(hat_v))
+
+#     hat_v = torch.ones(N2)
+    
+#     print('hat_v: ', hat_v)
+#     print('1 - hat_v: ', 1 - hat_v)
+
+    # compute natural gradient
+    
+#     data_compute_J_transpose_V = {}
+#     data_compute_J_transpose_V['a_grad_momentum'] = a_grad_momentum
+#     data_compute_J_transpose_V['h_momentum'] = h_momentum
+    
+#     start_time = time.time()
+    
+    
+    
+    delta = compute_J_transpose_V_1_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
+
+#     print('test delta')
+#     delta = model_grad
+    
+#     print('time for compute J transpose V: ', start_time - time.time())
+    
+#     print('\n')
+    
+#     data_compute_J_transpose_V = {}
+    
+    
+        
+
+        
+        
+#     print('delta[1]: ', delta[1])
+#     print('model_grad[1]: ', model_grad[1]
+        
+
+    delta = get_multiply(1 / N2, delta, params)
+    
+    
+    delta = get_subtract(model_grad, delta, params)
+    
+    delta = get_multiply(1 / lambda_, delta, params)
+        
+    p = get_minus(delta, params)
+    
+
+            
+
+            
+            
+
+        
+
+#     data_['model'] = model
+    data_['p'] = p
+    
+#     if algorithm == 'SMW-Fisher-momentum':
+#         data_['a_grad_momentum'] = a_grad_momentum
+#         data_['h_momentum'] = h_momentum
+    
+#     print('model.W[1] in utils: ', model.W[1])
+#     print('model.W[1].data in utils: ', model.W[1].data)
+        
+    return data_
+
 def get_model_grad_zerod(model):
     model.zero_grad()
 #     print('gradeint zerod')
@@ -428,24 +621,20 @@ def SMW_Fisher_update(data_, params):
 #     print('\n')
     
 #     data_compute_J_transpose_V = {}
-    
-    
-        
-    for l in range(numlayers):
-        delta[l] = 1 / N2 * delta[l] # [m[l+1], m[l]]
         
         
 #     print('delta[1]: ', delta[1])
 #     print('model_grad[1]: ', model_grad[1])
 
-    for l in range(numlayers):
-        delta[l] = model_grad[l] - delta[l]
-        
-#     print('make delta[1] to be grad: ', delta[1])
+    
+    delta = get_multiply(1 / N2, delta, params)
         
     
-    for l in range(numlayers):
-        delta[l] = 1 / lambda_ * delta[l]
+    delta = get_subtract(model_grad, delta, params)
+        
+    delta = get_multiply(1 / lambda_, delta, params)    
+        
+    p = get_minus(delta, params)
     
 
     
@@ -484,9 +673,9 @@ def SMW_Fisher_update(data_, params):
     
 
     
-    p = []
-    for l in range(numlayers):
-        p.append(-delta[l])
+    
+        
+    
     
 
             
