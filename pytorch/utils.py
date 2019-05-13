@@ -141,7 +141,8 @@ def get_cache_momentum(data_, params):
         
 #         numlayers = params['numlayers']
         
-        layersizes = model.layersizes
+#         layersizes = model.layersizes
+        m_L = params['m_L']
         
         N2_index = params['N2_index']
         
@@ -163,10 +164,12 @@ def get_cache_momentum(data_, params):
         
         z, a, h = model.forward(X_mb[N2_index])
         
+        print('h: ', h)
+        
         h_momentum = torch.FloatTensor([copy.deepcopy(hi.data) for hi in h])
         
         a_grad_momentum = []
-        for i in range(layersizes[-1]):
+        for i in range(m_L):
             
 #         Jacobian_z = []
 
