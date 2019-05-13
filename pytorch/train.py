@@ -122,8 +122,8 @@ class Model(nn.Module):
 #         a[1] = self.fc[1](h[0])
 #         h[1] = F.relu(a[1])
         
-        a = tuple(a)
-        h = tuple(h)
+#         a = tuple(a)
+#         h = tuple(h)
             
         z = self.fc[-1](h[-1])
             
