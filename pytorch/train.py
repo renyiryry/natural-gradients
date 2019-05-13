@@ -68,9 +68,10 @@ class Model(nn.Module):
 #             self.W.append(self.fc[l].weight)
             
         self.W = list(range(3))
-        self.W[0] = self.fc[0].weight
-        self.W[1] = self.fc[1].weight
-        self.W[2] = self.fc[2].weight
+        for l in range(self.numlayers):
+            self.W[l] = self.fc[l].weight
+#         self.W[1] = self.fc[1].weight
+#         self.W[2] = self.fc[2].weight
         
         self.W = tuple(self.W)
     
@@ -106,17 +107,25 @@ class Model(nn.Module):
 #                 a.append(self.fc[l](h[l-1]))
 #             h.append(F.relu(a[l]))
             
-        a = list(range(2))
-        h = list(range(2))
-        a[0] = self.fc[0](x)
-        h[0] = F.relu(a[0])
-        a[1] = self.fc[1](h[0])
-        h[1] = F.relu(a[1])
+        a = list(range(self.numlayers - 1))
+        h = list(range(self.numlayers - 1))
+        
+        for l in range(self.numlayers - 1):
+            if l == 0:
+                a[l] = self.fc[l](x)
+            else:
+                a[l] = self.fc[l](h[l-1])
+            h[l] = F.relu(a[l])
+        
+#         a[0] = self.fc[0](x)
+#         h[0] = F.relu(a[0])
+#         a[1] = self.fc[1](h[0])
+#         h[1] = F.relu(a[1])
         
         a = tuple(a)
         h = tuple(h)
             
-        z = self.fc[2](h[1])
+        z = self.fc[-1](h[-1])
             
 
 #         cache = (a1, h1, a2, h2)
