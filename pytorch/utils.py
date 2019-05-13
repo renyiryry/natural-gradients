@@ -192,8 +192,8 @@ def compute_JV(V, data_, params):
         
         GN_cache = data_['GN_cache']
         
-        a_grad_momentum = GN_cache['a_grad_momentum']
-        h_momentum = GN_cache['h_momentum']
+        a_grad_momentum = GN_cache['a_grad']
+        h_momentum = GN_cache['h']
         
         m_L = data_['model'].layersizes[-1]
         
