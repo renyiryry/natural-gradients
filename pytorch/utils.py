@@ -373,6 +373,8 @@ def get_cache_momentum(data_, params):
         
 #         z.backward(grad_tensors = torch.Tensor(z.size()))
         z.backward(torch.Tensor(z.size()))
+    
+        print('model.W[1].grad.size(): ', model.W[1].grad.size())
         
         
         
