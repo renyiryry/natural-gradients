@@ -12,7 +12,7 @@ def get_cache_momentum(data_, params):
         
         N2_index = params['N2_index']
         
-        z, _ = model.forward(X_mb[N2_index])
+        
         
 #         import torch.nn.functional as F
 #         t_mb = data_['t_mb']
@@ -20,7 +20,7 @@ def get_cache_momentum(data_, params):
 #         print('loss.size(): ', loss.size())
 #         loss.backward()
         
-        model = get_model_grad_zerod(model)
+        
         
         
         
@@ -29,6 +29,11 @@ def get_cache_momentum(data_, params):
         for i in range(layersizes[-1]):
             print('z.size(): ', z.size())
 #         Jacobian_z = []
+
+            z, _ = model.forward(X_mb[N2_index])
+
+            model = get_model_grad_zerod(model)
+    
             torch.sum(z[:, i]).backward()
     
         print('model.W[1].grad.size(): ', model.W[1].grad.size())
