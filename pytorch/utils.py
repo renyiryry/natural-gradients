@@ -5,8 +5,11 @@ def get_cache_momentum(data_, params):
     
     if algorithm == 'SMW-GN':
         import torch
+        import copy
         
         model = data_['model']
+        
+        numlayers = params['numlayers']
         
         layersizes = model.layersizes
         
@@ -41,7 +44,15 @@ def get_cache_momentum(data_, params):
     
             torch.sum(z[:, i]).backward()
         
+            
+        
 #             a_grad_momentum.append(copy.deepcopy())
+
+            a_grad_momentum_i = []
+            for l in range(numlayers - 1):
+                a_grad_momentum_i.append(copy.deepcopy(a[l].grad))
+                
+             
         
             print('a:', a)
             print('h: ', h)
