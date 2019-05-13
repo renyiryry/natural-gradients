@@ -22,7 +22,7 @@ def get_cache_momentum(data_, params):
 
         for i in range(layersizes[-1]):
 #         Jacobian_z = []
-            z[:, i].backward()
+            z[i].backward()
     
         print('model.W[1].grad.size(): ', model.W[1].grad.size())
         
