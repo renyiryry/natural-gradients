@@ -26,17 +26,21 @@ def get_cache_momentum(data_, params):
         
 #         z.backward(torch.Tensor(z.size()))
 
+        GN_cache = []
+
         for i in range(layersizes[-1]):
             
 #         Jacobian_z = []
 
-            z, _ = model.forward(X_mb[N2_index])
+            z, cache = model.forward(X_mb[N2_index])
     
-            print('z.size(): ', z.size())
+#             print('z.size(): ', z.size())
 
             model = get_model_grad_zerod(model)
     
             torch.sum(z[:, i]).backward()
+        
+            print(cache)
     
         print('model.W[1].grad.size(): ', model.W[1].grad.size())
         
