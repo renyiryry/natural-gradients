@@ -501,7 +501,7 @@ for i in range(max_epoch * iter_per_epoch):
     
 
 
-z, _ = model.forward(torch.from_numpy(X_test))
+z, _ , _= model.forward(torch.from_numpy(X_test))
 y = z.argmax(dim=1)
 acc = np.mean(y.numpy() == t_test)
 
