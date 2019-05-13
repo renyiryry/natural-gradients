@@ -190,8 +190,10 @@ def compute_JV(V, data_, params):
         
         import torch
         
-        a_grad_momentum = data_['a_grad_momentum']
-        h_momentum = data_['h_momentum']
+        GN_cache = data_['GN_cache']
+        
+        a_grad_momentum = GN_cache['a_grad_momentum']
+        h_momentum = GN_cache['h_momentum']
         
         m_L = data_['model'].layersizes[-1]
         
