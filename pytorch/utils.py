@@ -64,6 +64,8 @@ def get_cache_momentum(data_, params):
         GN_cache['a_grad'] = a_grad_momentum
         GN_cache['h'] = h_momentum
         
+        data_['GN_cache'] = GN_cache
+        
         
         
         
