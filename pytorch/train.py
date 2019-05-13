@@ -157,7 +157,7 @@ algorithm = args.algorithm
 params['algorithm'] = algorithm
 max_epoch = args.max_epoch
 
-if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN':
     lambda_ = args.lambda_
     params['lambda_'] = lambda_
     boost = 1.01
@@ -235,7 +235,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
         
     data_['a_grad_momentum'] = a_grad_momentum
     data_['h_momentum'] = h_momentum
-elif params['algorithm'] == 'SMW-Fisher' or algorithm == 'SGD':
+elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN':
     1;
 else:
     print('Error!')
@@ -412,6 +412,8 @@ for i in range(max_epoch * iter_per_epoch):
         data_, params = SMW_Fisher_update(data_, params)
     elif algorithm == 'SGD':
         data_ = SGD_update(data_, params)
+    elif algorithm == 'SMW-GN':
+        data_ = SMW_GN_update(data_, params)
     else:
         print('Error!')
         sys.exit()
@@ -424,10 +426,15 @@ for i in range(max_epoch * iter_per_epoch):
     p = data_['p']
     
     
-    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN':
         
         lambda_ = update_lambda(p, data_, params)
         params['lambda_'] = lambda_
+    elif algorithm == 'SGD':
+        1
+    else:
+        print('Error!')
+        sys.exit()
 #     print('no update lambda')
         
     model = update_parameter(p, model, params)
