@@ -185,7 +185,24 @@ def compute_JV(V, data_, params):
 #     print('V[1]: ', V[1])
 #     print('1/N2 * h_momentum[1].t() @ a_grad_momentum[1]:', 1/N2 * h_momentum[1].t() @ a_grad_momentum[1])
     elif algorithm == 'SMW-GN':
-        print('Error!')
+        
+        import torch
+        
+        a_grad_momentum = data_['a_grad_momentum']
+        h_momentum = data_['h_momentum']
+        
+        m_L = data_['model'].layersizes[-1]
+        
+        N2 = params['N2']
+        
+        
+        
+        v = torch.zeros(m_L, N2)
+        
+        for i in range(m_L):
+            for l in range(numlayers):
+                print('len(a_grad_momentum): ', len(a_grad_momentum))
+#                 v[i] += 
         
     else:
         print('Error!')
@@ -230,7 +247,7 @@ def SMW_GN_update(data_, params):
 #     algorithm = params['algorithm']
 #     model = data_['model']
     
-#     model_grad = data_['model_grad']
+    model_grad = data_['model_grad']
     
 #     X_mb = data_['X_mb']
 #     t_mb = data_['t_mb']    
