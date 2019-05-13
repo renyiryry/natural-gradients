@@ -130,21 +130,25 @@ class Model(nn.Module):
 
 #         cache = (a1, h1, a2, h2)
             
-        cache = ((self.numlayers - 1)) * 2 * [0]
-        for l in range(0, self.numlayers - 1):
-#             cache = cache + [a[l],h[l]]
-#             cache.append([a[l],h[l]])
-            cache[2*l] = a[l]
-            cache[2*l+1] = h[l]
-        cache = tuple(cache) 
+#         cache = ((self.numlayers - 1)) * 2 * [0]
+#         for l in range(0, self.numlayers - 1):            
+#             cache[2*l] = a[l]
+#             cache[2*l+1] = h[l]
+#         cache = tuple(cache) 
+        
+
     
 #         print('len(cache): ', len(cache))
 
         z.retain_grad()
-        for c in cache:
+#         for c in cache:
+#             c.retain_grad()
+        for c in a:
+            c.retain_grad()
+        for c in h:
             c.retain_grad()
 
-        return z, cache
+        return z, a, h
 
 # Model
 model = Model()
@@ -285,7 +289,7 @@ for i in range(max_epoch * iter_per_epoch):
     
 #     print('model.W: ', model.W)
     
-    z, cache = model.forward(X_mb)
+    z, a, h = model.forward(X_mb)
     
 #     a1, h1, a2, h2 = cache
 
@@ -377,7 +381,8 @@ for i in range(max_epoch * iter_per_epoch):
     data_['t_mb'] = t_mb
     
 
-    data_['cache'] = cache
+    data_['a'] = a
+    data_['h'] = h
     
     data_['z'] = z
     
@@ -481,7 +486,7 @@ for i in range(max_epoch * iter_per_epoch):
         
     
     
-        z, cache = model.forward(X_train)
+        z, _, _ = model.forward(X_train)
     
 
     
