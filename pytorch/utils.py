@@ -25,8 +25,9 @@ def get_cache_momentum(data_, params):
         
         
 #         z.backward(torch.Tensor(z.size()))
-
-        GN_cache = []
+        a_grad_momentum = []
+        h_momentum = []
+        
 
         for i in range(layersizes[-1]):
             
@@ -40,10 +41,16 @@ def get_cache_momentum(data_, params):
     
             torch.sum(z[:, i]).backward()
         
-            print(a)
-            print(h)
+#             a_grad_momentum.append(copy.deepcopy())
+        
+            print('a:', a)
+            print('h: ', h)
     
-        print('model.W[1].grad.size(): ', model.W[1].grad.size())
+#         print('model.W[1].grad.size(): ', model.W[1].grad.size())
+        
+        GN_cache = {}
+        GN_cache['a_grad'] = []
+        GN_cache['h'] = []
         
         
         
