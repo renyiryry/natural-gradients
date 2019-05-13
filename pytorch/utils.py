@@ -27,10 +27,12 @@ def get_cache_momentum(data_, params):
 #         z.backward(torch.Tensor(z.size()))
 
         for i in range(layersizes[-1]):
-            print('z.size(): ', z.size())
+            
 #         Jacobian_z = []
 
             z, _ = model.forward(X_mb[N2_index])
+    
+            print('z.size(): ', z.size())
 
             model = get_model_grad_zerod(model)
     
