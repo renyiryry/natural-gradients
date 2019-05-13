@@ -22,11 +22,12 @@ def get_cache_momentum(data_, params):
         
         model = get_model_grad_zerod(model)
         
-        print('z.size(): ', z.size())
+        
         
 #         z.backward(torch.Tensor(z.size()))
 
         for i in range(layersizes[-1]):
+            print('z.size(): ', z.size())
 #         Jacobian_z = []
             torch.sum(z[:, i]).backward()
     
