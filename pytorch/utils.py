@@ -360,6 +360,8 @@ def get_D_t(data_, params):
 def get_cache_momentum(data_, params):
     algorithm = params['algorithm']
     
+    X_mb = data_['X_mb']
+    
     if algorithm == 'SMW-GN':
         model = data_['model']
         
@@ -377,7 +379,7 @@ def get_cache_momentum(data_, params):
     
 #     import numpy as np
     
-        X_mb = data_['X_mb']
+        
         cache = data_['cache']
         z = data_['z']
     
