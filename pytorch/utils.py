@@ -16,7 +16,7 @@ def get_cache_momentum(data_, params):
         
         import torch.nn.functional as F
         t_mb = data_['t_mb']
-        loss = F.cross_entropy(z, t_mb,reduction = 'none')
+        loss = F.cross_entropy(z, t_mb[N2_index],reduction = 'none')
         print('loss.size(): ', loss.size())
         
         model = get_model_grad_zerod(model)
