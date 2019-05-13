@@ -8,6 +8,8 @@ def get_cache_momentum(data_, params):
         
         model = data_['model']
         
+        layersizes = model.layersizes
+        
         N2_index = params['N2_index']
         
         z, _ = model.forward(X_mb[N2_index])
@@ -17,8 +19,10 @@ def get_cache_momentum(data_, params):
         print('z.size(): ', z.size())
         
 #         z.backward(torch.Tensor(z.size()))
-        Jacobian_z = []
-        z.grad(Jacobian_z)
+
+        for i in range(layersizes[-1]):
+#         Jacobian_z = []
+            z[:, i].backward()
     
         print('model.W[1].grad.size(): ', model.W[1].grad.size())
         
