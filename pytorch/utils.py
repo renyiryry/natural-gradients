@@ -377,34 +377,34 @@ def get_cache_momentum(data_, params):
     
 #     import numpy as np
     
-    X_mb = data_['X_mb']
-    cache = data_['cache']
-    z = data_['z']
+        X_mb = data_['X_mb']
+        cache = data_['cache']
+        z = data_['z']
     
     
     
     
-    N1 = params['N1']
-    N2 = params['N2']
-    i = params['i']
-    algorithm = params['algorithm']
-    numlayers = params['numlayers']
+        N1 = params['N1']
+        N2 = params['N2']
+        i = params['i']
+        
+        numlayers = params['numlayers']
     
-    N2_index = params['N2_index']
+        N2_index = params['N2_index']
     
-    if algorithm == 'SMW-Fisher-momentum':
-        a_grad_momentum = data_['a_grad_momentum']
-        h_momentum = data_['h_momentum']
+        if algorithm == 'SMW-Fisher-momentum':
+            a_grad_momentum = data_['a_grad_momentum']
+            h_momentum = data_['h_momentum']
     
     
-    a = []
-    h = [X_mb]
-    for ii in range(len(cache)):
-        if ii % 2 == 0:
-            a.append(cache[ii])
-        else:
-            h.append(cache[ii])        
-    a.append(z)
+        a = []
+        h = [X_mb]
+        for ii in range(len(cache)):
+            if ii % 2 == 0:
+                a.append(cache[ii])
+            else:
+                h.append(cache[ii])        
+        a.append(z)
     
     
     
@@ -430,29 +430,29 @@ def get_cache_momentum(data_, params):
     
     
     # Update running estimates
-    if algorithm == 'SMW-Fisher-momentum':
-        rho = min(1-1/i, 0.95)
+        if algorithm == 'SMW-Fisher-momentum':
+            rho = min(1-1/i, 0.95)
         
-        for l in range(numlayers):
-            a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * N1 * (a[l].grad)[N2_index]
-            h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
+            for l in range(numlayers):
+                a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * N1 * (a[l].grad)[N2_index]
+                h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
         
-    elif algorithm == 'SMW-Fisher' or algorithm =='kfac':
-        a_grad_momentum = []
-        h_momentum = []
-        for l in range(numlayers):
-            a_grad_momentum.append(N1 * (a[l].grad)[N2_index])
-            h_momentum.append(h[l][N2_index])
+        elif algorithm == 'SMW-Fisher' or algorithm =='kfac':
+            a_grad_momentum = []
+            h_momentum = []
+            for l in range(numlayers):
+                a_grad_momentum.append(N1 * (a[l].grad)[N2_index])
+                h_momentum.append(h[l][N2_index])
             
     
         
         
-    else:
-        print('Error!')
-        sys.exit()
+        else:
+            print('Error!')
+            sys.exit()
         
-    data_['a_grad_momentum'] = a_grad_momentum
-    data_['h_momentum'] = h_momentum
+        data_['a_grad_momentum'] = a_grad_momentum
+        data_['h_momentum'] = h_momentum
 
 
     return data_
