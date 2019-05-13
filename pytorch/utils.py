@@ -18,6 +18,7 @@ def get_cache_momentum(data_, params):
         t_mb = data_['t_mb']
         loss = F.cross_entropy(z, t_mb[N2_index],reduction = 'none')
         print('loss.size(): ', loss.size())
+        loss.backward()
         
         model = get_model_grad_zerod(model)
         
