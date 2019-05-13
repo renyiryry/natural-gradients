@@ -147,6 +147,10 @@ class Model(nn.Module):
             c.retain_grad()
         for c in h:
             c.retain_grad()
+        
+        h = [x] + h
+        a = a + [z]
+        
 
         return z, a, h
 
