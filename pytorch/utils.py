@@ -67,7 +67,7 @@ def SMW_GN_update(data_, params):
     
     
 #     import torch
-#     import numpy as np
+    import numpy as np
 #     import scipy
 #     import time
 #     import copy
