@@ -415,6 +415,8 @@ def update_lambda(p, data_, params):
     boost = params['boost']
     drop = params['drop']
     
+    algorithm = params['algorithm']
+    
     
     # compute rho
 #     test_rate = 1;
