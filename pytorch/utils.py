@@ -1,3 +1,58 @@
+def get_D_t(data_, params):
+    import sys
+    import torch
+    algorithm = params['algorithm']
+    
+    N2 = params['N2']
+    numlayers = params['numlayers']
+    
+    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+    
+#         from torch import eye
+    
+        a_grad_momentum = data_['a_grad_momentum']
+        h_momentum = data_['h_momentum']
+    
+        lambda_ = params['lambda_']
+        
+        
+
+        # compute D_t 
+        D_t = lambda_ * torch.eye(N2)
+    
+#     print('D_t aftre lambda: ', D_t)
+#     print('lambda: ', lambda_)
+    
+        for l in range(numlayers):
+        
+#         print('h[l][N2_index] @ h[l][N2_index].t().size(): ', (h[l][N2_index] @ h[l][N2_index].t()).size())
+#         print('(a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t().size(): ',
+#               ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()).size())
+        
+            D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
+    elif algorithm == 'SMW-GN':
+        
+#         from numpy import kron
+        import numpy as np
+    
+        GN_cache = data_['GN_cache']
+        h = GN_cache['h']
+        
+        print('h.size(): ', h.size())
+        
+        m_L = params['m_L']
+        
+        
+        D_t = torch.zeros(m_L * N2, m_L * N2)
+        
+#         for l in range(numlayers):
+            
+#             D_t += torch.from_numpy(np.kron(, np.ones(m_L, m_L))) * ()
+    else:
+        print('Error!')
+        sys.exit()
+    return D_t
+
 def compute_JV(V, data_, params):
     import sys
     algorithm = params['algorithm']
@@ -23,9 +78,7 @@ def compute_JV(V, data_, params):
         for l in range(numlayers):
         
 #         model.W[l] @ h[l] # m[l+1] * N2
-    # a[l][N2_index] @ model.W[l] # N2 * m[l]
-    # (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
-    #  torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+    
         
             v += torch.sum((a_grad_momentum[l] @ V[l]) * h_momentum[l], dim = 1)
         
@@ -38,10 +91,12 @@ def compute_JV(V, data_, params):
         
         GN_cache = data_['GN_cache']
         
+        m_L = params['m_L']
+        
         a_grad = GN_cache['a_grad']
         h = GN_cache['h']
         
-        m_L = data_['model'].layersizes[-1]
+        
         
         
         
@@ -51,11 +106,19 @@ def compute_JV(V, data_, params):
         
         for i in range(m_L):
             a_grad_i = a_grad[i]
-            h_i = h[i]
+#             h_i = h[i]
             for l in range(numlayers):
 #                 print('len(a_grad_momentum): ', len(a_grad_momentum))
+
+    # a[l][N2_index] @ model.W[l] # N2 * m[l]
+    # (a[l][N2_index] @ model.W[l]) * h[l][N2_index] # N2 * m[l]
+    #  torch.sum((a[l][N2_index] @ model.W[l]) * h[l][N2_index], dim = 1)
+    
+    # a[l].grad: size N1 * m[l+1], it has a coefficient 1 / N1, which should be first compensate
+    # h[l]: size N1 * m[l]
+    # model.W[l]: size m[l+1] * m[l]
                 
-                v[i] += torch.sum((a_grad_i[l] @ V[l]) * h_i[l], dim = 1)
+                v[i] += torch.sum((a_grad_i[l] @ V[l]) * h[l], dim = 1)
         
         v = v.view(m_L * N2)
         
@@ -95,21 +158,25 @@ def get_cache_momentum(data_, params):
         
         
 #         z.backward(torch.Tensor(z.size()))
-        a_grad_momentum = []
-        h_momentum = []
         
-
+#         h_momentum = []
+        
+        z, a, h = model.forward(X_mb[N2_index])
+        
+        h_momentum = torch.FloatTensor([copy.deepcopy(hi.data) for hi in h])
+        
+        a_grad_momentum = []
         for i in range(layersizes[-1]):
             
 #         Jacobian_z = []
 
-            z, a, h = model.forward(X_mb[N2_index])
+            
     
 #             print('z.size(): ', z.size())
 
             model = get_model_grad_zerod(model)
     
-            torch.sum(z[:, i]).backward()
+            torch.sum(z[:, i]).backward(retain_graph = True)
         
             
         
@@ -118,7 +185,7 @@ def get_cache_momentum(data_, params):
             a_grad_momentum.append([copy.deepcopy(ai.grad) for ai in a])
 #             for l in range(numlayers - 1):
 #                 a_grad_momentum_i.append(copy.deepcopy(a[l].grad))
-            h_momentum.append([copy.deepcopy(hi.data) for hi in h])
+        
                 
              
         
@@ -290,6 +357,9 @@ def SMW_GN_update(data_, params):
     N2_index = np.random.permutation(N1)[:N2]
     params['N2_index'] = N2_index
     
+    m_L = data_['model'].layersizes[-1]
+    params['m_L'] = m_L
+    
     
 #     start_time = time.time()
     
@@ -323,7 +393,7 @@ def SMW_GN_update(data_, params):
 
 #     start_time = time.time()
         
-    D_t = get_D_t_1(data_, params)
+    D_t = get_D_t(data_, params)
     
 #     print('D_t:', D_t)
     
@@ -517,31 +587,7 @@ def compute_J_transpose_V(v, data_, params):
     
     return delta
 
-def get_D_t(data_, params):
-    from torch import eye
-    
-    a_grad_momentum = data_['a_grad_momentum']
-    h_momentum = data_['h_momentum']
-    
-    lambda_ = params['lambda_']
-    numlayers = params['numlayers']
-    N2 = params['N2']
 
-    # compute D_t 
-    D_t = lambda_ * eye(N2)
-    
-#     print('D_t aftre lambda: ', D_t)
-#     print('lambda: ', lambda_)
-    
-    for l in range(numlayers):
-        
-#         print('h[l][N2_index] @ h[l][N2_index].t().size(): ', (h[l][N2_index] @ h[l][N2_index].t()).size())
-#         print('(a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t().size(): ',
-#               ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()).size())
-        
-        D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
-        
-    return D_t
 
 
 
@@ -634,11 +680,6 @@ def update_lambda(p, data_, params):
     return lambda_
 
 def SMW_Fisher_update(data_, params):
-    # a[l].grad: size N1 * m[l+1], it has a coefficient 1 / N1, which should be first compensate
-    # h[l]: size N1 * m[l]
-    # model.W[l]: size m[l+1] * m[l]
-    
-    
     import torch
     import numpy as np
     import scipy
