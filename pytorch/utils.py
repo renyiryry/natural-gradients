@@ -14,11 +14,11 @@ def get_cache_momentum(data_, params):
         
         z, _ = model.forward(X_mb[N2_index])
         
-        import torch.nn.functional as F
-        t_mb = data_['t_mb']
-        loss = F.cross_entropy(z, t_mb[N2_index],reduction = 'none')
-        print('loss.size(): ', loss.size())
-        loss.backward()
+#         import torch.nn.functional as F
+#         t_mb = data_['t_mb']
+#         loss = F.cross_entropy(z, t_mb[N2_index],reduction = 'none')
+#         print('loss.size(): ', loss.size())
+#         loss.backward()
         
         model = get_model_grad_zerod(model)
         
@@ -28,7 +28,7 @@ def get_cache_momentum(data_, params):
 
         for i in range(layersizes[-1]):
 #         Jacobian_z = []
-            z[i].backward()
+            torch.sum(z[:, i]).backward()
     
         print('model.W[1].grad.size(): ', model.W[1].grad.size())
         
