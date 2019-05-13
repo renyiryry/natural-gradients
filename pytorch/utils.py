@@ -363,13 +363,15 @@ def get_cache_momentum(data_, params):
     X_mb = data_['X_mb']
     
     if algorithm == 'SMW-GN':
+        import torch
+        
         model = data_['model']
         
         N2_index = params['N2_index']
         
         z, _ = model.forward(X_mb[N2_index])
         
-        z.backward()
+        z.backward(grad_tensors = torch.Tensor(z.size()))
         
         
         
