@@ -51,7 +51,7 @@ def get_cache_momentum(data_, params):
             a_grad_momentum.append([copy.deepcopy(ai.grad) for ai in a])
 #             for l in range(numlayers - 1):
 #                 a_grad_momentum_i.append(copy.deepcopy(a[l].grad))
-            h_momentum.append([copy.deepcopy(hi) for hi in h])
+            h_momentum.append([copy.deepcopy(hi.data) for hi in h])
                 
              
         
