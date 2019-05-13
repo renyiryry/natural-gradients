@@ -93,13 +93,13 @@ def get_cache_momentum(data_, params):
     
     
 #         a = []
-        h = [X_mb] + h
+#         h = [X_mb] + h
 #         for ii in range(len(cache)):
 #             if ii % 2 == 0:
 #                 a.append(cache[ii])
 #             else:
 #                 h.append(cache[ii])        
-        a.append(z)
+#         a.append(z)
     
     
     
