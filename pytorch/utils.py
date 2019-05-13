@@ -208,6 +208,8 @@ def get_cache_momentum(data_, params):
     return data_
 
 def update_lambda(p, data_, params):
+    import sys
+    
     model = data_['model']
     X_mb = data_['X_mb']
     t_mb = data_['t_mb']
@@ -237,17 +239,7 @@ def update_lambda(p, data_, params):
     
     
     
-    denom = computeFV(p, data_, params)
     
-#     print('time for update lambda 1/4: ', time.time() - start_time)
-
-    denom = get_dot_product(p, denom, params)
-    
-    denom = -0.5 * denom
-    
-    
-    
-    denom = denom - get_dot_product(model_grad, p, params) 
     
 #     print('time for update lambda 1/2: ', time.time() - start_time)
         
@@ -263,11 +255,27 @@ def update_lambda(p, data_, params):
 
 #         data_computeFV = {}
    
-    rho = (oldll_chunk - ll_chunk) / denom
+    
         
         
     if oldll_chunk - ll_chunk < 0:
         rho = float("-inf")
+    else:
+        if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+            denom = computeFV(p, data_, params)
+        elif algorithm == 'SMW-GN':
+            denom = computeGV(p, data_, params)
+        else:
+            print('Error!')
+            sys.exit()
+    
+#     print('time for update lambda 1/4: ', time.time() - start_time)
+
+        denom = get_dot_product(p, denom, params)
+        denom = -0.5 * denom
+        denom = denom - get_dot_product(model_grad, p, params) 
+        
+        rho = (oldll_chunk - ll_chunk) / denom
         
     
 #     print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
