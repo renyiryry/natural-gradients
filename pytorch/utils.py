@@ -159,14 +159,17 @@ def compute_JV(V, data_, params):
     import sys
     algorithm = params['algorithm']
     
+    numlayers = params['numlayers']
+    N2 = params['N2']
+    
     if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
         import torch
     
         a_grad_momentum = data_['a_grad_momentum']
         h_momentum = data_['h_momentum']
     
-        N2 = params['N2']
-        numlayers = params['numlayers']
+        
+        
     
         v = torch.zeros(N2)
     
@@ -197,7 +200,7 @@ def compute_JV(V, data_, params):
         
         m_L = data_['model'].layersizes[-1]
         
-        N2 = params['N2']
+        
         
         
         
