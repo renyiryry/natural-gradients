@@ -358,7 +358,7 @@ def get_D_t(data_, params):
     return D_t
 
 def get_cache_momentum(data_, params):
-    algorithm == params['algorithm']
+    algorithm = params['algorithm']
     
     if algorithm == 'SMW-GN':
         model = data_['model']
