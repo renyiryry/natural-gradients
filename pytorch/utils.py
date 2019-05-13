@@ -32,7 +32,7 @@ def get_cache_momentum(data_, params):
             
 #         Jacobian_z = []
 
-            z, cache = model.forward(X_mb[N2_index])
+            z, a, h = model.forward(X_mb[N2_index])
     
 #             print('z.size(): ', z.size())
 
@@ -40,7 +40,8 @@ def get_cache_momentum(data_, params):
     
             torch.sum(z[:, i]).backward()
         
-            print(cache)
+            print(a)
+            print(h)
     
         print('model.W[1].grad.size(): ', model.W[1].grad.size())
         
@@ -53,7 +54,8 @@ def get_cache_momentum(data_, params):
 #     import numpy as np
     
         
-        cache = data_['cache']
+        a = data_['a']
+        h = data_['h']
         z = data_['z']
     
     
@@ -72,13 +74,13 @@ def get_cache_momentum(data_, params):
             h_momentum = data_['h_momentum']
     
     
-        a = []
-        h = [X_mb]
-        for ii in range(len(cache)):
-            if ii % 2 == 0:
-                a.append(cache[ii])
-            else:
-                h.append(cache[ii])        
+#         a = []
+        h = [X_mb] + h
+#         for ii in range(len(cache)):
+#             if ii % 2 == 0:
+#                 a.append(cache[ii])
+#             else:
+#                 h.append(cache[ii])        
         a.append(z)
     
     
@@ -408,7 +410,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
 
     model = get_model_grad_zerod(model)
     
-    z, cache = model.forward(x)
+    z, _, _ = model.forward(x)
     
     
     
@@ -600,7 +602,8 @@ def SMW_Fisher_update(data_, params):
     
     X_mb = data_['X_mb']
     t_mb = data_['t_mb']    
-    cache = data_['cache']
+    a = data_['a']
+    h = data_['h']
     z = data_['z']
 
     
@@ -882,7 +885,8 @@ def kfac_update(data_, params):
 #     h1 = data_['h1']
 #     h2 = data_['h2']
     
-    cache = data_['cache']
+    a = data_['a']
+    h = data_['h']
     
     z = data_['z']
     A = data_['A']
@@ -902,13 +906,13 @@ def kfac_update(data_, params):
     N2_index = np.random.permutation(N1)[:N2]
     params['N2_index'] = N2_index
     
-    a = []
-    h = []
-    for ii in range(0, len(cache)):
-        if ii % 2 == 0:
-            a.append(cache[ii])
-        else:
-            h.append(cache[ii])
+#     a = []
+#     h = []
+#     for ii in range(0, len(cache)):
+#         if ii % 2 == 0:
+#             a.append(cache[ii])
+#         else:
+#             h.append(cache[ii])
     
     
     
