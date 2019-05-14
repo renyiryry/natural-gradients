@@ -1297,7 +1297,7 @@ def computeFV(delta, data_, params):
 #     print('test 11:08')
     
     
-    if algorhithm == 'SMW-Fisher' or algorithm == 'kfac':
+    if algorithm == 'SMW-Fisher' or algorithm == 'kfac':
         delta = compute_J_transpose_V_backp(v, data_, params)
     elif algorithm == 'SMW-Fisher-momentum':
         delta = compute_J_transpose_V(v, data_, params)
