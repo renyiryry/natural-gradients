@@ -405,7 +405,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     loss = F.cross_entropy(z, t_mb)
 
-    print('loss: ', loss)
+#     print('loss: ', loss)
 
     model = get_model_grad_zerod(model)
     
@@ -445,7 +445,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         model_grad.append(copy.deepcopy(model.W[l].grad))
     data_['model_grad'] = model_grad
     
-    print('model_grad[1] in train: ', model_grad[1])
+#     print('model_grad[1] in train: ', model_grad[1])
     
     
     
