@@ -625,7 +625,7 @@ for i in range(max_epoch * iter_per_epoch):
     
 
 v = 1 / len(X_test) * torch.ones(len(X_test))
-_, a , _= model.forward(torch.from_numpy(X_test), torch.from_numpy(t_test), v)
+_, a , _= model.forward(torch.from_numpy(X_test), torch.from_numpy(t_test).long(), v)
 z = a[-1]
 y = z.argmax(dim=1)
 acc = np.mean(y.numpy() == t_test)
