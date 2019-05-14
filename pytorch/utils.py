@@ -1257,10 +1257,16 @@ def get_new_loss(model, p, x, t):
     import torch.nn.functional as F
     import copy
     
+    print('p[1]: ', p[1])
+    
     model_new = copy.deepcopy(model)
+    
+    print('model_new.W[1]: ', model_new.W[1])
     
     for l in range(model_new.numlayers):
         model_new.W[l].data += p[l]
+        
+    print('model_new.W[1]: ', model_new.W[1])
         
 #     z, _, _ = model_new.forward(x)
     
