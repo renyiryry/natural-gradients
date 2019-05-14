@@ -609,7 +609,7 @@ for i in range(max_epoch * iter_per_epoch):
             
         
     
-        v = 1 / len(X_mb) * torch.ones(len(X_mb))
+        v = 1 / len(X_train) * torch.ones(len(X_train))
         loss, _, _ = model.forward(X_train, t_train, v)
     
 
