@@ -412,20 +412,20 @@ for i in range(max_epoch * iter_per_epoch):
     
     #########################
     
-    data_['mnist'] = mnist
+#     data_['mnist'] = mnist
     
-    X_mb, t_mb = mnist.train.next_batch(N1)
-    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+#     X_mb, t_mb = mnist.train.next_batch(N1)
+#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
     
-    v = 1 / len(X_mb) * torch.ones(len(X_mb))
-    loss, a, h = model.forward(X_mb, t_mb, v)
+#     v = 1 / len(X_mb) * torch.ones(len(X_mb))
+#     loss, a, h = model.forward(X_mb, t_mb, v)
 
-    model = get_model_grad_zerod(model)
+#     model = get_model_grad_zerod(model)
     
-    loss.backward()
-    print('test 11:00')
+#     loss.backward()
+#     print('test 11:00')
 
 #         print('time of loss:', time.time() - test_start_time)
 
@@ -543,18 +543,18 @@ for i in range(max_epoch * iter_per_epoch):
         
      #########################
     
-    X_mb, t_mb = mnist.train.next_batch(N1)
-    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+#     X_mb, t_mb = mnist.train.next_batch(N1)
+#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
     
-    v = 1 / len(X_mb) * torch.ones(len(X_mb))
-    loss, a, h = model.forward(X_mb, t_mb, v)
+#     v = 1 / len(X_mb) * torch.ones(len(X_mb))
+#     loss, a, h = model.forward(X_mb, t_mb, v)
 
-    model = get_model_grad_zerod(model)
+#     model = get_model_grad_zerod(model)
     
-    loss.backward()
-    print('test 11:03')
+#     loss.backward()
+#     print('test 11:03')
         
         
 #     print('time of second order:', time.time() - test_start_time)
