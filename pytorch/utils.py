@@ -105,7 +105,7 @@ class Model(nn.Module):
         return z, a, h
 
     
-def compute_J_transpose_V_backp(v, model, x, t, params):
+def compute_J_transpose_V_backp(v, data_, params):
     # use backpropagation
     import copy
     import torch.nn.functional as F
@@ -1010,7 +1010,8 @@ def SMW_Fisher_update(data_, params):
     
     
     
-    delta = compute_J_transpose_V_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
+#     delta = compute_J_transpose_V_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
+    delta = compute_J_transpose_V_backp(hat_v, data_, params)
 
 #     print('test delta')
 #     delta = model_grad
@@ -1195,7 +1196,7 @@ def computeFV(delta, data_, params):
     
     
     
-    delta = compute_J_transpose_V_backp(v, model, X_mb[N2_index], t_mb[N2_index], params)
+    delta = compute_J_transpose_V_backp(v, data_, params)
     
 #     print('delta.size(): ', delta.size())
     
