@@ -118,6 +118,8 @@ def compute_J_transpose_V_backp(v, data_, params):
     X_mb = data_['X_mb']
     t_mb = data_['t_mb']
     
+    N2_index = params['N2_index']
+    
 #     model.detach()
     
     
@@ -154,9 +156,9 @@ def compute_J_transpose_V_backp(v, data_, params):
 
     # Forward
     
-    z, a, h = model.forward(X_mb)
+    z, a, h = model.forward(X_mb[N2_index])
     
-    loss = F.cross_entropy(z, t_mb)
+    loss = F.cross_entropy(z, t_mb[N2_index])
 
     model = get_model_grad_zerod(model)
     
@@ -179,11 +181,11 @@ def compute_J_transpose_V_backp(v, data_, params):
 #         model_new.W[l].data = model.W[l].data
     print('test')
     
-    z, _, _ = model_new.forward(x)
+    z, _, _ = model_new.forward(X_mb[N2_index])
     
     
     
-    loss = F.cross_entropy(z, t, reduction = 'none')
+    loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
     
     weighted_loss = torch.dot(loss, v)
     
