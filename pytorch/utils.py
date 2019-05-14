@@ -550,9 +550,12 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
 #     model.W[0].data = model.W[0].data - 0.1
 #     print('test ?')
 
-    model = get_model_grad_zerod(model)
+#     model = get_model_grad_zerod(model)
+    model_new = Model()
     
-    z, _, _ = model.forward(x)
+    model_new.load_state_dict(model.state_dict())
+    
+    z, _, _ = model_new.forward(x)
     
     
     
@@ -562,8 +565,8 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
     
     model = get_model_grad_zerod(model)
     
-    weighted_loss.backward(retain_graph = True)
-#     weighted_loss.backward()
+#     weighted_loss.backward(retain_graph = True)
+    weighted_loss.backward()
     
 #     print('model_1.W[1].size():', model_1.W[1].size())
     
