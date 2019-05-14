@@ -1125,9 +1125,12 @@ def get_new_loss(model, p, x, t):
     for l in range(model_new.numlayers):
         model_new.W[l].data += p[l]
         
-    z, _, _ = model_new.forward(x)
+#     z, _, _ = model_new.forward(x)
     
-    loss = F.cross_entropy(z, t)
+#     loss = F.cross_entropy(z, t)
+    
+    v = 1 / len(x) * torch.ones(t)
+    loss, _, _ = model.forward(x, t, v)
     
     return loss
 
