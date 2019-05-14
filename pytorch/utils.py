@@ -1041,20 +1041,20 @@ def kfac_update(data_, params):
     
     G_ = []
     for l in range(0, numlayers):
-        if l < numlayers - 1:
-            G_.append(1/N1 * a[l].grad.t() @ a[l].grad)
-        elif l == numlayers - 1:
-            G_.append(1/N1 * z.grad.t() @ z.grad)
-        else:
-            print('Error!')
-            sys.exit()
+#         if l < numlayers - 1:
+        G_.append(1/N1 * a[l].grad.t() @ a[l].grad)
+#         elif l == numlayers - 1:
+#             G_.append(1/N1 * z.grad.t() @ z.grad)
+#         else:
+#             print('Error!')
+#             sys.exit()
             
     A_ = []
     for l in range(0, numlayers):
-        if l == 0:
-            A_.append(1/N1 * X_mb.t() @ X_mb)
-        else:
-            A_.append(1/N1 * h[l-1].t() @ h[l-1])
+#         if l == 0:
+#             A_.append(1/N1 * X_mb.t() @ X_mb)
+#         else:
+        A_.append(1/N1 * h[l].t() @ h[l])
         
 
 #     G_ = [G1_, G2_, G3_]
