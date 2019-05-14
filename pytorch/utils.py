@@ -1106,9 +1106,9 @@ def kfac_update(data_, params):
 #         print('model.W[l].grad.data: ', model.W[l].grad.data)
 #         print('A_inv[l]: ', A_inv[l])
 
-        print('A_inv[l].size(): ', A_inv[l].size())
+#         print('A_inv[l].size(): ', A_inv[l].size())
     
-        print('G_inv[l].size(): ', G_inv[l].size())
+#         print('G_inv[l].size(): ', G_inv[l].size())
         
             
         delta.append(G_inv[l] @ model_grad[l] @ A_inv[l])
