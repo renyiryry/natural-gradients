@@ -830,14 +830,13 @@ def update_lambda(p, data_, params):
 
     # Forward
     
-    z, a, h = model.forward(X_mb)
-    
-    loss = F.cross_entropy(z, t_mb)
+    v = 1 / len(X_mb) * torch.ones(len(X_mb))
+    loss, a, h = model.forward(X_mb, t_mb, v)
 
     model = get_model_grad_zerod(model)
     
     loss.backward()
-    print('test')
+    print('test 11: 03 2')
         
     ll_chunk = get_new_loss(model, p, X_mb, t_mb)
     
