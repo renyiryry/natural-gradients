@@ -378,6 +378,11 @@ len_record = int(max_epoch / record_epoch)
 losses = np.zeros(len_record)
 times = np.zeros(len_record)
 
+init_loss = get_loss(model, X_train, t_train)
+
+
+# times[0] = 0
+
 # max_iter = 5000
 # max_iter = 5
 
@@ -618,14 +623,15 @@ for i in range(int(max_epoch * iter_per_epoch)):
             
         
     
-        v = 1 / len(X_train) * torch.ones(len(X_train))
-        loss, _, _ = model.forward(X_train, t_train, v)
+        
+        
+        
     
 
     
 #         loss = F.cross_entropy(z, t_train)    
             
-        losses[epoch] = loss
+        losses[epoch] = get_loss(model, X_train, t_train)
         
     
         
@@ -640,6 +646,11 @@ y = z.argmax(dim=1)
 acc = np.mean(y.numpy() == t_test)
 
 print(f'Accuracy: {acc:.3f}')
+
+
+times = [0] + [times]
+losses = [init_loss] + losses
+
 # np.save('temp/kfac_losses.npy', losses)
 # np.save('/content/logs/temp/kfac_losses.npy', losses)
 np.save('/content/logs/temp/' + algorithm + '_losses.npy', losses)
