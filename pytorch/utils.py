@@ -1094,7 +1094,7 @@ def SMW_Fisher_update(data_, params):
     t_mb = data_['t_mb']    
     a = data_['a']
     h = data_['h']
-    z = data_['z']
+#     z = data_['z']
 
     
     
