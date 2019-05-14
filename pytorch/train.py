@@ -493,7 +493,7 @@ for i in range(max_epoch * iter_per_epoch):
     data_['a'] = a
     data_['h'] = h
     
-    data_['z'] = z
+#     data_['z'] = z
     
 #         i = epoch * iter_per_epoch + iter_
     params['i'] = i
