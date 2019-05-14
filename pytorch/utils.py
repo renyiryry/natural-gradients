@@ -1356,46 +1356,46 @@ def computeFV(delta, data_, params):
 #     start_time = time.time()
 
     #########################
-    mnist = data_['mnist']
-    N1 = params['N1']
+#     mnist = data_['mnist']
+#     N1 = params['N1']
     
-    import torch
+#     import torch
     
-    X_mb, t_mb = mnist.train.next_batch(N1)
-    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+#     X_mb, t_mb = mnist.train.next_batch(N1)
+#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
     
-    v = 1 / len(X_mb) * torch.ones(len(X_mb))
-    loss, a, h = model.forward(X_mb, t_mb, v)
+#     v = 1 / len(X_mb) * torch.ones(len(X_mb))
+#     loss, a, h = model.forward(X_mb, t_mb, v)
 
-    model = get_model_grad_zerod(model)
+#     model = get_model_grad_zerod(model)
     
-    loss.backward()
-    print('test: 11:07')
+#     loss.backward()
+#     print('test: 11:07')
     
     v = compute_JV(delta, data_, params)
     
 #     print('time for FV 1/2: ', time.time() - start_time)
 
     #########################
-    mnist = data_['mnist']
-    N1 = params['N1']
+#     mnist = data_['mnist']
+#     N1 = params['N1']
     
-    import torch
+#     import torch
     
-    X_mb, t_mb = mnist.train.next_batch(N1)
-    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+#     X_mb, t_mb = mnist.train.next_batch(N1)
+#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
     
-    v_0 = 1 / len(X_mb) * torch.ones(len(X_mb))
-    loss, a, h = model.forward(X_mb, t_mb, v_0)
+#     v_0 = 1 / len(X_mb) * torch.ones(len(X_mb))
+#     loss, a, h = model.forward(X_mb, t_mb, v_0)
 
-    model = get_model_grad_zerod(model)
+#     model = get_model_grad_zerod(model)
     
-    loss.backward()
-    print('test 11:08')
+#     loss.backward()
+#     print('test 11:08')
     
     
     
