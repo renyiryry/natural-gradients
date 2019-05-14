@@ -967,11 +967,11 @@ def update_lambda(p, data_, params):
         
         rho = (oldll_chunk - ll_chunk) / denom
         
-        print('ll_chunk: ', ll_chunk)
-        print('old ll_chunk: ', oldll_chunk)
-        print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
-        print('denom: ', denom)
-        print('rho: ', rho)
+#         print('ll_chunk: ', ll_chunk)
+#         print('old ll_chunk: ', oldll_chunk)
+#         print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
+#         print('denom: ', denom)
+#         print('rho: ', rho)
         
     
     
@@ -1203,7 +1203,7 @@ def get_new_loss(model, p, x, t):
     import torch.nn.functional as F
     import copy
     
-    print('p[1]: ', p[1])
+#     print('p[1]: ', p[1])
     
     model_new = copy.deepcopy(model)
     
