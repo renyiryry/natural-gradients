@@ -467,7 +467,7 @@ def get_cache_momentum(data_, params):
         
         a = data_['a']
         h = data_['h']
-        z = data_['z']
+#         z = data_['z']
     
     
     
