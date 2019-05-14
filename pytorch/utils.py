@@ -634,6 +634,8 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
     import torch.nn.functional as F
     import torch
     
+    numlayers = params['numlayers']
+    
 #     model.detach()
     
     
@@ -662,7 +664,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
     
 #     model_new.load_state_dict(model.state_dict())
 
-    for l in numlayers:
+    for l in range(numlayers):
         model_new.W[l].data = model.W[l].data
     
     z, _, _ = model_new.forward(x)
@@ -683,7 +685,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
 #     a_grad_momentum = data_['a_grad_momentum']
 #     h_momentum = data_['h_momentum']
     
-    numlayers = params['numlayers']
+    
     
     delta = list(range(numlayers))
     for l in range(numlayers):
