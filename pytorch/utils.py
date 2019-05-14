@@ -368,7 +368,7 @@ def compute_J_transpose_V_backp(v, data_, params):
 
 #     for l in range(numlayers):
 #         model_new.W[l].data = model.W[l].data
-    print('test')
+#     print('test')
     
 #     z, _, _ = model_new.forward(X_mb[N2_index])
     
