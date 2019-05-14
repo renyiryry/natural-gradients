@@ -794,6 +794,26 @@ def update_lambda(p, data_, params):
     print('test')
         
     ll_chunk = get_new_loss(model, p, X_mb, t_mb)
+    
+    #########################
+    mnist = data_['mnist']
+    N1 = params['N1']
+    
+    import torch
+    
+    X_mb, t_mb = mnist.train.next_batch(N1)
+    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+
+    # Forward
+    
+    z, a, h = model.forward(X_mb)
+    
+    loss = F.cross_entropy(z, t_mb)
+
+    model = get_model_grad_zerod(model)
+    
+    loss.backward()
+    print('test')
         
 #     [oldll_chunk, ~] =...
 #             computeLL(paramsp, indata, outdata, numchunks, targetchunk)
