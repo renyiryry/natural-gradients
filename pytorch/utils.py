@@ -262,8 +262,11 @@ def compute_J_transpose_V_backp(v, data_, params):
 
     # Forward
     
-#     v_2 = 2 / len(X_mb) * torch.ones(len(X_mb))
-    v_2 = v
+    v_2 = 2 / len(X_mb) * torch.ones(len(X_mb))
+    
+    print('v: ', v)
+    print('v_2:', v_2)
+    
     loss, a, h = model.forward(X_mb, t_mb, v_2)
 
     model = get_model_grad_zerod(model)
