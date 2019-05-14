@@ -490,7 +490,8 @@ def compute_JV(V, data_, params):
             v += torch.sum((a_grad_momentum[l] @ V[l]) * h_momentum[l], dim = 1)
             
             
-        print('v:', v)
+#         print('v:', v)
+        v = v.data
         
         
 #     print('V[1]: ', V[1])
