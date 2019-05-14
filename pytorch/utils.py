@@ -1110,8 +1110,9 @@ def SMW_Fisher_update(data_, params):
 #     print('torch.min(hat_v): ', torch.min(hat_v))
 
 #     hat_v = torch.ones(N2)
+    hat_v = torch.zeros(N2)
     
-#     print('hat_v: ', hat_v)
+    print('test hat_v: ', hat_v)
 #     print('1 - hat_v: ', 1 - hat_v)
 
     # compute natural gradient
