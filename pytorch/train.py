@@ -652,10 +652,13 @@ print(f'Accuracy: {acc:.3f}')
 
 # np.save('temp/kfac_losses.npy', losses)
 # np.save('/content/logs/temp/kfac_losses.npy', losses)
-np.save('/content/logs/temp/' + algorithm + '_losses.npy', losses)
-np.save('/content/logs/temp/' + algorithm + '_times.npy', times)
 
-np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + algorithm + '_losses.npy', losses)
-np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + algorithm + '_times.npy', times)
+name_result = algorithm + '_alpha_' + str(alpha)
+
+np.save('/content/logs/temp/' + name_result + '_losses.npy', losses)
+np.save('/content/logs/temp/' + name_result + '_times.npy', times)
+
+np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_losses.npy', losses)
+np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_times.npy', times)
 
 
