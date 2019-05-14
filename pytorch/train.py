@@ -609,12 +609,12 @@ for i in range(max_epoch * iter_per_epoch):
             
         
     
-    
-        z, _, _ = model.forward(X_train)
+        v = 1 / len(X_mb) * torch.ones(len(X_mb))
+        loss, _, _ = model.forward(X_train, t_train, v)
     
 
     
-        loss = F.cross_entropy(z, t_train)    
+#         loss = F.cross_entropy(z, t_train)    
             
         losses[epoch] = loss
         
