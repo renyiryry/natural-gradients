@@ -304,6 +304,8 @@ for i in range(max_epoch * iter_per_epoch):
     
     #########################
     
+    data_['mnist'] = mnist
+    
     X_mb, t_mb = mnist.train.next_batch(N1)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
