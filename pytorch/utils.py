@@ -105,6 +105,85 @@ class Model(nn.Module):
 
         return z, a, h
 
+    
+def compute_J_transpose_V_backp(v, model, x, t, params):
+    # use backpropagation
+    import copy
+    import torch.nn.functional as F
+    import torch
+    
+    numlayers = params['numlayers']
+    
+#     model.detach()
+    
+    
+#     model_1 = copy.deepcopy(data_['model'])
+#     model = data_['model']
+#     X_mb = data_['X_mb']
+#     t_mb = data_['t_mb']
+    
+#     N2_index = params['N2_index']
+    
+#     model_new = Model()
+    
+#     model_new.W = model.W
+    
+#     print(model_new.fc[1].weight)
+#     print(model.fc[1].weight)
+
+#     print('X_mb[N2_index].size(): ', X_mb[N2_index].size())
+
+#     model.W[0].data = model.W[0].data + 0.1
+#     model.W[0].data = model.W[0].data - 0.1
+#     print('test ?')
+
+#     model = get_model_grad_zerod(model)
+    model_new = Model()
+    
+#     model_new.load_state_dict(model.state_dict())
+
+#     for l in range(numlayers):
+#         model_new.W[l].data = model.W[l].data
+    print('test')
+    
+    z, _, _ = model_new.forward(x)
+    
+    
+    
+    loss = F.cross_entropy(z, t, reduction = 'none')
+    
+    weighted_loss = torch.dot(loss, v)
+    
+    model = get_model_grad_zerod(model)
+    
+#     weighted_loss.backward(retain_graph = True)
+    weighted_loss.backward()
+    
+#     print('model_1.W[1].size():', model_1.W[1].size())
+    
+#     a_grad_momentum = data_['a_grad_momentum']
+#     h_momentum = data_['h_momentum']
+    
+    
+    
+    delta = list(range(numlayers))
+    for l in range(numlayers):
+#         delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
+#         delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
+        
+#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
+        delta[l] = copy.deepcopy(model.W[l].grad)
+    
+#     cache.detach_()
+    
+    model = get_model_grad_zerod(model)
+    
+#     del model_1
+    
+    
+    return delta
+
+    
 def get_D_t(data_, params):
     import sys
     import torch
@@ -628,81 +707,7 @@ def get_model_grad_zerod(model):
 #     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
     return model
 
-def compute_J_transpose_V_backp(v, model, x, t, params):
-    # use backpropagation
-    import copy
-    import torch.nn.functional as F
-    import torch
-    
-    numlayers = params['numlayers']
-    
-#     model.detach()
-    
-    
-#     model_1 = copy.deepcopy(data_['model'])
-#     model = data_['model']
-#     X_mb = data_['X_mb']
-#     t_mb = data_['t_mb']
-    
-#     N2_index = params['N2_index']
-    
-#     model_new = Model()
-    
-#     model_new.W = model.W
-    
-#     print(model_new.fc[1].weight)
-#     print(model.fc[1].weight)
 
-#     print('X_mb[N2_index].size(): ', X_mb[N2_index].size())
-
-#     model.W[0].data = model.W[0].data + 0.1
-#     model.W[0].data = model.W[0].data - 0.1
-#     print('test ?')
-
-#     model = get_model_grad_zerod(model)
-    model_new = Model()
-    
-#     model_new.load_state_dict(model.state_dict())
-
-    for l in range(numlayers):
-        model_new.W[l].data = model.W[l].data
-    
-    z, _, _ = model_new.forward(x)
-    
-    
-    
-    loss = F.cross_entropy(z, t, reduction = 'none')
-    
-    weighted_loss = torch.dot(loss, v)
-    
-    model = get_model_grad_zerod(model)
-    
-#     weighted_loss.backward(retain_graph = True)
-    weighted_loss.backward()
-    
-#     print('model_1.W[1].size():', model_1.W[1].size())
-    
-#     a_grad_momentum = data_['a_grad_momentum']
-#     h_momentum = data_['h_momentum']
-    
-    
-    
-    delta = list(range(numlayers))
-    for l in range(numlayers):
-#         delta[l] = a_grad_momentum[l][:, :, None] @ h_momentum[l][:, None, :] # [N2, m[l+1], m[l]]
-#         delta[l] = v[:, None, None] * delta[l] # [N2, m[l+1], m[l]]
-        
-#         delta = torch.sum(delta, dim = 0) # [m[l+1], m[l]]
-        delta[l] = copy.deepcopy(model.W[l].grad)
-    
-#     cache.detach_()
-    
-    model = get_model_grad_zerod(model)
-    
-#     del model_1
-    
-    
-    return delta
 
 def compute_J_transpose_V(v, data_, params):
     
