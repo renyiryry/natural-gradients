@@ -375,10 +375,11 @@ else:
 
 # Visualization stuffs
 len_record = int(max_epoch / record_epoch)
-losses = np.zeros(len_record)
+losses = np.zeros(len_record + 1)
 times = np.zeros(len_record)
 
-init_loss = get_loss(model, X_train, t_train)
+losses[0] = get_loss(model, X_train, t_train)
+times[0] = 0
 
 
 # times[0] = 0
@@ -596,12 +597,12 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
     
     if (i+1) % iter_per_record == 0:
-        times[epoch] = time.time() - start_time
+        times[epoch+1] = time.time() - start_time
     
 #         print('time this iter: ', times[i-1])
     
         if epoch > 0:
-            times[epoch] = times[epoch] + times[epoch-1]
+            times[epoch+1] = times[epoch+1] + times[epoch]
         
         
     
@@ -612,9 +613,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
             
         print(f'Iter-{epoch}; Loss: {loss:.3f}')
         if epoch > 0:
-            print('elapsed time: ', times[epoch] - times[epoch-1])
+            print('elapsed time: ', times[epoch+1] - times[epoch])
         else:
-            print('elapsed time: ', times[epoch])
+            print('elapsed time: ', times[epoch+1])
         if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
             lambda_ = params['lambda_']
             print('lambda = ', lambda_)
@@ -631,7 +632,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #         loss = F.cross_entropy(z, t_train)    
             
-        losses[epoch] = get_loss(model, X_train, t_train).data.numpy()
+        losses[epoch+1] = get_loss(model, X_train, t_train).data.numpy()
         
     
         
@@ -649,8 +650,8 @@ print(f'Accuracy: {acc:.3f}')
 
 
 # times = np.asarray([0] + [times])
-times = np.insert(times, 0, 0)
-losses = np.insert(losses, init_loss.data, 0)
+# times = np.insert(times, 0, 0)
+# losses = np.insert(losses, init_loss.data, 0)
 
 # np.save('temp/kfac_losses.npy', losses)
 # np.save('/content/logs/temp/kfac_losses.npy', losses)
