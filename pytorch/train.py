@@ -325,6 +325,9 @@ for i in range(max_epoch * iter_per_epoch):
     
 
     loss.backward()
+    
+    loss.backward()
+    print('test')
 
 #         print('time of loss:', time.time() - test_start_time)
 
