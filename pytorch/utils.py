@@ -1,3 +1,107 @@
+class Model(nn.Module):
+
+    def __init__(self):
+        super(Model, self).__init__()
+        
+        self.layersizes = [784, 200, 100, 10]
+        self.numlayers = len(self.layersizes) - 1
+        
+#         self.fc = self.numlayers * [0]
+        self.fc = list(range(self.numlayers))
+        for l in range(self.numlayers):
+            self.fc[l] = nn.Linear(self.layersizes[l], self.layersizes[l+1], bias=False)
+        
+        self.fc = tuple(self.fc)
+
+ 
+
+
+
+            
+        self.W = list(range(3))
+        for l in range(self.numlayers):
+            self.W[l] = self.fc[l].weight
+#         self.W[1] = self.fc[1].weight
+#         self.W[2] = self.fc[2].weight
+        
+        self.W = tuple(self.W)
+
+
+    def forward(self, x):
+#         a1 = self.fc1(x)
+#         h1 = F.relu(a1)
+#         a2 = self.fc2(h1)
+#         h2 = F.relu(a2)
+#         z = self.fc3(h2)
+        
+#         a = (self.numlayers - 1) * [0]
+#         h = (self.numlayers - 1) * [0]
+#         for l in range(self.numlayers - 1):
+#             if l == 0:
+#                 a[l] = self.fc[l](x)
+#             else:
+#                 a[l] = self.fc[l](h[l-1])
+#             h[l] = F.relu(a[l])
+            
+            
+        
+        
+#         a = []
+#         h = []
+#         for l in range(self.numlayers - 1):
+#             if l == 0:
+#                 a.append(self.fc[l](x))
+#             else:
+#                 a.append(self.fc[l](h[l-1]))
+#             h.append(F.relu(a[l]))
+            
+        a = list(range(self.numlayers - 1))
+        h = list(range(self.numlayers - 1))
+        
+        for l in range(self.numlayers - 1):
+            if l == 0:
+                a[l] = self.fc[l](x)
+            else:
+                a[l] = self.fc[l](h[l-1])
+            h[l] = F.relu(a[l])
+        
+#         a[0] = self.fc[0](x)
+#         h[0] = F.relu(a[0])
+#         a[1] = self.fc[1](h[0])
+#         h[1] = F.relu(a[1])
+        
+#         a = tuple(a)
+#         h = tuple(h)
+            
+        z = self.fc[-1](h[-1])
+            
+
+#         cache = (a1, h1, a2, h2)
+            
+#         cache = ((self.numlayers - 1)) * 2 * [0]
+#         for l in range(0, self.numlayers - 1):            
+#             cache[2*l] = a[l]
+#             cache[2*l+1] = h[l]
+#         cache = tuple(cache) 
+        
+
+    
+#         print('len(cache): ', len(cache))
+
+        z.retain_grad()
+#         for c in cache:
+#             c.retain_grad()
+        for c in a:
+            c.retain_grad()
+        for c in h:
+            c.retain_grad()
+        
+        h = [x] + h
+        a = a + [z]
+        
+
+        return z, a, h
+
 def get_D_t(data_, params):
     import sys
     import torch
