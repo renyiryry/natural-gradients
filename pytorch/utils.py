@@ -268,15 +268,15 @@ def compute_J_transpose_V_backp(v, data_, params):
     print('v.data: ', v.data)
     print('v_2:', v_2)
     
-    for l in range(len(v_2)):
+#     for l in range(len(v_2)):
         
-        print('v_2[l].data: ', v_2[l].data)
-        print('v[l].data: ', v[l].data)
+#         print('v_2[l].data: ', v_2[l].data)
+#         print('v[l].data: ', v[l].data)
         
-        v_2[l].data = v[l].data
+#         v_2[l].data = v[l].data
         
-        print('v_2[l].data: ', v_2[l].data)
-        print('v[l].data: ', v[l].data)
+#         print('v_2[l].data: ', v_2[l].data)
+#         print('v[l].data: ', v[l].data)
         
     print('v_2:', v_2)
     
@@ -301,7 +301,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     # Forward
     
     v_0 = 1 / len(X_mb) * torch.ones(len(X_mb))
-    loss, a, h = model.forward(X_mb, t_mb, v)
+    loss, a, h = model.forward(X_mb, t_mb, v.data)
 
     model = get_model_grad_zerod(model)
     
