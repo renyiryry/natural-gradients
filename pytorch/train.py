@@ -631,7 +631,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #         loss = F.cross_entropy(z, t_train)    
             
-        losses[epoch] = get_loss(model, X_train, t_train)
+        losses[epoch] = get_loss(model, X_train, t_train).data.numpy()
         
     
         
@@ -650,7 +650,7 @@ print(f'Accuracy: {acc:.3f}')
 
 # times = np.asarray([0] + [times])
 times = np.insert(times, 0, 0)
-losses = np.insert(losses.data.numpy(), init_loss.data, 0)
+losses = np.insert(losses, init_loss.data, 0)
 
 # np.save('temp/kfac_losses.npy', losses)
 # np.save('/content/logs/temp/kfac_losses.npy', losses)
