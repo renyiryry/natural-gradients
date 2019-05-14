@@ -37,6 +37,7 @@ def get_D_t(data_, params):
     
         GN_cache = data_['GN_cache']
         h = GN_cache['h']
+        a_grad = GN_cacha['a_grad']
         
         print('h.size(): ', h.size())
         
@@ -45,9 +46,17 @@ def get_D_t(data_, params):
         
         D_t = torch.zeros(m_L * N2, m_L * N2)
         
-#         for l in range(numlayers):
+        
+        
+        for l in range(numlayers):
             
-#             D_t += torch.from_numpy(np.kron(, np.ones(m_L, m_L))) * ()
+            # h[l]: N2 * m[l]
+            
+            # a_grad[l]
+            
+            print('a_grad[l].size(): ', a_grad[l].size())
+            
+#             D_t += torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L))) * ()
     else:
         print('Error!')
         sys.exit()
@@ -164,13 +173,13 @@ def get_cache_momentum(data_, params):
         
         z, a, h = model.forward(X_mb[N2_index])
         
-        print('h[0].size(): ', h[0].size())
-        print('h[1].size(): ', h[1].size())
-        print('h[2].size(): ', h[2].size())
-        print('h: ', h)
-        print('h[0]: ', h[0])
-        print('h[1]: ', h[1])
-        print('h[2]: ', h[2])
+#         print('h[0].size(): ', h[0].size())
+#         print('h[1].size(): ', h[1].size())
+#         print('h[2].size(): ', h[2].size())
+#         print('h: ', h)
+#         print('h[0]: ', h[0])
+#         print('h[1]: ', h[1])
+#         print('h[2]: ', h[2])
         
         h_momentum = torch.FloatTensor([copy.deepcopy(hi.data) for hi in h])
         
@@ -206,6 +215,7 @@ def get_cache_momentum(data_, params):
         GN_cache = {}
         GN_cache['a_grad'] = a_grad_momentum
         GN_cache['h'] = h_momentum
+        
         
         data_['GN_cache'] = GN_cache
         
