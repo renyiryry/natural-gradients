@@ -165,6 +165,9 @@ def get_cache_momentum(data_, params):
         z, a, h = model.forward(X_mb[N2_index])
         
         print('h: ', h)
+        print('h[0]: ', h[0])
+        print('h[1]: ', h[1])
+        print('h[2]: ', h[2])
         
         h_momentum = torch.FloatTensor([copy.deepcopy(hi.data) for hi in h])
         
