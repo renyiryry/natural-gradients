@@ -161,7 +161,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     # Forward
     
 #     v = 1 / len(X_mb) * torch.ones(len(X_mb))
-    loss, a, h = model.forward(X_mb, t_mb, v)
+    loss, a, h = model.forward(X_mb[N2_index], t_mb[N2_index], v)
     
 #     loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
 #     weighted_loss = torch.dot(loss, v)
@@ -170,7 +170,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     loss.backward()
 #     weighted_loss.backward()
-    print('test 10:16')
+    print('test 11:10')
 
 
 
