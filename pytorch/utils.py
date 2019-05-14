@@ -113,6 +113,8 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     numlayers = params['numlayers']
     
+    model = data_['model']
+    
 #     model.detach()
     
     
