@@ -154,7 +154,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
     
     weighted_loss = torch.dot(loss, v)
     
-    model = get_model_grad_zerod(model)
+#     model = get_model_grad_zerod(model)
     
 #     weighted_loss.backward(retain_graph = True)
     weighted_loss.backward()
