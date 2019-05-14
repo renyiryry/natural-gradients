@@ -273,6 +273,7 @@ params = {}
 parser = argparse.ArgumentParser()
 parser.add_argument('algorithm', type=str)
 parser.add_argument('--max_epoch', type=float)
+parser.add_argument('--record_epoch', type=float)
 parser.add_argument('N1', type=int)
 parser.add_argument('N2', type=int)
 parser.add_argument('--alpha', type=float)
@@ -282,6 +283,7 @@ args = parser.parse_args()
 algorithm = args.algorithm
 params['algorithm'] = algorithm
 max_epoch = args.max_epoch
+record_epoch = args.record_epoch
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN':
     lambda_ = args.lambda_
@@ -372,19 +374,22 @@ else:
 
 
 # Visualization stuffs
-losses = np.zeros(max_epoch)
-times = np.zeros(max_epoch)
+len_record = int(max_epoch / record_epoch)
+losses = np.zeros(len_record)
+times = np.zeros(len_record)
 
 # max_iter = 5000
 # max_iter = 5
 
 iter_per_epoch = int(len(mnist.train.labels) / N1)
 
+iter_per_record = int(len(mnist.train.labels) * record_epoch / N1)
+
 # Training
 epoch = -1
 for i in range(max_epoch * iter_per_epoch):
     
-    if i % iter_per_epoch == 0:
+    if i % iter_per_record == 0:
         start_time = time.time()
         epoch += 1
     
@@ -581,16 +586,16 @@ for i in range(max_epoch * iter_per_epoch):
         
     
     
-    if (i+1) % iter_per_epoch == 0:
+    if (i+1) % iter_per_record == 0:
         times[epoch] = time.time() - start_time
     
 #         print('time this iter: ', times[i-1])
     
-    if epoch > 0:
-        times[epoch] = times[epoch] + times[epoch-1]
+        if epoch > 0:
+            times[epoch] = times[epoch] + times[epoch-1]
         
         
-    if (i+1) % iter_per_epoch == 0:
+    
         
 #         print(z)
         
