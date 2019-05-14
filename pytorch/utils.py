@@ -164,6 +164,9 @@ def get_cache_momentum(data_, params):
         
         z, a, h = model.forward(X_mb[N2_index])
         
+        print('h[0].size(): ', h[0].size())
+        print('h[1].size(): ', h[1].size())
+        print('h[2].size(): ', h[2].size())
         print('h: ', h)
         print('h[0]: ', h[0])
         print('h[1]: ', h[1])
