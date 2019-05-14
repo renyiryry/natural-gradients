@@ -186,7 +186,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     model = get_model_grad_zerod(model)
     
     loss.backward()
-    print('test 15:25')
+    print('test 15:26')
 
     #########################
     mnist = data_['mnist']
