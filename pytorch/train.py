@@ -405,11 +405,13 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     loss = F.cross_entropy(z, t_mb)
 
+    print('loss: ', loss)
+
     model = get_model_grad_zerod(model)
     
 #         test_start_time = time.time()
     
-#     loss.backward(retain_graph=True)
+
     
 
     loss.backward()
