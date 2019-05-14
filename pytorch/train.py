@@ -264,7 +264,7 @@ class Model(nn.Module):
 # model = Model()
 model = Model_2()
 
-print('model.W[1] when initialize: ', model.W[1])
+# print('model.W[1] when initialize: ', model.W[1])
 
 # print('model: ', model)
     
