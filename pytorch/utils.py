@@ -1061,7 +1061,7 @@ def kfac_update(data_, params):
 #     A_ = [A1_, A2_, A3_]
 
     # Update running estimates of KFAC
-    rho = min(1-1/i, 0.95)
+    rho = min(1-1/(i+1), 0.95)
 
     for l in range(numlayers):
         
