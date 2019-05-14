@@ -227,9 +227,6 @@ class Model(nn.Module):
 #         h[0] = F.relu(a[0])
 #         a[1] = self.fc[1](h[0])
 #         h[1] = F.relu(a[1])
-        
-#         a = tuple(a)
-#         h = tuple(h)
             
         z = self.fc[-1](h[-1])
             
@@ -376,7 +373,7 @@ else:
 # Visualization stuffs
 len_record = int(max_epoch / record_epoch)
 losses = np.zeros(len_record + 1)
-times = np.zeros(len_record)
+times = np.zeros(len_record + 1)
 
 losses[0] = get_loss(model, X_train, t_train)
 times[0] = 0
