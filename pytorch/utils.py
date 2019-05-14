@@ -1129,7 +1129,7 @@ def get_new_loss(model, p, x, t):
     
 #     loss = F.cross_entropy(z, t)
     
-    v = 1 / len(x) * torch.ones(t)
+    v = 1 / len(x) * torch.ones(len(x))
     loss, _, _ = model.forward(x, t, v)
     
     return loss
