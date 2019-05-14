@@ -1,7 +1,7 @@
 import torch.nn as nn
 import torch.nn.functional as F
 
-class Model(nn.Module):
+class Model_2(nn.Module):
 
     def __init__(self):
         super(Model, self).__init__()
@@ -29,7 +29,7 @@ class Model(nn.Module):
         self.W = tuple(self.W)
 
 
-    def forward(self, x):
+    def forward(self, x, z):
 #         a1 = self.fc1(x)
 #         h1 = F.relu(a1)
 #         a2 = self.fc2(h1)
@@ -76,6 +76,9 @@ class Model(nn.Module):
 #         h = tuple(h)
             
         z = self.fc[-1](h[-1])
+        
+        loss = F.cross_entropy(z, t, redution = 'none')
+        weighted_loss = torch.dot(loss, v)
             
 
 #         cache = (a1, h1, a2, h2)
@@ -102,7 +105,7 @@ class Model(nn.Module):
         a = a + [z]
         
 
-        return z, a, h
+        return weighted_loss, a, h
 
     
 def compute_J_transpose_V_backp(v, data_, params):
@@ -174,7 +177,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     
 
 
-    model_new = Model()
+    model_new = Model_2()
     
     print('model_new.W[1]): ', model_new.W[1])
     print('model.W[1]): ', model.W[1])
@@ -185,20 +188,21 @@ def compute_J_transpose_V_backp(v, data_, params):
 #         model_new.W[l].data = model.W[l].data
     print('test')
     
-    z, _, _ = model_new.forward(X_mb[N2_index])
+#     z, _, _ = model_new.forward(X_mb[N2_index])
     
     
     
 #     loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
-    loss = F.cross_entropy(z, t_mb[N2_index])
+#     loss = F.cross_entropy(z, t_mb[N2_index])
     
 #     weighted_loss = torch.dot(loss, v)
     
-    model_new = get_model_grad_zerod(model_new)
+#     model_new = get_model_grad_zerod(model_new)
+    weighted_loss = model_new.forward(X_mb[N2_index], t_mb[N2_index], v)
     
 #     weighted_loss.backward(retain_graph = True)
-#     weighted_loss.backward()
-    loss.backward()
+    weighted_loss.backward()
+#     loss.backward()
     
     print('test 10:28')
     
