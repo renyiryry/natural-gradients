@@ -30,6 +30,112 @@ X_train = mnist.train.images
 t_train = mnist.train.labels
 X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
 
+class Model_2(nn.Module):
+
+    def __init__(self):
+        super(Model_2, self).__init__()
+        
+        self.layersizes = [784, 200, 100, 10]
+        self.numlayers = len(self.layersizes) - 1
+        
+        self.fc = list(range(self.numlayers))
+        for l in range(self.numlayers):
+            self.fc[l] = nn.Linear(self.layersizes[l], self.layersizes[l+1], bias=False)
+        
+        self.fc = tuple(self.fc)
+
+ 
+
+
+
+            
+        self.W = list(range(3))
+        for l in range(self.numlayers):
+            self.W[l] = self.fc[l].weight
+#         self.W[1] = self.fc[1].weight
+#         self.W[2] = self.fc[2].weight
+        
+        self.W = tuple(self.W)
+
+
+    def forward(self, x, t, v):
+#         a1 = self.fc1(x)
+#         h1 = F.relu(a1)
+#         a2 = self.fc2(h1)
+#         h2 = F.relu(a2)
+#         z = self.fc3(h2)
+        
+#         a = (self.numlayers - 1) * [0]
+#         h = (self.numlayers - 1) * [0]
+#         for l in range(self.numlayers - 1):
+#             if l == 0:
+#                 a[l] = self.fc[l](x)
+#             else:
+#                 a[l] = self.fc[l](h[l-1])
+#             h[l] = F.relu(a[l])
+            
+            
+        
+        
+#         a = []
+#         h = []
+#         for l in range(self.numlayers - 1):
+#             if l == 0:
+#                 a.append(self.fc[l](x))
+#             else:
+#                 a.append(self.fc[l](h[l-1]))
+#             h.append(F.relu(a[l]))
+            
+        a = list(range(self.numlayers - 1))
+        h = list(range(self.numlayers - 1))
+        
+        for l in range(self.numlayers - 1):
+            if l == 0:
+                a[l] = self.fc[l](x)
+            else:
+                a[l] = self.fc[l](h[l-1])
+            h[l] = F.relu(a[l])
+        
+#         a[0] = self.fc[0](x)
+#         h[0] = F.relu(a[0])
+#         a[1] = self.fc[1](h[0])
+#         h[1] = F.relu(a[1])
+        
+#         a = tuple(a)
+#         h = tuple(h)
+            
+        z = self.fc[-1](h[-1])
+        
+        loss = F.cross_entropy(z, t, reduction = 'none')
+        weighted_loss = torch.dot(loss, v)
+            
+
+#         cache = (a1, h1, a2, h2)
+            
+#         cache = ((self.numlayers - 1)) * 2 * [0]
+#         for l in range(0, self.numlayers - 1):            
+#             cache[2*l] = a[l]
+#             cache[2*l+1] = h[l]
+#         cache = tuple(cache) 
+        
+
+    
+#         print('len(cache): ', len(cache))
+
+        z.retain_grad()
+#         for c in cache:
+#             c.retain_grad()
+        for c in a:
+            c.retain_grad()
+        for c in h:
+            c.retain_grad()
+        
+        h = [x] + h
+        a = a + [z]
+        
+
+        return weighted_loss, a, h
+
 
 
 class Model(nn.Module):
@@ -155,7 +261,8 @@ class Model(nn.Module):
         return z, a, h
 
 # Model
-model = Model()
+# model = Model()
+model = Model_2()
 
 print('model.W[1] when initialize: ', model.W[1])
 
