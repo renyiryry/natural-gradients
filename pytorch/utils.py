@@ -9,7 +9,6 @@ class Model(nn.Module):
         self.layersizes = [784, 200, 100, 10]
         self.numlayers = len(self.layersizes) - 1
         
-#         self.fc = self.numlayers * [0]
         self.fc = list(range(self.numlayers))
         for l in range(self.numlayers):
             self.fc[l] = nn.Linear(self.layersizes[l], self.layersizes[l+1], bias=False)
@@ -157,7 +156,7 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
     
     weighted_loss = torch.dot(loss, v)
     
-#     model = get_model_grad_zerod(model)
+    model_new = get_model_grad_zerod(model_new)
     
 #     weighted_loss.backward(retain_graph = True)
     weighted_loss.backward()
