@@ -39,7 +39,7 @@ def get_D_t(data_, params):
         h = GN_cache['h']
         a_grad = GN_cache['a_grad']
         
-        print('h.size(): ', h.size())
+#         print('h.size(): ', h.size())
         
         m_L = params['m_L']
         
