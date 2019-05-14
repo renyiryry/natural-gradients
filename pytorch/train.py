@@ -387,7 +387,7 @@ iter_per_record = int(len(mnist.train.labels) * record_epoch / N1)
 
 # Training
 epoch = -1
-for i in range(max_epoch * iter_per_epoch):
+for i in range(int(max_epoch * iter_per_epoch)):
     
     if i % iter_per_record == 0:
         start_time = time.time()
