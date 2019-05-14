@@ -874,19 +874,22 @@ def update_lambda(p, data_, params):
     if oldll_chunk - ll_chunk < 0:
         rho = float("-inf")
     else:
-        if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+        if algorithm == 'SMW-Fisher' or algorithm == 'SMW-GN':
+            denom = - 0.5 * get_dot_product(model_grad, p, params)
+        elif algorithm == 'kfac' or algorithm == 'SMW-Fisher-momentum':
             denom = computeFV(p, data_, params)
-        elif algorithm == 'SMW-GN':
-            denom = computeGV(p, data_, params)
+                
+            denom = get_dot_product(p, denom, params)
+            denom = -0.5 * denom
+            denom = denom - get_dot_product(model_grad, p, params) 
+                
         else:
             print('Error!')
             sys.exit()
     
 #     print('time for update lambda 1/4: ', time.time() - start_time)
 
-        denom = get_dot_product(p, denom, params)
-        denom = -0.5 * denom
-        denom = denom - get_dot_product(model_grad, p, params) 
+            
         
         rho = (oldll_chunk - ll_chunk) / denom
         
