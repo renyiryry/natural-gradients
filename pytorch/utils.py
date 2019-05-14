@@ -107,7 +107,7 @@ class Model_2(nn.Module):
         
 
         return weighted_loss, a, h
-def get_loss(model, x, t)
+def get_loss(model, x, t):
     v = 1 / len(x) * torch.ones(len(x))
     loss, _, _ = model.forward(x, t, v)
     return loss
