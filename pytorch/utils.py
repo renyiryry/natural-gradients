@@ -115,6 +115,9 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     model = data_['model']
     
+    X_mb = data_['X_mb']
+    t_mb = data_['t_mb']
+    
 #     model.detach()
     
     
@@ -146,8 +149,8 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     import torch
     
-    X_mb, t_mb = mnist.train.next_batch(N1)
-    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+#     X_mb, t_mb = mnist.train.next_batch(N1)
+#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
     
