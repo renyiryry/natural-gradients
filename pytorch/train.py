@@ -319,10 +319,12 @@ for i in range(max_epoch * iter_per_epoch):
     
 #         test_start_time = time.time()
     
-    loss.backward(retain_graph=True)
+#     loss.backward(retain_graph=True)
     
+
+    loss.backward()
+
 #         print('time of loss:', time.time() - test_start_time)
-#     loss.backward()
 
 
 
