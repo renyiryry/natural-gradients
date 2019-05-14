@@ -1087,7 +1087,7 @@ def kfac_update(data_, params):
 #         print('i = ', i)
         
         # Amortize the inverse. Only update inverses every now and then
-        if (i-1) % inverse_update_freq == 0:
+        if i % inverse_update_freq == 0:
             
             
             
