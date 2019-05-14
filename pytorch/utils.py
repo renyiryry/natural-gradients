@@ -268,7 +268,14 @@ def compute_J_transpose_V_backp(v, data_, params):
     print('v_2:', v_2)
     
     for l in range(len(v_2)):
+        
+        print('v_2[l].data: ', v_2[l].data)
+        print('v[l].data: ', v[l].data)
+        
         v_2[l].data = v[l].data
+        
+        print('v_2[l].data: ', v_2[l].data)
+        print('v[l].data: ', v[l].data)
         
     print('v_2:', v_2)
     
