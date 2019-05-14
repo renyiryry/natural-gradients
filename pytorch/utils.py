@@ -241,6 +241,27 @@ def compute_J_transpose_V_backp(v, data_, params):
 
     # Forward
     
+    v_2 = 2 / len(X_mb) * torch.ones(len(X_mb))
+    loss, a, h = model.forward(X_mb, t_mb, v_2)
+
+    model = get_model_grad_zerod(model)
+    
+    loss.backward()
+    print('test 15:40')
+    
+    #########################
+    mnist = data_['mnist']
+    N1 = params['N1']
+    
+    N2 = params['N2']
+    
+    import torch
+    
+    X_mb, t_mb = mnist.train.next_batch(N2)
+    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+
+    # Forward
+    
     v_0 = 1 / len(X_mb) * torch.ones(len(X_mb))
     loss, a, h = model.forward(X_mb, t_mb, v)
 
