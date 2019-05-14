@@ -343,7 +343,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     print('v.size: ', v.size())
     print('X_mb[N2_index].size(): ', X_mb[N2_index].size())
 
-    loss, a, h = model.forward(X_mb[N2_index], t_mb[N2_index], v)
+    loss, a, h = model.forward(X_mb[N2_index], t_mb[N2_index], v.data)
     
 #     loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
 #     weighted_loss = torch.dot(loss, v)
