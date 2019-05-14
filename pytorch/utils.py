@@ -1207,19 +1207,19 @@ def get_new_loss(model, p, x, t):
     
     model_new = copy.deepcopy(model)
     
-    print('model_new.W[1]: ', model_new.W[1])
+#     print('model_new.W[1]: ', model_new.W[1])
     
     for l in range(model_new.numlayers):
         model_new.W[l].data += p[l]
         
-    print('model_new.W[1]: ', model_new.W[1])
+#     print('model_new.W[1]: ', model_new.W[1])
         
 #     z, _, _ = model_new.forward(x)
     
 #     loss = F.cross_entropy(z, t)
     
     v = 1 / len(x) * torch.ones(len(x))
-    loss, _, _ = model.forward(x, t, v)
+    loss, _, _ = model_new.forward(x, t, v)
     
     return loss
 
