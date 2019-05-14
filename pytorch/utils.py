@@ -629,7 +629,7 @@ def get_cache_momentum(data_, params):
     
     # Update running estimates
         if algorithm == 'SMW-Fisher-momentum':
-            rho = min(1-1/i+1, 0.95)
+            rho = min(1 - 1/(i+1), 0.95)
         
             for l in range(numlayers):
                 a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * N1 * (a[l].grad)[N2_index]
