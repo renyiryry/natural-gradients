@@ -6,7 +6,7 @@ class Model_2(nn.Module):
 
     def __init__(self):
         super(Model_2, self).__init__()
-        
+       
         self.layersizes = [784, 200, 100, 10]
         self.numlayers = len(self.layersizes) - 1
         
@@ -488,6 +488,9 @@ def compute_JV(V, data_, params):
     
         
             v += torch.sum((a_grad_momentum[l] @ V[l]) * h_momentum[l], dim = 1)
+            
+            
+        print('v:', v)
         
         
 #     print('V[1]: ', V[1])
@@ -1031,7 +1034,7 @@ def update_lambda(p, data_, params):
     
 
 
-#         data_computeFV = {}
+
    
     
         
