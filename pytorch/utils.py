@@ -189,14 +189,18 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     
     
-    loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
+#     loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
+    loss = F.cross_entropy(z, t_mb[N2_index])
     
     weighted_loss = torch.dot(loss, v)
     
     model_new = get_model_grad_zerod(model_new)
     
 #     weighted_loss.backward(retain_graph = True)
-    weighted_loss.backward()
+#     weighted_loss.backward()
+    loss.backward()
+    
+    print('test 10:28')
     
 #     print('model_1.W[1].size():', model_1.W[1].size())
     
