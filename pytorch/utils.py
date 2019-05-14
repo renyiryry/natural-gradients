@@ -181,7 +181,7 @@ def get_cache_momentum(data_, params):
 #         print('h[1]: ', h[1])
 #         print('h[2]: ', h[2])
         
-        h_momentum = torch.FloatTensor([copy.deepcopy(hi.data) for hi in h])
+        h_momentum = [copy.deepcopy(hi.data) for hi in h]
         
         a_grad_momentum = []
         for i in range(m_L):
