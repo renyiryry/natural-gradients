@@ -419,14 +419,13 @@ for i in range(max_epoch * iter_per_epoch):
 
     # Forward
     
-    z, a, h = model.forward(X_mb)
-    
-    loss = F.cross_entropy(z, t_mb)
+    v = 1 / len(X_mb) * torch.ones(len(X_mb))
+    loss, a, h = model.forward(X_mb, t_mb, v)
 
     model = get_model_grad_zerod(model)
     
     loss.backward()
-    print('test')
+    print('test 11:00')
 
 #         print('time of loss:', time.time() - test_start_time)
 
