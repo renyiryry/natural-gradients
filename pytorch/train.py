@@ -650,7 +650,7 @@ print(f'Accuracy: {acc:.3f}')
 
 # times = np.asarray([0] + [times])
 times = np.insert(times, 0, 0)
-losses = [init_loss] + losses
+losses = np.insert(losses.data.numpy(), init_loss.data, 0)
 
 # np.save('temp/kfac_losses.npy', losses)
 # np.save('/content/logs/temp/kfac_losses.npy', losses)
