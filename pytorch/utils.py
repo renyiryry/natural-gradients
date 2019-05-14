@@ -1001,44 +1001,44 @@ def update_lambda(p, data_, params):
 #     print('time for update lambda 1/2: ', time.time() - start_time)
 
      #########################
-    mnist = data_['mnist']
-    N1 = params['N1']
+#     mnist = data_['mnist']
+#     N1 = params['N1']
     
-    import torch
+#     import torch
     
-    X_mb, t_mb = mnist.train.next_batch(N1)
-    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+#     X_mb, t_mb = mnist.train.next_batch(N1)
+#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
     
-    v = 1 / len(X_mb) * torch.ones(len(X_mb))
-    loss, a, h = model.forward(X_mb, t_mb, v)
+#     v = 1 / len(X_mb) * torch.ones(len(X_mb))
+#     loss, a, h = model.forward(X_mb, t_mb, v)
 
-    model = get_model_grad_zerod(model)
+#     model = get_model_grad_zerod(model)
     
-    loss.backward()
-    print('test 11: 03 2')
+#     loss.backward()
+#     print('test 11: 03 2')
         
     ll_chunk = get_new_loss(model, p, X_mb, t_mb)
     
     #########################
-    mnist = data_['mnist']
-    N1 = params['N1']
+#     mnist = data_['mnist']
+#     N1 = params['N1']
     
-    import torch
+#     import torch
     
-    X_mb, t_mb = mnist.train.next_batch(N1)
-    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+#     X_mb, t_mb = mnist.train.next_batch(N1)
+#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
     
-    v = 1 / len(X_mb) * torch.ones(len(X_mb))
-    loss, a, h = model.forward(X_mb, t_mb, v)
+#     v = 1 / len(X_mb) * torch.ones(len(X_mb))
+#     loss, a, h = model.forward(X_mb, t_mb, v)
 
-    model = get_model_grad_zerod(model)
+#     model = get_model_grad_zerod(model)
     
-    loss.backward()
-    print('test 11:06')
+#     loss.backward()
+#     print('test 11:06')
         
 #     [oldll_chunk, ~] =...
 #             computeLL(paramsp, indata, outdata, numchunks, targetchunk)
