@@ -776,6 +776,9 @@ def update_lambda(p, data_, params):
      #########################
     mnist = data_['mnist']
     N1 = params['N1']
+    
+    import torch
+    
     X_mb, t_mb = mnist.train.next_batch(N1)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
