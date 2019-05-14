@@ -148,7 +148,7 @@ def get_cache_momentum(data_, params):
         
         model = data_['model']
         
-#         numlayers = params['numlayers']
+        numlayers = params['numlayers']
         
 #         layersizes = model.layersizes
         m_L = params['m_L']
@@ -183,7 +183,7 @@ def get_cache_momentum(data_, params):
         
         h_momentum = [copy.deepcopy(hi.data) for hi in h]
         
-        a_grad_momentum = []
+        a_grad_momentum = list(range(numlayers))
         for i in range(m_L):
             
 #         Jacobian_z = []
@@ -200,9 +200,12 @@ def get_cache_momentum(data_, params):
         
 #             a_grad_momentum.append(copy.deepcopy())
 
-            a_grad_momentum.append([copy.deepcopy(ai.grad) for ai in a])
+#             a_grad_momentum.append([copy.deepcopy(ai.grad) for ai in a])
 #             for l in range(numlayers - 1):
 #                 a_grad_momentum_i.append(copy.deepcopy(a[l].grad))
+
+            for l in range(numlayers):
+                a_grad_momentum[l].append(copy.deepcopy(a[l].grad))    
         
                 
              
