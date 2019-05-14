@@ -648,7 +648,7 @@ acc = np.mean(y.numpy() == t_test)
 print(f'Accuracy: {acc:.3f}')
 
 
-times = [0] + [times]
+times = np.asarray([0] + [times])
 losses = [init_loss] + losses
 
 # np.save('temp/kfac_losses.npy', losses)
