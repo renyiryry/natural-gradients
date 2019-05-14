@@ -1179,11 +1179,13 @@ def SMW_Fisher_update(data_, params):
 #     data_compute_J_transpose_V = {}
         
         
+   
+    
+    delta = get_multiply(1 / N2, delta, params)
+    
     print('delta[1]: ', delta[1])
     print('model_grad[1]: ', model_grad[1])
 
-    
-    delta = get_multiply(1 / N2, delta, params)
         
     
     delta = get_subtract(model_grad, delta, params)
