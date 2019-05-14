@@ -1250,7 +1250,7 @@ def kfac_update(data_, params):
     a = data_['a']
     h = data_['h']
     
-    z = data_['z']
+#     z = data_['z']
     A = data_['A']
     G = data_['G']
     A_inv = data_['A_inv']
