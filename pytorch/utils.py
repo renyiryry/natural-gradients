@@ -1151,10 +1151,10 @@ def SMW_Fisher_update(data_, params):
 #     print('torch.max(hat_v): ', torch.max(hat_v))
 #     print('torch.min(hat_v): ', torch.min(hat_v))
 
-#     hat_v = torch.ones(N2)
+    hat_v = torch.ones(N2)
     
-#     print('hat_v: ', hat_v)
-#     print('1 - hat_v: ', 1 - hat_v)
+    print('hat_v: ', hat_v)
+    print('1 - hat_v: ', 1 - hat_v)
 
     # compute natural gradient
     
@@ -1179,8 +1179,8 @@ def SMW_Fisher_update(data_, params):
 #     data_compute_J_transpose_V = {}
         
         
-#     print('delta[1]: ', delta[1])
-#     print('model_grad[1]: ', model_grad[1])
+    print('delta[1]: ', delta[1])
+    print('model_grad[1]: ', model_grad[1])
 
     
     delta = get_multiply(1 / N2, delta, params)
