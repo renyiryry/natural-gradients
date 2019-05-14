@@ -1205,14 +1205,13 @@ def computeFV(delta, data_, params):
 
     # Forward
     
-    z, a, h = model.forward(X_mb)
-    
-    loss = F.cross_entropy(z, t_mb)
+    v = 1 / len(X_mb) * torch.ones(len(X_mb))
+    loss, a, h = model.forward(X_mb, t_mb, v)
 
     model = get_model_grad_zerod(model)
     
     loss.backward()
-    print('test 10:14')
+    print('test 11:08')
     
     
     
