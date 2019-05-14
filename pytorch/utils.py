@@ -29,7 +29,7 @@ class Model_2(nn.Module):
         self.W = tuple(self.W)
 
 
-    def forward(self, x, z):
+    def forward(self, x, z, v):
 #         a1 = self.fc1(x)
 #         h1 = F.relu(a1)
 #         a2 = self.fc2(h1)
