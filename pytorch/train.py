@@ -288,34 +288,9 @@ for i in range(max_epoch * iter_per_epoch):
 
     # Forward
     
-#     print('i: ', i)
-#     print('X_mb: ', X_mb)
-    
-#     print('model.W[1]: ', model.W[1])
-    
-#     print('model.W: ', model.W)
-    
     z, a, h = model.forward(X_mb)
     
-#     a1, h1, a2, h2 = cache
-
-    # Loss
-    
-    
-    
-    
-#     print('a1: ', cache[0])
-#     print('a2: ', cache[2])
-#     print('z: ', z)
-    
     loss = F.cross_entropy(z, t_mb)
-    
-#     print('loss: ', loss)
-    
-#     model.zero_grad()
-
-#     print('model.W[1]: ', model.W[1])
-#     print('model.W[1].grad.data: ', model.W[1].grad.data)
 
     model = get_model_grad_zerod(model)
     
@@ -325,6 +300,20 @@ for i in range(max_epoch * iter_per_epoch):
     
 
     loss.backward()
+    
+    
+    #########################
+    
+    X_mb, t_mb = mnist.train.next_batch(N1)
+    X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+
+    # Forward
+    
+    z, a, h = model.forward(X_mb)
+    
+    loss = F.cross_entropy(z, t_mb)
+
+    model = get_model_grad_zerod(model)
     
     loss.backward()
     print('test')
