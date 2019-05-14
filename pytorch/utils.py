@@ -69,7 +69,7 @@ def compute_JV(V, data_, params):
     numlayers = params['numlayers']
     N2 = params['N2']
     
-    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithnm == 'kfac':
+    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
         import torch
     
         a_grad_momentum = data_['a_grad_momentum']
