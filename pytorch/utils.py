@@ -6,7 +6,7 @@ def get_D_t(data_, params):
     N2 = params['N2']
     numlayers = params['numlayers']
     
-    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithnm == 'kfac':
+    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
     
 #         from torch import eye
     
@@ -69,7 +69,7 @@ def compute_JV(V, data_, params):
     numlayers = params['numlayers']
     N2 = params['N2']
     
-    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithnm == 'kfac':
         import torch
     
         a_grad_momentum = data_['a_grad_momentum']
