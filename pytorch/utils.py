@@ -107,7 +107,10 @@ class Model_2(nn.Module):
         
 
         return weighted_loss, a, h
-
+def get_loss(model, x, t)
+    v = 1 / len(x) * torch.ones(len(x))
+    loss, _, _ = model.forward(x, t, v)
+    return loss
     
 def compute_J_transpose_V_backp(v, data_, params):
     # use backpropagation
