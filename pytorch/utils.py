@@ -140,6 +140,9 @@ def compute_J_transpose_V_backp(v, model, x, t, params):
 #     model = get_model_grad_zerod(model)
     model_new = Model()
     
+    print('model_new.W[1]): ', model_new.W[1])
+    print('model.W[1]): ', model.W[1])
+    
 #     model_new.load_state_dict(model.state_dict())
 
 #     for l in range(numlayers):
