@@ -77,7 +77,7 @@ class Model_2(nn.Module):
             
         z = self.fc[-1](h[-1])
         
-        loss = F.cross_entropy(z, t, redution = 'none')
+        loss = F.cross_entropy(z, t, reduction = 'none')
         weighted_loss = torch.dot(loss, v)
             
 
