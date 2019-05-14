@@ -157,6 +157,8 @@ class Model(nn.Module):
 # Model
 model = Model()
 
+print('model.W[1] when initialize: ', model.W[1])
+
 # print('model: ', model)
     
 params = {}
