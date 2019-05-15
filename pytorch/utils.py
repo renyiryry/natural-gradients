@@ -118,7 +118,7 @@ class Model_2(nn.Module):
 def get_loss(model, x, t):
     v = 1 / len(x) * torch.ones(len(x))
     loss, _, _ = model.forward(x, t, v)
-    return loss
+    return loss.data.numpy()
 
 def get_acc(model, x, t):
     v = 1 / len(x) * torch.ones(len(x))
