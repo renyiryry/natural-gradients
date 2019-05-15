@@ -425,10 +425,7 @@ def get_cache_momentum(data_, params):
         
 #         h_momentum = []
         
-        v_tmp = 1 / len(X_mb[N2_index]) * torch.ones(len(X_mb[N2_index]))
-        _, a, h = model.forward(X_mb[N2_index], t_mb[N2_index], v_tmp)
         
-        z = a[-1]
         
 #         print('h[0].size(): ', h[0].size())
 #         print('h[1].size(): ', h[1].size())
@@ -438,10 +435,15 @@ def get_cache_momentum(data_, params):
 #         print('h[1]: ', h[1])
 #         print('h[2]: ', h[2])
         
-        h_momentum = [copy.deepcopy(hi.data) for hi in h]
+        
         
         a_grad_momentum = numlayers * [0]
         for i in range(m_L):
+            
+            v_tmp = 1 / len(X_mb[N2_index]) * torch.ones(len(X_mb[N2_index]))
+            _, a, h = model.forward(X_mb[N2_index], t_mb[N2_index], v_tmp)
+        
+            z = a[-1]
             
 #         Jacobian_z = []
 
@@ -482,6 +484,8 @@ def get_cache_momentum(data_, params):
 #             print('h: ', h)
     
 #         print('model.W[1].grad.size(): ', model.W[1].grad.size())
+
+        h_momentum = [copy.deepcopy(hi.data) for hi in h]
         
         GN_cache = {}
         GN_cache['a_grad'] = a_grad_momentum
