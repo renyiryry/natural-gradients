@@ -119,7 +119,7 @@ def get_loss(model, x, t):
     loss, _, _ = model.forward(x, t, v)
     return loss
 
-def get_acc(model, x, t)
+def get_acc(model, x, t):
     v = 1 / len(x) * torch.ones(len(x))
     _, a , _= model.forward(torch.from_numpy(x), torch.from_numpy(t).long(), v)
     z = a[-1]
