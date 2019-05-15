@@ -591,7 +591,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
 #         print(t_mb)
             
-        print(f'Iter-{epoch}; Loss: {loss:.3f}')
+        print(f'Iter-{epoch+1}; Loss: {loss:.3f}')
         if epoch > 0:
             print('elapsed time: ', times[epoch+1] - times[epoch])
         else:
