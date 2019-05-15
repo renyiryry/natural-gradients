@@ -438,9 +438,12 @@ def get_cache_momentum(data_, params):
         
         
         a_grad_momentum = numlayers * [0]
+        
+        v_tmp = 1 / len(X_mb[N2_index]) * torch.ones(len(X_mb[N2_index]))
+        
         for i in range(m_L):
             
-            v_tmp = 1 / len(X_mb[N2_index]) * torch.ones(len(X_mb[N2_index]))
+            
             _, a, h = model.forward(X_mb[N2_index], t_mb[N2_index], v_tmp)
         
             z = a[-1]
@@ -472,6 +475,8 @@ def get_cache_momentum(data_, params):
                 if i == 0:
                     a_grad_momentum[i] = [copy.deepcopy(a[l].grad)]
                 else:
+                    
+                    print('a_grad_momentum[i]', a_grad_momentum[i])
                     
                     
                     
