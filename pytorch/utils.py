@@ -467,10 +467,13 @@ def get_cache_momentum(data_, params):
 #                 print('a_grad_momentum[l]: ', a_grad_momentum[l])
 #                 print('a[l]: ', a[l])
                 
-                if l == 0:
-                    a_grad_momentum[l] = [copy.deepcopy(a[l].grad)]
+                if i == 0:
+                    a_grad_momentum[i] = [copy.deepcopy(a[l].grad)]
                 else:
-                    a_grad_momentum[l].append(copy.deepcopy(a[l].grad))    
+                    
+                    
+                    
+                    a_grad_momentum[i].append(copy.deepcopy(a[l].grad))    
         
                 
              
