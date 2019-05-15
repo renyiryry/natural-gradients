@@ -1285,6 +1285,7 @@ def kfac_update(data_, params):
     lambda_ = params['lambda_']
     alpha = params['alpha']
     numlayers = params['numlayers']
+    rho_kfac = params['rho_kfac']
     
     N2_index = np.random.permutation(N1)[:N2]
     params['N2_index'] = N2_index
@@ -1321,7 +1322,7 @@ def kfac_update(data_, params):
 #     A_ = [A1_, A2_, A3_]
 
     # Update running estimates of KFAC
-    rho = min(1-1/(i+1), 0.95)
+    rho = min(1-1/(i+1), rho_kfac)
 
     for l in range(numlayers):
         
