@@ -399,6 +399,10 @@ for i in range(int(max_epoch * iter_per_epoch)):
 
     print('a[-1] size:', a[-1].size())
     print('a[-1]:', a[-1])
+    print('torch.sum(a[-1], dim=0).size():', torch.sum(a[-1], dim=0).size())
+    print('torch.sum(a[-1], dim=0):', torch.sum(a[-1], dim=0))
+    print('torch.sum(a[-1], dim=1).size():', torch.sum(a[-1], dim=1).size())
+    print('torch.sum(a[-1], dim=1):', torch.sum(a[-1], dim=1))
     print('loss: ', loss)
 
     model = get_model_grad_zerod(model)
