@@ -109,9 +109,6 @@ class Model_2(nn.Module):
         loss = F.cross_entropy(z, t, reduction = 'none')
         weighted_loss = torch.dot(loss, v)
             
-
-#         cache = (a1, h1, a2, h2)
-            
 #         cache = ((self.numlayers - 1)) * 2 * [0]
 #         for l in range(0, self.numlayers - 1):            
 #             cache[2*l] = a[l]
@@ -400,6 +397,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     loss = F.cross_entropy(z, t_mb)
 
+    print('h[-1] size:', h[-1].size())
     print('h[-1]:', h[-1])
     print('loss: ', loss)
 
@@ -445,13 +443,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
     
     
-    ###########
-    # test
     
-#     loss = nn.MSELoss(z, t_mb)
-#     loss.backward()
-    
-#     print('test')
     
     ###########
     
