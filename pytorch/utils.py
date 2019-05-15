@@ -162,9 +162,7 @@ def compute_J_transpose_V_backp(v, data_, params):
 
 #     print('X_mb[N2_index].size(): ', X_mb[N2_index].size())
 
-#     model.W[0].data = model.W[0].data + 0.1
-#     model.W[0].data = model.W[0].data - 0.1
-#     print('test ?')
+
 
 #     model = get_model_grad_zerod(model)  
 
@@ -593,6 +591,12 @@ def get_subtract(model_grad, delta, params):
     numlayers = params['numlayers']
     for l in range(numlayers):
         delta[l] = model_grad[l] - delta[l]
+    return delta
+
+def get_plus(model_grad, delta, params):
+    numlayers = params['numlayers']
+    for l in range(numlayers):
+        delta[l] = model_grad[l] + delta[l]
     return delta
 
 def get_multiply(alpha, delta, params):
@@ -1104,7 +1108,8 @@ def SMW_Fisher_update(data_, params):
     ########################
     print('model_grad[1]: ', model_grad[1])
     
-    should_be_be_grad = computeFV(delta, data_, params)
+    should_be_grad = computeFV(delta, data_, params)
+    should_be_grad = get_plus(should_be_grad, get_multiply(lambda_, delta, params), params) 
     
     print('should_be_grad[1]: ', should_be_grad[1])
     
