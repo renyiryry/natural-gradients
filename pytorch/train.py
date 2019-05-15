@@ -392,21 +392,21 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     loss = F.cross_entropy(z, t_mb)
 
-    print('model.W[0]: ', model.W[0])
-    print('model.W[1]: ', model.W[1])
-    print('model.W[2]: ', model.W[2])
+#     print('model.W[0]: ', model.W[0])
+#     print('model.W[1]: ', model.W[1])
+#     print('model.W[2]: ', model.W[2])
 
-    print('a[0] size:', a[0].size())
-    print('a[0]:', a[0])
-    print('a[1] size:', a[1].size())
-    print('a[1]:', a[1])
-    print('a[2] size:', a[2].size())
-    print('a[2]:', a[2])
+#     print('a[0] size:', a[0].size())
+#     print('a[0]:', a[0])
+#     print('a[1] size:', a[1].size())
+#     print('a[1]:', a[1])
+#     print('a[2] size:', a[2].size())
+#     print('a[2]:', a[2])
 #     print('torch.sum(a[-1], dim=0).size():', torch.sum(a[-1], dim=0).size())
 #     print('torch.sum(a[-1], dim=0):', torch.sum(a[-1], dim=0))
-    print('torch.sum(a[-1], dim=1).size():', torch.sum(a[-1], dim=1).size())
-    print('torch.sum(a[-1], dim=1):', torch.sum(a[-1], dim=1))
-    print('loss: ', loss)
+#     print('torch.sum(a[-1], dim=1).size():', torch.sum(a[-1], dim=1).size())
+#     print('torch.sum(a[-1], dim=1):', torch.sum(a[-1], dim=1))
+#     print('loss: ', loss)
 
     model = get_model_grad_zerod(model)
     
@@ -446,7 +446,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         model_grad.append(copy.deepcopy(model.W[l].grad))
     data_['model_grad'] = model_grad
     
-    print('model_grad[1] in train: ', model_grad[1])
+#     print('model_grad[1] in train: ', model_grad[1])
     
     
     
