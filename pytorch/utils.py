@@ -440,7 +440,7 @@ def get_cache_momentum(data_, params):
         
         h_momentum = [copy.deepcopy(hi.data) for hi in h]
         
-        a_grad_momentum = numlayers * []
+        a_grad_momentum = numlayers * [0]
         for i in range(m_L):
             
 #         Jacobian_z = []
@@ -464,10 +464,13 @@ def get_cache_momentum(data_, params):
 
             for l in range(numlayers):
         
-                print('a_grad_momentum[l]: ', a_grad_momentum[l])
-                print('a[l]: ', a[l])
-        
-                a_grad_momentum[l].append(copy.deepcopy(a[l].grad))    
+#                 print('a_grad_momentum[l]: ', a_grad_momentum[l])
+#                 print('a[l]: ', a[l])
+                
+                if l == 0:
+                    a_grad_momentum[l] = copy.deepcopy(a[l].grad)
+                else:
+                    a_grad_momentum[l].append(copy.deepcopy(a[l].grad))    
         
                 
              
