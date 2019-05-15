@@ -263,6 +263,7 @@ parser.add_argument('N2', type=int)
 parser.add_argument('--alpha', type=float)
 parser.add_argument('--lambda_', type=float)
 parser.add_argument('--inverse_update_freq', type=int)
+parser.add_argument('--rho_kfac', type=float)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 algorithm = args.algorithm
@@ -270,6 +271,7 @@ params['algorithm'] = algorithm
 max_epoch = args.max_epoch
 record_epoch = args.record_epoch
 inverse_update_freq = args.inverse_update_freq
+rho_kfac = args.rho_kfac
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN':
     lambda_ = args.lambda_
@@ -303,6 +305,7 @@ alpha = args.alpha
 params['N1'] = N1
 params['N2'] = N2
 params['inverse_update_freq'] = inverse_update_freq
+params['rho_kfac'] = rho_kfac
 
 params['alpha'] = alpha
 params['numlayers'] = model.numlayers
