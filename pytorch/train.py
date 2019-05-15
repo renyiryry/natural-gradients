@@ -392,6 +392,10 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     loss = F.cross_entropy(z, t_mb)
 
+    print('model.W[0]: ', model.W[0])
+    print('model.W[1]: ', model.W[1])
+    print('model.W[2]: ', model.W[2])
+
     print('a[0] size:', a[0].size())
     print('a[0]:', a[0])
     print('a[1] size:', a[1].size())
@@ -450,7 +454,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 
     
-    print('model.W[1]: ', model.W[1])
+    
     
 #     print('z.grad: ', z.grad)
     
