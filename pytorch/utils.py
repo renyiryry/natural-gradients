@@ -1025,6 +1025,9 @@ def SMW_Fisher_update(data_, params):
         else:
             D_t_inv = data_['D_t_inv']
         
+        print('D_t_inv', D_t_inv.size())
+        print('v.data.numpy().size(): ', v.data.numpy().size())
+        
         hat_v = np.matmul(D_t_inv, v.data.numpy())
         
     else:
