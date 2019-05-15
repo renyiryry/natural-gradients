@@ -186,11 +186,6 @@ class Model(nn.Module):
 #         print('size(self.W[2]): ', self.W[2].numel())
 
     def forward(self, x):
-#         a1 = self.fc1(x)
-#         h1 = F.relu(a1)
-#         a2 = self.fc2(h1)
-#         h2 = F.relu(a2)
-#         z = self.fc3(h2)
         
 #         a = (self.numlayers - 1) * [0]
 #         h = (self.numlayers - 1) * [0]
@@ -405,6 +400,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     loss = F.cross_entropy(z, t_mb)
 
+    print('h[-1]:', h[-1])
     print('loss: ', loss)
 
     model = get_model_grad_zerod(model)
