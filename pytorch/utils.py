@@ -1261,6 +1261,8 @@ def computeFV(delta, data_, params):
     
     delta = get_mean(delta, params)
     
+    print('delta[1].size(): ', delta[1].size())
+    
     return delta
 
 
