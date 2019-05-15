@@ -164,106 +164,15 @@ def compute_J_transpose_V_backp(v, data_, params):
     
     
     
-    #########################
-#     mnist = data_['mnist']
-#     N1 = params['N1']
     
-#     import torch
-    
-#     X_mb, t_mb = mnist.train.next_batch(N1)
-#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
-
-    # Forward
-    
-#     v_0 = 1 / len(X_mb) * torch.ones(len(X_mb))
-#     loss, a, h = model.forward(X_mb[N2_index], t_mb[N2_index], v_0[N2_index])
-
-#     model = get_model_grad_zerod(model)
-    
-#     loss.backward()
-#     print('test 15:27')
     
    
     
-    #########################
-#     mnist = data_['mnist']
-#     N1 = params['N1']
     
-#     N2 = params['N2']
     
-#     import torch
     
-#     X_mb, t_mb = mnist.train.next_batch(N2)
-#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
-
-    # Forward
     
-#     v_2 = 2 / len(X_mb) * torch.ones(len(X_mb))
-#     loss, a, h = model.forward(X_mb, t_mb, v_2)
-
-#     model = get_model_grad_zerod(model)
     
-#     loss.backward()
-#     print('test 15:43')
-    
-    #########################
-#     mnist = data_['mnist']
-#     N1 = params['N1']
-    
-#     N2 = params['N2']
-    
-#     import torch
-    
-#     X_mb, t_mb = mnist.train.next_batch(N2)
-#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
-
-    # Forward
-    
-#     v_2 = 2 / len(X_mb) * torch.ones(len(X_mb))
-    
-#     print('v: ', v)
-#     print('v.data: ', v.data)
-#     print('v_2:', v_2)
-    
-#     for l in range(len(v_2)):
-        
-#         print('v_2[l].data: ', v_2[l].data)
-#         print('v[l].data: ', v[l].data)
-        
-#         v_2[l].data = v[l].data
-        
-#         print('v_2[l].data: ', v_2[l].data)
-#         print('v[l].data: ', v[l].data)
-        
-#     print('v_2:', v_2)
-    
-#     loss, a, h = model.forward(X_mb, t_mb, v.data)
-
-#     model = get_model_grad_zerod(model)
-    
-#     loss.backward()
-#     print('test 15:51')
-    
-    #########################
-#     mnist = data_['mnist']
-#     N1 = params['N1']
-    
-#     N2 = params['N2']
-    
-#     import torch
-    
-#     X_mb, t_mb = mnist.train.next_batch(N2)
-#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
-
-    # Forward
-    
-#     v_0 = 1 / len(X_mb) * torch.ones(len(X_mb))
-#     loss, a, h = model.forward(X_mb, t_mb, v.data)
-
-#     model = get_model_grad_zerod(model)
-    
-#     loss.backward()
-#     print('test 15:42')
     
     
 
@@ -299,7 +208,6 @@ def compute_J_transpose_V_backp(v, data_, params):
     
 #     weighted_loss.backward(retain_graph = True)
     loss.backward()
-#     loss.backward()
     
 #     print('test 10:28')
     
@@ -528,7 +436,8 @@ def get_cache_momentum(data_, params):
 
             model = get_model_grad_zerod(model)
     
-            torch.sum(z[:, i]).backward(retain_graph = True)
+#             torch.sum(z[:, i]).backward(retain_graph = True)
+            torch.sum(z[:, i]).backward()
         
             
         
@@ -1267,24 +1176,7 @@ def computeFV(delta, data_, params):
     
 #     print('time for FV 1/2: ', time.time() - start_time)
 
-    #########################
-#     mnist = data_['mnist']
-#     N1 = params['N1']
     
-#     import torch
-    
-#     X_mb, t_mb = mnist.train.next_batch(N1)
-#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
-
-    # Forward
-    
-#     v_0 = 1 / len(X_mb) * torch.ones(len(X_mb))
-#     loss, a, h = model.forward(X_mb, t_mb, v_0)
-
-#     model = get_model_grad_zerod(model)
-    
-#     loss.backward()
-#     print('test 11:08')
     
     
     if algorithm == 'SMW-Fisher' or algorithm == 'kfac':
