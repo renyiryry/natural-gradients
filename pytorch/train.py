@@ -397,8 +397,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     loss = F.cross_entropy(z, t_mb)
 
-    print('h[-1] size:', h[-1].size())
-    print('h[-1]:', h[-1])
+    print('a[-1] size:', a[-1].size())
+    print('a[-1]:', a[-1])
     print('loss: ', loss)
 
     model = get_model_grad_zerod(model)
@@ -538,20 +538,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         print('Error!')
         sys.exit()
         
-     #########################
-    
-#     X_mb, t_mb = mnist.train.next_batch(N1)
-#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
-
-    # Forward
-    
-#     v = 1 / len(X_mb) * torch.ones(len(X_mb))
-#     loss, a, h = model.forward(X_mb, t_mb, v)
-
-#     model = get_model_grad_zerod(model)
-    
-#     loss.backward()
-#     print('test 11:03')
+     
         
         
 #     print('time of second order:', time.time() - test_start_time)
