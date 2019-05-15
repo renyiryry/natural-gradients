@@ -444,9 +444,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
     
     
-    ###########
+
     
-#     print('model.W[1]: ', model.W[1])
+    print('model.W[1]: ', model.W[1])
     
 #     print('z.grad: ', z.grad)
     
