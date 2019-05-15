@@ -1293,11 +1293,11 @@ def kfac_update(data_, params):
             
             
             
-            A_inv[l] = (A[l] + lambda_ * torch.eye(A[l].shape[0])).inverse()
+            A_inv[l] = (A[l] + sqrt(lambda_) * torch.eye(A[l].shape[0])).inverse()
             
 #             print('G[l] + eps*torch.eye(G[l].shape[0]): ', G[l] + eps*torch.eye(G[l].shape[0]))
             
-            G_inv[l] = (G[l] + lambda_ * torch.eye(G[l].shape[0])).inverse()
+            G_inv[l] = (G[l] + sqrt(lambda_) * torch.eye(G[l].shape[0])).inverse()
 
 #         print(type(G_inv[l]))
 #         print(type(model.W[l].grad.data))
