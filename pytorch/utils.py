@@ -364,7 +364,9 @@ def compute_JV(V, data_, params):
         
         print('len(a_grad): ', len(a_grad))
         
-        print('a_grad[1].size(): ', a_grad[1].size())
+        print('len(a_grad[1]): ', len(a_grad[1]))
+        
+        print('a_grad[1][0].size(): ', a_grad[1][0].size())
         
         
         
