@@ -1018,7 +1018,7 @@ def SMW_Fisher_update(data_, params):
         
         inverse_update_freq = params['inverse_update_freq']
         
-        if (i - 1) % inverse_upate_freq == 0:
+        if (i - 1) % inverse_update_freq == 0:
             D_t = get_D_t(data_, params)
             D_t_inv = D_t.inverse().numpu()
             data_['D_tinv'] = D_t_inv
