@@ -391,11 +391,14 @@ def compute_JV(V, data_, params):
 def get_cache_momentum(data_, params):
     algorithm = params['algorithm']
     
-    X_mb = data_['X_mb']
+    
     
     if algorithm == 'SMW-GN':
 #         import torch
         import copy
+    
+        X_mb = data_['X_mb']
+        t_mb = data_['t_mb']
         
         model = data_['model']
         
@@ -422,7 +425,10 @@ def get_cache_momentum(data_, params):
         
 #         h_momentum = []
         
-        z, a, h = model.forward(X_mb[N2_index])
+        v_tmp = 1 / len(X_mb[N2_index]) * torch.ones(len(X_mb[N2_index]))
+        _, a, h = model.forward(X_mb[N2_index], t_mb[N2_index], v_tmp)
+        
+        z = a[-1]
         
 #         print('h[0].size(): ', h[0].size())
 #         print('h[1].size(): ', h[1].size())
