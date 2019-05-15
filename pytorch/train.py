@@ -134,7 +134,7 @@ class Model_2(nn.Module):
         return weighted_loss, a, h
 
 
-
+"""
 class Model(nn.Module):
 
     def __init__(self):
@@ -196,14 +196,7 @@ class Model(nn.Module):
             
         
         
-#         a = []
-#         h = []
-#         for l in range(self.numlayers - 1):
-#             if l == 0:
-#                 a.append(self.fc[l](x))
-#             else:
-#                 a.append(self.fc[l](h[l-1]))
-#             h.append(F.relu(a[l]))
+
             
         a = list(range(self.numlayers - 1))
         h = list(range(self.numlayers - 1))
@@ -248,6 +241,8 @@ class Model(nn.Module):
         
 
         return z, a, h
+"""
+
 
 # Model
 # model = Model()
@@ -399,8 +394,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
 
     print('a[-1] size:', a[-1].size())
     print('a[-1]:', a[-1])
-    print('torch.sum(a[-1], dim=0).size():', torch.sum(a[-1], dim=0).size())
-    print('torch.sum(a[-1], dim=0):', torch.sum(a[-1], dim=0))
+#     print('torch.sum(a[-1], dim=0).size():', torch.sum(a[-1], dim=0).size())
+#     print('torch.sum(a[-1], dim=0):', torch.sum(a[-1], dim=0))
     print('torch.sum(a[-1], dim=1).size():', torch.sum(a[-1], dim=1).size())
     print('torch.sum(a[-1], dim=1):', torch.sum(a[-1], dim=1))
     print('loss: ', loss)
