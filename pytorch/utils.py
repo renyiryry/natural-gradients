@@ -437,7 +437,9 @@ def get_cache_momentum(data_, params):
         
         
         
-        a_grad_momentum = numlayers * [0]
+        a_grad_momentum = list(range(numlayers))
+        
+        print('a_grad_momentum', a_grad_momentum)
         
         v_tmp = 1 / len(X_mb[N2_index]) * torch.ones(len(X_mb[N2_index]))
         
