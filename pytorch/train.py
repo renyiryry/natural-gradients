@@ -554,9 +554,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
     p = data_['p']
     
-    print('p[0]: ', p[0])
-    print('p[1]: ', p[1])
-    print('p[2]: ', p[2])
+#     print('p[0]: ', p[0])
+#     print('p[1]: ', p[1])
+#     print('p[2]: ', p[2])
     
     
     if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN':
