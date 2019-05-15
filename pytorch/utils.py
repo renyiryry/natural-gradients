@@ -931,6 +931,9 @@ def SMW_Fisher_update(data_, params):
     h = data_['h']
 #     z = data_['z']
 
+
+        
+
     
     
     if algorithm == 'SMW-Fisher-momentum':
@@ -948,8 +951,9 @@ def SMW_Fisher_update(data_, params):
     alpha = params['alpha']
     lambda_ = params['lambda_']
     numlayers = params['numlayers']
-    boost = params['boost']
-    drop = params['drop']
+    
+    
+    
     
     N2_index = np.random.permutation(N1)[:N2]
     params['N2_index'] = N2_index
@@ -990,8 +994,10 @@ def SMW_Fisher_update(data_, params):
     
 
 #     start_time = time.time()
+
+    if algorithm == 'SMW-Fisher':
         
-    D_t = get_D_t(data_, params)
+        D_t = get_D_t(data_, params)
     
 #     print('D_t:', D_t)
     
@@ -1002,10 +1008,28 @@ def SMW_Fisher_update(data_, params):
     
 #     start_time = time.time()
     
-    D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
-    hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
+        D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
+        hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
-    hat_v = torch.from_numpy(hat_v)
+        hat_v = torch.from_numpy(hat_v)
+        
+    elif algorithm == 'SMW-Fisher-momentum':
+            
+        
+        inverse_update_freq = params['inverse_update_freq']
+        
+        if (i - 1) % inverse_upate_freq == 0:
+            D_t = get_D_t(data_, params)
+            D_t_inv = D_t.inverse().numpu()
+            data_['D_tinv'] = D_t_inv
+        else:
+            D_t_inv = data_['data_inv']
+        
+        hat_v = np.matmul(D_t_inv, v.data.numpy())
+        
+    else:
+        print('Error!')
+        sys.exit()
     
 #     print('time for solve linear system: ', start_time - time.time())
     
