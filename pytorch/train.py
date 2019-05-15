@@ -360,8 +360,10 @@ else:
 # Visualization stuffs
 len_record = int(max_epoch / record_epoch)
 losses = np.zeros(len_record + 1)
+acces = np.zeros(len_record + 1)
 times = np.zeros(len_record + 1)
 
+acces[0] = get_acc(model, X_test, t_test)
 losses[0] = get_loss(model, X_train, t_train)
 times[0] = 0
 
@@ -591,7 +593,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
 #         print(t_mb)
             
-        print(f'Iter-{epoch+1}; Loss: {loss:.3f}')
+        
         if epoch > 0:
             print('elapsed time: ', times[epoch+1] - times[epoch])
         else:
@@ -614,19 +616,19 @@ for i in range(int(max_epoch * iter_per_epoch)):
             
         losses[epoch+1] = get_loss(model, X_train, t_train).data.numpy()
         
+        acces[epoch+1] = get_acc(model, X_test, t_test).data.numpy()
+        
+        print(f'Iter-{epoch+1}; Loss: {losses[epoch+1]:.3f}')
+        print(f'Accuracy: {acces[epoch+1]:.3f}')
+        
     
         
     model = get_model_grad_zerod(model)
 
     
 
-v = 1 / len(X_test) * torch.ones(len(X_test))
-_, a , _= model.forward(torch.from_numpy(X_test), torch.from_numpy(t_test).long(), v)
-z = a[-1]
-y = z.argmax(dim=1)
-acc = np.mean(y.numpy() == t_test)
 
-print(f'Accuracy: {acc:.3f}')
+
 
 
 # times = np.asarray([0] + [times])
@@ -639,9 +641,11 @@ print(f'Accuracy: {acc:.3f}')
 name_result = algorithm + '_alpha_' + str(alpha)
 
 np.save('/content/logs/temp/' + name_result + '_losses.npy', losses)
+np.save('/content/logs/temp/' + name_result + '_acces.npy', acces)
 np.save('/content/logs/temp/' + name_result + '_times.npy', times)
 
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_losses.npy', losses)
+np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_acces.npy', acces)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_times.npy', times)
 
 
