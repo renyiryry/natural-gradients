@@ -1100,6 +1100,17 @@ def SMW_Fisher_update(data_, params):
     delta = get_multiply(1 / lambda_, delta, params)
     
 #     print('delta[1] 4: ', delta[1])
+
+    ########################
+    print('model_grad[1]: ', model_grad[1])
+    
+    should_be_be_grad = computeFV(delta, data_, params)
+    
+    print('should_be_grad[1]: ', should_be_grad[1])
+    
+    
+    print('test')
+
         
     p = get_minus(delta, params)
     
