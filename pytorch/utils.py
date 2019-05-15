@@ -1357,7 +1357,7 @@ def kfac_update(data_, params):
         
 #         print('A[l].size(): ', A[l].size())
         
-#         print('G[l]: ', G[l])
+        print('G[l]: ', G[l])
 
     # Step
     delta = []
