@@ -811,8 +811,6 @@ def update_lambda(p, data_, params):
     
     
     # compute rho
-#     test_rate = 1;
-#     test_p = test_rate * p;
       
 
 #     [ll_chunk, ~] =...
@@ -852,9 +850,9 @@ def update_lambda(p, data_, params):
     if oldll_chunk - ll_chunk < 0:
         rho = float("-inf")
     else:
-        if algorithm == 'SMW-GN':
+        if algorithm == 'SMW-Fisher' or algorithm == 'SMW-GN':
             denom = - 0.5 * get_dot_product(model_grad, p, params)
-        elif algorithm == 'SMW-Fisher' or algorithm == 'kfac' or algorithm == 'SMW-Fisher-momentum':
+        elif algorithm == 'kfac' or algorithm == 'SMW-Fisher-momentum':
             denom = computeFV(p, data_, params)
                 
             denom = get_dot_product(p, denom, params)
