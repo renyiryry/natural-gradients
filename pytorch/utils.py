@@ -280,7 +280,7 @@ def get_D_t(data_, params):
     elif algorithm == 'SMW-GN':
         
 #         from numpy import kron
-        import numpy as np
+#         import numpy as np
     
         GN_cache = data_['GN_cache']
         h = GN_cache['h']
@@ -590,11 +590,7 @@ def SMW_GN_update(data_, params):
     # model.W[l]: size m[l+1] * m[l]
     
     
-#     import torch
-    import numpy as np
-#     import scipy
-#     import time
-#     import copy
+
     
 #     algorithm = params['algorithm']
 #     model = data_['model']
@@ -894,7 +890,7 @@ def update_lambda(p, data_, params):
 
 def SMW_Fisher_update(data_, params):
 #     import torch
-    import numpy as np
+#     import numpy as np
     import scipy
     import time
     import copy
@@ -1155,8 +1151,6 @@ def get_mean(delta, params):
     return delta
 
 def computeFV(delta, data_, params):
-#     import torch
-    import numpy as np
     
     X_mb = data_['X_mb']
     t_mb = data_['t_mb']
@@ -1208,7 +1202,7 @@ def computeFV(delta, data_, params):
 
 
 def kfac_update(data_, params):
-    import numpy as np
+#     import numpy as np
     
     X_mb = data_['X_mb']
     
