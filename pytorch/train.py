@@ -368,10 +368,12 @@ len_record = int(max_epoch / record_epoch)
 losses = np.zeros(len_record + 1)
 acces = np.zeros(len_record + 1)
 times = np.zeros(len_record + 1)
+epochs = np.zeros(len_record + 1)
 
 acces[0] = get_acc(model, X_test, t_test)
 losses[0] = get_loss(model, X_train, t_train)
 times[0] = 0
+epoches = 0
 
 
 # times[0] = 0
@@ -581,7 +583,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
         acces[epoch+1] = get_acc(model, X_test, t_test)
         
-        
+        epochs[epoch+1] = epoch * record_epoch
     
         
 #         print(z)
@@ -612,6 +614,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
             print('elapsed time: ', times[epoch+1] - times[epoch])
         else:
             print('elapsed time: ', times[epoch+1])
+            
+        
             
         if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
             lambda_ = params['lambda_']
