@@ -728,15 +728,13 @@ def SMW_GN_update(data_, params):
 
     # compute natural gradient
     
-#     data_compute_J_transpose_V = {}
-#     data_compute_J_transpose_V['a_grad_momentum'] = a_grad_momentum
-#     data_compute_J_transpose_V['h_momentum'] = h_momentum
+
     
 #     start_time = time.time()
     
     
     
-    delta = compute_J_transpose_V_1_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
+    delta = compute_sum_J_transpose_V_1_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
 
 #     print('test delta')
 #     delta = model_grad
@@ -745,7 +743,7 @@ def SMW_GN_update(data_, params):
     
 #     print('\n')
     
-#     data_compute_J_transpose_V = {}
+
     
     
         
@@ -799,7 +797,7 @@ def get_model_grad_zerod(model):
 
 
 
-def compute_J_transpose_V(v, data_, params):
+def compute_sum_J_transpose_V(v, data_, params):
     
     a_grad_momentum = data_['a_grad_momentum']
     h_momentum = data_['h_momentum']
@@ -815,6 +813,10 @@ def compute_J_transpose_V(v, data_, params):
 
     for l in range(numlayers):
         delta[l] = torch.sum(delta[l], dim = 0) # [m[l+1], m[l]]
+        
+    print('check if correct')
+    
+    sys.exit()
     
     
     return delta
@@ -1061,9 +1063,7 @@ def SMW_Fisher_update(data_, params):
 
     # compute natural gradient
     
-#     data_compute_J_transpose_V = {}
-#     data_compute_J_transpose_V['a_grad_momentum'] = a_grad_momentum
-#     data_compute_J_transpose_V['h_momentum'] = h_momentum
+
     
 #     start_time = time.time()
     
@@ -1073,7 +1073,7 @@ def SMW_Fisher_update(data_, params):
     if algorithm == 'SMW-Fisher':
         delta = compute_sum_J_transpose_V_backp(hat_v, data_, params)
     elif algorithm == 'SMW-Fisher-momentum':
-        delta = compute_J_transpose_V(hat_v, data_, params)
+        delta = compute_sum_J_transpose_V(hat_v, data_, params)
     else:
         print('Error!')
         sys.exit()
@@ -1085,7 +1085,7 @@ def SMW_Fisher_update(data_, params):
     
 #     print('\n')
     
-#     data_compute_J_transpose_V = {}
+
         
 #     print('delta[1] 1: ', delta[1])    
    
@@ -1253,12 +1253,11 @@ def computeFV(delta, data_, params):
     
     
     
-#     if algorithm == 'SMW-Fisher' or algorithm == 'kfac':
+
     delta = compute_sum_J_transpose_V_backp(v, data_, params)
-#     elif algorithm == 'SMW-Fisher-momentum':
-#         delta = compute_J_transpose_V(v, data_, params)
+
     
-    print('delta[1].size(): ', delta[1].size())
+#     print('delta[1].size(): ', delta[1].size())
     
     
     
@@ -1266,7 +1265,7 @@ def computeFV(delta, data_, params):
     
     delta = get_multiply(1 / N2, delta, params)
     
-    print('delta[1].size(): ', delta[1].size())
+#     print('delta[1].size(): ', delta[1].size())
     
     return delta
 
