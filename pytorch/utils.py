@@ -118,6 +118,14 @@ def get_loss(model, x, t):
     v = 1 / len(x) * torch.ones(len(x))
     loss, _, _ = model.forward(x, t, v)
     return loss
+
+def get_acc(model, x, t)
+    v = 1 / len(x) * torch.ones(len(x))
+    _, a , _= model.forward(torch.from_numpy(x), torch.from_numpy(t).long(), v)
+    z = a[-1]
+    y = z.argmax(dim=1)
+    acc = np.mean(y.numpy() == t)
+    return acc
     
 def compute_J_transpose_V_backp(v, data_, params):
     # use backpropagation
