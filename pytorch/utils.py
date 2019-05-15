@@ -1213,8 +1213,8 @@ def kfac_update(data_, params):
 #     h1 = data_['h1']
 #     h2 = data_['h2']
     
-    a = data_['a']
-    h = data_['h']
+#     a = data_['a']
+#     h = data_['h']
     
 #     z = data_['z']
     A = data_['A']
@@ -1243,27 +1243,25 @@ def kfac_update(data_, params):
 #             a.append(cache[ii])
 #         else:
 #             h.append(cache[ii])
+
+    data_ = get_cache_momentum(data_, params)
     
     
     
-    
+    a_grad_momentum = data_['a_grad_momentum']
+    h_momentum = data_['h_momentum']
     
     G_ = []
     for l in range(0, numlayers):
-#         if l < numlayers - 1:
-        G_.append(1/N1 * a[l].grad.t() @ a[l].grad)
-#         elif l == numlayers - 1:
-#             G_.append(1/N1 * z.grad.t() @ z.grad)
-#         else:
-#             print('Error!')
-#             sys.exit()
+        G_.append(1/N2 * a_grad_momentum[l].t() @ a_grad_momentum[l])
+        
             
     A_ = []
     for l in range(0, numlayers):
 #         if l == 0:
 #             A_.append(1/N1 * X_mb.t() @ X_mb)
 #         else:
-        A_.append(1/N1 * h[l].t() @ h[l])
+        A_.append(1/N2 * h_momentum[l].t() @ h_momentum[l])
         
 
 #     G_ = [G1_, G2_, G3_]
@@ -1322,7 +1320,7 @@ def kfac_update(data_, params):
         
 #         print('delta: ', delta)
 
-    data_ = get_cache_momentum(data_, params)
+    
     
     p = []
     for l in range(numlayers):
