@@ -435,7 +435,8 @@ def get_cache_momentum(data_, params):
         
         
         
-        a_grad_momentum = list(range(numlayers))
+#         a_grad_momentum = list(range(numlayers))
+        a_grad_momentum = numlayers * [[]]
         
         print('a_grad_momentum', a_grad_momentum)
         
