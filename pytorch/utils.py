@@ -1023,7 +1023,7 @@ def SMW_Fisher_update(data_, params):
             D_t_inv = D_t.inverse().numpu()
             data_['D_tinv'] = D_t_inv
         else:
-            D_t_inv = data_['data_inv']
+            D_t_inv = data_['D_t_inv']
         
         hat_v = np.matmul(D_t_inv, v.data.numpy())
         
