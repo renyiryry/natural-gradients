@@ -614,9 +614,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #         loss = F.cross_entropy(z, t_train)    
             
-        losses[epoch+1] = get_loss(model, X_train, t_train).data.numpy()
+        losses[epoch+1] = get_loss(model, X_train, t_train)
         
-        acces[epoch+1] = get_acc(model, X_test, t_test).data.numpy()
+        acces[epoch+1] = get_acc(model, X_test, t_test)
         
         print(f'Iter-{epoch+1}; Loss: {losses[epoch+1]:.3f}')
         print(f'Accuracy: {acces[epoch+1]:.3f}')
