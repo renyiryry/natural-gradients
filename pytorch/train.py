@@ -620,6 +620,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
         print(f'Iter-{epoch+1}; Loss: {losses[epoch+1]:.3f}')
         print(f'Accuracy: {acces[epoch+1]:.3f}')
+        print('\n')
         
     
         
