@@ -420,22 +420,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     loss.backward()
     
     
-    #########################
     
-#     data_['mnist'] = mnist
-    
-#     X_mb, t_mb = mnist.train.next_batch(N1)
-#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
-
-    # Forward
-    
-#     v = 1 / len(X_mb) * torch.ones(len(X_mb))
-#     loss, a, h = model.forward(X_mb, t_mb, v)
-
-#     model = get_model_grad_zerod(model)
-    
-#     loss.backward()
-#     print('test 11:00')
 
 #         print('time of loss:', time.time() - test_start_time)
 
@@ -585,6 +570,10 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
         if epoch > 0:
             times[epoch+1] = times[epoch+1] + times[epoch]
+            
+        losses[epoch+1] = get_loss(model, X_train, t_train)
+        
+        acces[epoch+1] = get_acc(model, X_test, t_test)
         
         
     
@@ -594,10 +583,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #         print(t_mb)
             
         
-        if epoch > 0:
-            print('elapsed time: ', times[epoch+1] - times[epoch])
-        else:
-            print('elapsed time: ', times[epoch+1])
+        
         if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
             lambda_ = params['lambda_']
             print('lambda = ', lambda_)
@@ -614,12 +600,16 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #         loss = F.cross_entropy(z, t_train)    
             
-        losses[epoch+1] = get_loss(model, X_train, t_train)
         
-        acces[epoch+1] = get_acc(model, X_test, t_test)
         
         print(f'Iter-{epoch+1}; Loss: {losses[epoch+1]:.3f}')
         print(f'Accuracy: {acces[epoch+1]:.3f}')
+        
+        if epoch > 0:
+            print('elapsed time: ', times[epoch+1] - times[epoch])
+        else:
+            print('elapsed time: ', times[epoch+1])
+        
         print('\n')
         
     
