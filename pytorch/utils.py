@@ -1214,12 +1214,15 @@ def get_dot_product(delta_1, delta_2, params):
     
     return dot_product
 
+"""
 def get_mean(delta, params):
 #     import torch
     numlayers = params['numlayers']
     for l in range(numlayers):
         delta[l] = torch.mean(delta[l], dim=0)
     return delta
+"""
+
 
 def computeFV(delta, data_, params):
     
@@ -1259,7 +1262,9 @@ def computeFV(delta, data_, params):
     
     
     
-    delta = get_mean(delta, params)
+#     delta = get_mean(delta, params)
+    
+    delta = get_multiply(1 / N2, delta, params)
     
     print('delta[1].size(): ', delta[1].size())
     
