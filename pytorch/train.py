@@ -381,9 +381,6 @@ times[0] = 0
 
 # times[0] = 0
 
-# max_iter = 5000
-# max_iter = 5
-
 iter_per_epoch = int(len(mnist.train.labels) / N1)
 
 iter_per_record = int(len(mnist.train.labels) * record_epoch / N1)
@@ -408,7 +405,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     loss = F.cross_entropy(z, t_mb)
 
-#     print('loss: ', loss)
+    print('loss: ', loss)
 
     model = get_model_grad_zerod(model)
     
