@@ -128,7 +128,7 @@ def get_acc(model, x, t):
     acc = np.mean(y.numpy() == t)
     return acc
     
-def compute_J_transpose_V_backp(v, data_, params):
+def compute_sum_J_transpose_V_backp(v, data_, params):
     # use backpropagation
     import copy
     import torch.nn.functional as F
@@ -1069,9 +1069,9 @@ def SMW_Fisher_update(data_, params):
     
     
     
-#     delta = compute_J_transpose_V_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
+
     if algorithm == 'SMW-Fisher':
-        delta = compute_J_transpose_V_backp(hat_v, data_, params)
+        delta = compute_sum_J_transpose_V_backp(hat_v, data_, params)
     elif algorithm == 'SMW-Fisher-momentum':
         delta = compute_J_transpose_V(hat_v, data_, params)
     else:
@@ -1251,7 +1251,7 @@ def computeFV(delta, data_, params):
     
     
     if algorithm == 'SMW-Fisher' or algorithm == 'kfac':
-        delta = compute_J_transpose_V_backp(v, data_, params)
+        delta = compute_sum_J_transpose_V_backp(v, data_, params)
     elif algorithm == 'SMW-Fisher-momentum':
         delta = compute_J_transpose_V(v, data_, params)
     
