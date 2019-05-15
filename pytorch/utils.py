@@ -1345,6 +1345,8 @@ def kfac_update(data_, params):
 
     # Update running estimates of KFAC
     rho = min(1-1/(i+1), rho_kfac)
+    
+#     print()
 
     for l in range(numlayers):
         
@@ -1357,7 +1359,7 @@ def kfac_update(data_, params):
         
 #         print('A[l].size(): ', A[l].size())
         
-        print('G[l]: ', G[l])
+#      print('G[1]: ', G[1])
 
     # Step
     delta = []
