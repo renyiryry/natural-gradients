@@ -362,7 +362,12 @@ def compute_JV(V, data_, params):
         
         v = torch.zeros(m_L, N2)
         
-        print('a_grad.size(): ', a_grad.size())
+        print('len(a_grad): ', len(a_grad))
+        
+        print('a_grad[1].size(): ', a_grad[1].size())
+        
+        
+        
         print('h.size(): ', h.size())
         
         
