@@ -584,10 +584,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
             
         
         
-        if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
-            lambda_ = params['lambda_']
-            print('lambda = ', lambda_)
-            print('\n')
+        
 
             
         
@@ -609,6 +606,10 @@ for i in range(int(max_epoch * iter_per_epoch)):
             print('elapsed time: ', times[epoch+1] - times[epoch])
         else:
             print('elapsed time: ', times[epoch+1])
+            
+        if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
+            lambda_ = params['lambda_']
+            print('lambda = ', lambda_)
         
         print('\n')
         
