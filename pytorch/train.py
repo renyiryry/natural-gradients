@@ -349,6 +349,10 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
         
     data_['a_grad_momentum'] = a_grad_momentum
     data_['h_momentum'] = h_momentum
+    
+    D_t_inv = [0]
+    data_['D_t_inv'] = D_t_inv
+    
 elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN':
     1;
 else:
