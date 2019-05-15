@@ -1011,7 +1011,7 @@ def SMW_Fisher_update(data_, params):
         D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
         hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
-        hat_v = torch.from_numpy(hat_v)
+        
         
     elif algorithm == 'SMW-Fisher-momentum':
             
@@ -1025,7 +1025,7 @@ def SMW_Fisher_update(data_, params):
         else:
             D_t_inv = data_['D_t_inv']
         
-        print('D_t_inv ', D_t_inv)
+#         print('D_t_inv ', D_t_inv)
 #         print('D_t_inv', D_t_inv.size())
 #         print('v.data.numpy().size(): ', v.data.numpy().size())
         
@@ -1034,6 +1034,8 @@ def SMW_Fisher_update(data_, params):
     else:
         print('Error!')
         sys.exit()
+        
+    hat_v = torch.from_numpy(hat_v)
     
 #     print('time for solve linear system: ', start_time - time.time())
     
