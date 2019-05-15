@@ -1,7 +1,9 @@
+import torch
+
 """
 import torch.nn as nn
 import torch.nn.functional as F
-import torch
+
 
 class Model_2(nn.Module):
 
@@ -120,7 +122,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     # use backpropagation
     import copy
     import torch.nn.functional as F
-    import torch
+#     import torch
     
     numlayers = params['numlayers']
     
@@ -159,24 +161,7 @@ def compute_J_transpose_V_backp(v, data_, params):
 
     
     
-    #########################
-#     mnist = data_['mnist']
-#     N1 = params['N1']
     
-#     import torch
-    
-#     X_mb, t_mb = mnist.train.next_batch(N1)
-#     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
-
-    # Forward
-    
-#     v_0 = 1 / len(X_mb) * torch.ones(len(X_mb))
-#     loss, a, h = model.forward(X_mb[:-1], t_mb[:-1], v_0[:-1])
-
-#     model = get_model_grad_zerod(model)
-    
-#     loss.backward()
-#     print('test 15:26')
     
     #########################
 #     mnist = data_['mnist']
@@ -344,7 +329,7 @@ def compute_J_transpose_V_backp(v, data_, params):
     
 def get_D_t(data_, params):
     import sys
-    import torch
+#     import torch
     algorithm = params['algorithm']
     
     N2 = params['N2']
@@ -414,7 +399,7 @@ def compute_JV(V, data_, params):
     N2 = params['N2']
     
     if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac':
-        import torch
+#         import torch
     
         a_grad_momentum = data_['a_grad_momentum']
         h_momentum = data_['h_momentum']
@@ -444,7 +429,7 @@ def compute_JV(V, data_, params):
 #     print('1/N2 * h_momentum[1].t() @ a_grad_momentum[1]:', 1/N2 * h_momentum[1].t() @ a_grad_momentum[1])
     elif algorithm == 'SMW-GN':
         
-        import torch
+#         import torch
         
         GN_cache = data_['GN_cache']
         
@@ -491,7 +476,7 @@ def get_cache_momentum(data_, params):
     X_mb = data_['X_mb']
     
     if algorithm == 'SMW-GN':
-        import torch
+#         import torch
         import copy
         
         model = data_['model']
@@ -992,7 +977,7 @@ def update_lambda(p, data_, params):
     return lambda_
 
 def SMW_Fisher_update(data_, params):
-    import torch
+#     import torch
     import numpy as np
     import scipy
     import time
@@ -1247,14 +1232,14 @@ def get_dot_product(delta_1, delta_2, params):
     return dot_product
 
 def get_mean(delta, params):
-    import torch
+#     import torch
     numlayers = params['numlayers']
     for l in range(numlayers):
         delta[l] = torch.mean(delta[l], dim=0)
     return delta
 
 def computeFV(delta, data_, params):
-    import torch
+#     import torch
     import numpy as np
     
     X_mb = data_['X_mb']
@@ -1324,7 +1309,7 @@ def computeFV(delta, data_, params):
 
 
 def kfac_update(data_, params):
-    import torch
+#     import torch
     import sys
     import numpy as np
     
