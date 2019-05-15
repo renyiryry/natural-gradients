@@ -1,4 +1,5 @@
 import torch
+import sys
 
 """
 import torch.nn as nn
@@ -328,7 +329,7 @@ def compute_J_transpose_V_backp(v, data_, params):
 
     
 def get_D_t(data_, params):
-    import sys
+#     import sys
 #     import torch
     algorithm = params['algorithm']
     
@@ -392,7 +393,7 @@ def get_D_t(data_, params):
     return D_t
 
 def compute_JV(V, data_, params):
-    import sys
+#     import sys
     algorithm = params['algorithm']
     
     numlayers = params['numlayers']
@@ -881,7 +882,7 @@ def compute_J_transpose_V(v, data_, params):
 
 
 def update_lambda(p, data_, params):
-    import sys
+#     import sys
     
     model = data_['model']
     X_mb = data_['X_mb']
@@ -1310,7 +1311,7 @@ def computeFV(delta, data_, params):
 
 def kfac_update(data_, params):
 #     import torch
-    import sys
+#     import sys
     import numpy as np
     
     X_mb = data_['X_mb']
@@ -1353,15 +1354,7 @@ def kfac_update(data_, params):
     
     
     
-    # KFAC matrices
-#     G1_ = 1/m * a1.grad.t() @ a1.grad
-#     G2_ = 1/m * a2.grad.t() @ a2.grad
-#     G3_ = 1/m * z.grad.t() @ z.grad
     
-    
-#     A1_ = 1/m * X_mb.t() @ X_mb
-#     A2_ = 1/m * h1.t() @ h1
-#     A3_ = 1/m * h2.t() @ h2
     
     G_ = []
     for l in range(0, numlayers):
