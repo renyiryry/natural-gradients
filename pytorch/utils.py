@@ -1250,12 +1250,12 @@ def computeFV(delta, data_, params):
     
     
     
-    if algorithm == 'SMW-Fisher' or algorithm == 'kfac':
-        delta = compute_sum_J_transpose_V_backp(v, data_, params)
-    elif algorithm == 'SMW-Fisher-momentum':
-        delta = compute_J_transpose_V(v, data_, params)
+#     if algorithm == 'SMW-Fisher' or algorithm == 'kfac':
+    delta = compute_sum_J_transpose_V_backp(v, data_, params)
+#     elif algorithm == 'SMW-Fisher-momentum':
+#         delta = compute_J_transpose_V(v, data_, params)
     
-#     print('delta.size(): ', delta.size())
+    print('delta[1].size(): ', delta[1].size())
     
     
     
