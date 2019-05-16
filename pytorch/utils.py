@@ -702,7 +702,7 @@ def SMW_GN_update(data_, params):
     v = compute_JV(model_grad, data_, params)
     
     
-    print('v of compute JV: ', v)
+#     print('v of compute JV: ', v)
     
 #     print('time for compute JV: ', start_time - time.time())
     
@@ -717,7 +717,7 @@ def SMW_GN_update(data_, params):
         
     D_t = get_D_t(data_, params)
     
-    print('D_t:', D_t)
+#     print('D_t:', D_t)
     
 #     print('v:', v)
 #     print('torch.mean(v): ', torch.mean(v))
@@ -743,7 +743,7 @@ def SMW_GN_update(data_, params):
     
 #     print('time for solve linear system: ', start_time - time.time())
     
-    print('hat_v: ', hat_v)
+#     print('hat_v: ', hat_v)
     
 #     print('torch.mean(hat_v): ', torch.mean(hat_v))
     
@@ -782,7 +782,7 @@ def SMW_GN_update(data_, params):
 
         
         
-    print('delta[1]: ', delta[1])
+#     print('delta[1]: ', delta[1])
 #     print('model_grad[1]: ', model_grad[1]
         
 
@@ -794,20 +794,20 @@ def SMW_GN_update(data_, params):
     delta = get_multiply(1 / lambda_, delta, params)
     
     
-    print('delta[1]: ', delta[1])
+#     print('delta[1]: ', delta[1])
     
     
     
     ########################
-    print('model_grad[1]: ', model_grad[1])
+#     print('model_grad[1]: ', model_grad[1])
 #     
-    should_be_grad = computeFV(delta, data_, params)
-    should_be_grad = get_plus(should_be_grad, get_multiply(lambda_, delta, params), params) 
+#     should_be_grad = computeFV(delta, data_, params)
+#     should_be_grad = get_plus(should_be_grad, get_multiply(lambda_, delta, params), params) 
     
-    print('should_be_grad[1]: ', should_be_grad[1])
+#     print('should_be_grad[1]: ', should_be_grad[1])
     
     
-    print('test')
+#     print('test')
     
         
     p = get_minus(delta, params)
