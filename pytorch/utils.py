@@ -256,7 +256,7 @@ def get_D_t(data_, params):
 #         H = get_H(data_, params)
 #         for i in range(N2):
 #             D_t[i * m_L: (i+1) * m_L, i * m_L: (i+1) * m_L] += lambda_ * H[i]
-        D_t = D_t + lambda_ * torch.eye(m_L * N2)
+        D_t = D_t + lambda_ * np.eye(m_L * N2)
         
     else:
         print('Error!')
