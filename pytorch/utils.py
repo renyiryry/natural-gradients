@@ -326,7 +326,7 @@ def get_D_t(data_, params):
             
             print('h_kron.dtype', h_kron.dtype)
             
-            print('(permuted_a_grad_l @ permuted_a_grad_l.t())', (permuted_a_grad_l @ permuted_a_grad_l.t()).dtype).type(torch.DoubleTensor)
+#             print('(permuted_a_grad_l @ permuted_a_grad_l.t())', (permuted_a_grad_l @ permuted_a_grad_l.t()).dtype).type(torch.DoubleTensor)
             
 #             print('permuted_a_grad_l.size(): ', permuted_a_grad_l.size())
             
@@ -350,7 +350,7 @@ def get_D_t(data_, params):
             
 #             print('print((permuted_a_grad_l.t() @ permuted_a_grad_l).size())', (permuted_a_grad_l.t() @ permuted_a_grad_l).size())
             
-            D_t += h_kron * (permuted_a_grad_l @ permuted_a_grad_l.t())
+            D_t += h_kron * (permuted_a_grad_l @ permuted_a_grad_l.t()).type(torch.DoubleTensor)
     else:
         print('Error!')
         sys.exit()
