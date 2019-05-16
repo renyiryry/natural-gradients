@@ -492,9 +492,10 @@ for i in range(int(max_epoch * iter_per_epoch)):
 
     # Forward
     
-    v = 1 / len(X_mb) * torch.ones(len(X_mb))
-    loss, a, h = model.forward(X_mb, t_mb, v)
+#     v = 1 / len(X_mb) * torch.ones(len(X_mb))
+    z, a, h = model.forward(X_mb)
     
+    loss = F.cross_entropy(z, t_mb, reduction = 'mean')    
 #     loss = F.cross_entropy(z, t_mb)
 
 #     print('model.W[0]: ', model.W[0])
