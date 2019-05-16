@@ -357,7 +357,7 @@ def get_D_t(data_, params):
         D_t = np.transpose(D_t)
         
         for i in range(N2 * m_L):
-            D_t[:, i] = get_HV(D_t[:, i])
+            D_t[:, i] = get_HV(D_t[:, i], data_, params)
         
         D_t = np.transpose(D_t)
         
@@ -374,6 +374,26 @@ def get_D_t(data_, params):
         print('Error!')
         sys.exit()
     return D_t
+
+def get_HV(V, data_, params):
+    
+    N2 = params['N2']
+    N2_index = params['N2_index']
+    
+    V = reshape(V, (N2, m_L))
+    
+    a = data_['a']
+    z = a[-1]
+    
+    HV = np.multiply(z[N2_index], V)
+    
+    sum_HV = np.sum(HV, 1) # length N2
+    
+    for i in range(N2):
+        HV[i] -= sum_HV[i] * z[N2_index][i]
+        
+    
+    return HV
 
 def compute_JV(V, data_, params):
 #     import sys
