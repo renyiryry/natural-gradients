@@ -200,12 +200,12 @@ def get_D_t(data_, params):
             
             # a_grad[l]
             
-            print('len(a_grad_l)', len(a_grad_l))
+#             print('len(a_grad_l)', len(a_grad_l))
             
 #             print('a_grad_l[0].size(): ', a_grad_l[0].size())
             
     
-            print('a_grad_l.permute(1, 0, 2).contiguous().size():', a_grad_l.permute(1, 0, 2).contiguous().size())
+#             print('a_grad_l.permute(1, 0, 2).contiguous().size():', a_grad_l.permute(1, 0, 2).contiguous().size())
             
             
             permuted_a_grad_l = a_grad_l.permute(1, 0, 2).contiguous().view(m_L * N2, model.layersizes[l+1])
@@ -218,7 +218,7 @@ def get_D_t(data_, params):
             
 #             h_kron = h_kron.type(torch.DoubleTensor)
             
-            print('h_kron.dtype', h_kron.dtype)
+#             print('h_kron.dtype', h_kron.dtype)
             
 #             print('(permuted_a_grad_l @ permuted_a_grad_l.t())', (permuted_a_grad_l @ permuted_a_grad_l.t()).dtype).type(torch.DoubleTensor)
             
@@ -1196,6 +1196,10 @@ def get_new_loss(model, p, x, t):
 #     print('model_new.W[1]: ', model_new.W[1])
         
     z, _, _ = model_new.forward(x)
+    
+    print('z:', z)
+    
+    print('t:', t)
     
     loss = F.cross_entropy(z, t, reduction = 'mean')
     print('test')
