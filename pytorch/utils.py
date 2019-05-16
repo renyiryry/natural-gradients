@@ -387,7 +387,7 @@ def get_H(data_, params):
     
 #     print('z_data', z_data)
     
-    H = np.zeros(N2, m_L, m_L)
+    H = np.zeros((N2, m_L, m_L))
     for i in range(N2):
         H[i] -= np.outer(z_data[i], z_data[i])
         H[np.diag_indices(m_L)] += z_data[i]
