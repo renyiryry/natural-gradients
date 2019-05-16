@@ -12,7 +12,7 @@ def get_loss(model, x, t):
     return loss.data.numpy()
 
 def get_acc(model, x, t):
-    z, _ , _= model.forward(torch.from_numpy(x))
+    z, _ , _= model.forward(torch.from_numpy(x))SMW_GN
     y = z.argmax(dim=1)
     acc = np.mean(y.numpy() == t)
     return acc
@@ -99,6 +99,10 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
         m_L = params['m_L']
         
         v = v.view(N2, m_L)
+        
+        print('print(z.dtype): ', z.dtype)
+        
+        print('print(v.dtype): ', v.dtype)
         
         loss = torch.sum(z * v)
         
