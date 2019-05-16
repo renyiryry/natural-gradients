@@ -376,7 +376,7 @@ if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-
 elif algorithm == 'SGD':
     1
 else:
-    print('Error!')
+    print('Error! 1431')
     sys.exit()
 
 # N1 = 128  # mini-batch size (for gradient)
@@ -384,7 +384,7 @@ N1 = args.N1
 N2 = args.N2
 
 if N2 > N1:
-    print('Error!')
+    print('Error! 1432')
     sys.exit()
 
 
@@ -452,7 +452,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
 elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN':
     1;
 else:
-    print('Error!')
+    print('Error! 1433')
     sys.exit()
 
     
@@ -638,7 +638,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     elif algorithm == 'SMW-GN':
         data_ = SMW_GN_update(data_, params)
     else:
-        print('Error!')
+        print('Error! 1434')
         sys.exit()
         
      
@@ -663,7 +663,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     elif algorithm == 'SGD':
         1
     else:
-        print('Error!')
+        print('Error! 1435')
         sys.exit()
 #     print('no update lambda')
         
