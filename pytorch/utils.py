@@ -300,11 +300,13 @@ def get_HV(V, data_, params):
     
     V = np.reshape(V, (N2, m_L))
     
-    a = data_['a']
-    z = a[-1]
-    z_data = z[N2_index]
+#     a = data_['a']
+#     z = a[-1]
+#     z_data = z[N2_index]
     
-    y = F.softmax(z_data, dim = 1)
+#     y = F.softmax(z_data, dim = 1)
+    
+    y = data_['y']
     
     y = y.data.numpy()
     
@@ -704,7 +706,7 @@ def SMW_GN_update(data_, params):
 
     print('time for get cache momentum: ', start_time - time.time())
     
-    
+    start_time = time.time()
     
     a = data_['a']
     z = a[-1]
@@ -713,6 +715,8 @@ def SMW_GN_update(data_, params):
     y = F.softmax(z_data, dim = 1)
     
     data_['y'] = y
+    
+    print('time for compute y: ', start_time - time.time())
 
 
     
