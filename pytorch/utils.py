@@ -136,17 +136,11 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
 
     
 def get_D_t(data_, params):
-#     import sys
-#     import torch
-    algorithm = params['algorithm']
-    
+    algorithm = params['algorithm'] 
     N2 = params['N2']
     numlayers = params['numlayers']
     
-    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
-    
-#         from torch import eye
-    
+    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':   
         a_grad_momentum = data_['a_grad_momentum']
         h_momentum = data_['h_momentum']
     
@@ -259,10 +253,10 @@ def get_D_t(data_, params):
         
         D_t = 1 / N2 * D_t
         
-        H = get_H(data_, params)
-        
-        for i in range(N2):
-            D_t[i * m_L: (i+1) * m_L, i * m_L: (i+1) * m_L] += lambda_ * H[i]
+#         H = get_H(data_, params)
+#         for i in range(N2):
+#             D_t[i * m_L: (i+1) * m_L, i * m_L: (i+1) * m_L] += lambda_ * H[i]
+        D_t = D_t + lambda_ * torch.eye(m_L * N2)
         
     else:
         print('Error!')
