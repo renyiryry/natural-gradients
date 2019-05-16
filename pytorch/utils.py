@@ -7,11 +7,8 @@ import copy
 
 
 def get_loss(model, x, t):
-#     v = 1 / len(x) * torch.ones(len(x))
-    z, _, _ = model.forward(x)
-    
+    z, _, _ = model.forward(x)   
     loss = F.cross_entropy(z, t, reduction = 'mean')
-    
     return loss.data.numpy()
 
 def get_acc(model, x, t):
@@ -105,7 +102,7 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
         
         v = v.view(N2, m_L)
         
-        loss = torch.sum(z, v)
+        loss = torch.sum(z * v)
         
     else:
         print('Error!')
