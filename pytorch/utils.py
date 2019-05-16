@@ -1259,7 +1259,9 @@ def computeFV(delta, data_, params):
 #     print('time for FV 1/2: ', time.time() - start_time)
 
     if algorithm == 'SMW-GN':
+        v = v.data.numpy()
         v = get_HV(v, data_, params)
+        v = torch.from_numpy(v)
     
     
 
