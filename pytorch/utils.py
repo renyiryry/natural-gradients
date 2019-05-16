@@ -1305,6 +1305,25 @@ def computeFV(delta, data_, params):
     print('norm 2', get_dot_product(aver_J, aver_J, params))
     
     print('test 2')
+    
+    ###############
+    
+    
+    test_v = torch.ones(m_L * N2)
+    
+    sum_J = compute_sum_J_transpose_V_backp(test_v, data_, params)
+    
+    
+    
+#     aver_J = get_multiply(1 / N2, aver_J, params)
+    
+#     aver_J = get_multiply(1 / (N2 * m_L), aver_J, params)
+    
+    print('norm 1', torch.sum(compute_JV(sum_J, data_, params)))
+    
+    print('norm 2', get_dot_product(sum_J, sum_J, params))
+    
+    print('test 3')
 
     
 #     print('delta[1].size(): ', delta[1].size())
