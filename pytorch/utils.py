@@ -969,9 +969,9 @@ def update_lambda(p, data_, params):
         rho = (oldll_chunk - ll_chunk) / denom
         
 
-#         print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
-#         print('denom: ', denom)
-#         print('rho: ', rho)
+        print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
+        print('denom: ', denom)
+        print('rho: ', rho)
 
 #     print('lambda', lambda_)
         
