@@ -704,7 +704,7 @@ def SMW_GN_update(data_, params):
     
     data_ = get_cache_momentum(data_, params)
 
-    print('time for get cache momentum: ', start_time - time.time())
+    print('time for get cache momentum: ', time.time() - start_time)
     
     start_time = time.time()
     
@@ -716,7 +716,7 @@ def SMW_GN_update(data_, params):
     
     data_['y'] = y
     
-    print('time for compute y: ', start_time - time.time())
+    print('time for compute y: ', time.time() - start_time)
 
 
     
@@ -736,7 +736,7 @@ def SMW_GN_update(data_, params):
     
 #     print('v of compute JV: ', v)
     
-    print('time for compute JV: ', start_time - time.time())
+    print('time for compute JV: ', time.time() - start_time)
     
 
         
@@ -754,7 +754,7 @@ def SMW_GN_update(data_, params):
 #     print('v:', v)
 #     print('torch.mean(v): ', torch.mean(v))
     
-    print('time for get D_t: ', start_time - time.time())
+    print('time for get D_t: ', time.time() - start_time)
     
     start_time = time.time()
     
@@ -773,7 +773,7 @@ def SMW_GN_update(data_, params):
     
 #     hat_v = hat_v.long()
     
-    print('time for solve linear system: ', start_time - time.time())
+    print('time for solve linear system: ', time.time() - start_time)
     
 #     print('hat_v: ', hat_v)
     
@@ -803,7 +803,7 @@ def SMW_GN_update(data_, params):
 #     print('test delta')
 #     delta = model_grad
     
-    print('time for compute J transpose V: ', start_time - time.time())
+    print('time for compute J transpose V: ', time.time() - start_time)
     
 #     print('\n')
     
