@@ -34,7 +34,7 @@ X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
 class Model_3(nn.Module):
 
     def __init__(self):
-        super(Model_2, self).__init__()
+        super(Model_3, self).__init__()
         
         self.layersizes = [784, 200, 100, 10]
         self.numlayers = len(self.layersizes) - 1
