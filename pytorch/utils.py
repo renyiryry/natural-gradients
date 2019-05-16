@@ -587,7 +587,7 @@ def get_cache_momentum(data_, params):
                 a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * N1 * (a[l].grad)[N2_index]
                 h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
         
-        elif algorithm == 'SMW-Fisher' or algorithm =='kfac':
+        elif algorithm == 'SMW-Fisher' or algorithm == 'kfac' or algorithm == 'Fisher-block':
             a_grad_momentum = []
             h_momentum = []
             for l in range(numlayers):
