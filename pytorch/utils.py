@@ -292,6 +292,7 @@ def get_D_t(data_, params):
         
         D_t = torch.zeros(m_L * N2, m_L * N2)
         
+        # a_grad[l]: N2, m_L, m_l
         
         
         for l in range(numlayers):
@@ -307,7 +308,11 @@ def get_D_t(data_, params):
             
             print('a_grad_l[0].size(): ', a_grad_l[0].size())
             
-            D_t += torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L))) * ()
+            permuted_a_grad_l = a_grad_l.permute(1, 0. 2).contiguous().view(m_L * N2, model.layersizes[l+1])
+            
+            print('permuted_a_grad_l.size(): ', permuted_a_grad_l.size())
+            
+            D_t += torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L))) * (permuted_a_grad_l.t() @ permuted_a_grad_l)
     else:
         print('Error!')
         sys.exit()
