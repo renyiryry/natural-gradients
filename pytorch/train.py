@@ -36,7 +36,8 @@ class Model_3(nn.Module):
     def __init__(self):
         super(Model_3, self).__init__()
         
-        self.layersizes = [784, 200, 100, 10]
+#         self.layersizes = [784, 200, 100, 10]
+        self.layersizes = [784, 400, 400, 10]
         self.numlayers = len(self.layersizes) - 1
         
         self.fc = list(range(self.numlayers))
