@@ -791,7 +791,7 @@ def SMW_GN_update(data_, params):
         
         
 #     print('delta[1]: ', delta[1])
-    print('model_grad[1]: ', model_grad[1])
+#     print('model_grad[1]: ', model_grad[1])
         
 
     delta = get_multiply(1 / N2, delta, params)
@@ -802,7 +802,7 @@ def SMW_GN_update(data_, params):
     delta = get_multiply(1 / lambda_, delta, params)
     
     
-    print('delta[1]: ', delta[1])
+#     print('delta[1]: ', delta[1])
     
     
     
@@ -819,9 +819,9 @@ def SMW_GN_update(data_, params):
     
     F_grad = computeFV(model_grad, data_, params)
     
-    print('print(get_dot_product(F_grad, model_grad, params))', get_dot_product(F_grad, model_grad, params))
+#     print('print(get_dot_product(F_grad, model_grad, params))', get_dot_product(F_grad, model_grad, params))
     
-    print()
+#     print()
     
     
 #     print('test')
@@ -832,7 +832,7 @@ def SMW_GN_update(data_, params):
 #     p = get_minus(model_grad, params)
 #     print('test sgd')
 
-    print('print(get_dot_product(p, model_grad, params))', get_dot_product(p, model_grad, params))
+#     print('print(get_dot_product(p, model_grad, params))', get_dot_product(p, model_grad, params))
             
 
             
@@ -1284,41 +1284,22 @@ def computeFV(delta, data_, params):
     
     
     #############
-    N2 = params['N2']
-    m_L = params['m_L']
-    test_v = torch.zeros(m_L * N2)
-    test_v[0] = 1
+#     N2 = params['N2']
+#     m_L = params['m_L']
+#     test_v = torch.zeros(m_L * N2)
+#     test_v[0] = 1
     
-    print('print(compute_sum_J_transpose_V_backp(test_v, data_, params)): ', compute_sum_J_transpose_V_backp(test_v, data_, params))
+#     print('print(compute_sum_J_transpose_V_backp(test_v, data_, params)): ', compute_sum_J_transpose_V_backp(test_v, data_, params))
     
-    print('test')
+#     print('test')
     
     
     ###############
     
     
-    test_v = torch.ones(m_L * N2)
+#     test_v = torch.ones(m_L * N2)
     
-    aver_J = compute_sum_J_transpose_V_backp(test_v, data_, params)
-    
-    
-    
-#     aver_J = get_multiply(1 / N2, aver_J, params)
-    
-    aver_J = get_multiply(1 / (N2 * m_L), aver_J, params)
-    
-    print('norm 1', torch.sum(compute_JV(aver_J, data_, params)) / (m_L * N2))
-    
-    print('norm 2', get_dot_product(aver_J, aver_J, params))
-    
-    print('test 2')
-    
-    ###############
-    
-    
-    test_v = torch.ones(m_L * N2)
-    
-    sum_J = compute_sum_J_transpose_V_backp(test_v, data_, params)
+#     aver_J = compute_sum_J_transpose_V_backp(test_v, data_, params)
     
     
     
@@ -1326,11 +1307,30 @@ def computeFV(delta, data_, params):
     
 #     aver_J = get_multiply(1 / (N2 * m_L), aver_J, params)
     
-    print('norm 1', torch.sum(compute_JV(sum_J, data_, params)))
+#     print('norm 1', torch.sum(compute_JV(aver_J, data_, params)) / (m_L * N2))
     
-    print('norm 2', get_dot_product(sum_J, sum_J, params))
+#     print('norm 2', get_dot_product(aver_J, aver_J, params))
     
-    print('test 3')
+#     print('test 2')
+    
+    ###############
+    
+    
+#     test_v = torch.ones(m_L * N2)
+    
+#     sum_J = compute_sum_J_transpose_V_backp(test_v, data_, params)
+    
+    
+    
+#     aver_J = get_multiply(1 / N2, aver_J, params)
+    
+#     aver_J = get_multiply(1 / (N2 * m_L), aver_J, params)
+    
+#     print('norm 1', torch.sum(compute_JV(sum_J, data_, params)))
+    
+#     print('norm 2', get_dot_product(sum_J, sum_J, params))
+    
+#     print('test 3')
 
     
 #     print('delta[1].size(): ', delta[1].size())
