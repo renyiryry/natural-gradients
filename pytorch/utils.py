@@ -1296,7 +1296,9 @@ def computeFV(delta, data_, params):
     
     
     
-    aver_J = get_multiply(1 / N2, aver_J, params)
+#     aver_J = get_multiply(1 / N2, aver_J, params)
+    
+    aver_J = get_multiply(1 / (N2 * m_L), aver_J, params)
     
     print('norm 1', torch.sum(compute_JV(aver_J, data_, params)) / (m_L * N2))
     
