@@ -365,7 +365,8 @@ record_epoch = args.record_epoch
 inverse_update_freq = args.inverse_update_freq
 rho_kfac = args.rho_kfac
 
-if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN':
+if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN'\
+    or algorithm == 'Fisher-block':
     lambda_ = args.lambda_
     params['lambda_'] = lambda_
     boost = 1.01
@@ -448,7 +449,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
     D_t_inv = [0]
     data_['D_t_inv'] = D_t_inv
     
-elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN':
+elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN' or algorithm == 'Fisher-block':
     1;
 else:
     print('Error!')
@@ -654,7 +655,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #     print('p[2]: ', p[2])
     
     
-    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN':
+    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN'\
+        or algorithm == 'Fisher-block':
         
         lambda_ = update_lambda(p, data_, params)
         params['lambda_'] = lambda_
