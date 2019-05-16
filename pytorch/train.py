@@ -619,7 +619,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 
     
-    if params['algorithm'] == 'kfac':    
+    if algorithm == 'kfac' or algorithm == 'Fisher-block':    
         
     
     
