@@ -320,6 +320,8 @@ def get_D_t(data_, params):
             
 #             print('(torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L)))).size()' (torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L)))).size())
             
+            print('np.kron(h_l_h_l_t, np.ones(m_L, m_L))', np.kron(h_l_h_l_t, np.ones(m_L, m_L)))
+            
             print('torch.from_numpy(np.kron(h_l_h_l_t, np.ones(m_L, m_L))) ', torch.from_numpy(np.kron(h_l_h_l_t, np.ones(m_L, m_L))))
     
 #             print('(permuted_a_grad_l.t() @ permuted_a_grad_l).size()', (permuted_a_grad_l.t() @ permuted_a_grad_l).size())
