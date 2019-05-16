@@ -314,16 +314,21 @@ def get_D_t(data_, params):
             
             permuted_a_grad_l = a_grad_l.permute(1, 0, 2).contiguous().view(m_L * N2, model.layersizes[l+1])
             
+            h_l_h_l_t = (h[l] @ h[l].t()).data.numpy()
+            
             print('permuted_a_grad_l.size(): ', permuted_a_grad_l.size())
             
 #             print('(torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L)))).size()' (torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L)))).size())
             
-            print('(permuted_a_grad_l.t() @ permuted_a_grad_l).size()', (permuted_a_grad_l.t() @ permuted_a_grad_l).size())
+            print('torch.from_numpy(np.kron(h_l_h_l_t, np.ones(m_L, m_L))) ', torch.from_numpy(np.kron(h_l_h_l_t, np.ones(m_L, m_L))))
+    
+#             print('(permuted_a_grad_l.t() @ permuted_a_grad_l).size()', (permuted_a_grad_l.t() @ permuted_a_grad_l).size())
             
-            h_l_h_l_t = (h[l] @ h[l].t()).data.numpy()
+            print('(permuted_a_grad_l.t() @ permuted_a_grad_l)', (permuted_a_grad_l.t() @ permuted_a_grad_l))
+    
             
-            D_t += torch.from_numpy(np.kron(h_l_h_l_t, np.ones(m_L, m_L)))\
-            * (permuted_a_grad_l.t() @ permuted_a_grad_l)
+            
+            D_t += torch.from_numpy(np.kron(h_l_h_l_t, np.ones(m_L, m_L))) * (permuted_a_grad_l.t() @ permuted_a_grad_l)
     else:
         print('Error!')
         sys.exit()
