@@ -96,9 +96,9 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
         
         v = v.view(N2, m_L)
         
-        print('print(z.dtype): ', z.dtype)
+#         print('print(z.dtype): ', z.dtype)
         
-        print('print(v.dtype): ', v.dtype)
+#         print('print(v.dtype): ', v.dtype)
         
         loss = torch.sum(z * v)
         
