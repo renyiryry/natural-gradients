@@ -918,8 +918,8 @@ def update_lambda(p, data_, params):
     
     
         
-    print('ll_chunk: ', ll_chunk)
-    print('old ll_chunk: ', oldll_chunk)
+#     print('ll_chunk: ', ll_chunk)
+#     print('old ll_chunk: ', oldll_chunk)
 
 
 
@@ -954,7 +954,7 @@ def update_lambda(p, data_, params):
 #         print('denom: ', denom)
 #         print('rho: ', rho)
 
-    print('lambda', lambda_)
+#     print('lambda', lambda_)
         
     
     
