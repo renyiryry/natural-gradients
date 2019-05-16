@@ -896,15 +896,12 @@ def update_lambda(p, data_, params):
 
         
     ll_chunk = get_new_loss(model, p, X_mb, t_mb)
-    
-    
-        
-#     [oldll_chunk, ~] =...
-#             computeLL(paramsp, indata, outdata, numchunks, targetchunk)
     oldll_chunk = loss
+    
+    
         
-    
-    
+    print('ll_chunk: ', ll_chunk)
+    print('old ll_chunk: ', oldll_chunk)
 
 
 
@@ -934,8 +931,7 @@ def update_lambda(p, data_, params):
         
         rho = (oldll_chunk - ll_chunk) / denom
         
-#         print('ll_chunk: ', ll_chunk)
-#         print('old ll_chunk: ', oldll_chunk)
+
 #         print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
 #         print('denom: ', denom)
 #         print('rho: ', rho)
