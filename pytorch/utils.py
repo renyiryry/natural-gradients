@@ -35,7 +35,7 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
     
     z, _, _ = model.forward(X_mb[N2_index])
     
-    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum'
+    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
     
 
     
@@ -571,9 +571,7 @@ def get_cache_momentum(data_, params):
     
     
     
-#     print('a[0].size(): ', a[0].size())
-#     print('a[1].size(): ', a[1].size())
-#     print('a[2].size(): ', a[2].size())
+
     
 #     print('h[0].size(): ', h[0].size())
 #     print('h[1].size(): ', h[1].size())
@@ -1156,54 +1154,7 @@ def SMW_Fisher_update(data_, params):
         
     p = get_minus(delta, params)
     
-
-    
-    # update parameters
-#     for l in range(numlayers):
-        
-#         For two 2D tensors a and b (of size [b,n] and [b,m] respectively),
-# a[:, :, None] @ b[:, None, :] (of size [b,n,m]) gives the outer product operated on each item in the batch.
-        
-#         print('a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :].size(): ', 
-#               (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]).size()) 
-        
-#         print('(torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]). dim=0)).size(): ', 
-#               (torch.mean((1 - hat_v)[:, None, None] * (a[l][N2_index][:, :, None] @ h[l][N2_index][:, None, :]), dim=0)).size())
-        
-#         print('a[l][N2_index][:, :, None]: ', a[l][N2_index][:, :, None])
-#         print('h[l][N2_index][:, None, :]: ', h[l][N2_index][:, None, :])
-    
-        
-        
-#         print('delta.size():', delta.size())
-#         print('delta: ', delta)
-    
-#         print('delta * N2: ', delta * N2)
-        
-#         print('model.W[l].grad.size(): ', model.W[l].grad.size())
-#         print('model.W[l].grad: ', model.W[l].grad)
-
-#         print('model.W[1].data in utils: ', model.W[1].data)
-    
-#         model.W[l].data -= alpha * delta[l]
-        
-#         print('model.W[1].data in utils: ', model.W[1].data)
-        
-    
-    
-
-    
-    
-        
-    
-    
-
-            
-
-            
-            
-
-        
+  
 
 #     data_['model'] = model
     data_['p'] = p
@@ -1234,8 +1185,10 @@ def get_new_loss(model, p, x, t):
     
 #     loss = F.cross_entropy(z, t)
     
-    v = 1 / len(x) * torch.ones(len(x))
-    loss, _, _ = model_new.forward(x, t, v)
+#     v = 1 / len(x) * torch.ones(len(x))
+    z, _, _ = model_new.forward(x)
+    
+    loss = F.cross_entropy(z, t, reduction = 'none')
     
     return loss
 
