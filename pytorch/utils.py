@@ -290,7 +290,7 @@ def get_D_t(data_, params):
         m_L = params['m_L']
         
         
-        D_t = torch.zeros(m_L * N2, m_L * N2)
+        D_t = np.zeros((m_L * N2, m_L * N2))
         
         # a_grad[l]: N2, m_L, m_l
         
