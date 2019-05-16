@@ -743,6 +743,8 @@ def SMW_GN_update(data_, params):
     
     hat_v = torch.from_numpy(hat_v)
     
+    hat_v = hat_v.long()
+    
 #     print('time for solve linear system: ', start_time - time.time())
     
 #     print('hat_v: ', hat_v)
