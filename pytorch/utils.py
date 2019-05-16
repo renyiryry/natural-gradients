@@ -810,12 +810,13 @@ def SMW_GN_update(data_, params):
     print('should_be_grad[1]: ', should_be_grad[1])
     
     
-#     print('test')
+    print('test')
     
         
     p = get_minus(delta, params)
     
-
+    P = get_minus(model_grad, params)
+    print('test sgd')
             
 
             
