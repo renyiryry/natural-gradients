@@ -406,6 +406,8 @@ def compute_JV(V, data_, params):
 def get_cache_momentum(data_, params):
     algorithm = params['algorithm']
     
+    N2 = params['N2']
+    
     
     
     if algorithm == 'SMW-GN':
@@ -537,7 +539,7 @@ def get_cache_momentum(data_, params):
     
     
         N1 = params['N1']
-        N2 = params['N2']
+        
         i = params['i']
         
         numlayers = params['numlayers']
