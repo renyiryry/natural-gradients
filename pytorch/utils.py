@@ -379,6 +379,7 @@ def get_HV(V, data_, params):
     
     N2 = params['N2']
     N2_index = params['N2_index']
+    m_L = params['m_L']
     
     V = np.reshape(V, (N2, m_L))
     
