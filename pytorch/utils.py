@@ -9,6 +9,9 @@ import copy
 def get_loss(model, x, t):
     z, _, _ = model.forward(x)   
     loss = F.cross_entropy(z, t, reduction = 'mean')
+    
+    print('loss', loss)
+    
     return loss
 
 def get_acc(model, x, t):
