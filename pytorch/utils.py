@@ -1188,6 +1188,9 @@ def get_new_loss(model, p, x, t):
     
 #     z, _, _ = model_new.forward(x)
 #     loss = F.cross_entropy(z, t, reduction = 'mean')  
+
+    print('print(get_loss(model, x, t))', get_loss(model, x, t))
+
     return get_loss(model_new, x, t)
 
 def get_dot_product(delta_1, delta_2, params):
