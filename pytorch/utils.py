@@ -369,7 +369,7 @@ def get_D_t(data_, params):
         H = get_H(data_, params)
         
         for i in range(N2):
-            D_t[i * m_L: (i+1) * m_L -1, i * m_L: (i+1) * m_L -1] += lambda_ * H[i]
+            D_t[i * m_L: (i+1) * m_L, i * m_L: (i+1) * m_L] += lambda_ * H[i]
         
     else:
         print('Error!')
