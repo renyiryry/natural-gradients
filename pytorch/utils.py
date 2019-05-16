@@ -845,7 +845,7 @@ def SMW_GN_update(data_, params):
     
     hat_v = np.linalg.solve(D_t, v.data.numpy())
     
-    hat_v = torch.from_numpy(hat_v)
+#     hat_v = torch.from_numpy(hat_v)
     
     hat_v = get_HV(hat_v, data_, params)
     
