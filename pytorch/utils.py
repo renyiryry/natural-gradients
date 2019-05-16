@@ -560,9 +560,12 @@ def get_cache_momentum(data_, params):
         for i in range(m_L):
             
             
-            _, a, h = model.forward(X_mb[N2_index], t_mb[N2_index], v_tmp)
+            z, a, h = model.forward(X_mb[N2_index])
+            
+            
         
-            z = a[-1]
+#             z = a[-1]
+            
             
 #         Jacobian_z = []
 
