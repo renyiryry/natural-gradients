@@ -10,7 +10,7 @@ def get_loss(model, x, t):
     z, _, _ = model.forward(x)   
     loss = F.cross_entropy(z, t, reduction = 'mean')
     
-    print('loss', loss)
+#     print('loss', loss)
     
     return loss
 
