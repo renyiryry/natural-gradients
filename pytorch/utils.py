@@ -324,6 +324,10 @@ def get_D_t(data_, params):
             
             h_kron = h_kron.type(torch.DoubleTensor)
             
+            print('h_kron.dtype', h_kron.dtype)
+            
+            print('(permuted_a_grad_l @ permuted_a_grad_l.t())', (permuted_a_grad_l @ permuted_a_grad_l.t()).dtype)
+            
 #             print('permuted_a_grad_l.size(): ', permuted_a_grad_l.size())
             
 #             print('(torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L)))).size()' (torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L)))).size())
