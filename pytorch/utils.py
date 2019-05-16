@@ -5,6 +5,7 @@ import numpy as np
 import scipy
 import copy
 
+import time
 
 def get_loss(model, x, t):
     z, _, _ = model.forward(x)
@@ -967,13 +968,7 @@ def update_lambda(p, data_, params):
         
     return lambda_
 
-def SMW_Fisher_update(data_, params):
-#     import torch
-#     import numpy as np
-
-    import time
-#     import copy
-    
+def SMW_Fisher_update(data_, params):   
     algorithm = params['algorithm']
     model = data_['model']
     
