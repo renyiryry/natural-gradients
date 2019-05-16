@@ -165,9 +165,6 @@ def get_D_t(data_, params):
         
         D_t = D_t.data.numpy()
     elif algorithm == 'SMW-GN':
-        
-#         from numpy import kron
-#         import numpy as np
     
         GN_cache = data_['GN_cache']
         h = GN_cache['h']
@@ -184,6 +181,8 @@ def get_D_t(data_, params):
         # a_grad[l]: N2, m_L, m_l
         
         model = data_['model']
+        
+        start_time = time.time()
         
         
         for l in range(numlayers):
@@ -241,7 +240,11 @@ def get_D_t(data_, params):
             
             D_t += np.multiply(h_kron, (permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())
         
+        print('time for compute J J transpose: ', time.time() - start_time)
+        
         # add the H term
+        
+        start_time = time.time()
         
         D_t = np.transpose(D_t)
         
@@ -249,6 +252,8 @@ def get_D_t(data_, params):
             D_t[:, i] = get_HV(D_t[:, i], data_, params)
         
         D_t = np.transpose(D_t)
+        
+        print('time for compute H: ', time.time() - start_time)
         
         
         
