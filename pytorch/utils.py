@@ -308,8 +308,10 @@ def get_D_t(data_, params):
             
             print('len(a_grad_l)', len(a_grad_l))
             
-            print('a_grad_l[0].size(): ', a_grad_l[0].size())
+#             print('a_grad_l[0].size(): ', a_grad_l[0].size())
             
+    
+            print('a_grad_l.permute(1, 0, 2).contiguous().size():', a_grad_l.permute(1, 0, 2).contiguous().size())
             
             
             permuted_a_grad_l = a_grad_l.permute(1, 0, 2).contiguous().view(m_L * N2, model.layersizes[l+1])
