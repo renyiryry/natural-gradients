@@ -385,14 +385,17 @@ def get_HV(V, data_, params):
     
     a = data_['a']
     z = a[-1]
+    z_data = z[N2_index].data.numpy()
     
-    HV = np.multiply(z[N2_index], V)
+    HV = np.multiply(z_data, V)
     
     sum_HV = np.sum(HV, 1) # length N2
     
     for i in range(N2):
-        HV[i] -= sum_HV[i] * z[N2_index][i]
+        HV[i] -= sum_HV[i] * z_data[i]
         
+    
+    HV = np.reshape(HV, m_L * N2)
     
     return HV
 
