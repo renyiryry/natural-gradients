@@ -12,9 +12,7 @@ def get_loss(model, x, t):
     return loss.data.numpy()
 
 def get_acc(model, x, t):
-#     v = 1 / len(x) * torch.ones(len(x))
     z, _ , _= model.forward(torch.from_numpy(x))
-#     z = a[-1]
     y = z.argmax(dim=1)
     acc = np.mean(y.numpy() == t)
     return acc
@@ -740,6 +738,8 @@ def SMW_GN_update(data_, params):
     
     
     hat_v = get_HV(hat_v, data_, params)
+    
+    hat_v = np.double(hat_v)
     
     hat_v = torch.from_numpy(hat_v)
     
