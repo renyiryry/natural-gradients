@@ -1415,7 +1415,7 @@ def kfac_update(data_, params):
 
     ##############
     algorithm = params['algorithm']
-    layersizes = params['layersizes']
+    layersizes = model.layersizes
     if algorithm == 'Fisher-block':
         delta = []
         for l in range(numlayers):
