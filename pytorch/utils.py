@@ -276,6 +276,8 @@ def get_D_t(data_, params):
 #               ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()).size())
         
             D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
+        
+        D_t = D_t.data.numpy()
     elif algorithm == 'SMW-GN':
         
 #         from numpy import kron
@@ -838,7 +840,7 @@ def SMW_GN_update(data_, params):
     
 #     start_time = time.time()
     
-    D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
+    D_t_cho_fac = scipy.linalg.cho_factor(D_t)
     hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
     hat_v = torch.from_numpy(hat_v)
@@ -1150,7 +1152,7 @@ def SMW_Fisher_update(data_, params):
     
 #     start_time = time.time()
     
-        D_t_cho_fac = scipy.linalg.cho_factor(D_t.data.numpy())
+        D_t_cho_fac = scipy.linalg.cho_factor(D_t)
         hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
         hat_v = torch.from_numpy(hat_v)
@@ -1162,7 +1164,7 @@ def SMW_Fisher_update(data_, params):
         
         if i % inverse_update_freq == 0 or i < 100:
             D_t = get_D_t(data_, params)
-            D_t_inv = D_t.inverse()
+            D_t_inv = torch.from_numpu(D_t).inverse()
             data_['D_t_inv'] = D_t_inv
         else:
             D_t_inv = data_['D_t_inv']
