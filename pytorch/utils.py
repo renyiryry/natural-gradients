@@ -351,6 +351,25 @@ def get_D_t(data_, params):
 #             print('print((permuted_a_grad_l.t() @ permuted_a_grad_l).size())', (permuted_a_grad_l.t() @ permuted_a_grad_l).size())
             
             D_t += np.multiply(h_kron, (permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())
+        
+        # add the H term
+        
+        D_t = np.transpose(D_t)
+        
+        for i in range(N2 * m_L):
+            D_t[:, i] = get_HV(D_t[:, i])
+        
+        D_t = np.transpose(D_t)
+        
+        
+        
+        D_t = 1 / N2 * D_t
+        
+        H = get_H()
+        
+        for i in range(N2):
+            D_t[i * m_L: (i+1) * m_L -1, i * m_L: (i+1) * m_L -1] += lambda_ * H[i]
+        
     else:
         print('Error!')
         sys.exit()
