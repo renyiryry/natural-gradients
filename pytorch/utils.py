@@ -707,6 +707,9 @@ def SMW_GN_update(data_, params):
     
     v = compute_JV(model_grad, data_, params)
     
+    
+    print('v of compute JV: ', v)
+    
 #     print('time for compute JV: ', start_time - time.time())
     
 
