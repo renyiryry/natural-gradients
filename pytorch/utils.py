@@ -368,9 +368,9 @@ def compute_JV(V, data_, params):
         
         print('a_grad[1][0].size(): ', a_grad[1][0].size())
         
+        print('len(h)', len(h))
         
-        
-        print('h.size(): ', h.size())
+        print('h[1].size(): ', h[1].size())
         
         for l in range(numlayers):
         
