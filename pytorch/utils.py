@@ -783,7 +783,7 @@ def SMW_GN_update(data_, params):
         
         
 #     print('delta[1]: ', delta[1])
-    print('model_grad[1]: ', model_grad[1]
+    print('model_grad[1]: ', model_grad[1])
         
 
     delta = get_multiply(1 / N2, delta, params)
