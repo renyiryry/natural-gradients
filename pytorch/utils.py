@@ -1195,9 +1195,12 @@ def get_new_loss(model, p, x, t):
         
 #     print('model_new.W[1]: ', model_new.W[1])
         
-#     z, _, _ = model_new.forward(x)
+    z, _, _ = model_new.forward(x)
     
-#     loss = F.cross_entropy(z, t)
+    loss = F.cross_entropy(z, t, reduction = 'mean')
+    print('test')
+    
+#     loss= get_loss(model_new, x, t)
     
 #     v = 1 / len(x) * torch.ones(len(x))
     
@@ -1206,7 +1209,7 @@ def get_new_loss(model, p, x, t):
 
     print('print(get_loss(model, x, t))', get_loss(model, x, t))
 
-    return get_loss(model_new, x, t)
+    return loss
 
 def get_dot_product(delta_1, delta_2, params):
     import torch
