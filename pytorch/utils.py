@@ -7,7 +7,7 @@ import copy
 
 
 def get_loss(model, x, t):
-    z, _, _ = model.forward(x)   
+    z, _, _ = model.forward(x)
     loss = F.cross_entropy(z, t, reduction = 'mean')
     
 #     print('loss', loss)
@@ -103,7 +103,7 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
         loss = torch.sum(z * v)
         
     else:
-        print('Error!')
+        print('Error! 1500')
         sys.exit()
     
 #     del model_1
@@ -259,7 +259,7 @@ def get_D_t(data_, params):
         D_t = D_t + lambda_ * np.eye(m_L * N2)
         
     else:
-        print('Error!')
+        print('Error! 1501')
         sys.exit()
     return D_t
 
@@ -394,7 +394,7 @@ def compute_JV(V, data_, params):
         v = v.view(m_L * N2)
         
     else:
-        print('Error!')
+        print('Error! 1502')
         sys.exit()
     
     return v
@@ -598,7 +598,7 @@ def get_cache_momentum(data_, params):
         
         
         else:
-            print('Error!')
+            print('Error! 1503')
             sys.exit()
         
         data_['a_grad_momentum'] = a_grad_momentum
@@ -940,7 +940,7 @@ def update_lambda(p, data_, params):
             denom = denom - get_dot_product(model_grad, p, params) 
                 
         else:
-            print('Error!')
+            print('Error! 1504')
             sys.exit()
     
 #     print('time for update lambda 1/4: ', time.time() - start_time)
@@ -1086,7 +1086,7 @@ def SMW_Fisher_update(data_, params):
         hat_v = D_t_inv @ v
         
     else:
-        print('Error!')
+        print('Error! 1505')
         sys.exit()
         
     
@@ -1123,7 +1123,7 @@ def SMW_Fisher_update(data_, params):
     elif algorithm == 'SMW-Fisher-momentum':
         delta = compute_sum_J_transpose_V(hat_v, data_, params)
     else:
-        print('Error!')
+        print('Error! 1506')
         sys.exit()
 
 #     print('test delta')
