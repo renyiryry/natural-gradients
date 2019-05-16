@@ -803,9 +803,18 @@ def SMW_GN_update(data_, params):
 #     print('model_grad[1]: ', model_grad[1])
 #     
 #     should_be_grad = computeFV(delta, data_, params)
+    
+    
+#     print(get_dot_product(should_be_grad, delta))
 #     should_be_grad = get_plus(should_be_grad, get_multiply(lambda_, delta, params), params) 
     
 #     print('should_be_grad[1]: ', should_be_grad[1])
+    
+    F_grad = computeFV(model_grad, data_, params)
+    
+    print('print(get_dot_product(F_grad, model_grad, params))', get_dot_product(F_grad, model_grad, params))
+    
+    print()
     
     
 #     print('test')
