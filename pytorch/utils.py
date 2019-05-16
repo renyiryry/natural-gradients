@@ -1181,7 +1181,7 @@ def SMW_Fisher_update(data_, params):
 
 def get_new_loss(model, p, x, t):
     
-    print('p[1]: ', p[1])
+#     print('p[1]: ', p[1])
     
     model_new = copy.deepcopy(model)
     
@@ -1192,23 +1192,23 @@ def get_new_loss(model, p, x, t):
         
 #     print('model_new.W[1]: ', model_new.W[1])
         
-    z, _, _ = model_new.forward(x)
+#     z, _, _ = model_new.forward(x)
     
-    print('z:', z)
+#     print('z:', z)
     
-    print('t:', t)
+#     print('t:', t)
     
-    loss = F.cross_entropy(z, t, reduction = 'mean')
-    print('test')
+#     loss = F.cross_entropy(z, t, reduction = 'mean')
+#     print('test')
     
-#     loss= get_loss(model_new, x, t)
+    loss= get_loss(model_new, x, t)
     
 #     v = 1 / len(x) * torch.ones(len(x))
     
 #     z, _, _ = model_new.forward(x)
 #     loss = F.cross_entropy(z, t, reduction = 'mean')  
 
-    print('print(get_loss(model, x, t))', get_loss(model, x, t))
+#     print('print(get_loss(model, x, t))', get_loss(model, x, t))
 
     return loss
 
