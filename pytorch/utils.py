@@ -295,11 +295,16 @@ def get_D_t(data_, params):
         
         for l in range(numlayers):
             
+            a_grad_l = a_grad[l]
+            h_l = h[l]
+            
             # h[l]: N2 * m[l]
             
             # a_grad[l]
             
-            print('a_grad[l].size(): ', a_grad[l].size())
+            print('len(a_grad_l)', len(a_grad_l))
+            
+            print('a_grad_l[0].size(): ', a_grad_l[0].size())
             
 #             D_t += torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L))) * ()
     else:
