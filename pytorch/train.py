@@ -59,7 +59,7 @@ class Model_3(nn.Module):
         self.W = tuple(self.W)
 
 
-    def forward(self, x, t, v):
+    def forward(self, x):
 #         a1 = self.fc1(x)
 #         h1 = F.relu(a1)
 #         a2 = self.fc2(h1)
