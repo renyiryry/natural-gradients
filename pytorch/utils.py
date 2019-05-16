@@ -693,11 +693,26 @@ def SMW_GN_update(data_, params):
     params['m_L'] = m_L
     
     
+    
+    
+    
+    
+    
     start_time = time.time()
     
     data_ = get_cache_momentum(data_, params)
 
     print('time for get cache momentum: ', start_time - time.time())
+    
+    
+    
+    a = data_['a']
+    z = a[-1]
+    z_data = z[N2_index]
+    
+    y = F.softmax(z_data, dim = 1)
+    
+    data_['y'] = y
 
 
     
