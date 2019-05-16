@@ -414,7 +414,7 @@ data_['model'] = model
 
 
 
-if params['algorithm'] == 'kfac':
+if params['algorithm'] == 'kfac' or algorithm == 'Fisher-block':
 
     A = []  # KFAC A
     G = []  # KFAC G
@@ -449,7 +449,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
     D_t_inv = [0]
     data_['D_t_inv'] = D_t_inv
     
-elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN' or algorithm == 'Fisher-block':
+elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN':
     1;
 else:
     print('Error!')
