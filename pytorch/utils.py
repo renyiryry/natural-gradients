@@ -1166,7 +1166,7 @@ def SMW_Fisher_update(data_, params):
 
 def get_new_loss(model, p, x, t):
     
-#     print('p[1]: ', p[1])
+    print('p[1]: ', p[1])
     
     model_new = copy.deepcopy(model)
     
