@@ -288,6 +288,7 @@ def get_D_t(data_, params):
 #         print('h.size(): ', h.size())
         
         m_L = params['m_L']
+        lambda_ = params['lambda_']
         
         
         D_t = np.zeros((m_L * N2, m_L * N2))
