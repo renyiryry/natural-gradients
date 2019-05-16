@@ -743,7 +743,7 @@ def SMW_GN_update(data_, params):
     
     hat_v = get_HV(hat_v, data_, params)
     
-    hat_v = np.double(hat_v)
+    hat_v = np.float32(hat_v)
     
     hat_v = torch.from_numpy(hat_v)
     
