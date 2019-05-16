@@ -3,6 +3,7 @@ import torch.nn.functional as F
 import sys
 import numpy as np
 import scipy
+import copy
 
 
 def get_loss(model, x, t):
@@ -23,20 +24,29 @@ def get_acc(model, x, t):
     
 def compute_sum_J_transpose_V_backp(v, data_, params):
     # use backpropagation
-    import copy
-    import torch.nn.functional as F
-#     import torch
-    
-    numlayers = params['numlayers']
+    algorithm = params['algorithm']
+    N2_index = params['N2_index']
+    N2 = params['N2']
     
     model = data_['model']
-    
     X_mb = data_['X_mb']
-    t_mb = data_['t_mb']
     
-    N2_index = params['N2_index']
+    model = get_model_grad_zerod(model)
     
-#     model.detach()
+    z, _, _ = model.forward(X_mb[N2_index])
+    
+    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum'
+    
+
+    
+        numlayers = params['numlayers']
+    
+        
+    
+        
+        t_mb = data_['t_mb']
+    
+        
     
     
 #     model_1 = copy.deepcopy(data_['model'])
@@ -80,10 +90,29 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
     
 #     weighted_loss = torch.dot(loss, v)
     
-    model = get_model_grad_zerod(model)
-    loss, _, _ = model.forward(X_mb[N2_index], t_mb[N2_index], v)
+        
+        
+        
+        loss = F.cross_entropy(z, t_mb[N2_index], reduction = 'none')
+        
+        loss = torch.dot(loss, v)
     
 #     weighted_loss.backward(retain_graph = True)
+        
+    elif algorithm == 'SMW-GN':
+        
+        m_L = params['m_L']
+        
+        v = v.view(N2, m_L)
+        
+        loss = torch.sum(z, v)
+        
+    else:
+        print('Error!')
+        sys.exit()
+    
+#     del model_1
+
     loss.backward()
     
 #     print('test 10:28')
@@ -106,8 +135,6 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
 #     cache.detach_()
     
     model = get_model_grad_zerod(model)
-    
-#     del model_1
     
     
     return delta
@@ -391,8 +418,6 @@ def get_cache_momentum(data_, params):
     
     
     if algorithm == 'SMW-GN':
-#         import torch
-        import copy
     
         X_mb = data_['X_mb']
         t_mb = data_['t_mb']
@@ -746,7 +771,7 @@ def SMW_GN_update(data_, params):
     
     
     
-    delta = compute_sum_J_transpose_V_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
+    delta = compute_sum_J_transpose_V_backp(hat_v, data_, params)
 
 #     print('test delta')
 #     delta = model_grad
@@ -936,7 +961,7 @@ def SMW_Fisher_update(data_, params):
 #     import numpy as np
 
     import time
-    import copy
+#     import copy
     
     algorithm = params['algorithm']
     model = data_['model']
@@ -1193,8 +1218,6 @@ def SMW_Fisher_update(data_, params):
     return data_, params
 
 def get_new_loss(model, p, x, t):
-    import torch.nn.functional as F
-    import copy
     
 #     print('p[1]: ', p[1])
     
