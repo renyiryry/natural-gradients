@@ -12,7 +12,7 @@ def get_loss(model, x, t):
     return loss.data.numpy()
 
 def get_acc(model, x, t):
-    z, _ , _= model.forward(torch.from_numpy(x))SMW_GN
+    z, _ , _= model.forward(torch.from_numpy(x))
     y = z.argmax(dim=1)
     acc = np.mean(y.numpy() == t)
     return acc
