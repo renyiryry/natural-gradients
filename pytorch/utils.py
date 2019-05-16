@@ -266,6 +266,9 @@ def get_D_t(data_, params):
 
 def get_H(data_, params):
     
+    print('wrong')
+    sys.exit()
+    
     N2_index = params['N2_index']
     m_L = params['m_L']
     N2 = params['N2']
@@ -294,9 +297,11 @@ def get_HV(V, data_, params):
     
     a = data_['a']
     z = a[-1]
-    z_data = z[N2_index].data.numpy()
+    z_data = z[N2_index]
     
     y = F.softmax(z_data, dim = 1)
+    
+    y = y.data.numpy()
     
     HV = np.multiply(y, V)
     
