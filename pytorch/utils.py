@@ -1,6 +1,7 @@
 import torch
 import sys
 import numpy as np
+import scipy
 
 """
 import torch.nn as nn
@@ -296,7 +297,7 @@ def get_D_t(data_, params):
         for l in range(numlayers):
             
             a_grad_l = a_grad[l]
-            h_l = h[l]
+#             h_l = h[l]
             
             # h[l]: N2 * m[l]
             
@@ -306,7 +307,7 @@ def get_D_t(data_, params):
             
             print('a_grad_l[0].size(): ', a_grad_l[0].size())
             
-#             D_t += torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L))) * ()
+            D_t += torch.from_numpy(np.kron(h[l] @ h[l].t(), np.ones(m_L, m_L))) * ()
     else:
         print('Error!')
         sys.exit()
@@ -452,9 +453,12 @@ def get_cache_momentum(data_, params):
         
         
 #         a_grad_momentum = list(range(numlayers))
-        a_grad_momentum = numlayers * [[]]
+#         a_grad_momentum = numlayers * [[]]
+        a_grad_momentum = []
+        for l in range(numlayers):
+            a_grad_momentum.append(torch.ones(N2, m_L, numlayers[l+1]))
         
-        print('a_grad_momentum', a_grad_momentum)
+#         print('a_grad_momentum', a_grad_momentum)
         
         v_tmp = 1 / len(X_mb[N2_index]) * torch.ones(len(X_mb[N2_index]))
         
@@ -488,16 +492,19 @@ def get_cache_momentum(data_, params):
         
 #                 print('a_grad_momentum[l]: ', a_grad_momentum[l])
 #                 print('a[l]: ', a[l])
+
+
+                a_grad_momentum[l][:, i, :] = copy.deepcopy(a[l].grad)
                 
-                if i == 0:
-                    a_grad_momentum[l] = [copy.deepcopy(a[l].grad)]
-                else:
+#                 if i == 0:
+#                     a_grad_momentum[l] = [copy.deepcopy(a[l].grad)]
+#                 else:
                     
 #                     print('a_grad_momentum[i]', a_grad_momentum[i])
                     
                     
                     
-                    a_grad_momentum[l].append(copy.deepcopy(a[l].grad))    
+#                     a_grad_momentum[l].append(copy.deepcopy(a[l].grad))    
         
                 
              
@@ -939,7 +946,7 @@ def update_lambda(p, data_, params):
 def SMW_Fisher_update(data_, params):
 #     import torch
 #     import numpy as np
-    import scipy
+
     import time
     import copy
     
