@@ -379,6 +379,7 @@ def get_H(data_, params):
     
     N2_index = params['N2_index']
     m_L = params['m_L']
+    N2 = params['N2']
     
     a = data_['a']
     z = a[-1]
