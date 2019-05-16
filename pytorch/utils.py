@@ -378,15 +378,21 @@ def get_D_t(data_, params):
 def get_H(data_, params):
     
     N2_index = params['N2_index']
+    m_L = params['m_L']
     
     a = data_['a']
     z = a[-1]
     z_data = z[N2_index].data.numpy()
     
-    print('z_data', z_data)
+#     print('z_data', z_data)
     
-#     H = np.zeros()
-    return
+    H = np.zeros(N2, m_L, m_L)
+    for i in range(N2):
+        H[i] -= np.outer(z_data[i], z_data[i])
+        H[np.diag_indices(m_L)] += z_data[i]
+    
+    
+    return H
 
 def get_HV(V, data_, params):
     
