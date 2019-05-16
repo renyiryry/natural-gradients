@@ -840,8 +840,10 @@ def SMW_GN_update(data_, params):
     
 #     start_time = time.time()
     
-    D_t_cho_fac = scipy.linalg.cho_factor(D_t)
-    hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
+#     D_t_cho_fac = scipy.linalg.cho_factor(D_t)
+#     hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
+    
+    hat_v = no.linalg.slove(D_t, v.data.numpy())
     
     hat_v = torch.from_numpy(hat_v)
     
