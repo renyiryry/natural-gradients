@@ -387,7 +387,7 @@ def compute_JV(V, data_, params):
     # h[l]: size N1 * m[l]
     # model.W[l]: size m[l+1] * m[l]
                 
-                v[i, l] += torch.sum((a_grad_l[i] @ V[l]) * h[l], dim = 1)
+                v[i] += torch.sum((a_grad_l[i] @ V[l]) * h[l], dim = 1)
         
         v = v.view(m_L * N2)
         
