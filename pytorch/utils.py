@@ -420,7 +420,7 @@ def get_cache_momentum(data_, params):
         model = data_['model']
         
         numlayers = params['numlayers']
-        layersizes = params['layersizes']
+#         layersizes = params['layersizes']
         
 #         layersizes = model.layersizes
         m_L = params['m_L']
@@ -459,7 +459,7 @@ def get_cache_momentum(data_, params):
 #         a_grad_momentum = numlayers * [[]]
         a_grad_momentum = []
         for l in range(numlayers):
-            a_grad_momentum.append(torch.ones(N2, m_L, layersizes[l+1]))
+            a_grad_momentum.append(torch.ones(N2, m_L, model.layersizes[l+1]))
         
 #         print('a_grad_momentum', a_grad_momentum)
         
