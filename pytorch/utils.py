@@ -117,14 +117,17 @@ class Model_2(nn.Module):
 
 
 def get_loss(model, x, t):
-    v = 1 / len(x) * torch.ones(len(x))
-    loss, _, _ = model.forward(x, t, v)
+#     v = 1 / len(x) * torch.ones(len(x))
+    z, _, _ = model.forward(x)
+    
+    loss = F.cross_entropy(z, t, reduction = 'mean')
+    
     return loss.data.numpy()
 
 def get_acc(model, x, t):
     v = 1 / len(x) * torch.ones(len(x))
-    _, a , _= model.forward(torch.from_numpy(x), torch.from_numpy(t).long(), v)
-    z = a[-1]
+    z, _ , _= model.forward(torch.from_numpy(x), torch.from_numpy(t).long(), v)
+#     z = a[-1]
     y = z.argmax(dim=1)
     acc = np.mean(y.numpy() == t)
     return acc
