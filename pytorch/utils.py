@@ -1322,6 +1322,7 @@ def kfac_update(data_, params):
     numlayers = params['numlayers']
     rho_kfac = params['rho_kfac']
     
+    
     N2_index = np.random.permutation(N1)[:N2]
     params['N2_index'] = N2_index
     
@@ -1410,6 +1411,20 @@ def kfac_update(data_, params):
         delta.append(G_inv[l] @ model_grad[l] @ A_inv[l])
         
 #         print('delta: ', delta)
+
+
+    ##############
+    algorithm = params['algorithm']
+    layersizes = params['layersizes']
+    if algorithm == 'Fisher-block':
+        delta = []
+        for l in range(numlayers):
+            F = lambda_ * torch.eye(layersizes[l] * layersizes[l+1]) + np.kron(A_block, G_block)
+            
+            print('print(model_grad[l])', model_grad[l])
+            
+#             delta.append()
+        
 
     
     
