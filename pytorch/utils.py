@@ -723,7 +723,7 @@ def SMW_GN_update(data_, params):
         
     D_t = get_D_t(data_, params)
     
-#     print('D_t:', D_t)
+    print('D_t:', D_t)
     
 #     print('v:', v)
 #     print('torch.mean(v): ', torch.mean(v))
