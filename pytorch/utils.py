@@ -688,11 +688,11 @@ def SMW_GN_update(data_, params):
     params['m_L'] = m_L
     
     
-#     start_time = time.time()
+    start_time = time.time()
     
     data_ = get_cache_momentum(data_, params)
 
-#     print('time for get cache momentum: ', start_time - time.time())
+    print('time for get cache momentum: ', start_time - time.time())
 
 
     
@@ -705,14 +705,14 @@ def SMW_GN_update(data_, params):
     
 
     
-#     start_time = time.time()
+    start_time = time.time()
     
     v = compute_JV(model_grad, data_, params)
     
     
 #     print('v of compute JV: ', v)
     
-#     print('time for compute JV: ', start_time - time.time())
+    print('time for compute JV: ', start_time - time.time())
     
 
         
@@ -721,7 +721,7 @@ def SMW_GN_update(data_, params):
     # compute hat_v
     
 
-#     start_time = time.time()
+    start_time = time.time()
         
     D_t = get_D_t(data_, params)
     
@@ -730,9 +730,9 @@ def SMW_GN_update(data_, params):
 #     print('v:', v)
 #     print('torch.mean(v): ', torch.mean(v))
     
-#     print('time for get D_t: ', start_time - time.time())
+    print('time for get D_t: ', start_time - time.time())
     
-#     start_time = time.time()
+    start_time = time.time()
     
 #     D_t_cho_fac = scipy.linalg.cho_factor(D_t)
 #     hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
@@ -749,7 +749,7 @@ def SMW_GN_update(data_, params):
     
 #     hat_v = hat_v.long()
     
-#     print('time for solve linear system: ', start_time - time.time())
+    print('time for solve linear system: ', start_time - time.time())
     
 #     print('hat_v: ', hat_v)
     
@@ -770,7 +770,7 @@ def SMW_GN_update(data_, params):
     
 
     
-#     start_time = time.time()
+    start_time = time.time()
     
     
     
@@ -779,7 +779,7 @@ def SMW_GN_update(data_, params):
 #     print('test delta')
 #     delta = model_grad
     
-#     print('time for compute J transpose V: ', start_time - time.time())
+    print('time for compute J transpose V: ', start_time - time.time())
     
 #     print('\n')
     
@@ -895,8 +895,6 @@ def compute_sum_J_transpose_V(v, data_, params):
 
 
 def update_lambda(p, data_, params):
-#     import sys
-    
     model = data_['model']
     X_mb = data_['X_mb']
     t_mb = data_['t_mb']
@@ -969,9 +967,9 @@ def update_lambda(p, data_, params):
         rho = (oldll_chunk - ll_chunk) / denom
         
 
-        print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
-        print('denom: ', denom)
-        print('rho: ', rho)
+#         print('oldll_chunk - ll_chunk: ', oldll_chunk - ll_chunk)
+#         print('denom: ', denom)
+#         print('rho: ', rho)
 
 #     print('lambda', lambda_)
         
