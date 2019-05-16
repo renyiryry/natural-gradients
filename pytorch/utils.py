@@ -746,7 +746,7 @@ def SMW_GN_update(data_, params):
     
 #     print('time for solve linear system: ', start_time - time.time())
     
-#     print('hat_v: ', hat_v)
+    print('hat_v: ', hat_v)
     
 #     print('torch.mean(hat_v): ', torch.mean(hat_v))
     
