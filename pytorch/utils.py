@@ -168,29 +168,6 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
 #     model = get_model_grad_zerod(model)  
 
 
-    
-    
-    
-    
-    
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-
-
-
-    
-
-
 #     model_new = Model_2()
     
 #     print('model_new.W[1]): ', model_new.W[1])
@@ -874,7 +851,7 @@ def SMW_GN_update(data_, params):
     
     
     
-    delta = compute_sum_J_transpose_V_1_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
+    delta = compute_sum_J_transpose_V_backp(hat_v, model, X_mb[N2_index], t_mb[N2_index], params)
 
 #     print('test delta')
 #     delta = model_grad
