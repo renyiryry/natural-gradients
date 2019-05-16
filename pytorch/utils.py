@@ -365,7 +365,7 @@ def get_D_t(data_, params):
         
         D_t = 1 / N2 * D_t
         
-        H = get_H(data_)
+        H = get_H(data_, params)
         
         for i in range(N2):
             D_t[i * m_L: (i+1) * m_L -1, i * m_L: (i+1) * m_L -1] += lambda_ * H[i]
@@ -375,7 +375,9 @@ def get_D_t(data_, params):
         sys.exit()
     return D_t
 
-def get_H(data_):
+def get_H(data_, params):
+    
+    N2_index = params['N2_index']
     
     a = data_['a']
     z = a[-1]
