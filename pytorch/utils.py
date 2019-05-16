@@ -798,6 +798,20 @@ def SMW_GN_update(data_, params):
     
     
     print('delta[1]: ', delta[1])
+    
+    
+    
+    ########################
+    print('model_grad[1]: ', model_grad[1])
+#     
+    should_be_grad = computeFV(delta, data_, params)
+    should_be_grad = get_plus(should_be_grad, get_multiply(lambda_, delta, params), params) 
+    
+    print('should_be_grad[1]: ', should_be_grad[1])
+    
+    
+#     print('test')
+    
         
     p = get_minus(delta, params)
     
