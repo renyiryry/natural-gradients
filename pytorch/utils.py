@@ -280,17 +280,28 @@ def get_JH(D_t, data_, params):
     N2 = params['N2']
     m_L = params['m_L']
     
-    print('y.size', y.size())
+#     print('y.size', y.size())
     
+    # D_t_1
     
+    diag_y = y.view(m_L * N2)
     
     diag_y = diag_y.repeat(N2 * m_L, 1)
     
     D_t_1 = D_t * diag_y
     
-#     D_t_2 =
+    # D_t_2
     
-    D_t = D_t_1 - D_t_2
+#     D_t_2 = torch.zeros(m_L * N2, N2)
+    D_t_3 = torch.zeros(m_L * N2, m_L * N2)
+    for i in range(N2):
+#         D_t_2[:, i] = D_t[:, i * m_L : (i+1) * m_L] @ y[i]
+    
+    
+#     for i in range(N2):
+        D_t_3[:, i * m_L : (i+1) * m_L] = (D_t[:, i * m_L : (i+1) * m_L] @ y[i]) @ y[i].t()
+    
+    D_t = D_t_1 - D_t_3
     return D_t
     
 
