@@ -288,7 +288,7 @@ def get_JH(D_t, data_, params):
     
     D_t_1 = D_t * diag_y
     
-    D_t_2 =
+#     D_t_2 =
     
     D_t = D_t_1 - D_t_2
     return D_t
