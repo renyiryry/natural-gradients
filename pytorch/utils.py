@@ -1547,6 +1547,8 @@ def kfac_update(data_, params):
 #             print('print(model_grad[l])', model_grad[l])
 
             params['algorithm'] = 'SMW-Fisher'
+    
+            print('SMW_Fisher_update(data_, params)', SMW_Fisher_update(data_, params))
 
             delta.append(SMW_Fisher_update(data_, params))
         
