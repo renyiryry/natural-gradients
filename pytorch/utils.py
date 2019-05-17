@@ -1542,9 +1542,11 @@ def kfac_update(data_, params):
     if algorithm == 'Fisher-block':
         delta = []
         for l in range(numlayers):
-            F = lambda_ * torch.eye(layersizes[l] * layersizes[l+1]) + np.kron(A_block, G_block)
+#             F = lambda_ * torch.eye(layersizes[l] * layersizes[l+1]) + np.kron(A_block, G_block)
             
-            print('print(model_grad[l])', model_grad[l])
+#             print('print(model_grad[l])', model_grad[l])
+
+            delta.append(SMW_Fisher_update(data_, params))
             
 #             delta.append()
         
