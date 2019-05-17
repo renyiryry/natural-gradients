@@ -126,8 +126,7 @@ class Model_3(nn.Module):
 
         return z, a, h
 
-
-
+"""
 class Model_2(nn.Module):
 
     def __init__(self):
@@ -225,116 +224,12 @@ class Model_2(nn.Module):
         
 
         return weighted_loss, a, h
-
-
 """
-class Model(nn.Module):
 
-    def __init__(self):
-        super(Model, self).__init__()
-        
-        self.layersizes = [784, 200, 100, 10]
-        self.numlayers = len(self.layersizes) - 1
-        
-#         self.fc = self.numlayers * [0]
-        self.fc = list(range(self.numlayers))
-        for l in range(self.numlayers):
-            self.fc[l] = nn.Linear(self.layersizes[l], self.layersizes[l+1], bias=False)
-            
-#         self.fc[0] = nn.Linear(self.layersizes[0], self.layersizes[0+1], bias=False)
-#         self.fc[1] = nn.Linear(self.layersizes[1], self.layersizes[1+1], bias=False)
-#         self.fc[2] = nn.Linear(self.layersizes[2], self.layersizes[2+1], bias=False)
-        
-        self.fc = tuple(self.fc)
-        
-        
 
-#         self.fc1 = nn.Linear(784, 200, bias=False)
-#         self.fc2 = nn.Linear(200, 100, bias=False)
-#         self.fc3 = nn.Linear(100, 10, bias=False)
 
-#         self.W = [self.fc1.weight, self.fc2.weight, self.fc3.weight]  
-#         self.W = self.numlayers * [0]
-#         for l in range(self.numlayers):
-#             self.W[l] = self.fc[l].weight
-#         self.W = [fci.weight for fci in self.fc]
 
-#         self.W = []
-#         for l in range(self.numlayers):
-#             self.W.append(self.fc[l].weight)
-            
-        self.W = list(range(3))
-        for l in range(self.numlayers):
-            self.W[l] = self.fc[l].weight
-#         self.W[1] = self.fc[1].weight
-#         self.W[2] = self.fc[2].weight
-        
-        self.W = tuple(self.W)
-    
-#         print('size(self.W[0]): ', self.W[0].numel())
-#         print('size(self.W[1]): ', self.W[1].numel())
-#         print('size(self.W[2]): ', self.W[2].numel())
 
-    def forward(self, x):
-        
-#         a = (self.numlayers - 1) * [0]
-#         h = (self.numlayers - 1) * [0]
-#         for l in range(self.numlayers - 1):
-#             if l == 0:
-#                 a[l] = self.fc[l](x)
-#             else:
-#                 a[l] = self.fc[l](h[l-1])
-#             h[l] = F.relu(a[l])
-            
-            
-        
-        
-
-            
-        a = list(range(self.numlayers - 1))
-        h = list(range(self.numlayers - 1))
-        
-        for l in range(self.numlayers - 1):
-            if l == 0:
-                a[l] = self.fc[l](x)
-            else:
-                a[l] = self.fc[l](h[l-1])
-            h[l] = F.relu(a[l])
-        
-#         a[0] = self.fc[0](x)
-#         h[0] = F.relu(a[0])
-#         a[1] = self.fc[1](h[0])
-#         h[1] = F.relu(a[1])
-            
-        z = self.fc[-1](h[-1])
-            
-
-#         cache = (a1, h1, a2, h2)
-            
-#         cache = ((self.numlayers - 1)) * 2 * [0]
-#         for l in range(0, self.numlayers - 1):            
-#             cache[2*l] = a[l]
-#             cache[2*l+1] = h[l]
-#         cache = tuple(cache) 
-        
-
-    
-#         print('len(cache): ', len(cache))
-
-        z.retain_grad()
-#         for c in cache:
-#             c.retain_grad()
-        for c in a:
-            c.retain_grad()
-        for c in h:
-            c.retain_grad()
-        
-        h = [x] + h
-        a = a + [z]
-        
-
-        return z, a, h
-"""
 
 
 # Model
@@ -368,8 +263,8 @@ rho_kfac = args.rho_kfac
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN'\
     or algorithm == 'Fisher-block':
-    lambda_ = args.lambda_
-    params['lambda_'] = lambda_
+    init_lambda_ = args.lambda_
+    params['lambda_'] = init_lambda_
     boost = 1.01
     drop = 1 / 1.01
     params['boost'] = boost
@@ -660,6 +555,10 @@ for i in range(int(max_epoch * iter_per_epoch)):
         or algorithm == 'Fisher-block':
         
         lambda_ = update_lambda(p, data_, params)
+        
+        lambda_ = init_lambda_
+        print('test')
+        
         params['lambda_'] = lambda_
     elif algorithm == 'SGD':
         1
@@ -752,5 +651,123 @@ np.save('/content/logs/temp/' + name_result + '_times.npy', times)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_losses.npy', losses)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_acces.npy', acces)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_times.npy', times)
+
+
+
+
+
+
+
+
+
+
+"""
+class Model(nn.Module):
+
+    def __init__(self):
+        super(Model, self).__init__()
+        
+        self.layersizes = [784, 200, 100, 10]
+        self.numlayers = len(self.layersizes) - 1
+        
+#         self.fc = self.numlayers * [0]
+        self.fc = list(range(self.numlayers))
+        for l in range(self.numlayers):
+            self.fc[l] = nn.Linear(self.layersizes[l], self.layersizes[l+1], bias=False)
+            
+#         self.fc[0] = nn.Linear(self.layersizes[0], self.layersizes[0+1], bias=False)
+#         self.fc[1] = nn.Linear(self.layersizes[1], self.layersizes[1+1], bias=False)
+#         self.fc[2] = nn.Linear(self.layersizes[2], self.layersizes[2+1], bias=False)
+        
+        self.fc = tuple(self.fc)
+        
+        
+
+#         self.fc1 = nn.Linear(784, 200, bias=False)
+#         self.fc2 = nn.Linear(200, 100, bias=False)
+#         self.fc3 = nn.Linear(100, 10, bias=False)
+
+#         self.W = [self.fc1.weight, self.fc2.weight, self.fc3.weight]  
+#         self.W = self.numlayers * [0]
+#         for l in range(self.numlayers):
+#             self.W[l] = self.fc[l].weight
+#         self.W = [fci.weight for fci in self.fc]
+
+#         self.W = []
+#         for l in range(self.numlayers):
+#             self.W.append(self.fc[l].weight)
+            
+        self.W = list(range(3))
+        for l in range(self.numlayers):
+            self.W[l] = self.fc[l].weight
+#         self.W[1] = self.fc[1].weight
+#         self.W[2] = self.fc[2].weight
+        
+        self.W = tuple(self.W)
+    
+#         print('size(self.W[0]): ', self.W[0].numel())
+#         print('size(self.W[1]): ', self.W[1].numel())
+#         print('size(self.W[2]): ', self.W[2].numel())
+
+    def forward(self, x):
+        
+#         a = (self.numlayers - 1) * [0]
+#         h = (self.numlayers - 1) * [0]
+#         for l in range(self.numlayers - 1):
+#             if l == 0:
+#                 a[l] = self.fc[l](x)
+#             else:
+#                 a[l] = self.fc[l](h[l-1])
+#             h[l] = F.relu(a[l])
+            
+            
+        
+        
+
+            
+        a = list(range(self.numlayers - 1))
+        h = list(range(self.numlayers - 1))
+        
+        for l in range(self.numlayers - 1):
+            if l == 0:
+                a[l] = self.fc[l](x)
+            else:
+                a[l] = self.fc[l](h[l-1])
+            h[l] = F.relu(a[l])
+        
+#         a[0] = self.fc[0](x)
+#         h[0] = F.relu(a[0])
+#         a[1] = self.fc[1](h[0])
+#         h[1] = F.relu(a[1])
+            
+        z = self.fc[-1](h[-1])
+            
+
+#         cache = (a1, h1, a2, h2)
+            
+#         cache = ((self.numlayers - 1)) * 2 * [0]
+#         for l in range(0, self.numlayers - 1):            
+#             cache[2*l] = a[l]
+#             cache[2*l+1] = h[l]
+#         cache = tuple(cache) 
+        
+
+    
+#         print('len(cache): ', len(cache))
+
+        z.retain_grad()
+#         for c in cache:
+#             c.retain_grad()
+        for c in a:
+            c.retain_grad()
+        for c in h:
+            c.retain_grad()
+        
+        h = [x] + h
+        a = a + [z]
+        
+
+        return z, a, h
+"""
 
 
