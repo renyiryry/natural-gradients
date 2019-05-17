@@ -288,7 +288,7 @@ def get_JH(D_t, data_, params):
     
     diag_y = diag_y.repeat(N2 * m_L, 1)
     
-    D_t_1 = D_t * diag_y
+    D_t_1 = D_t * diag_y.data.numpy()
     
     # D_t_2
     
