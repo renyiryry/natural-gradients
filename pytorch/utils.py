@@ -206,7 +206,11 @@ def get_D_t(data_, params):
             
             print('h[l]', h[l])
             
-            h_l_h_l_t = (h[l] @ h[l].t()).data.numpy()
+            h_l_h_l_t = h[l] @ h[l].t()
+            
+            print('h_l_h_l_t', h_l_h_l_t)
+            
+            h_l_h_l_t = h_l_h_l_t.data.numpy()
             
             print('h_l_h_l_t', h_l_h_l_t)
             
