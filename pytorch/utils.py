@@ -204,23 +204,23 @@ def get_D_t(data_, params):
             
             permuted_a_grad_l = a_grad_l.permute(1, 0, 2).contiguous().view(m_L * N2, model.layersizes[l+1])
             
-            print('h[l]', h[l])
+#             print('h[l]', h[l])
             
-            print('torch.max(h[l])', torch.max(h[l]))
+#             print('torch.max(h[l])', torch.max(h[l]))
             
-            print('(h[l].t())', (h[l].t()))
+#             print('(h[l].t())', (h[l].t()))
             
-            print('h[l] @ (h[l].t())', h[l] @ (h[l].t()))
+#             print('h[l] @ (h[l].t())', h[l] @ (h[l].t()))
             
-            print('print(torch.mm(h[l], h[l].t()))', torch.mm(h[l], h[l].t()))
+#             print('print(torch.mm(h[l], h[l].t()))', torch.mm(h[l], h[l].t()))
             
             h_l_h_l_t = h[l] @ (h[l].t())
             
-            print('h_l_h_l_t', h_l_h_l_t)
+#             print('h_l_h_l_t', h_l_h_l_t)
             
             h_l_h_l_t = h_l_h_l_t.data.numpy()
             
-            print('h_l_h_l_t', h_l_h_l_t)
+#             print('h_l_h_l_t', h_l_h_l_t)
             
             h_kron = np.kron(h_l_h_l_t, np.ones((m_L, m_L)))
             
@@ -258,9 +258,9 @@ def get_D_t(data_, params):
     
             
     
-            print('h_kron', h_kron)
+#             print('h_kron', h_kron)
         
-            print('print((permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())', (permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())
+#             print('print((permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())', (permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())
     
             D_t += np.multiply(h_kron, (permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())
         
