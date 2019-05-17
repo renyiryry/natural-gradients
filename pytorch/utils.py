@@ -212,7 +212,7 @@ def get_D_t(data_, params):
             
 #             h_kron = h_kron.type(torch.DoubleTensor)
             
-#             print('h_kron.dtype', h_kron.dtype)
+#             
             
 #             print('(permuted_a_grad_l @ permuted_a_grad_l.t())', (permuted_a_grad_l @ permuted_a_grad_l.t()).dtype).type(torch.DoubleTensor)
             
@@ -238,6 +238,10 @@ def get_D_t(data_, params):
             
 #             print('print((permuted_a_grad_l.t() @ permuted_a_grad_l).size())', (permuted_a_grad_l.t() @ permuted_a_grad_l).size())
             
+            print('h_kron', h_kron)
+        
+            print('print((permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())', (permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())
+    
             D_t += np.multiply(h_kron, (permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())
         
 #         print('time for compute J J transpose: ', time.time() - start_time)
