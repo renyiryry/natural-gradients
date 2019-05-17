@@ -204,7 +204,11 @@ def get_D_t(data_, params):
             
             permuted_a_grad_l = a_grad_l.permute(1, 0, 2).contiguous().view(m_L * N2, model.layersizes[l+1])
             
+            print('h[l]', h[l])
+            
             h_l_h_l_t = (h[l] @ h[l].t()).data.numpy()
+            
+            print('h_l_h_l_t', h_l_h_l_t)
             
             h_kron = np.kron(h_l_h_l_t, np.ones((m_L, m_L)))
             
@@ -238,9 +242,9 @@ def get_D_t(data_, params):
             
 #             print('print((permuted_a_grad_l.t() @ permuted_a_grad_l).size())', (permuted_a_grad_l.t() @ permuted_a_grad_l).size())
             
-            print('h[l]', h[l])
+            
     
-            print('h_l_h_l_t', h_l_h_l_t)
+            
     
             print('h_kron', h_kron)
         
