@@ -744,7 +744,7 @@ def SMW_GN_update(data_, params):
 
     print('time for get cache momentum: ', time.time() - start_time)
     
-    start_time = time.time()
+#     start_time = time.time()
     
     a = data_['a']
     z = a[-1]
@@ -754,7 +754,7 @@ def SMW_GN_update(data_, params):
     
     data_['y'] = y
     
-    print('time for compute y: ', time.time() - start_time)
+#     print('time for compute y: ', time.time() - start_time)
 
 
     
