@@ -246,12 +246,16 @@ def get_D_t(data_, params):
         
         start_time = time.time()
         
-        D_t = np.transpose(D_t)
+        D_t = get_JH(D_t, data_, params)
         
-        for i in range(N2 * m_L):
-            D_t[:, i] = get_HV(D_t[:, i], data_, params)
         
-        D_t = np.transpose(D_t)
+        
+#         D_t = np.transpose(D_t)
+        
+#         for i in range(N2 * m_L):
+#             D_t[:, i] = get_HV(D_t[:, i], data_, params)
+        
+#         D_t = np.transpose(D_t)
         
         print('time for compute H: ', time.time() - start_time)
         
@@ -268,6 +272,27 @@ def get_D_t(data_, params):
         print('Error! 1501')
         sys.exit()
     return D_t
+
+def get_JH(D_t, data_, params):
+    
+    y = data_['y']
+    
+    N2 = params['N2']
+    m_L = params['m_L']
+    
+    print('y.size', y.size())
+    
+    
+    
+    diag_y = diag_y.repeat(N2 * m_L, 1)
+    
+    D_t_1 = D_t * diag_y
+    
+    D_t_2 =
+    
+    D_t = D_t_1 - D_t_2
+    return D_t
+    
 
 def get_H(data_, params):
     
