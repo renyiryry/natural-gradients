@@ -293,13 +293,13 @@ def get_JH(D_t, data_, params):
     # D_t_2
     
 #     D_t_2 = torch.zeros(m_L * N2, N2)
-    D_t_3 = torch.zeros(m_L * N2, m_L * N2)
+    D_t_3 = np.zeros((m_L * N2, m_L * N2))
     for i in range(N2):
 #         D_t_2[:, i] = D_t[:, i * m_L : (i+1) * m_L] @ y[i]
     
     
-#     for i in range(N2):
-        D_t_3[:, i * m_L : (i+1) * m_L] = (D_t[:, i * m_L : (i+1) * m_L] @ y[i]) @ y[i].t()
+
+        D_t_3[:, i * m_L : (i+1) * m_L] = np.matmul(np.matmul(D_t[:, i * m_L : (i+1) * m_L], y[i].data.numpy()), (y[i].t()).data.numpy)
     
     D_t = D_t_1 - D_t_3
     return D_t
