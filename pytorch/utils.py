@@ -238,6 +238,8 @@ def get_D_t(data_, params):
             
 #             print('print((permuted_a_grad_l.t() @ permuted_a_grad_l).size())', (permuted_a_grad_l.t() @ permuted_a_grad_l).size())
             
+            print('h[l]', h[l])
+    
             print('h_l_h_l_t', h_l_h_l_t)
     
             print('h_kron', h_kron)
