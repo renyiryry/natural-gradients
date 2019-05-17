@@ -1548,9 +1548,14 @@ def kfac_update(data_, params):
 
             params['algorithm'] = 'SMW-Fisher'
     
-            print('SMW_Fisher_update(data_, params)', SMW_Fisher_update(data_, params))
+            data_test, _ = SMW_Fisher_update(data_, params)
+    
+#             print('SMW_Fisher_update(data_, params)', SMW_Fisher_update(data_, params))
+            
 
-            delta.append(SMW_Fisher_update(data_, params))
+            p = data_test['p']
+        
+            delta.append(-p)
         
             params['algorithm'] = 'Fisher-block'
             
