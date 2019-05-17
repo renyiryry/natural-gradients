@@ -222,7 +222,7 @@ def get_D_t(data_, params):
             
 #             print()
     
-#             print('h_l_h_l_t', h_l_h_l_t)
+#             
     
 #             print('np.kron(h_l_h_l_t, np.ones(m_L, m_L))', np.kron(h_l_h_l_t, np.ones(m_L, m_L)))
             
@@ -238,6 +238,8 @@ def get_D_t(data_, params):
             
 #             print('print((permuted_a_grad_l.t() @ permuted_a_grad_l).size())', (permuted_a_grad_l.t() @ permuted_a_grad_l).size())
             
+            print('h_l_h_l_t', h_l_h_l_t)
+    
             print('h_kron', h_kron)
         
             print('print((permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())', (permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())
