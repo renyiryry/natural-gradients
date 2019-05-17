@@ -206,6 +206,8 @@ def get_D_t(data_, params):
             
             print('h[l]', h[l])
             
+            print('(h[l].t())', (h[l].t()))
+            
             print('h[l] @ (h[l].t())', h[l] @ (h[l].t()))
             
             h_l_h_l_t = h[l] @ (h[l].t())
