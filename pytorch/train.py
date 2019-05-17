@@ -102,7 +102,7 @@ class Model_3(nn.Module):
             if self.activation == 'relu':
                 h[l] = F.relu(a[l])
             elif self.activation == 'sigmoid':
-                h[l] = F.sigmoid(a[l])
+                h[l] = torch.sigmoid(a[l])
         
 #         a = tuple(a)
 #         h = tuple(h)
