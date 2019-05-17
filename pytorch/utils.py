@@ -246,16 +246,16 @@ def get_D_t(data_, params):
         
         start_time = time.time()
         
-#         D_t = get_JH(D_t, data_, params)
+        D_t = get_JH(D_t, data_, params)
         
         
         
-        D_t = np.transpose(D_t)
+#         D_t = np.transpose(D_t)
         
-        for i in range(N2 * m_L):
-            D_t[:, i] = get_HV(D_t[:, i], data_, params)
+#         for i in range(N2 * m_L):
+#             D_t[:, i] = get_HV(D_t[:, i], data_, params)
         
-        D_t = np.transpose(D_t)
+#         D_t = np.transpose(D_t)
         
         print('time for compute H: ', time.time() - start_time)
         
