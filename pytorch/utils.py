@@ -182,7 +182,7 @@ def get_D_t(data_, params):
         
         model = data_['model']
         
-        start_time = time.time()
+#         start_time = time.time()
         
         
         for l in range(numlayers):
@@ -240,11 +240,11 @@ def get_D_t(data_, params):
             
             D_t += np.multiply(h_kron, (permuted_a_grad_l @ permuted_a_grad_l.t()).data.numpy())
         
-        print('time for compute J J transpose: ', time.time() - start_time)
+#         print('time for compute J J transpose: ', time.time() - start_time)
         
         # add the H term
         
-        start_time = time.time()
+#         start_time = time.time()
         
         D_t = get_JH(D_t, data_, params)
         
@@ -257,7 +257,7 @@ def get_D_t(data_, params):
         
 #         D_t = np.transpose(D_t)
         
-        print('time for compute H: ', time.time() - start_time)
+#         print('time for compute H: ', time.time() - start_time)
         
         
         
