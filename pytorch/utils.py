@@ -1546,11 +1546,11 @@ def kfac_update(data_, params):
             
 #             print('print(model_grad[l])', model_grad[l])
 
-            params['algorithm'] == 'SMW-Fisher'
+            params['algorithm'] = 'SMW-Fisher'
 
             delta.append(SMW_Fisher_update(data_, params))
         
-            params['algorithm'] == 'Fisher-block'
+            params['algorithm'] = 'Fisher-block'
             
 #             delta.append()
         
