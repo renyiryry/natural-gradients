@@ -1439,7 +1439,6 @@ def computeFV(delta, data_, params):
 
 
 def kfac_update(data_, params):
-#     import numpy as np
     
     X_mb = data_['X_mb']
     
@@ -1533,13 +1532,13 @@ def kfac_update(data_, params):
         # Amortize the inverse. Only update inverses every now and then
         if i % inverse_update_freq == 0:
             
+            phi_ = np.sqrt( ( np.trace(A[l].data.numpy) / A[l].shape[0] ) / ( np.trace(G[l].data.numpy) / G[l].shape[0] ) )
             
-            
-            A_inv[l] = (A[l] + np.sqrt(lambda_) * torch.eye(A[l].shape[0])).inverse()
+            A_inv[l] = (A[l] + (phi_ * np.sqrt(lambda_)) * torch.eye(A[l].shape[0])).inverse()
             
 #             print('G[l] + eps*torch.eye(G[l].shape[0]): ', G[l] + eps*torch.eye(G[l].shape[0]))
             
-            G_inv[l] = (G[l] + np.sqrt(lambda_) * torch.eye(G[l].shape[0])).inverse()
+            G_inv[l] = (G[l] + (1 / phi_ * np.sqrt(lambda_)) * torch.eye(G[l].shape[0])).inverse()
 
 #         print(type(G_inv[l]))
 #         print(type(model.W[l].grad.data))
