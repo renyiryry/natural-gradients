@@ -55,7 +55,7 @@ class Model_3(nn.Module):
 
 
             
-        self.W = list(range(3))
+        self.W = list(range(self.numlayers))
         for l in range(self.numlayers):
             self.W[l] = self.fc[l].weight
 #         self.W[1] = self.fc[1].weight
