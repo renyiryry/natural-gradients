@@ -1532,7 +1532,7 @@ def kfac_update(data_, params):
         # Amortize the inverse. Only update inverses every now and then
         if i % inverse_update_freq == 0:
             
-            phi_ = np.sqrt( ( np.trace(A[l].data.numpy) / A[l].shape[0] ) / ( np.trace(G[l].data.numpy) / G[l].shape[0] ) )
+            phi_ = np.sqrt( ( np.trace(A[l].data.numpy()) / A[l].shape[0] ) / ( np.trace(G[l].data.numpy()) / G[l].shape[0] ) )
             
             A_inv[l] = (A[l] + (phi_ * np.sqrt(lambda_)) * torch.eye(A[l].shape[0])).inverse()
             
