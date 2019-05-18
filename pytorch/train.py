@@ -40,7 +40,8 @@ class Model_3(nn.Module):
 
         self.activation = activation
 
-        self.layersizes = [784, 400, 400, 10]
+#         self.layersizes = [784, 400, 400, 10]
+        self.layersizes = [784, 500, 10]
         self.numlayers = len(self.layersizes) - 1
         
         self.fc = list(range(self.numlayers))
