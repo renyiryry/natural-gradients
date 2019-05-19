@@ -470,8 +470,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
         lambda_ = update_lambda(p, data_, params)
         
-        lambda_ = 0.1
-        print('test')
+#         lambda_ = 0.1
+#         print('test')
         
         params['lambda_'] = lambda_
     elif algorithm == 'SGD':
