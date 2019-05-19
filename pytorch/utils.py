@@ -1264,7 +1264,7 @@ def SMW_Fisher_update(data_, params):
         
     p = get_minus(delta, params)
     
-    print('print(get_dot_product(p, model_grad, params)): ', get_dot_product(p, model_grad, params))
+#     print('print(get_dot_product(p, model_grad, params)): ', get_dot_product(p, model_grad, params))
     
   
 
