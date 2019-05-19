@@ -1041,6 +1041,9 @@ def update_lambda(p, data_, params):
             denom = get_dot_product(p, denom, params)
             denom = -0.5 * denom
             denom = denom - get_dot_product(model_grad, p, params) 
+            
+            print('get_dot_product(model_grad, p, params) ')
+            print(get_dot_product(model_grad, p, params) )
                 
         else:
             print('Error! 1504')
