@@ -470,7 +470,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
         lambda_ = update_lambda(p, data_, params)
         
-        lambda_ = init_lambda
+        lambda_ = init_lambda_
         print('test')
         
         params['lambda_'] = lambda_
