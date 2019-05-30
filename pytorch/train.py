@@ -146,11 +146,11 @@ class Model_3(nn.Module):
 params = {}
 
 parser = argparse.ArgumentParser()
-parser.add_argument('algorithm', type=str)
+parser.add_argument('--algorithm', type=str)
 parser.add_argument('--max_epoch', type=float)
 parser.add_argument('--record_epoch', type=float)
-parser.add_argument('N1', type=int)
-parser.add_argument('N2', type=int)
+parser.add_argument('--N1', type=int)
+parser.add_argument('--N2', type=int)
 parser.add_argument('--alpha', type=float)
 parser.add_argument('--lambda_', type=float)
 parser.add_argument('--inverse_update_freq', type=int)
