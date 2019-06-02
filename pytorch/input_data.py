@@ -184,7 +184,9 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         SOURCE_URL = 'https://www.cs.toronto.edu/~kriz/'
         file_name = 'cifar-10-python.tar.gz'
         
-        maybe_download(SOURCE_URL, file_name, train_dir)
+        local_file = maybe_download(SOURCE_URL, file_name, train_dir)
+        
+        print('local_file', local_file)
         
     else:
         print('Dataset not supported.')
