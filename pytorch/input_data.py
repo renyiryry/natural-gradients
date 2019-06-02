@@ -3,7 +3,7 @@ import gzip
 import os
 # import urllib
 import urllib.request
-import numpy
+import numpy as np
 
 
 import sys
@@ -23,8 +23,8 @@ def maybe_download(SOURCE_URL, filename, work_directory):
 
 
 def _read32(bytestream):
-    dt = numpy.dtype(numpy.uint32).newbyteorder('>')
-    return numpy.frombuffer(bytestream.read(4), dtype=dt)[0]
+    dt = np.dtype(np.uint32).newbyteorder('>')
+    return np.frombuffer(bytestream.read(4), dtype=dt)[0]
 
 
 def extract_images(filename):
@@ -40,10 +40,10 @@ def extract_images(filename):
         rows = _read32(bytestream)
         cols = _read32(bytestream)
         buf = bytestream.read(rows * cols * num_images)
-        data = numpy.frombuffer(buf, dtype=numpy.uint8)
+        data = np.frombuffer(buf, dtype=np.uint8)
         data = data.reshape(num_images, rows, cols, 1)
         
-        print('print(shape(data))', shape(data))
+        print('print(shape(data))', np.shape(data))
         
         return data
 
@@ -59,7 +59,7 @@ def extract_labels(filename, one_hot=False):
                 (magic, filename))
         num_items = _read32(bytestream)
         buf = bytestream.read(num_items)
-        labels = numpy.frombuffer(buf, dtype=numpy.uint8)
+        labels = np.frombuffer(buf, dtype=np.uint8)
         if one_hot:
             return dense_to_one_hot(labels)
         return labels
@@ -68,8 +68,8 @@ def extract_labels(filename, one_hot=False):
 def dense_to_one_hot(labels_dense, num_classes=10):
     """Convert class labels from scalars to one-hot vectors."""
     num_labels = labels_dense.shape[0]
-    index_offset = numpy.arange(num_labels) * num_classes
-    labels_one_hot = numpy.zeros((num_labels, num_classes))
+    index_offset = np.arange(num_labels) * num_classes
+    labels_one_hot = np.zeros((num_labels, num_classes))
     labels_one_hot.flat[index_offset + labels_dense.ravel()] = 1
     return labels_one_hot
 
@@ -90,8 +90,8 @@ class DataSet(object):
             images = images.reshape(images.shape[0],
                                     images.shape[1] * images.shape[2])
             # Convert from [0, 255] -> [0.0, 1.0].
-            images = images.astype(numpy.float32)
-            images = numpy.multiply(images, 1.0 / 255.0)
+            images = images.astype(np.float32)
+            images = np.multiply(images, 1.0 / 255.0)
         self._images = images
         self._labels = labels
         self._epochs_completed = 0
@@ -126,8 +126,8 @@ class DataSet(object):
             # Finished epoch
             self._epochs_completed += 1
             # Shuffle the data
-            perm = numpy.arange(self._num_examples)
-            numpy.random.shuffle(perm)
+            perm = np.arange(self._num_examples)
+            np.random.shuffle(perm)
             self._images = self._images[perm]
             self._labels = self._labels[perm]
             # Start next epoch
