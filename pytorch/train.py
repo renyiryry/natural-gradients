@@ -284,9 +284,9 @@ epoches = 0
 
 # times[0] = 0
 
-iter_per_epoch = int(len(mnist.train.labels) / N1)
+iter_per_epoch = int(len(t_train) / N1)
 
-iter_per_record = int(len(mnist.train.labels) * record_epoch / N1)
+iter_per_record = int(len(t_train) * record_epoch / N1)
 
 # Training
 epoch = -1
