@@ -20,7 +20,8 @@ import copy
 np.random.seed(9999)
 torch.manual_seed(9999)
 
-dataset = input_data.read_data_sets('../MNIST_data', one_hot=False)
+name_dataset = 'MNIST'
+dataset = input_data.read_data_sets(name_dataset, '../MNIST_data', one_hot=False)
 
 
 
