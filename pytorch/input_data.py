@@ -4,12 +4,12 @@ import os
 # import urllib
 import urllib.request
 import numpy
-SOURCE_URL = 'http://yann.lecun.com/exdb/mnist/'
+
 
 import sys
 
 
-def maybe_download(filename, work_directory):
+def maybe_download(SOURCE_URL, filename, work_directory):
     """Download the data from Yann's website, unless it's already here."""
     if not os.path.exists(work_directory):
         os.mkdir(work_directory)
@@ -146,19 +146,22 @@ def read_data_sets(name_dataset, train_dir, fake_data=False, one_hot=False):
         return data_sets
     
     if name_dataset == 'MNIST':
+        
+        SOURCE_URL = 'http://yann.lecun.com/exdb/mnist/'
+        
         TRAIN_IMAGES = 'train-images-idx3-ubyte.gz'
         TRAIN_LABELS = 'train-labels-idx1-ubyte.gz'
         TEST_IMAGES = 't10k-images-idx3-ubyte.gz'
         TEST_LABELS = 't10k-labels-idx1-ubyte.gz'
         VALIDATION_SIZE = 5000
     
-        local_file = maybe_download(TRAIN_IMAGES, train_dir)
+        local_file = maybe_download(SOURCE_URL, TRAIN_IMAGES, train_dir)
         train_images = extract_images(local_file)
-        local_file = maybe_download(TRAIN_LABELS, train_dir)
+        local_file = maybe_download(SOURCE_URL, TRAIN_LABELS, train_dir)
         train_labels = extract_labels(local_file, one_hot=one_hot)
-        local_file = maybe_download(TEST_IMAGES, train_dir)
+        local_file = maybe_download(SOURCE_URL, TEST_IMAGES, train_dir)
         test_images = extract_images(local_file)
-        local_file = maybe_download(TEST_LABELS, train_dir)
+        local_file = maybe_download(SOURCE_URL, TEST_LABELS, train_dir)
         test_labels = extract_labels(local_file, one_hot=one_hot)
     
         validation_images = train_images[:VALIDATION_SIZE]
