@@ -20,14 +20,14 @@ import copy
 np.random.seed(9999)
 torch.manual_seed(9999)
 
-mnist = input_data.read_data_sets('../MNIST_data', one_hot=False)
+dataset = input_data.read_data_sets('../MNIST_data', one_hot=False)
 
 
 
-X_test = mnist.test.images
-t_test = mnist.test.labels
-X_train = mnist.train.images
-t_train = mnist.train.labels
+X_test = dataset.test.images
+t_test = dataset.test.labels
+X_train = dataset.train.images
+t_train = dataset.train.labels
 X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
 
 
@@ -298,7 +298,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     for iter_ in range(iter_per_epoch):
     
-    X_mb, t_mb = mnist.train.next_batch(N1)
+    X_mb, t_mb = dataset.train.next_batch(N1)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
 
     # Forward
