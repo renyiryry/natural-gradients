@@ -171,6 +171,10 @@ def read_data_sets(name_dataset, train_dir, fake_data=False, one_hot=False):
         data_sets.train = DataSet(train_images, train_labels)
         data_sets.validation = DataSet(validation_images, validation_labels)
         data_sets.test = DataSet(test_images, test_labels)
+        
+    elif name_dataset == 'CIFAR':
+        SOURCE_URL = 'https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz'
+        
     else:
         print('Dataset not supported.')
         sys.exit()
