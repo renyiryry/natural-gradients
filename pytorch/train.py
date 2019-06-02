@@ -20,16 +20,7 @@ import copy
 np.random.seed(9999)
 torch.manual_seed(9999)
 
-name_dataset = 'MNIST'
-dataset = input_data.read_data_sets(name_dataset, '../MNIST_data', one_hot=False)
 
-
-
-X_test = dataset.test.images
-t_test = dataset.test.labels
-X_train = dataset.train.images
-t_train = dataset.train.labels
-X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
 
 
 class Model_3(nn.Module):
@@ -157,6 +148,7 @@ parser.add_argument('--lambda_', type=float)
 parser.add_argument('--inverse_update_freq', type=int)
 parser.add_argument('--rho_kfac', type=float)
 parser.add_argument('--activation', type=str)
+parser.add_argument('--dataset', type=str)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 algorithm = args.algorithm
@@ -166,6 +158,27 @@ record_epoch = args.record_epoch
 inverse_update_freq = args.inverse_update_freq
 rho_kfac = args.rho_kfac
 activation = args.activation
+name_dataset = args.dataset
+
+
+
+
+
+# name_dataset = 'MNIST'
+dataset = input_data.read_data_sets(name_dataset, '../MNIST_data', one_hot=False)
+
+
+
+X_test = dataset.test.images
+t_test = dataset.test.labels
+X_train = dataset.train.images
+t_train = dataset.train.labels
+X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
+
+
+
+
+
 
 
 # Model
