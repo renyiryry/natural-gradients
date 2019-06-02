@@ -141,7 +141,7 @@ class DataSet(object):
         return self._images[start:end], self._labels[start:end]
 
 
-def read_data_sets(name_dataset, train_dir, fake_data=False, one_hot=False):
+def read_data_sets(name_dataset, fake_data=False, one_hot=False):
     class DataSets(object):
         pass
     data_sets = DataSets()
@@ -150,6 +150,8 @@ def read_data_sets(name_dataset, train_dir, fake_data=False, one_hot=False):
         data_sets.validation = DataSet([], [], fake_data=True)
         data_sets.test = DataSet([], [], fake_data=True)
         return data_sets
+    
+    train_dir = '../' + name_dataset + '_data'
     
     if name_dataset == 'MNIST':
         
@@ -179,7 +181,10 @@ def read_data_sets(name_dataset, train_dir, fake_data=False, one_hot=False):
         data_sets.test = DataSet(test_images, test_labels)
         
     elif name_dataset == 'CIFAR':
-        SOURCE_URL = 'https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz'
+        SOURCE_URL = 'https://www.cs.toronto.edu/~kriz/'
+        file_name = 'cifar-10-python.tar.gz'
+        
+        maybe_download(SOURCE_URL, file_name, train_dir)
         
     else:
         print('Dataset not supported.')
