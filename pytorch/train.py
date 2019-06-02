@@ -165,7 +165,7 @@ name_dataset = args.dataset
 
 
 # name_dataset = 'MNIST'
-dataset = input_data.read_data_sets(name_dataset, '../MNIST_data', one_hot=False)
+dataset = input_data.read_data_sets(name_dataset, one_hot=False)
 
 
 
