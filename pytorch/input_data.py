@@ -41,6 +41,9 @@ def extract_images(filename):
         cols = _read32(bytestream)
         buf = bytestream.read(rows * cols * num_images)
         data = np.frombuffer(buf, dtype=np.uint8)
+        
+        print('print(shape(data))', np.shape(data))
+        
         data = data.reshape(num_images, rows, cols, 1)
         
         print('print(shape(data))', np.shape(data))
