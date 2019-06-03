@@ -18,6 +18,8 @@ def maybe_download(SOURCE_URL, filename, work_directory):
         
         print('filepath', filepath)
         
+        print('current path', os.getcwd())
+        
 #         filepath, _ = urllib.urlretrieve(SOURCE_URL + filename, filepath)
         filepath, _ = urllib.request.urlretrieve(SOURCE_URL + filename, filepath)
         statinfo = os.stat(filepath)
