@@ -17,13 +17,16 @@ def maybe_download(SOURCE_URL, filename, work_directory):
     if not os.path.exists(work_directory):
         os.mkdir(work_directory)
     filepath = os.path.join(work_directory, filename)
+    
+    print('filepath', filepath)
+    
     if not os.path.exists(filepath):
         
         
         
         
         
-        print('filepath', filepath)
+        
         
 #         filepath, _ = urllib.urlretrieve(SOURCE_URL + filename, filepath)
         filepath, _ = urllib.request.urlretrieve(SOURCE_URL + filename, filepath)
