@@ -166,7 +166,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         data_sets.test = DataSet([], [], fake_data=True)
         return data_sets
     
-    train_dir = '../' + name_dataset + '_data'
+    train_dir = '../data/' + name_dataset + '_data'
     
     if name_dataset == 'MNIST':
         
