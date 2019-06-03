@@ -17,7 +17,9 @@ def maybe_download(SOURCE_URL, filename, work_directory):
     print('work_directory', work_directory)
     
     if not os.path.exists(work_directory):
-        os.mkdir(work_directory)
+#         os.mkdir(work_directory)
+        os.makedirs(work_directory)
+        
     filepath = os.path.join(work_directory, filename)
     
     print('filepath', filepath)
