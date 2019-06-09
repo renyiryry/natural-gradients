@@ -582,10 +582,12 @@ name_result = name_dataset + '_' + algorithm + '_alpha_' + str(alpha)
 np.save('/content/logs/temp/' + name_result + '_losses.npy', losses)
 np.save('/content/logs/temp/' + name_result + '_acces.npy', acces)
 np.save('/content/logs/temp/' + name_result + '_times.npy', times)
+np.save('/content/logs/temp/' + name_result + '_epoches.npy', epoches)
 
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_losses.npy', losses)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_acces.npy', acces)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_times.npy', times)
+np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_epoches.npy', epoches)
 
 
 
