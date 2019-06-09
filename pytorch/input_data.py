@@ -219,13 +219,13 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
                     print(key)
                     print(dict[key])
                 
-                train_images += dict['data']
-                train_labels += dict['labels']
+                train_images += dict['data'.encode('UTF-8')]
+                train_labels += dict['labels'.encode('UTF-8')]
                 
         with open(working_dir + 'test_batch', 'rb') as fo:
             dict = pickle.load(fo, encoding='bytes')
-            test_images = dict['data']
-            test_labels = dict['labels']
+            test_images = dict['data'.encode('UTF-8')]
+            test_labels = dict['labels'.encode('UTF-8')]
                 
         
         VALIDATION_SIZE = 5000
