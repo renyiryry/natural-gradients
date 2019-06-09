@@ -207,7 +207,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         
         import tarfile
         tf = tarfile.open(train_dir + '/' + file_name)
-        tf.extractall()
+        tf.extractall(train_dir)
         
     else:
         print('Dataset not supported.')
