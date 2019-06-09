@@ -217,6 +217,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
                 for key in dict:
                     print('key')
                     print(key)
+                    print(dict[key])
                 
                 train_images += dict['data']
                 train_labels += dict['labels']
