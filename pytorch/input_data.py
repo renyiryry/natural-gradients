@@ -59,11 +59,11 @@ def extract_images(filename):
         buf = bytestream.read(rows * cols * num_images)
         data = np.frombuffer(buf, dtype=np.uint8)
         
-        print('print(shape(data))', np.shape(data))
+#         print('print(shape(data))', np.shape(data))
         
         data = data.reshape(num_images, rows, cols, 1)
         
-        print('print(shape(data))', np.shape(data))
+#         print('print(shape(data))', np.shape(data))
         
         return data
 
