@@ -236,26 +236,26 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
             test_labels = dict['labels'.encode('UTF-8')]
             test_labels = np.asarray(test_labels)
 
-        print('train_images.shape')
-        print(train_images.shape)
-        print('train_labels.shape')
-        print(train_labels.shape)
-        print('test_images.shape')
-        print(test_images.shape)
-        print('test_labels.shape')
-        print(test_labels.shape)
+#         print('train_images.shape')
+#         print(train_images.shape)
+#         print('train_labels.shape')
+#         print(train_labels.shape)
+#         print('test_images.shape')
+#         print(test_images.shape)
+#         print('test_labels.shape')
+#         print(test_labels.shape)
         
         train_images = train_images[:, :, np.newaxis, np.newaxis]
         test_images = test_images[:, :, np.newaxis, np.newaxis]
         
-        print('train_images.shape')
-        print(train_images.shape)
-        print('train_labels.shape')
-        print(train_labels.shape)
-        print('test_images.shape')
-        print(test_images.shape)
-        print('test_labels.shape')
-        print(test_labels.shape)
+#         print('train_images.shape')
+#         print(train_images.shape)
+#         print('train_labels.shape')
+#         print(train_labels.shape)
+#         print('test_images.shape')
+#         print(test_images.shape)
+#         print('test_labels.shape')
+#         print(test_labels.shape)
                 
         
         VALIDATION_SIZE = 5000
