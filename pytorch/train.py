@@ -520,7 +520,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
         acces[epoch+1] = get_acc(model, X_test, t_test)
         
-        epochs[epoch+1] = epoch * record_epoch
+        epochs[epoch+1] = (epoch + 1) * record_epoch
     
         
 #         print(z)
