@@ -25,7 +25,7 @@ torch.manual_seed(9999)
 
 class Model_3(nn.Module):
 
-    def __init__(self, activation):
+    def __init__(self, activation, name_dataset):
         super(Model_3, self).__init__()
         
 #         self.layersizes = [784, 200, 100, 10]
@@ -33,7 +33,14 @@ class Model_3(nn.Module):
         self.activation = activation
 
 #         self.layersizes = [784, 400, 400, 10]
-        self.layersizes = [784, 500, 10]
+        if name_dataset == 'MNIST':
+            self.layersizes = [784, 500, 10]
+        elif name_dataset == 'CIFAR':
+            self.layersizes = [3072, 400, 400, 10]
+        else:
+            print('Dateset not supported!')
+            sys.exit()
+            
         self.numlayers = len(self.layersizes) - 1
         
         self.fc = list(range(self.numlayers))
@@ -183,7 +190,7 @@ X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
 
 # Model
 # model = Model()
-model = Model_3(activation)
+model = Model_3(activation, name_dataset)
 
 # print('model.W[1] when initialize: ', model.W[1])
 
