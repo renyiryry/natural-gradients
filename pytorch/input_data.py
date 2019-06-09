@@ -219,6 +219,9 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
 #                     print('key')
 #                     print(key)
 #                     print(dict[key])
+
+                print(train_images)
+                print(dict['data'.encode('UTF-8')])
                 
                 train_images = np.concatenate(train_images, dict['data'.encode('UTF-8')])
                 train_labels = np.concatenate(train_labels, dict['labels'.encode('UTF-8')])
