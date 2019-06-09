@@ -209,8 +209,8 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         
         working_dir = train_dir + '/cifar-10-batches-py/'
         
-#         train_images = []
-#         train_labels = []
+        train_images = []
+        train_labels = []
         for i in range(5):
             with open(working_dir + 'data_batch_' + str(i+1), 'rb') as fo:
                 dict = pickle.load(fo, encoding='bytes')
@@ -223,12 +223,12 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
 #                 print(train_images)
 #                 print(dict['data'.encode('UTF-8')])
                 
-                if i == 0:
-                    train_images = dict['data'.encode('UTF-8')]
-                    train_labels = dict['labels'.encode('UTF-8')]
-                else:
-                    train_images = np.concatenate(train_images, dict['data'.encode('UTF-8')])
-                    train_labels = np.concatenate(train_labels, dict['labels'.encode('UTF-8')])
+#                 if i == 0:
+#                     train_images = dict['data'.encode('UTF-8')]
+#                     train_labels = dict['labels'.encode('UTF-8')]
+#                 else:
+                train_images = np.concatenate((train_images, dict['data'.encode('UTF-8')]))
+                train_labels = np.concatenate((train_labels, dict['labels'.encode('UTF-8')]))
                 
         with open(working_dir + 'test_batch', 'rb') as fo:
             dict = pickle.load(fo, encoding='bytes')
