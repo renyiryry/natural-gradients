@@ -245,8 +245,8 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         print('test_labels.shape')
         print(test_labels.shape)
         
-        train_images = train_images[:, np.newaxis, np.newaxis]
-        test_images = test_images[:, np.newaxis, np.newaxis]
+        train_images = train_images[:, :, np.newaxis, np.newaxis]
+        test_images = test_images[:, :, np.newaxis, np.newaxis]
         
         print('train_images.shape')
         print(train_images.shape)
