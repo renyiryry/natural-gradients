@@ -234,6 +234,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
             dict = pickle.load(fo, encoding='bytes')
             test_images = dict['data'.encode('UTF-8')]
             test_labels = dict['labels'.encode('UTF-8')]
+            test_labels = np.asarray(test_labels)
 
         print('train_images.shape')
         print(train_images.shape)
