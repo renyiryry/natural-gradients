@@ -189,15 +189,12 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         local_file = maybe_download(SOURCE_URL, TEST_LABELS, train_dir)
         test_labels = extract_labels(local_file, one_hot=one_hot)
     
-        validation_images = train_images[:VALIDATION_SIZE]
-        validation_labels = train_labels[:VALIDATION_SIZE]
-        train_images = train_images[VALIDATION_SIZE:]
-        train_labels = train_labels[VALIDATION_SIZE:]
-        data_sets.train = DataSet(train_images, train_labels)
-        data_sets.validation = DataSet(validation_images, validation_labels)
-        data_sets.test = DataSet(test_images, test_labels)
+        
         
     elif name_dataset == 'CIFAR':
+        import tarfile
+        import pickle
+        
         SOURCE_URL = 'https://www.cs.toronto.edu/~kriz/'
         file_name = 'cifar-10-python.tar.gz'
         
@@ -205,11 +202,39 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         
         print('local_file', local_file)
         
-        import tarfile
+        
         tf = tarfile.open(train_dir + '/' + file_name)
         tf.extractall(train_dir)
+        
+        working_dir = train_dir + '/cifar-10-batches-py/'
+        
+        train_images = []
+        train_labels = []
+        for i in range(5):
+            with open(working_dir + 'data_batch_' + str(i+1), 'rb') as fo:
+                dict = pickle.load(fo, encoding='bytes')
+                train_images += dict['data']
+                train_labels += dict['labels']
+                
+        with open(working_dir + 'test_batch', 'rb') as fo:
+            dict = pickle.load(fo, encoding='bytes')
+            test_images = dict['data']
+            test_labels = dict['labels']
+                
+        
+        VALIDATION_SIZE = 5000
         
     else:
         print('Dataset not supported.')
         sys.exit()
+        
+    validation_images = train_images[:VALIDATION_SIZE]
+    validation_labels = train_labels[:VALIDATION_SIZE]
+    train_images = train_images[VALIDATION_SIZE:]
+    train_labels = train_labels[VALIDATION_SIZE:]
+    data_sets.train = DataSet(train_images, train_labels)
+    data_sets.validation = DataSet(validation_images, validation_labels)
+    data_sets.test = DataSet(test_images, test_labels)    
+        
+    
     return data_sets
