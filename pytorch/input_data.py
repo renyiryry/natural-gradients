@@ -234,6 +234,15 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
             dict = pickle.load(fo, encoding='bytes')
             test_images = dict['data'.encode('UTF-8')]
             test_labels = dict['labels'.encode('UTF-8')]
+
+        print('train_images.shape')
+        print(train_images.shape)
+        print('train_labels.shape')
+        print(train_labels.shape)
+        print('test_images.shape')
+        print(test_images.shape)
+        print('test_labels.shape')
+        print(test_labels.shape)
                 
         
         VALIDATION_SIZE = 5000
