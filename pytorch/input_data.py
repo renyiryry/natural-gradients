@@ -214,10 +214,10 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
             with open(working_dir + 'data_batch_' + str(i+1), 'rb') as fo:
                 dict = pickle.load(fo, encoding='bytes')
                 
-                for key in dict:
-                    print('key')
-                    print(key)
-                    print(dict[key])
+#                 for key in dict:
+#                     print('key')
+#                     print(key)
+#                     print(dict[key])
                 
                 train_images += dict['data'.encode('UTF-8')]
                 train_labels += dict['labels'.encode('UTF-8')]
