@@ -194,6 +194,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
     elif name_dataset == 'CIFAR':
         import tarfile
         import pickle
+        import numpy as np
         
         SOURCE_URL = 'https://www.cs.toronto.edu/~kriz/'
         file_name = 'cifar-10-python.tar.gz'
@@ -219,8 +220,8 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
 #                     print(key)
 #                     print(dict[key])
                 
-                train_images += dict['data'.encode('UTF-8')]
-                train_labels += dict['labels'.encode('UTF-8')]
+                train_images = np.concatenate(train_images, dict['data'.encode('UTF-8')])
+                train_labels = np.concatenate(train_labels, dict['labels'.encode('UTF-8')])
                 
         with open(working_dir + 'test_batch', 'rb') as fo:
             dict = pickle.load(fo, encoding='bytes')
