@@ -300,7 +300,7 @@ epochs = np.zeros(len_record + 1)
 acces[0] = get_acc(model, X_test, t_test)
 losses[0] = get_loss(model, X_train, t_train)
 times[0] = 0
-epoches = 0
+epochs[0] = 0
 
 
 # times[0] = 0
@@ -582,12 +582,12 @@ name_result = name_dataset + '_' + algorithm + '_alpha_' + str(alpha)
 np.save('/content/logs/temp/' + name_result + '_losses.npy', losses)
 np.save('/content/logs/temp/' + name_result + '_acces.npy', acces)
 np.save('/content/logs/temp/' + name_result + '_times.npy', times)
-np.save('/content/logs/temp/' + name_result + '_epoches.npy', epoches)
+np.save('/content/logs/temp/' + name_result + '_epochs.npy', epochs)
 
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_losses.npy', losses)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_acces.npy', acces)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_times.npy', times)
-np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_epoches.npy', epoches)
+np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_epochs.npy', epochs)
 
 
 
