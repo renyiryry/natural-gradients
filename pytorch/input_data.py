@@ -22,7 +22,7 @@ def maybe_download(SOURCE_URL, filename, work_directory):
         
     filepath = os.path.join(work_directory, filename)
     
-    print('filepath', filepath)
+#     print('filepath', filepath)
     
     if not os.path.exists(filepath):
         
