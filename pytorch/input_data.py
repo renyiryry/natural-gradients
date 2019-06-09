@@ -220,8 +220,8 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
 #                     print(key)
 #                     print(dict[key])
 
-                print(train_images)
-                print(dict['data'.encode('UTF-8')])
+#                 print(train_images)
+#                 print(dict['data'.encode('UTF-8')])
                 
                 if i == 0:
                     train_images = dict['data'.encode('UTF-8')]
