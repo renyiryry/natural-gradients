@@ -12,9 +12,9 @@ import sys
 def maybe_download(SOURCE_URL, filename, work_directory):
     """Download the data from Yann's website, unless it's already here."""
     
-    print('current path', os.getcwd())
+#     print('current path', os.getcwd())
     
-    print('work_directory', work_directory)
+#     print('work_directory', work_directory)
     
     if not os.path.exists(work_directory):
 #         os.mkdir(work_directory)
