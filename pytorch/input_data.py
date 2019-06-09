@@ -205,6 +205,10 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         
         print('local_file', local_file)
         
+        import tarfile
+        tf = tarfile.open(train_dir + file_name)
+        tf.extractall()
+        
     else:
         print('Dataset not supported.')
         sys.exit()
