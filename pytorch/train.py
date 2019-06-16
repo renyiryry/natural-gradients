@@ -313,6 +313,7 @@ iter_per_epoch = int(len(t_train) / N1)
 iter_per_record = int(len(t_train) * record_epoch / N1)
 
 # Training
+print('Begin training...')
 epoch = -1
 for i in range(int(max_epoch * iter_per_epoch)):
     
@@ -448,7 +449,6 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #     test_start_time = time.time()
     
 #     print('time first half: ', time.time() - start_time)
-    
     
     
     
