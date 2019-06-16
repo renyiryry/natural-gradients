@@ -212,6 +212,12 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
 #         test_labels = extract_labels(local_file, one_hot=one_hot)
 
         test_labels = test_images
+    
+    
+        print('train_images.shape')
+        print(train_images.shape)
+        print('train_labels.shape')
+        print(train_labels.shape)
 
 
         
