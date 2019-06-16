@@ -195,6 +195,8 @@ X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
 # model = Model()
 model = Model_3(activation, name_dataset)
 
+print('Model created.')
+
 # print('model.W[1] when initialize: ', model.W[1])
 
 # print('model: ', model)
