@@ -183,6 +183,11 @@ X_train = dataset.train.images
 t_train = dataset.train.labels
 X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
 
+print('X_train.shape')
+print(X_train.shape)
+print('t_train.shape')
+print(t_train.shape)
+
 
 
 
