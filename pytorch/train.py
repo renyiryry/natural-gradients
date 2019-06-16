@@ -173,8 +173,6 @@ name_dataset = args.dataset
 
 
 
-
-# name_dataset = 'MNIST'
 dataset = input_data.read_data_sets(name_dataset, one_hot=False)
 
 
@@ -192,7 +190,6 @@ X_train, t_train = torch.from_numpy(X_train), torch.from_numpy(t_train).long()
 
 
 # Model
-# model = Model()
 model = Model_3(activation, name_dataset)
 
 print('Model created.')
