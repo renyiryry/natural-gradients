@@ -188,6 +188,33 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         test_images = extract_images(local_file)
         local_file = maybe_download(SOURCE_URL, TEST_LABELS, train_dir)
         test_labels = extract_labels(local_file, one_hot=one_hot)
+        
+    elif name_dataset == 'MNIST-autoencoder':
+        
+        SOURCE_URL = 'http://yann.lecun.com/exdb/mnist/'
+        
+        TRAIN_IMAGES = 'train-images-idx3-ubyte.gz'
+#         TRAIN_LABELS = 'train-labels-idx1-ubyte.gz'
+        TEST_IMAGES = 't10k-images-idx3-ubyte.gz'
+#         TEST_LABELS = 't10k-labels-idx1-ubyte.gz'
+        VALIDATION_SIZE = 5000
+    
+        local_file = maybe_download(SOURCE_URL, TRAIN_IMAGES, train_dir)
+        train_images = extract_images(local_file)
+#         local_file = maybe_download(SOURCE_URL, TRAIN_LABELS, train_dir)
+#         train_labels = extract_labels(local_file, one_hot=one_hot)
+        
+        train_labels = train_images
+
+        local_file = maybe_download(SOURCE_URL, TEST_IMAGES, train_dir)
+        test_images = extract_images(local_file)
+#         local_file = maybe_download(SOURCE_URL, TEST_LABELS, train_dir)
+#         test_labels = extract_labels(local_file, one_hot=one_hot)
+
+        test_labels = test_images
+
+
+        
     
         
         
@@ -235,27 +262,9 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
             test_images = dict['data'.encode('UTF-8')]
             test_labels = dict['labels'.encode('UTF-8')]
             test_labels = np.asarray(test_labels)
-
-#         print('train_images.shape')
-#         print(train_images.shape)
-#         print('train_labels.shape')
-#         print(train_labels.shape)
-#         print('test_images.shape')
-#         print(test_images.shape)
-#         print('test_labels.shape')
-#         print(test_labels.shape)
         
         train_images = train_images[:, :, np.newaxis, np.newaxis]
         test_images = test_images[:, :, np.newaxis, np.newaxis]
-        
-#         print('train_images.shape')
-#         print(train_images.shape)
-#         print('train_labels.shape')
-#         print(train_labels.shape)
-#         print('test_images.shape')
-#         print(test_images.shape)
-#         print('test_labels.shape')
-#         print(test_labels.shape)
                 
         
         VALIDATION_SIZE = 5000
