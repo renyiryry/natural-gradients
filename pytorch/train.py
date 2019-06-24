@@ -613,6 +613,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
 # np.save('temp/kfac_losses.npy', losses)
 # np.save('/content/logs/temp/kfac_losses.npy', losses)
 
+print('Begin saving results...')
+
 name_result = name_dataset + '_' + algorithm +\
 '_momentum_gradient_' + str(int(if_momentuem_gradoent)) +\
 '_alpha_' + str(alpha)
