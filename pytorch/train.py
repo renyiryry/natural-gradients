@@ -210,7 +210,7 @@ print('Model created.')
 
 # print('model.W[1] when initialize: ', model.W[1])
 
-# print('model: ', model)
+params['layersizes'] = model.layersizes
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN'\
     or algorithm == 'Fisher-block':
