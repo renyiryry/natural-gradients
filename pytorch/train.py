@@ -616,7 +616,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
 print('Begin saving results...')
 
 name_result = name_dataset + '_' + algorithm +\
-'_momentum_gradient_' + str(int(if_momentuem_gradoent)) +\
+'_momentum_gradient_' + str(int(if_momentuem_gradient)) +\
 '_alpha_' + str(alpha)
 
 np.save('/content/logs/temp/' + name_result + '_losses.npy', losses)
