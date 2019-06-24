@@ -304,20 +304,20 @@ else:
     
 if if_momentum_gradient:
     
-    print('model.W')
-    print(model.W)
+#     print('model.W')
+#     print(model.W)
     
-    print('model.W[0].size')
-    print(model.W[0].size())
+#     print('model.W[0].size')
+#     print(model.W[0].size())
     
-    print('model.W[1].size')
-    print(model.W[1].size())
+#     print('model.W[1].size')
+#     print(model.W[1].size())
     
-    print(params['layersizes'])
+#     print(params['layersizes'])
     
     data_['model_grad'] = get_zero(params)
     
-    data_['model_grad'] = get_multiply(0, model.W, params)
+#     data_['model_grad'] = get_multiply(0, model.W, params)
     
 
     
