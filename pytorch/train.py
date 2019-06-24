@@ -149,6 +149,7 @@ params = {}
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--algorithm', type=str)
+parser.add_argument('--momentum_gradient', type=int)
 parser.add_argument('--max_epoch', type=float)
 parser.add_argument('--record_epoch', type=float)
 parser.add_argument('--N1', type=int)
@@ -169,6 +170,12 @@ inverse_update_freq = args.inverse_update_freq
 rho_kfac = args.rho_kfac
 activation = args.activation
 name_dataset = args.dataset
+
+if_momentum_gradient = args.momentum_gradient
+if if_momentum_gradient != 0 or if_momentum_gradient != 1:
+    print('Error!')
+    sys.exit()
+if_momentum_gradient = bool(if_momentum_gradient)
 
 
 
@@ -292,6 +299,10 @@ elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN':
 else:
     print('Error! 1433')
     sys.exit()
+    
+if if_momentum_gradient:
+    data_['model_grad'] = get_multiply(0, model.W, params)
+    
 
     
 
@@ -342,10 +353,6 @@ for i in range(int(max_epoch * iter_per_epoch)):
     loss = F.cross_entropy(z, t_mb, reduction = 'mean')    
 #     loss = F.cross_entropy(z, t_mb)
 
-#     print('model.W[0]: ', model.W[0])
-#     print('model.W[1]: ', model.W[1])
-#     print('model.W[2]: ', model.W[2])
-
 #     print('a[0] size:', a[0].size())
 #     print('a[0]:', a[0])
 #     print('a[1] size:', a[1].size())
@@ -379,9 +386,20 @@ for i in range(int(max_epoch * iter_per_epoch)):
     model_grad = []
     for l in range(model.numlayers):
         model_grad.append(copy.deepcopy(model.W[l].grad))
-    data_['model_grad'] = model_grad
     
-#     print('model_grad[1] in train: ', model_grad[1])
+    
+
+
+
+    if if_momentum_gradient:
+        rho = min(1-1/(i+1), 0.9)
+        data_['model_grad'] = get_plus(\
+                                       get_multiply(rho, data_['model_grad'], params),
+                                       get_multiply(1 - rho, model_grad, params),
+                                       params)
+    else:
+        data_['model_grad'] = model_grad
+        
     
     
     
@@ -391,7 +409,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
     
     
-#     print('z.grad: ', z.grad)
+
     
 #     print('h1.grad: ', cache[1].grad)
 #     print('h2.grad: ', cache[3].grad)
