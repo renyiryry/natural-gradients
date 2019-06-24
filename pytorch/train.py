@@ -627,6 +627,8 @@ np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_acces.
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_times.npy', times)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_epochs.npy', epochs)
 
+print('Saved at /content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '.')
+
 
 
 
