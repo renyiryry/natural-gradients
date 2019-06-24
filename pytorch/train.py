@@ -315,6 +315,8 @@ if if_momentum_gradient:
     
     print(params['layersizes'])
     
+    data_['model_grad'] = get_zero(params)
+    
     data_['model_grad'] = get_multiply(0, model.W, params)
     
 
