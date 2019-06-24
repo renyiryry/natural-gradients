@@ -7,6 +7,13 @@ import copy
 
 import time
 
+def get_zero(params):
+    layersizes = params['layersizes']
+    W = []
+    for l in range(len(layersizes) - 1):
+        W.append(torch.zeros(layersizes[l+1], layersizes[l]))
+    return W
+
 def get_loss(model, x, t):
     z, _, _ = model.forward(x)
     loss = F.cross_entropy(z, t, reduction = 'mean')
