@@ -172,7 +172,7 @@ activation = args.activation
 name_dataset = args.dataset
 
 if_momentum_gradient = args.momentum_gradient
-if if_momentum_gradient != 0 or if_momentum_gradient != 1:
+if if_momentum_gradient != 0 and if_momentum_gradient != 1:
     print('if_momentum_gradient')
     print(if_momentum_gradient)
     print('Error!')
