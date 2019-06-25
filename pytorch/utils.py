@@ -976,7 +976,7 @@ def compute_sum_J_transpose_V(v, data_, params):
     for l in range(numlayers):
         delta[l] = torch.sum(delta[l], dim = 0) # [m[l+1], m[l]]
         
-    print('check if correct')
+#     print('check if correct')
     
 #     sys.exit()
     
