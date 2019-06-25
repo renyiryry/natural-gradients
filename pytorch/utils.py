@@ -978,7 +978,7 @@ def compute_sum_J_transpose_V(v, data_, params):
         
     print('check if correct')
     
-    sys.exit()
+#     sys.exit()
     
     
     return delta
