@@ -1186,7 +1186,7 @@ def SMW_Fisher_update(data_, params):
         
         if i % inverse_update_freq == 0 or i < 100:
             D_t = get_D_t(data_, params)
-            D_t_inv = torch.from_numpu(D_t).inverse()
+            D_t_inv = torch.from_numpy(D_t).inverse()
             data_['D_t_inv'] = D_t_inv
         else:
             D_t_inv = data_['D_t_inv']
