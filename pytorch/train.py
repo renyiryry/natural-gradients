@@ -106,9 +106,6 @@ class Model_3(nn.Module):
                 h[l] = F.relu(a[l])
             elif self.activation == 'sigmoid':
                 h[l] = torch.sigmoid(a[l])
-        
-#         a = tuple(a)
-#         h = tuple(h)
             
         z = self.fc[-1](h[-1])
         
@@ -303,9 +300,6 @@ else:
     sys.exit()
     
 if if_momentum_gradient:
-    
-#     print('model.W')
-#     print(model.W)
     
 #     print('model.W[0].size')
 #     print(model.W[0].size())
