@@ -220,7 +220,7 @@ if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-
 elif algorithm == 'SGD':
     1
 else:
-    print('Error! 1431')
+    print('Error: algorithm not defined.')
     sys.exit()
 
 # N1 = 128  # mini-batch size (for gradient)
