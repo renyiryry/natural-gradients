@@ -122,8 +122,7 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
     
 #     print('model_1.W[1].size():', model_1.W[1].size())
     
-#     a_grad_momentum = data_['a_grad_momentum']
-#     h_momentum = data_['h_momentum']
+
     
     
     
@@ -523,13 +522,7 @@ def get_cache_momentum(data_, params):
         
         
         
-#         print('h[0].size(): ', h[0].size())
-#         print('h[1].size(): ', h[1].size())
-#         print('h[2].size(): ', h[2].size())
-#         print('h: ', h)
-#         print('h[0]: ', h[0])
-#         print('h[1]: ', h[1])
-#         print('h[2]: ', h[2])
+
         
         
         
@@ -1105,6 +1098,8 @@ def SMW_Fisher_update(data_, params):
     if algorithm == 'SMW-Fisher-momentum':
         a_grad_momentum = data_['a_grad_momentum']
         h_momentum = data_['h_momentum']
+    elif algorithm == 'SMW-Fisher-D_t-momentum':
+        D_t_momentum = data_['D_t']
         
     loss = data_['loss']
     
@@ -1141,9 +1136,7 @@ def SMW_Fisher_update(data_, params):
         
     # compute the vector after D_t    
     
-#     data_compute_JV = {}
-#     data_compute_JV['a_grad_momentum'] = a_grad_momentum
-#     data_compute_JV['h_momentum'] = h_momentum
+
     
 #     start_time = time.time()
     
@@ -1177,6 +1170,8 @@ def SMW_Fisher_update(data_, params):
         hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
         hat_v = torch.from_numpy(hat_v)
+    elif algorithm == 'SMW-Fisher-D_t-momentum':
+        
         
     elif algorithm == 'SMW-Fisher-momentum':
             
@@ -1278,19 +1273,16 @@ def SMW_Fisher_update(data_, params):
         
     p = get_minus(delta, params)
     
-#     print('print(get_dot_product(p, model_grad, params)): ', get_dot_product(p, model_grad, params))
-    
   
 
 #     data_['model'] = model
     data_['p'] = p
     
-    if algorithm == 'SMW-Fisher-momentum':
-        data_['a_grad_momentum'] = a_grad_momentum
-        data_['h_momentum'] = h_momentum
+#     if algorithm == 'SMW-Fisher-momentum':
+#         data_['a_grad_momentum'] = a_grad_momentum
+#         data_['h_momentum'] = h_momentum
     
-#     print('model.W[1] in utils: ', model.W[1])
-#     print('model.W[1].data in utils: ', model.W[1].data)
+
         
     return data_, params
 
