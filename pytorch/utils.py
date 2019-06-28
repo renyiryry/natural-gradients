@@ -42,16 +42,14 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
     
     z, _, _ = model.forward(X_mb[N2_index])
     
-    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':
+    if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or \
+    algorithm == 'SMW-Fisher-D_t-momentum':
         t_mb = data_['t_mb']
     
         
     
     
-#     model_1 = copy.deepcopy(data_['model'])
-#     model = data_['model']
-#     X_mb = data_['X_mb']
-#     t_mb = data_['t_mb']
+
     
 #     N2_index = params['N2_index']
     
