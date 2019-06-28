@@ -1113,7 +1113,6 @@ def SMW_Fisher_update(data_, params):
     N1 = params['N1']
     N2 = params['N2']
     i = params['i']
-#     inverse_update_freq = params['inverse_update_freq']
     alpha = params['alpha']
     lambda_ = params['lambda_']
     numlayers = params['numlayers']
@@ -1182,9 +1181,9 @@ def SMW_Fisher_update(data_, params):
     elif algorithm == 'SMW-Fisher-momentum':
             
         
-        inverse_update_freq = params['inverse_update_freq']
+        inverse_update_freq_D_t = params['inverse_update_freq_D_t']
         
-        if i % inverse_update_freq == 0 or i < 100:
+        if i % inverse_update_freq_D_t == 0 or i < 100:
             D_t = get_D_t(data_, params)
             D_t_inv = torch.from_numpy(D_t).inverse()
             data_['D_t_inv'] = D_t_inv
