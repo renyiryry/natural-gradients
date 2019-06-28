@@ -292,11 +292,15 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
     
     D_t_inv = [0]
     data_['D_t_inv'] = D_t_inv
+
+elif params['algorithm'] == 'SMW-Fisher-D_t-momentum':
+    data_['D_t'] = []
+    
     
 elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN':
     1;
 else:
-    print('Error! 1433')
+    print('Error: algorithm not defined.')
     sys.exit()
     
 if if_momentum_gradient:
