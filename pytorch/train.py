@@ -291,7 +291,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
     data_['D_t_inv'] = D_t_inv
 
 elif params['algorithm'] == 'SMW-Fisher-D_t-momentum':
-    data_['D_t'] = []
+    data_['D_t'] = np.zeros((N2, N2))
     
     
 elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN':
