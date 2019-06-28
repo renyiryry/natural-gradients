@@ -1176,10 +1176,10 @@ def SMW_Fisher_update(data_, params):
         
         rho = min(1-1/(i+1), 0.9)
         
-        print('D_t_momentum')
-        print(D_t_momentum)
+#         print('D_t_momentum')
+#         print(D_t_momentum)
         
-        print(rho * D_t_momentum)
+#         print(rho * D_t_momentum)
         
 #         (1 - rho) * D_t
         
@@ -1245,7 +1245,7 @@ def SMW_Fisher_update(data_, params):
     
     
 
-    if algorithm == 'SMW-Fisher':
+    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-D_t-momentum':
         delta = compute_sum_J_transpose_V_backp(hat_v, data_, params)
     elif algorithm == 'SMW-Fisher-momentum':
         delta = compute_sum_J_transpose_V(hat_v, data_, params)
