@@ -1171,7 +1171,7 @@ def SMW_Fisher_update(data_, params):
     
         hat_v = torch.from_numpy(hat_v)
     elif algorithm == 'SMW-Fisher-D_t-momentum':
-        
+        print('Not finished.')
         
     elif algorithm == 'SMW-Fisher-momentum':
             
