@@ -210,7 +210,7 @@ print('Model created.')
 params['layersizes'] = model.layersizes
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN'\
-    or algorithm == 'Fisher-block':
+    or algorithm == 'Fisher-block' or algorithm == 'SMW-Fisher-D_t-momentum':
     init_lambda_ = args.lambda_
     params['lambda_'] = init_lambda_
     boost = 1.01
