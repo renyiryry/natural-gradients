@@ -1098,8 +1098,8 @@ def SMW_Fisher_update(data_, params):
     if algorithm == 'SMW-Fisher-momentum':
         a_grad_momentum = data_['a_grad_momentum']
         h_momentum = data_['h_momentum']
-    elif algorithm == 'SMW-Fisher-D_t-momentum':
-        D_t_momentum = data_['D_t']
+#     elif algorithm == 'SMW-Fisher-D_t-momentum':
+        
         
     loss = data_['loss']
     
@@ -1125,9 +1125,7 @@ def SMW_Fisher_update(data_, params):
 
 #     print('time for get cache momentum: ', start_time - time.time())
 
-#     model_grad = []
-#     for l in range(numlayers):
-#         model_grad.append(copy.deepcopy(model.W[l].grad))
+
     
     
     
@@ -1157,8 +1155,6 @@ def SMW_Fisher_update(data_, params):
         
         D_t = get_D_t(data_, params)
     
-#     print('D_t:', D_t)
-    
 #     print('v:', v)
 #     print('torch.mean(v): ', torch.mean(v))
     
@@ -1171,7 +1167,23 @@ def SMW_Fisher_update(data_, params):
     
         hat_v = torch.from_numpy(hat_v)
     elif algorithm == 'SMW-Fisher-D_t-momentum':
-        print('Not finished.')
+#         print('Not finished.')
+        D_t_momentum = data_['D_t']
+    
+        D_t = get_D_t(data_, params)
+        
+        rho = min(1-1/(i+1), 0.9)
+        
+        D_t_momentum = rho * D_t_momentum + (1 - rho) * D_t
+        data_['D_t'] = D_t_momentum
+        
+        D_t_cho_fac = scipy.linalg.cho_factor(D_t_momentum)
+        hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
+    
+        hat_v = torch.from_numpy(hat_v)
+        
+        
+        
         
     elif algorithm == 'SMW-Fisher-momentum':
             
