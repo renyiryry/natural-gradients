@@ -287,7 +287,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
     data_['a_grad_momentum'] = a_grad_momentum
     data_['h_momentum'] = h_momentum
     
-    D_t_inv = [0]
+    D_t_inv = np.zeros((N2, N2))
     data_['D_t_inv'] = D_t_inv
 
 elif params['algorithm'] == 'SMW-Fisher-D_t-momentum':
