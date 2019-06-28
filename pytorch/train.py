@@ -460,8 +460,6 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #         i = epoch * iter_per_epoch + iter_
     params['i'] = i
-    
-#     print(data_['model'])
 
     model = data_['model']
 
@@ -490,7 +488,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
         data_, params = kfac_update(data_, params)
     
         
-    elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum':
+    elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum' or\
+    params['algorithm'] == 'SMW-Fisher-D_t-momentum':
         
         
         
@@ -500,7 +499,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     elif algorithm == 'SMW-GN':
         data_ = SMW_GN_update(data_, params)
     else:
-        print('Error! 1434')
+        print('Error: algorithm not defined.')
         sys.exit()
         
      
