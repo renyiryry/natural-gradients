@@ -227,9 +227,6 @@ if N2 > N1:
     print('Error! 1432')
     sys.exit()
 
-
-
-# alpha = 0.001
 alpha = args.alpha
 # eps = 1e-2
 
