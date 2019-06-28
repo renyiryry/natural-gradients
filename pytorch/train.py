@@ -111,12 +111,6 @@ class Model_3(nn.Module):
         
 #         loss = F.cross_entropy(z, t, reduction = 'none')
 #         weighted_loss = torch.dot(loss, v)
-            
-
-        
-
-    
-#         print('len(cache): ', len(cache))
 
         z.retain_grad()
 #         for c in cache:
@@ -154,6 +148,7 @@ parser.add_argument('--N2', type=int)
 parser.add_argument('--alpha', type=float)
 parser.add_argument('--lambda_', type=float)
 parser.add_argument('--inverse_update_freq', type=int)
+parser.add_argument('--inverse_update_freq_D_t', type=int)
 parser.add_argument('--rho_kfac', type=float)
 parser.add_argument('--activation', type=str)
 parser.add_argument('--dataset', type=str)
@@ -164,6 +159,7 @@ params['algorithm'] = algorithm
 max_epoch = args.max_epoch
 record_epoch = args.record_epoch
 inverse_update_freq = args.inverse_update_freq
+inverse_update_freq_D_t = args.inverse_update_freq_D_t
 rho_kfac = args.rho_kfac
 activation = args.activation
 name_dataset = args.dataset
@@ -242,6 +238,7 @@ alpha = args.alpha
 params['N1'] = N1
 params['N2'] = N2
 params['inverse_update_freq'] = inverse_update_freq
+params['inverse_update_freq_D_t'] = inverse_update_freq_D_t
 params['rho_kfac'] = rho_kfac
 
 params['alpha'] = alpha
