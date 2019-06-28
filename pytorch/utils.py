@@ -147,7 +147,7 @@ def get_D_t(data_, params):
     N2 = params['N2']
     numlayers = params['numlayers']
     
-    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum':   
+    if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-Fisher-D_t-momentum':   
         a_grad_momentum = data_['a_grad_momentum']
         h_momentum = data_['h_momentum']
     
