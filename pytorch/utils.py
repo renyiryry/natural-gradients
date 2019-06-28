@@ -1176,6 +1176,10 @@ def SMW_Fisher_update(data_, params):
         
         rho = min(1-1/(i+1), 0.9)
         
+        rho * D_t_momentum
+        
+        (1 - rho) * D_t
+        
         D_t_momentum = rho * D_t_momentum + (1 - rho) * D_t
         data_['D_t'] = D_t_momentum
         
