@@ -1176,8 +1176,8 @@ def SMW_Fisher_update(data_, params):
         rho = 0
         print('test: rho = 0')
         
-        print('D_t_momentum')
-        print(D_t_momentum)
+#         print('D_t_momentum')
+#         print(D_t_momentum)
         
 #         print(rho * D_t_momentum)
         
