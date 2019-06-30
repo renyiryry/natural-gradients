@@ -206,7 +206,8 @@ print('Model created.')
 params['layersizes'] = model.layersizes
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN'\
-    or algorithm == 'Fisher-block' or algorithm == 'SMW-Fisher-D_t-momentum':
+    or algorithm == 'Fisher-block' or algorithm == 'SMW-Fisher-D_t-momentum'\
+    or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
     init_lambda_ = args.lambda_
     params['lambda_'] = init_lambda_
     boost = 1.01
@@ -288,6 +289,21 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
     data_['D_t_inv'] = D_t_inv
 
 elif params['algorithm'] == 'SMW-Fisher-D_t-momentum':
+    data_['J_J_transpose'] = np.float32(np.zeros((N2, N2)))
+    
+elif params['algorithm'] == 'SMW-Fisher-momentum-D_t-momentum':
+    a_grad_momentum = []
+    h_momentum = []
+    
+    layersizes = model.layersizes
+    
+    for l in range(model.numlayers):
+        a_grad_momentum.append(torch.zeros(N2, layersizes[l+1]))
+        h_momentum.append(torch.zeros(N2, layersizes[l]))
+        
+    data_['a_grad_momentum'] = a_grad_momentum
+    data_['h_momentum'] = h_momentum
+    
     data_['J_J_transpose'] = np.float32(np.zeros((N2, N2)))
     
     
@@ -482,8 +498,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
         data_, params = kfac_update(data_, params)
     
         
-    elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum' or\
-    params['algorithm'] == 'SMW-Fisher-D_t-momentum':
+    elif params['algorithm'] == 'SMW-Fisher' or params['algorithm'] == 'SMW-Fisher-momentum'\
+        or params['algorithm'] == 'SMW-Fisher-D_t-momentum'\
+        or params['algorithm'] == 'SMW-Fisher-momentum-D_t-momentum':
         
         
         
