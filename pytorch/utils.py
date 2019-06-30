@@ -1186,6 +1186,8 @@ def SMW_Fisher_update(data_, params):
     
         hat_v = torch.from_numpy(hat_v)
         
+        hat_v = np.float32(hat_v)
+        
         
         
         
@@ -1215,7 +1217,7 @@ def SMW_Fisher_update(data_, params):
     
 #     print('time for solve linear system: ', start_time - time.time())
     
-    print('hat_v: ', hat_v)
+#     print('hat_v: ', hat_v)
     
 #     print('torch.mean(hat_v): ', torch.mean(hat_v))
     
