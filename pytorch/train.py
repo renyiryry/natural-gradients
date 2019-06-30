@@ -320,8 +320,6 @@ if if_momentum_gradient:
     
     data_['model_grad'] = get_zero(params)
     
-#     data_['model_grad'] = get_multiply(0, model.W, params)
-    
 
     
 
@@ -333,11 +331,13 @@ losses = np.zeros(len_record + 1)
 acces = np.zeros(len_record + 1)
 times = np.zeros(len_record + 1)
 epochs = np.zeros(len_record + 1)
+lambdas = np.zeros(len_record + 1)
 
 acces[0] = get_acc(model, X_test, t_test)
 losses[0] = get_loss(model, X_train, t_train)
 times[0] = 0
 epochs[0] = 0
+lambdas[0] = init_lambda_
 
 
 # times[0] = 0
@@ -558,6 +558,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
         acces[epoch+1] = get_acc(model, X_test, t_test)
         
         epochs[epoch+1] = (epoch + 1) * record_epoch
+        
+        lambdas[epoch+1] = params['lambda_']
     
         
 #         print(z)
@@ -594,8 +596,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
         if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac'\
             or algorithm == 'SMW-GN'\
             or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
-            lambda_ = params['lambda_']
-            print('lambda = ', lambda_)
+#             lambda_ = params['lambda_']
+            print('lambda = ', params['lambda_'])
         else:
             print('Error: algorithm not defined.')
             sys.exit
@@ -627,11 +629,13 @@ name_result = name_dataset + '_' + algorithm +\
 
 np.save('/content/logs/temp/' + name_result + '_losses.npy', losses)
 np.save('/content/logs/temp/' + name_result + '_acces.npy', acces)
+np.save('/content/logs/temp/' + name_result + '_lambdas.npy', lambdas)
 np.save('/content/logs/temp/' + name_result + '_times.npy', times)
 np.save('/content/logs/temp/' + name_result + '_epochs.npy', epochs)
 
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_losses.npy', losses)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_acces.npy', acces)
+np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_lambdas.npy', lambdas)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_times.npy', times)
 np.save('/content/gdrive/My Drive/Gauss_Newton/result/' + name_result + '_epochs.npy', epochs)
 
