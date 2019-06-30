@@ -288,7 +288,7 @@ elif params['algorithm'] == 'SMW-Fisher-momentum':
     data_['D_t_inv'] = D_t_inv
 
 elif params['algorithm'] == 'SMW-Fisher-D_t-momentum':
-    data_['D_t'] = np.float32(np.zeros((N2, N2)))
+    data_['J_J_transpose'] = np.float32(np.zeros((N2, N2)))
     
     
 elif algorithm == 'SMW-Fisher' or algorithm == 'SGD' or algorithm == 'SMW-GN':
@@ -353,9 +353,6 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     v = 1 / len(X_mb) * torch.ones(len(X_mb))
     z, a, h = model.forward(X_mb)
-    
-#     print('z: ', z)
-#     print('t_mb: ', t_mb)
     
     
     loss = F.cross_entropy(z, t_mb, reduction = 'mean')    
