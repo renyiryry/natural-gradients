@@ -597,7 +597,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
             
         if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'kfac'\
-            or algorithm == 'SMW-GN'
+            or algorithm == 'SMW-GN'\
             or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
             lambda_ = params['lambda_']
             print('lambda = ', lambda_)
