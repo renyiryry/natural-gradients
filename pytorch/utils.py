@@ -671,8 +671,8 @@ def get_cache_momentum(data_, params):
             a_grad_for_D_t = []
             h_for_D_t = []
             for l in range(numlayers):
-                a_grad_momentum.append(N1 * (a[l].grad)[N2_index])
-                h_momentum.append(h[l][N2_index])
+                a_grad_for_D_t.append(N1 * (a[l].grad)[N2_index])
+                h_for_D_t.append(h[l][N2_index])
                 
             data_['a_grad_for_D_t'] = a_grad_for_D_t
             data_['h_for_D_t'] = h_for_D_t
