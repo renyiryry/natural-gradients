@@ -67,11 +67,6 @@ class Model_3(nn.Module):
 
 
     def forward(self, x):
-#         a1 = self.fc1(x)
-#         h1 = F.relu(a1)
-#         a2 = self.fc2(h1)
-#         h2 = F.relu(a2)
-#         z = self.fc3(h2)
         
 #         a = (self.numlayers - 1) * [0]
 #         h = (self.numlayers - 1) * [0]
@@ -601,7 +596,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
             or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
             lambda_ = params['lambda_']
             print('lambda = ', lambda_)
-        ellse:
+        else:
             print('Error: algorithm not defined.')
             sys.exit
         
