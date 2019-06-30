@@ -1159,7 +1159,7 @@ def SMW_Fisher_update(data_, params):
         hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
         hat_v = torch.from_numpy(hat_v)
-    elif algorithm == 'SMW-Fisher-D_t-momentum':
+    elif algorithm == 'SMW-Fisher-D_t-momentum' or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
         J_J_transpose_momentum = data_['J_J_transpose']
     
         D_t = get_D_t(data_, params)
@@ -1200,10 +1200,6 @@ def SMW_Fisher_update(data_, params):
             data_['D_t_inv'] = D_t_inv
         else:
             D_t_inv = data_['D_t_inv']
-        
-#         print('D_t_inv ', D_t_inv)
-#         print('D_t_inv', D_t_inv.size())
-#         print('v: ', v)
         
         hat_v = D_t_inv @ v
         
