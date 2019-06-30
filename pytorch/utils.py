@@ -656,7 +656,7 @@ def get_cache_momentum(data_, params):
     
     
     # Update running estimates
-        if algorithm == 'SMW-Fisher-momentum':
+        if algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
             rho = min(1 - 1/(i+1), 0.95)
         
             for l in range(numlayers):
