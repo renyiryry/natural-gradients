@@ -1255,7 +1255,7 @@ def SMW_Fisher_update(data_, params):
 
     if algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-D_t-momentum':
         delta = compute_sum_J_transpose_V_backp(hat_v, data_, params)
-    elif algorithm == 'SMW-Fisher-momentum':
+    elif algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
         delta = compute_sum_J_transpose_V(hat_v, data_, params)
     else:
         print('Error! 1506')
