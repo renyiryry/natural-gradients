@@ -1154,9 +1154,6 @@ def SMW_Fisher_update(data_, params):
         
         D_t = get_D_t(data_, params)
     
-#     print('v:', v)
-#     print('torch.mean(v): ', torch.mean(v))
-    
 #     print('time for get D_t: ', start_time - time.time())
     
 #     start_time = time.time()
@@ -1166,10 +1163,10 @@ def SMW_Fisher_update(data_, params):
     
         hat_v = torch.from_numpy(hat_v)
     elif algorithm == 'SMW-Fisher-D_t-momentum':
-#         print('Not finished.')
-        D_t_momentum = data_['D_t']
+        J_J_transpose_momentum = data_['J_J_transpose']
     
         D_t = get_D_t(data_, params)
+        J_J_transpose = D_t - lambda_ * np.eyes(N2)
         
         rho = min(1-1/(i+1), 0.9)
         
@@ -1181,12 +1178,10 @@ def SMW_Fisher_update(data_, params):
         
 #         print(rho * D_t_momentum)
         
-#         (1 - rho) * D_t
+        J_J_transpose_momentum = rho * J_J_transpose_momentum + (1 - rho) * J_J_transpose
+        data_['J_J_transpose'] = J_J_transpose_momentum
         
-        D_t_momentum = rho * D_t_momentum + (1 - rho) * D_t
-        data_['D_t'] = D_t_momentum
-        
-        D_t_cho_fac = scipy.linalg.cho_factor(D_t_momentum)
+        D_t_cho_fac = scipy.linalg.cho_factor(J_J_transpose_momentum + lambda_ * np.eyes(N2))
         hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
         hat_v = torch.from_numpy(hat_v)
