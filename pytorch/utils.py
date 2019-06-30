@@ -1166,7 +1166,7 @@ def SMW_Fisher_update(data_, params):
         J_J_transpose_momentum = data_['J_J_transpose']
     
         D_t = get_D_t(data_, params)
-        J_J_transpose = D_t - lambda_ * np.eyes(N2)
+        J_J_transpose = D_t - lambda_ * np.eye(N2)
         
         rho = min(1-1/(i+1), 0.9)
         
@@ -1181,7 +1181,7 @@ def SMW_Fisher_update(data_, params):
         J_J_transpose_momentum = rho * J_J_transpose_momentum + (1 - rho) * J_J_transpose
         data_['J_J_transpose'] = J_J_transpose_momentum
         
-        D_t_cho_fac = scipy.linalg.cho_factor(J_J_transpose_momentum + lambda_ * np.eyes(N2))
+        D_t_cho_fac = scipy.linalg.cho_factor(J_J_transpose_momentum + lambda_ * np.eye(N2))
         hat_v = scipy.linalg.cho_solve(D_t_cho_fac, v.data.numpy())
     
         hat_v = torch.from_numpy(hat_v)
