@@ -619,10 +619,7 @@ def get_cache_momentum(data_, params):
         numlayers = params['numlayers']
     
         N2_index = params['N2_index']
-    
-        if algorithm == 'SMW-Fisher-momentum':
-            a_grad_momentum = data_['a_grad_momentum']
-            h_momentum = data_['h_momentum']
+            
     
     
 #         a = []
@@ -638,13 +635,9 @@ def get_cache_momentum(data_, params):
     
 
     
-#     print('h[0].size(): ', h[0].size())
-#     print('h[1].size(): ', h[1].size())
-#     print('h[2].size(): ', h[2].size())
+
     
-#     print('a[0].grad: ', a[0].grad)
-#     print('a[1].grad: ', a[1].grad)
-#     print('a[2].grad: ', a[2].grad)
+
     
 #     print('h[0]: ', h[0])
 #     print('h[1]: ', h[1])
@@ -657,6 +650,10 @@ def get_cache_momentum(data_, params):
     
     # Update running estimates
         if algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
+            
+            a_grad_momentum = data_['a_grad_momentum']
+            h_momentum = data_['h_momentum']
+            
             rho = min(1 - 1/(i+1), 0.95)
         
             for l in range(numlayers):
