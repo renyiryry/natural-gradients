@@ -528,7 +528,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
     
     if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN'\
-        or algorithm == 'Fisher-block' or algorithm == 'SMW-Fisher-D_t-momentum':
+        or algorithm == 'Fisher-block' or algorithm == 'SMW-Fisher-D_t-momentum'\
+        or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
         
         lambda_ = update_lambda(p, data_, params)
         
