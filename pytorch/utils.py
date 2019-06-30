@@ -168,6 +168,26 @@ def get_D_t(data_, params):
             D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
         
         D_t = D_t.data.numpy()
+    elif algorithm == 'SMW-Fisher-momentum-D_t-momentum':
+        a_grad_momentum = data_['a_grad_for_D_t']
+        h_momentum = data_['h_for_D_t']
+    
+        lambda_ = params['lambda_']
+        
+        
+
+        # compute D_t 
+        D_t = lambda_ * torch.eye(N2)
+    
+        for l in range(numlayers):
+        
+#         print('h[l][N2_index] @ h[l][N2_index].t().size(): ', (h[l][N2_index] @ h[l][N2_index].t()).size())
+#         print('(a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t().size(): ',
+#               ((a[l].grad)[N2_index] @ (a[l].grad)[N2_index].t()).size())
+        
+            D_t += 1 / N2 * (a_grad_momentum[l] @ a_grad_momentum[l].t()) * (h_momentum[l] @ h_momentum[l].t())
+        
+        D_t = D_t.data.numpy()
     elif algorithm == 'SMW-GN':
     
         GN_cache = data_['GN_cache']
@@ -203,16 +223,6 @@ def get_D_t(data_, params):
             
             
             permuted_a_grad_l = a_grad_l.permute(1, 0, 2).contiguous().view(m_L * N2, model.layersizes[l+1])
-            
-#             print('h[l]', h[l])
-            
-#             print('torch.max(h[l])', torch.max(h[l]))
-            
-#             print('(h[l].t())', (h[l].t()))
-            
-#             print('h[l] @ (h[l].t())', h[l] @ (h[l].t()))
-            
-#             print('print(torch.mm(h[l], h[l].t()))', torch.mm(h[l], h[l].t()))
             
             h_l_h_l_t = h[l] @ (h[l].t())
             
@@ -501,14 +511,6 @@ def get_cache_momentum(data_, params):
         
         
         
-#         import torch.nn.functional as F
-#         t_mb = data_['t_mb']
-#         loss = F.cross_entropy(z, t_mb[N2_index],reduction = 'none')
-#         print('loss.size(): ', loss.size())
-#         loss.backward()
-        
-        
-        
         
         
 #         z.backward(torch.Tensor(z.size()))
@@ -645,7 +647,7 @@ def get_cache_momentum(data_, params):
     
     
     # Update running estimates
-        if algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
+        if algorithm == 'SMW-Fisher-momentum':
             
             a_grad_momentum = data_['a_grad_momentum']
             h_momentum = data_['h_momentum']
@@ -655,6 +657,25 @@ def get_cache_momentum(data_, params):
             for l in range(numlayers):
                 a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * N1 * (a[l].grad)[N2_index]
                 h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
+        elif algorithm == 'SMW-Fisher-momentum-D_t-momentum':
+            
+            a_grad_momentum = data_['a_grad_momentum']
+            h_momentum = data_['h_momentum']
+            
+            rho = min(1 - 1/(i+1), 0.95)
+        
+            for l in range(numlayers):
+                a_grad_momentum[l] = rho * a_grad_momentum[l] + (1-rho) * N1 * (a[l].grad)[N2_index]
+                h_momentum[l] = rho * h_momentum[l] + (1-rho) * h[l][N2_index]
+                
+            a_grad_for_D_t = []
+            h_for_D_t = []
+            for l in range(numlayers):
+                a_grad_momentum.append(N1 * (a[l].grad)[N2_index])
+                h_momentum.append(h[l][N2_index])
+                
+            data_['a_grad_for_D_t'] = a_grad_for_D_t
+            data_['h_for_D_t'] = h_for_D_t
         
         elif algorithm == 'SMW-Fisher' or algorithm == 'kfac' or algorithm == 'Fisher-block' or\
         algorithm == 'SMW-Fisher-D_t-momentum':
