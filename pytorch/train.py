@@ -599,6 +599,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
             or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
 #             lambda_ = params['lambda_']
             print('lambda = ', params['lambda_'])
+        elif algorithm == 'SGD':
+            1
         else:
             print('Error: algorithm not defined.')
             sys.exit
