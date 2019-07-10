@@ -210,7 +210,8 @@ if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-
     params['boost'] = boost
     params['drop'] = drop
 elif algorithm == 'SGD':
-    1
+    init_lambda_ = args.lambda_
+    params['lambda_'] = init_lambda_
 else:
     print('Error: algorithm not defined.')
     sys.exit()
@@ -337,7 +338,7 @@ acces[0] = get_acc(model, X_test, t_test)
 losses[0] = get_loss(model, X_train, t_train)
 times[0] = 0
 epochs[0] = 0
-lambdas[0] = init_lambda_
+lambdas[0] = params['lambda_']
 
 
 # times[0] = 0
