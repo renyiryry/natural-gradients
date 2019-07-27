@@ -359,6 +359,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
     X_mb, t_mb = dataset.train.next_batch(N1)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
+    
+    print('t_mb.size()')
+    print(t_mb.size())
 
     # Forward
     
