@@ -472,11 +472,11 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #         print('F.softmax(z, dim=0)')
 #         print(F.softmax(z, dim=0))
         
-        print('F.sum(F.softmax(z, dim=0), dim=0)')
-        print(F.sum(F.softmax(z, dim=0), dim=0))
+        print('torch.sum(F.softmax(z, dim=0), dim=0)')
+        print(torch.sum(F.softmax(z, dim=0), dim=0))
         
-        print('F.sum(F.softmax(z, dim=0), dim=1)')
-        print(F.sum(F.softmax(z, dim=0), dim=1))
+        print('torch.sum(F.softmax(z, dim=0), dim=1)')
+        print(torch.sum(F.softmax(z, dim=0), dim=1))
         
         data_['t_mb_pred'] = t_mb
     
