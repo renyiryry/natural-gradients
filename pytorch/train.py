@@ -469,8 +469,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
         data_['h'] = h
     elif matrix_name == 'Fisher':
         
-        print('F.softmax(z)')
-        print(F.softmax(z))
+        print('F.softmax(z, dim=0)')
+        print(F.softmax(z, dim=0))
         
         data_['t_mb_pred'] = t_mb
     
