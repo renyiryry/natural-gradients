@@ -359,8 +359,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
     X_mb, t_mb = dataset.train.next_batch(N1)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
     
-    print('t_mb.size()')
-    print(t_mb.size())
+#     print('t_mb.size()')
+#     print(t_mb.size())
 
     # Forward
     z, a, h = model.forward(X_mb)
@@ -427,8 +427,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 
     
-#     print('h1.grad: ', cache[1].grad)
-#     print('h2.grad: ', cache[3].grad)
+
     
 #     print('h1 in train: ', cache[1])
 #     print('h2: ', cache[3])
@@ -494,15 +493,16 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
         data_['t_mb_pred'] = t_mb_pred
         
-        print('z.size()')
-        print(z.size())
+#         print('z.size()')
+#         print(z.size())
         
-        print('t_mb_pred.size()')
-        print(t_mb_pred.size())
+#         print('t_mb_pred.size()')
+#         print(t_mb_pred.size())
         
-        print('t_mb.size()')
-        print(t_mb.size())
+#         print('t_mb.size()')
+#         print(t_mb.size())
         
+        z, a, h = model.forward(X_mb)
         loss = F.cross_entropy(z, t_mb_pred, reduction = 'mean')    
         model = get_model_grad_zerod(model)
         loss.backward()
