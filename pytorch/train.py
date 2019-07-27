@@ -467,6 +467,16 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
         data_['a'] = a
         data_['h'] = h
+    elif matrix_name == 'Fisher':
+        
+        print('F.softmax(z)')
+        print(F.softmax(z))
+        
+        data_['t_mb_pred'] = t_mb
+    
+        data_['a'] = a
+        data_['h'] = h
+        
     else:
         print('Error.')
         sys.exit()
