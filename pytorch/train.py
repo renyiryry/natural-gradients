@@ -484,7 +484,10 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #         print('WeightedRandomSampler(pred_dist, 1)')
 #         print(len(list(WeightedRandomSampler(pred_dist, 1))))
         
-        t_mb_pred = len(list(WeightedRandomSampler(pred_dist, 1)))
+        t_mb_pred = list(WeightedRandomSampler(pred_dist, 1))
+        
+#         print(t_mb_pred)
+        
         t_mb_pred = torch.from_numpy(t_mb_pred).long()
         
         data_['t_mb_pred'] = t_mb_pred
