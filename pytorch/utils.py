@@ -490,7 +490,7 @@ def get_cache_momentum(data_, params):
     if algorithm == 'SMW-GN':
     
         X_mb = data_['X_mb']
-        t_mb = data_['t_mb']
+#         t_mb = data_['t_mb']
         
         model = data_['model']
         
@@ -525,6 +525,12 @@ def get_cache_momentum(data_, params):
 #         print('a_grad_momentum', a_grad_momentum)
         
         v_tmp = 1 / len(X_mb[N2_index]) * torch.ones(len(X_mb[N2_index]))
+        
+        print('len(X_mb[N2_index])')
+        print(len(X_mb[N2_index]))
+        
+        print('len(N2_index)')
+        print(len(N2_index))
         
         for i in range(m_L):
             
