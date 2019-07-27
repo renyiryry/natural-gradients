@@ -355,8 +355,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         start_time = time.time()
         epoch += 1
     
-#     for iter_ in range(iter_per_epoch):
-    
+    # get minibatch
     X_mb, t_mb = dataset.train.next_batch(N1)
     X_mb, t_mb = torch.from_numpy(X_mb), torch.from_numpy(t_mb).long()
     
@@ -364,8 +363,6 @@ for i in range(int(max_epoch * iter_per_epoch)):
     print(t_mb.size())
 
     # Forward
-    
-#     v = 1 / len(X_mb) * torch.ones(len(X_mb))
     z, a, h = model.forward(X_mb)
     
     print('z.size()')
@@ -382,6 +379,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #     print('torch.sum(a[-1], dim=1):', torch.sum(a[-1], dim=1))
 #     print('loss: ', loss)
 
+
+    # backward and gradient
     model = get_model_grad_zerod(model)
     
 #         test_start_time = time.time()
@@ -455,7 +454,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #     print('model.fc[1].weight.grad: ', model.fc[1].weight.grad)
 
     
-    
+    # get second order caches
 
     
     
