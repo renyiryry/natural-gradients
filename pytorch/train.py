@@ -468,15 +468,21 @@ for i in range(int(max_epoch * iter_per_epoch)):
         data_['a'] = a
         data_['h'] = h
     elif matrix_name == 'Fisher':
+        from torch.utils.data import WeightedRandomSampler
         
 #         print('F.softmax(z, dim=0)')
 #         print(F.softmax(z, dim=0))
         
-        print('torch.sum(F.softmax(z, dim=0), dim=0)')
-        print(torch.sum(F.softmax(z, dim=0), dim=0))
+#         print('torch.sum(F.softmax(z, dim=0), dim=0)')
+#         print(torch.sum(F.softmax(z, dim=0), dim=0))
         
-        print('torch.sum(F.softmax(z, dim=0), dim=1)')
-        print(torch.sum(F.softmax(z, dim=0), dim=1))
+#         print('torch.sum(F.softmax(z, dim=0), dim=1)')
+#         print(torch.sum(F.softmax(z, dim=0), dim=1))
+        
+        pred_dist = F.softmax(z, dim=1)
+        
+        print('WeightedRandomSampler(pred_dist, 1)')
+        print(WeightedRandomSampler(pred_dist, 1))
         
         data_['t_mb_pred'] = t_mb
     
