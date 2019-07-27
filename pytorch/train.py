@@ -135,6 +135,7 @@ params = {}
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--algorithm', type=str)
+parser.add_argument('--matrix_name', type=str)
 parser.add_argument('--momentum_gradient', type=int)
 parser.add_argument('--max_epoch', type=float)
 parser.add_argument('--record_epoch', type=float)
@@ -150,6 +151,7 @@ parser.add_argument('--dataset', type=str)
 args = parser.parse_args()
 # print args.accumulate(args.algorithm)
 algorithm = args.algorithm
+matrix_name = args.matrix_name
 params['algorithm'] = algorithm
 max_epoch = args.max_epoch
 record_epoch = args.record_epoch
@@ -311,9 +313,6 @@ else:
     
 if if_momentum_gradient:
     
-#     print('model.W[0].size')
-#     print(model.W[0].size())
-    
 #     print('model.W[1].size')
 #     print(model.W[1].size())
     
@@ -365,6 +364,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 #     v = 1 / len(X_mb) * torch.ones(len(X_mb))
     z, a, h = model.forward(X_mb)
+    
+    print('z.size()')
+    print(z.size())
     
     
     loss = F.cross_entropy(z, t_mb, reduction = 'mean')    
