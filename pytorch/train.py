@@ -499,6 +499,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
         print('t_mb_pred.size()')
         print(t_mb_pred.size())
         
+        print('t_mb.size()')
+        print(t_mb.size())
+        
         loss = F.cross_entropy(z, t_mb_pred, reduction = 'mean')    
         model = get_model_grad_zerod(model)
         loss.backward()
