@@ -462,12 +462,14 @@ for i in range(int(max_epoch * iter_per_epoch)):
     data_['loss'] = loss
     data_['t_mb'] = t_mb
     
-    data_['t_mb_pred'] = t_mb
+    if matrxi_name == 'EF':
+        data_['t_mb_pred'] = t_mb
     
-    data_['a'] = a
-    data_['h'] = h
-    
-#     data_['z'] = z
+        data_['a'] = a
+        data_['h'] = h
+    else:
+        print('Error.')
+        sys.exit()
     
 #         i = epoch * iter_per_epoch + iter_
     params['i'] = i
