@@ -485,6 +485,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #         print(len(list(WeightedRandomSampler(pred_dist, 1))))
         
         t_mb_pred = list(WeightedRandomSampler(pred_dist, 1))
+        t_mb_pred = np.asarray(t_mb_pred)
         
 #         print(t_mb_pred)
         
