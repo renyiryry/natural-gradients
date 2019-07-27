@@ -365,8 +365,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
     # Forward
     z, a, h = model.forward(X_mb)
     
-    print('z.size()')
-    print(z.size())
+#     print('z.size()')
+#     print(z.size())
     
     
     loss = F.cross_entropy(z, t_mb, reduction = 'mean')    
@@ -481,10 +481,19 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
         pred_dist = F.softmax(z, dim=1)
         
-        print('WeightedRandomSampler(pred_dist, 1)')
-        print(len(list(WeightedRandomSampler(pred_dist, 1))))
+#         print('WeightedRandomSampler(pred_dist, 1)')
+#         print(len(list(WeightedRandomSampler(pred_dist, 1))))
         
-        data_['t_mb_pred'] = t_mb
+        t_mb_pred = len(list(WeightedRandomSampler(pred_dist, 1)))
+        t_mb_pred = torch.from_numpy(t_mb_pred).long()
+        
+        data_['t_mb_pred'] = t_mb_pred
+        
+        loss = F.cross_entropy(z, t_mb_pred, reduction = 'mean')    
+        model = get_model_grad_zerod(model)
+        loss.backward()
+        
+        
     
         data_['a'] = a
         data_['h'] = h
