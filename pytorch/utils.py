@@ -45,7 +45,7 @@ def compute_sum_J_transpose_V_backp(v, data_, params):
     if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum'\
         or algorithm == 'SMW-Fisher-D_t-momentum'\
         or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
-        t_mb = data_['t_mb']
+        t_mb = data_['t_mb_pred']
     
         
     
@@ -1098,7 +1098,7 @@ def SMW_Fisher_update(data_, params):
     model_grad = data_['model_grad']
     
     X_mb = data_['X_mb']
-    t_mb = data_['t_mb']    
+#     t_mb = data_['t_mb']    
     a = data_['a']
     h = data_['h']
 
@@ -1373,7 +1373,7 @@ def get_mean(delta, params):
 def computeFV(delta, data_, params):
     
     X_mb = data_['X_mb']
-    t_mb = data_['t_mb']
+#     t_mb = data_['t_mb']
     model = data_['model']
     
     N1 = params['N1']
