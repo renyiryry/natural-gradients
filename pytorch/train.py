@@ -482,7 +482,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         pred_dist = F.softmax(z, dim=1)
         
         print('WeightedRandomSampler(pred_dist, 1)')
-        print(WeightedRandomSampler(pred_dist, 1))
+        print(list(WeightedRandomSampler(pred_dist, 1)))
         
         data_['t_mb_pred'] = t_mb
     
