@@ -462,7 +462,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     data_['loss'] = loss
     data_['t_mb'] = t_mb
     
-    if matrxi_name == 'EF':
+    if matrix_name == 'EF':
         data_['t_mb_pred'] = t_mb
     
         data_['a'] = a
