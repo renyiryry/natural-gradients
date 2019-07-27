@@ -486,6 +486,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
         t_mb_pred = list(WeightedRandomSampler(pred_dist, 1))
         t_mb_pred = np.asarray(t_mb_pred)
+        t_mb_pred = np.squeeze(t_mb_pred)
         
 #         print(t_mb_pred)
         
