@@ -501,6 +501,12 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
 #         print('t_mb.size()')
 #         print(t_mb.size())
+
+        print('t_mb_pred')
+        print(t_mb_pred)
+        
+        print('t_mb')
+        print(t_mb)
         
         z, a, h = model.forward(X_mb)
         loss = F.cross_entropy(z, t_mb_pred, reduction = 'mean')    
