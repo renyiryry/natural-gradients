@@ -395,8 +395,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
 
 #         print('time of loss:', time.time() - test_start_time)
 
-    print('a[0].grad')
-    print(a[0].grad)
+#     print('a[0].grad')
+#     print(a[0].grad)
 
 
 
@@ -493,6 +493,11 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
         t_mb_pred = torch.from_numpy(t_mb_pred).long()
         
+        
+        print('torch.sum(t_mb_pred = t_mb) / len(t_mb)')
+        print(torch.sum(t_mb_pred = t_mb) / len(t_mb))
+        
+        
         data_['t_mb_pred'] = t_mb_pred
         
 #         print('z.size()')
@@ -504,19 +509,19 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #         print('t_mb.size()')
 #         print(t_mb.size())
 
-        print('t_mb_pred')
-        print(t_mb_pred)
+#         print('t_mb_pred')
+#         print(t_mb_pred)
         
-        print('t_mb')
-        print(t_mb)
+#         print('t_mb')
+#         print(t_mb)
         
         z, a, h = model.forward(X_mb)
         loss = F.cross_entropy(z, t_mb_pred, reduction = 'mean')    
         model = get_model_grad_zerod(model)
         loss.backward()
         
-        print('a[0].grad')
-        print(a[0].grad)
+#         print('a[0].grad')
+#         print(a[0].grad)
         
         
     
