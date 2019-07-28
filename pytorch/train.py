@@ -695,6 +695,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
 print('Begin saving results...')
 
 name_result = name_dataset + '_' + algorithm +\
+'_matrix_name_' + matrix_name +\
 '_momentum_gradient_' + str(int(if_momentum_gradient)) +\
 '_alpha_' + str(alpha)
 
