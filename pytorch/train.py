@@ -494,8 +494,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
         t_mb_pred = torch.from_numpy(t_mb_pred).long()
         
         
-        print('np.sum(t_mb_pred == t_mb) / len(t_mb)')
-        print(np.sum(t_mb_pred.data.numpy() == t_mb.data.numpy()) / len(t_mb))
+#         print('np.sum(t_mb_pred == t_mb) / len(t_mb)')
+#         print(np.sum(t_mb_pred.data.numpy() == t_mb.data.numpy()) / len(t_mb))
         
         
         data_['t_mb_pred'] = t_mb_pred
