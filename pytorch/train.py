@@ -395,6 +395,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
 
 #         print('time of loss:', time.time() - test_start_time)
 
+    print('a[0].grad')
+    print(a[0].grad)
+
 
 
     
@@ -429,8 +432,7 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 
     
-#     print('h1 in train: ', cache[1])
-#     print('h2: ', cache[3])
+
     
 #     print('a1.grad: ', cache[0].grad)
 #     print('a2.grad in train: ', cache[2].grad)
@@ -512,6 +514,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
         loss = F.cross_entropy(z, t_mb_pred, reduction = 'mean')    
         model = get_model_grad_zerod(model)
         loss.backward()
+        
+        print('a[0].grad')
+        print(a[0].grad)
         
         
     
