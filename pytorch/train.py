@@ -580,11 +580,11 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
     p = data_['p']
     
-    print('-get_dot_product(p, model_grad, params) / get_dot_product(p, p, params)')
-    print(-get_dot_product(p, model_grad, params) / get_dot_product(p, p, params))
+#     print('-get_dot_product(p, model_grad, params) / get_dot_product(p, p, params)')
+#     print(-get_dot_product(p, model_grad, params) / get_dot_product(p, p, params))
     
-    print('params[lambda_]')
-    print(params['lambda_'])
+#     print('params[lambda_]')
+#     print(params['lambda_'])
     
 #     print('p[0]: ', p[0])
 #     print('p[1]: ', p[1])
