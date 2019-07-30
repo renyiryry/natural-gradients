@@ -282,6 +282,11 @@ def get_D_t(data_, params):
         
         D_t = get_JH(D_t, data_, params)
         
+        print('test')
+        
+        print('get_JH(np.eye(len(D_t)), data_, params)')
+        print(get_JH(np.eye(len(D_t)), data_, params))
+        
         print('np.linalg.norm(D_t)')
         print(np.linalg.norm(D_t))
         
