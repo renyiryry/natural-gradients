@@ -430,12 +430,6 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
 
     
-
-    
-
-    
-#     print('a1.grad: ', cache[0].grad)
-#     print('a2.grad in train: ', cache[2].grad)
     
 #     print('X_mb.grad: ', X_mb.grad)
     
@@ -578,6 +572,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #     print('time 3/4: ', time.time() - start_time)
         
     p = data_['p']
+    
+    print('get_dot_product(p, model_grad, params)')
+    print(get_dot_product(p, model_grad, params))
     
 #     print('p[0]: ', p[0])
 #     print('p[1]: ', p[1])
