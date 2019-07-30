@@ -880,6 +880,9 @@ def SMW_GN_update(data_, params):
 #     print('time for compute J transpose V: ', time.time() - start_time)
     
 #     print('\n')
+
+    print('get_dot_product(delta, model_grad, params)')
+    print(get_dot_product(delta, model_grad, params))
     
 
     
