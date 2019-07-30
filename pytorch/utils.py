@@ -797,8 +797,8 @@ def SMW_GN_update(data_, params):
     
     data_['y'] = y
     
-    print('y')
-    print(y)
+#     print('y')
+#     print(y)
     
 #     print('time for compute y: ', time.time() - start_time)
 
