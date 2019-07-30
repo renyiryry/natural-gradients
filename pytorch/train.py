@@ -143,6 +143,7 @@ parser.add_argument('--N1', type=int)
 parser.add_argument('--N2', type=int)
 parser.add_argument('--alpha', type=float)
 parser.add_argument('--lambda_', type=float)
+parser.add_argument('--tau', type=float)
 parser.add_argument('--inverse_update_freq', type=int)
 parser.add_argument('--inverse_update_freq_D_t', type=int)
 parser.add_argument('--rho_kfac', type=float)
@@ -207,6 +208,7 @@ if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-
     or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
     init_lambda_ = args.lambda_
     params['lambda_'] = init_lambda_
+    params['tau'] = args.tau
     boost = 1.01
     drop = 1 / 1.01
     params['boost'] = boost
@@ -545,8 +547,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
 #     print('time first half: ', time.time() - start_time)
     
     
-    
-
+    lambda_minus_tau = params['lambda_']
+    params['lambda_'] = params['lambda_'] + params['tau']
     
     if algorithm == 'kfac' or algorithm == 'Fisher-block':    
         data_, params = kfac_update(data_, params)
@@ -567,6 +569,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
         print('Error: algorithm not defined.')
         sys.exit()
         
+    params['lambda_'] = lambda_minus_tau
+#     params['lambda_'] = params['lambda_'] + params['tau']
      
         
         
