@@ -734,7 +734,7 @@ def SMW_GN_update(data_, params):
     
 
     
-#     algorithm = params['algorithm']
+
 #     model = data_['model']
     
     model_grad = data_['model_grad']
@@ -926,6 +926,9 @@ def SMW_GN_update(data_, params):
     
         
     p = get_minus(delta, params)
+    
+    print('get_dot_product(p, model_grad, params)')
+    print(get_dot_product(p, model_grad, params))
     
 #     p = get_minus(model_grad, params)
 #     print('test sgd')
