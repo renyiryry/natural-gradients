@@ -275,8 +275,14 @@ def get_D_t(data_, params):
         # add the H term
         
 #         start_time = time.time()
+
+
+        
         
         D_t = get_JH(D_t, data_, params)
+        
+        print('np.linalg.norm(D_t)')
+        print(np.linalg.norm(D_t))
         
         
         
