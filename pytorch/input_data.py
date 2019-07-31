@@ -311,9 +311,9 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
 
         import numpy as np
 
-# for key in dict_webspam:
+        for key in dict_webspam:
 #     print(key)
-#     dict_webspam[key] = np.asarray(dict_webspam[key])
+            dict_webspam[key] = np.asarray(dict_webspam[key])
 #     print(dict_webspam[key].shape)
     
 #         train_images = np.concatenate((dict_webspam['indata'], dict_webspam['intest']), axis=0)
