@@ -277,6 +277,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         
     elif name_dataset == 'webspam':
         
+        """
         SOURCE_URL = 'https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/'
         file_name = 'webspam_wc_normalized_unigram.svm.bz2'
         
@@ -288,6 +289,14 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         line_list = bz_file.readlines()
         
         print(line_list)
+        """
+        
+        from scipy.io import loadmat
+        x = loadmat('gdrive/My Drive/Gauss_Newton/data/webspam/webspam_wc_normalized_unigram.svm.mat')
+        
+        print(x)
+        
+        
         
         
         sys.exit()
