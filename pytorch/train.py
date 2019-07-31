@@ -37,6 +37,8 @@ class Model_3(nn.Module):
             self.layersizes = [784, 500, 10]
         elif name_dataset == 'CIFAR':
             self.layersizes = [3072, 400, 400, 10]
+        elif name_dataset == 'webspam':
+            self.layersizes = [254, 400, 400, 2]
         elif name_dataset == 'MNIST-autoencoder':
             # reference: https://arxiv.org/pdf/1301.3641.pdf
             self.layersizes = [784, 1000, 500, 250, 30, 250, 500, 1000, 784]
