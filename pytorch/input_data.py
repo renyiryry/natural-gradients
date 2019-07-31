@@ -316,17 +316,22 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
 #     dict_webspam[key] = np.asarray(dict_webspam[key])
 #     print(dict_webspam[key].shape)
     
-        train_images = np.concatenate((dict_webspam['indata'], dict_webspam['intest']), axis=0)
-        train_labels = np.concatenate((dict_webspam['outdata'], dict_webspam['outtest']), axis=0)
+#         train_images = np.concatenate((dict_webspam['indata'], dict_webspam['intest']), axis=0)
+        train_images = dict_webspam['indata']
+#         train_labels = np.concatenate((dict_webspam['outdata'], dict_webspam['outtest']), axis=0)
+        train_labels = dict_webspam['outdata']
         
 
+        
+        
+        
+        test_images = dict_webspam['intest']
+        test_labels = dict_webspam['outtest']
+        
         train_images = train_images[:, :, np.newaxis, np.newaxis]
+        test_images = test_images[:, :, np.newaxis, np.newaxis]
         
-        # fake
-        test_images = train_images[[1]]
-        test_labels = train_labels[[1]]
-        
-        VALIDATION_SIZE = 50000
+        VALIDATION_SIZE = 0
         
          
         
