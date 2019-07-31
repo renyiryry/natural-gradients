@@ -323,6 +323,8 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
 
         train_images = train_images[:, :, np.newaxis, np.newaxis]
         
+        VALIDATION_SIZE = 50000
+        
          
         
         
