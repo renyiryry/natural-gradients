@@ -428,8 +428,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
     else:
         data_['model_grad'] = model_grad
         
-        print('test')
-        data_['model_grad'] = get_minus(data_['model_grad'], params)
+#         print('test')
+#         data_['model_grad'] = get_minus(data_['model_grad'], params)
         
     
     
