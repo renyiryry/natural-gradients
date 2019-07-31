@@ -275,6 +275,19 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         
         VALIDATION_SIZE = 5000
         
+    elif name_dataset == 'webspam':
+        
+        SOURCE_URL = 'https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/'
+        file_name = 'webspam_wc_normalized_unigram.svm.bz2'
+        
+        local_file = maybe_download(SOURCE_URL, file_name, train_dir)
+        
+        
+        sys.exit()
+        
+         
+        
+        
     else:
         print('Dataset not supported.')
         sys.exit()
