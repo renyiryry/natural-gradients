@@ -26,10 +26,10 @@ def get_acc(model, x, t):
     z, _ , _= model.forward(torch.from_numpy(x))
     y = z.argmax(dim=1)
     
-    print('y')
-    print(y)
-    print('t')
-    print(t)
+#     print('y')
+#     print(y)
+#     print('t')
+#     print(t)
     
     acc = np.mean(y.numpy() == t)
     return acc
