@@ -380,8 +380,8 @@ for i in range(int(max_epoch * iter_per_epoch)):
     
     loss = F.cross_entropy(z, t_mb, reduction = 'mean')  
     
-    print('loss')
-    print(loss)
+#     print('loss')
+#     print(loss)
 
 
 #     print('torch.sum(a[-1], dim=0).size():', torch.sum(a[-1], dim=0).size())
