@@ -1198,6 +1198,9 @@ def SMW_Fisher_update(data_, params):
     if algorithm == 'SMW-Fisher':
         
         D_t = get_D_t(data_, params)
+        
+        print('D_t')
+        print(D_t)
     
 #     print('time for get D_t: ', start_time - time.time())
     
