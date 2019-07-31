@@ -291,11 +291,21 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         print(line_list)
         """
         
-#         from scipy.io import loadmat
+        """
+          from scipy.io import loadmat
         import scipy.io as io
         x = io.loadmat('gdrive/My Drive/Gauss_Newton/data/webspam/webspam_wc_normalized_unigram.svm.mat')
         
         print(x)
+        """
+#       
+
+        import pickle
+        
+        with open('gdrive/My Drive/Gauss_Newton/data/webspam/' + 'webspam_wc_normalized_unigram.pkl', 'rb') as f:
+            dict_webspam = pickle.load(f)
+            
+        print(dict_webspam)
         
         
         
