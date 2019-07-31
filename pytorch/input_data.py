@@ -318,10 +318,13 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
     
         train_images = np.concatenate((dict_webspam['indata'], dict_webspam['intest']), axis=0)
         train_labels = np.concatenate((dict_webspam['outdata'], dict_webspam['outtest']), axis=0)
-        test_images = []
-        test_labels = []
+        
 
         train_images = train_images[:, :, np.newaxis, np.newaxis]
+        
+        # fake
+        test_images = train_images[[1]]
+        test_labels = train_labels[[1]]
         
         VALIDATION_SIZE = 50000
         
