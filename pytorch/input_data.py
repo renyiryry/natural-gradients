@@ -328,6 +328,9 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         test_images = dict_webspam['intest']
         test_labels = dict_webspam['outtest']
         
+        print('train_images.shape')
+        print(train_images.shape)
+        
         train_images = train_images[:, :, np.newaxis, np.newaxis]
         test_images = test_images[:, :, np.newaxis, np.newaxis]
         
