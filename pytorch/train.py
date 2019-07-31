@@ -190,6 +190,11 @@ print(X_train.shape)
 print('t_train.shape')
 print(t_train.shape)
 
+print('np.min(t_test)')
+print(np.min(t_test))
+print('np.max(t_test)')
+print(np.max(t_test))
+
 
 
 
