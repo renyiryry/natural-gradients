@@ -282,6 +282,13 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         
         local_file = maybe_download(SOURCE_URL, file_name, train_dir)
         
+        import bz2
+
+        bz_file = bz2.BZ2File(train_dir + "webspam_wc_normalized_unigram.svm.bz2")
+        line_list = bz_file.readlines()
+        
+        print(line_list)
+        
         
         sys.exit()
         
