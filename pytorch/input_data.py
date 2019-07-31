@@ -305,6 +305,8 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         with open('/content/gdrive/My Drive/Gauss_Newton/data/webspam/' + 'webspam_wc_normalized_unigram.pkl', 'rb') as f:
             dict_webspam = pickle.load(f)
             
+        print('Load pkl successfully.')
+            
         print(dict_webspam)
         
         
