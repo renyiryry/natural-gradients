@@ -582,6 +582,9 @@ for i in range(int(max_epoch * iter_per_epoch)):
         
     p = data_['p']
     
+    print('get_dot_product(p, model_grad, params)')
+    print(get_dot_product(p, model_grad, params))
+    
 #     print('-get_dot_product(p, model_grad, params) / get_dot_product(p, p, params)')
 #     print(-get_dot_product(p, model_grad, params) / get_dot_product(p, p, params))
     
