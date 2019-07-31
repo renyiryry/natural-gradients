@@ -291,8 +291,9 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         print(line_list)
         """
         
-        from scipy.io import loadmat
-        x = loadmat('gdrive/My Drive/Gauss_Newton/data/webspam/webspam_wc_normalized_unigram.svm.mat')
+#         from scipy.io import loadmat
+        import scipy.io as io
+        x = io.loadmat('gdrive/My Drive/Gauss_Newton/data/webspam/webspam_wc_normalized_unigram.svm.mat')
         
         print(x)
         
