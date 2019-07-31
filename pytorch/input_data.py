@@ -305,14 +305,23 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         with open('/content/gdrive/My Drive/Gauss_Newton/data/webspam/' + 'webspam_wc_normalized_unigram.pkl', 'rb') as f:
             dict_webspam = pickle.load(f)
             
-        print('Load pkl successfully.')
+# print('Load pkl successfully.')
             
-        print(dict_webspam)
-        
-        
-        
-        
-        sys.exit()
+# print(dict_webspam)
+
+        import numpy as np
+
+# for key in dict_webspam:
+#     print(key)
+#     dict_webspam[key] = np.asarray(dict_webspam[key])
+#     print(dict_webspam[key].shape)
+    
+        train_images = np.concatenate((dict_webspam['indata'], dict_webspam['intest']), axis=0)
+        train_labels = np.concatenate((dict_webspam['outdata'], dict_webspam['outtest']), axis=0)
+        test_images = []
+        test_labels = []
+
+        train_images = train_images[:, :, np.newaxis, np.newaxis]
         
          
         
