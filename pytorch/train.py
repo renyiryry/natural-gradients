@@ -206,7 +206,7 @@ print('Model created.')
 params['layersizes'] = model.layersizes
 
 if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-momentum' or algorithm == 'SMW-GN'\
-    or algorithm == 'Fisher-block' or algorithm == 'SMW-Fisher-D_t-momentum'\
+    or algorithm == 'Fisher-block' or algorithm == 'SMW-Fisher-D_t-momentum' or algorithm == 'SGD' \
     or algorithm == 'SMW-Fisher-momentum-D_t-momentum':
     init_lambda_ = args.lambda_
     params['lambda_'] = init_lambda_
@@ -215,9 +215,9 @@ if algorithm == 'kfac' or algorithm == 'SMW-Fisher' or algorithm == 'SMW-Fisher-
     drop = 1 / 1.01
     params['boost'] = boost
     params['drop'] = drop
-elif algorithm == 'SGD':
-    init_lambda_ = args.lambda_
-    params['lambda_'] = init_lambda_
+# elif algorithm == 'SGD':
+#     init_lambda_ = args.lambda_
+#     params['lambda_'] = init_lambda_
 else:
     print('Error: algorithm not defined.')
     sys.exit()
