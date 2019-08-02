@@ -910,8 +910,8 @@ def SMW_GN_update(data_, params):
     
 #     print('\n')
 
-    print('get_dot_product(delta, model_grad, params)')
-    print(get_dot_product(delta, model_grad, params))
+#     print('get_dot_product(delta, model_grad, params)')
+#     print(get_dot_product(delta, model_grad, params))
     
 
     
