@@ -785,8 +785,6 @@ def SMW_GN_update(data_, params):
 #     i = params['i']
     lambda_ = params['lambda_']
 #     numlayers = params['numlayers']
-#     boost = params['boost']
-#     drop = params['drop']
     
     N2_index = np.random.permutation(N1)[:N2]
     params['N2_index'] = N2_index
@@ -816,8 +814,8 @@ def SMW_GN_update(data_, params):
     
     data_['y'] = y
     
-#     print('y')
-#     print(y)
+    print('y')
+    print(y)
     
 #     print('time for compute y: ', time.time() - start_time)
 
