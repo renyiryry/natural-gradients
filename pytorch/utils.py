@@ -282,8 +282,8 @@ def get_D_t(data_, params):
         
 #         start_time = time.time()
 
-        print('np.linalg.norm(D_t) before H')
-        print(np.linalg.norm(D_t))
+#         print('np.linalg.norm(D_t) before H')
+#         print(np.linalg.norm(D_t))
         
         
         D_t = get_JH(D_t, data_, params)
