@@ -298,8 +298,8 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         
         print(x)
         """
-#       
-
+        
+        """
         import pickle
         
         with open('/content/gdrive/My Drive/Gauss_Newton/data/webspam/' + 'webspam_wc_normalized_unigram.pkl', 'rb') as f:
@@ -330,6 +330,27 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         
         print('train_images.shape')
         print(train_images.shape)
+        """
+        
+        SOURCE_URL = 'https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/'
+        file_name = 'webspam_wc_normalized_unigram.svm.bz2'
+        
+        
+        local_file = maybe_download(SOURCE_URL, file_name, train_dir)
+        
+        from sklearn.datasets import load_svmlight_file
+
+        data = load_svmlight_file(train_dir + '/' + file_name)
+        
+        images = data[0]
+        labels = data[1]
+        
+        train_images = images[:300000]
+        test_images = images[300000:]
+        train_labels = labels[:300000]
+        test_labels = labels[300000:]
+
+        
         
         train_images = train_images[:, :, np.newaxis, np.newaxis]
         test_images = test_images[:, :, np.newaxis, np.newaxis]
