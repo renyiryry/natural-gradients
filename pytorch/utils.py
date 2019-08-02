@@ -288,12 +288,15 @@ def get_D_t(data_, params):
         
         D_t = get_JH(D_t, data_, params)
         
-#         print('test')
+        print('test')
         
 #         print('get_JH(np.eye(len(D_t)), data_, params)')
 #         print(get_JH(np.eye(len(D_t)), data_, params))
         
-#         H_test = get_JH(np.eye(len(D_t)), data_, params)
+        H_test = get_JH(np.eye(len(D_t)), data_, params)
+        
+        print('H_test')
+        print(H_test)
         
 #         print('np.linalg.norm(H_test)')
 #         print(np.linalg.norm(H_test))
