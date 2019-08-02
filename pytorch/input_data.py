@@ -214,10 +214,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         test_labels = test_images
     
     
-        print('train_images.shape')
-        print(train_images.shape)
-        print('train_labels.shape')
-        print(train_labels.shape)
+        
 
 
         
@@ -342,6 +339,16 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
     else:
         print('Dataset not supported.')
         sys.exit()
+        
+    print('train_images.shape')
+    print(train_images.shape)
+    print('train_labels.shape')
+    print(train_labels.shape)
+    
+    print('test_images.shape')
+    print(test_images.shape)
+    print('test_labels.shape')
+    print(test_labels.shape)
         
     validation_images = train_images[:VALIDATION_SIZE]
     validation_labels = train_labels[:VALIDATION_SIZE]
