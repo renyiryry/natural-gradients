@@ -170,6 +170,8 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
     
     train_dir = '../data/' + name_dataset + '_data'
     
+    VALIDATION_SIZE = 0
+    
     if name_dataset == 'MNIST':
         
         SOURCE_URL = 'http://yann.lecun.com/exdb/mnist/'
@@ -178,7 +180,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         TRAIN_LABELS = 'train-labels-idx1-ubyte.gz'
         TEST_IMAGES = 't10k-images-idx3-ubyte.gz'
         TEST_LABELS = 't10k-labels-idx1-ubyte.gz'
-        VALIDATION_SIZE = 5000
+#         VALIDATION_SIZE = 5000
     
         local_file = maybe_download(SOURCE_URL, TRAIN_IMAGES, train_dir)
         train_images = extract_images(local_file)
@@ -197,7 +199,8 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
 #         TRAIN_LABELS = 'train-labels-idx1-ubyte.gz'
         TEST_IMAGES = 't10k-images-idx3-ubyte.gz'
 #         TEST_LABELS = 't10k-labels-idx1-ubyte.gz'
-        VALIDATION_SIZE = 5000
+
+#         VALIDATION_SIZE = 5000
     
         local_file = maybe_download(SOURCE_URL, TRAIN_IMAGES, train_dir)
         train_images = extract_images(local_file)
@@ -270,7 +273,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         test_images = test_images[:, :, np.newaxis, np.newaxis]
                 
         
-        VALIDATION_SIZE = 5000
+#         VALIDATION_SIZE = 5000
         
     elif name_dataset == 'webspam':
         
@@ -331,7 +334,7 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
         train_images = train_images[:, :, np.newaxis, np.newaxis]
         test_images = test_images[:, :, np.newaxis, np.newaxis]
         
-        VALIDATION_SIZE = 0
+#         VALIDATION_SIZE = 0
         
          
         
@@ -350,8 +353,14 @@ def read_data_sets(name_dataset, fake_data=False, one_hot=False):
     print('test_labels.shape')
     print(test_labels.shape)
         
-    validation_images = train_images[:VALIDATION_SIZE]
-    validation_labels = train_labels[:VALIDATION_SIZE]
+#     validation_images = train_images[:VALIDATION_SIZE]
+#     validation_labels = train_labels[:VALIDATION_SIZE]
+    validation_images = train_images[:1]
+    validation_labels = train_labels[:1]
+    # fake
+    
+    
+    
     train_images = train_images[VALIDATION_SIZE:]
     train_labels = train_labels[VALIDATION_SIZE:]
     data_sets.train = DataSet(train_images, train_labels)
